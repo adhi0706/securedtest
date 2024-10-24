@@ -1,26 +1,26 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link'; // Use Link from next/link
-import Image, { StaticImageData } from 'next/image'; // Next.js Image component
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import { ClipLoader } from 'react-spinners';
+import React, { useState, useEffect } from "react";
+import Link from "next/link"; // Use Link from next/link
+import Image, { StaticImageData } from "next/image"; // Next.js Image component
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { ClipLoader } from "react-spinners";
 
 // Import blockchain logos
-import ethereum from '../assets/chains/ethereum.png';
-import BNB from '../assets/chains/binance.png';
-import Avalanche from '../assets/chains/avalanche.png';
-import Arbitrum from '../assets/chains/arbitrum.png';
-import Optimism from '../assets/chains/optimism.png';
-import Gnosis from '../assets/chains/gnosis.png';
-import Boba from '../assets/chains/boba.png';
-import Base from '../assets/chains/base.png';
-import Linea from '../assets/chains/lineascan.png';
-import Astar from '../assets/chains/astar.png';
-import Celo from '../assets/chains/celo.png';
-import fire from '../assets/chains/firechain_light.png';
-import Polygon from '../assets/chains/polygon.png';
+import ethereum from "../assets/chains/ethereum.png";
+import BNB from "../assets/chains/binance.png";
+import Avalanche from "../assets/chains/avalanche.png";
+import Arbitrum from "../assets/chains/arbitrum.png";
+import Optimism from "../assets/chains/optimism.png";
+import Gnosis from "../assets/chains/gnosis.png";
+import Boba from "../assets/chains/boba.png";
+import Base from "../assets/chains/base.png";
+import Linea from "../assets/chains/lineascan.png";
+import Astar from "../assets/chains/astar.png";
+import Celo from "../assets/chains/celo.png";
+import fire from "../assets/chains/firechain_light.png";
+import Polygon from "../assets/chains/polygon.png";
 
 // Mapping of blockchain names to their logos
 const blockchainLogos: { [key: string]: StaticImageData } = {
@@ -37,12 +37,15 @@ const blockchainLogos: { [key: string]: StaticImageData } = {
   Celo: Celo,
   FireChain: fire,
   Polygon: Polygon,
-  // Add more blockchains as needed
 };
 
-type Vulnerability = {
-  type: string;
-  reason: string;
+type VulnerabilityCount = {
+  gas: number;
+  low: number;
+  medium: number;
+  high: number;
+  critical: number;
+  informational: number;
 };
 
 type ScanData = {
@@ -51,8 +54,10 @@ type ScanData = {
   companyName: string;
   contractName: string;
   contractAddress: string;
+  compilerVersion: string;
   securityScore: number;
-  vulnerabilities: Vulnerability[];
+  vulnerabilityCount: VulnerabilityCount;
+  createdAt: string;
 };
 
 type ApiResponse = {
@@ -60,12 +65,11 @@ type ApiResponse = {
     id: number;
     company_name: string;
     contract_name: string;
-    source_code: string;
     blockchain: string;
     address: string;
     compiler_version: string;
     score: string;
-    vulnerabilities: Vulnerability[];
+    vulnerability_count: VulnerabilityCount;
     created_at: string;
   }[];
   totalPages: number;
@@ -85,42 +89,38 @@ const Scanned = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('https://139-59-5-56.nip.io:3443/getscansAE', {
-          method: 'POST',
+        const response = await fetch("https://139-59-5-56.nip.io:3443/getscansAE", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ page }),
         });
-        console.log('Fetch Response:', response);
+        console.log("Fetch Response:", response);
 
         if (!response.ok) {
           throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
 
         const result: ApiResponse = await response.json();
-        console.log('API Result:', result);
+        console.log("API Result:", result);
 
-        const formattedData: ScanData[] = result.scans.map((scan) => {
-          // Calculate number of lines in source_code
-          const lineCount = scan.source_code.split('\n').length;
-          console.log(`Scan ID ${scan.id}: Number of lines of code: ${lineCount}`);
-
-          return {
-            id: scan.id,
-            blockchain: scan.blockchain,
-            companyName: scan.company_name.trim(),
-            contractName: scan.contract_name.trim(),
-            contractAddress: scan.address || '',
-            securityScore: parseFloat(scan.score) || 0,
-            vulnerabilities: scan.vulnerabilities || [],
-          };
-        });
+        const formattedData: ScanData[] = result.scans.map((scan) => ({
+          id: scan.id,
+          blockchain: scan.blockchain,
+          companyName: scan.company_name.trim(),
+          contractName: scan.contract_name.trim(),
+          contractAddress: scan.address || "",
+          compilerVersion: scan.compiler_version,
+          securityScore: parseFloat(scan.score) || 0,
+          vulnerabilityCount: scan.vulnerability_count,
+          createdAt: scan.created_at,
+        }));
 
         setData(formattedData);
         setTotalPages(result.totalPages || 1);
       } catch (error: any) {
-        setError(error.message || 'An unexpected error occurred');
+        setError(error.message || "An unexpected error occurred");
       }
       setLoading(false);
     };
@@ -131,7 +131,9 @@ const Scanned = () => {
   return (
     <div>
       <div>
-        <h1 className='text-4xl text-center pb-7 text-white' id='poppins-semibold'>Recent Scanned Contracts</h1>
+        <h1 className="text-4xl text-center pb-7 text-white" id="poppins-semibold">
+          Recent Scanned Contracts
+        </h1>
       </div>
       <div className="overflow-x-auto lg:mx-20 mx-5 my-10">
         {loading ? (
@@ -141,67 +143,70 @@ const Scanned = () => {
         ) : error ? (
           <p className="text-center text-red-500">Error: {error}</p>
         ) : data.length === 0 ? (
-          <p className='text-center'>No scans available.</p>
+          <p className="text-center">No scans available.</p>
         ) : (
           <table className="min-w-full text-left table-auto">
-            <thead className='text-white text-xl'>
+            <thead className="text-white text-xl">
               <tr>
-                <th className='p-3 text-center'>Blockchain</th>
-                <th className='p-3 text-center'>Company Name</th>
-                <th className='p-3 text-center'>Contract Name</th>
-                <th className='p-3 text-center'>Contract Address</th>
-                <th className='p-3 text-center'>Security Score</th>
-                <th className='p-3 text-center'>Actions</th>
+                <th className="p-3 text-center">Blockchain</th>
+                <th className="p-3 text-center">Company Name</th>
+                <th className="p-3 text-center">Contract Name</th>
+                <th className="p-3 text-center">Contract Address</th>
+                <th className="p-3 text-center">Security Score</th>
+                <th className="p-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
-                <tr key={item.id} className='border-b'>
-                  <td className='p-3 flex justify-center items-center'>
-                    {blockchainLogos[item.blockchain] ? (
-                      <Image
-                        className='h-10 w-10'
-                        src={blockchainLogos[item.blockchain]}
-                        alt={`${item.blockchain} logo`}
-                        width={40}
-                        height={40}
-                      />
-                    ) : (
-                      <div className='h-10 w-10 bg-gray-300 flex justify-center items-center'>
-                        <span className='text-gray-600'>N/A</span>
-                      </div>
-                    )}
-                    <h1 className='ml-2 text-center'>{item.blockchain}</h1>
-                  </td>
-                  <td className='p-3 text-center'>{item.companyName}</td>
-                  <td className='p-3 text-center'>{item.contractName}</td>
-                  <td className='p-3 text-center'>{item.contractAddress}</td>
-                  <td className='p-3'>
-                    <div className="flex justify-center items-center">
-                      <div className='w-10 h-10 mr-3'>
-                        <CircularProgressbar
-                          value={item.securityScore}
-                          maxValue={100}
-                          text={`${Math.round(item.securityScore)}%`}
-                          styles={buildStyles({
-                            pathColor: '#1E90FF',
-                            textColor: '#1E90FF',
-                            trailColor: '#d6d6d6',
-                            textSize: '22px',
-                          })}
+              {data
+                .slice()
+                .reverse() // Reverse the data so the latest scans are shown first
+                .map((item) => (
+                  <tr key={item.id} className="border-b">
+                    <td className="p-3 flex justify-center items-center">
+                      {blockchainLogos[item.blockchain] ? (
+                        <Image
+                          className="h-10 w-10"
+                          src={blockchainLogos[item.blockchain]}
+                          alt={`${item.blockchain} logo`}
+                          width={40}
+                          height={40}
                         />
+                      ) : (
+                        <div className="h-10 w-10 bg-gray-300 flex justify-center items-center">
+                          <span className="text-gray-600">N/A</span>
+                        </div>
+                      )}
+                      <h1 className="ml-2 text-center">{item.blockchain}</h1>
+                    </td>
+                    <td className="p-3 text-center">{item.companyName}</td>
+                    <td className="p-3 text-center">{item.contractName}</td>
+                    <td className="p-3 text-center">{item.contractAddress}</td>
+                    <td className="p-3">
+                      <div className="flex justify-center items-center">
+                        <div className="w-10 h-10 mr-3">
+                          <CircularProgressbar
+                            value={item.securityScore}
+                            maxValue={100}
+                            text={`${Math.round(item.securityScore)}%`}
+                            styles={buildStyles({
+                              pathColor: "#1E90FF",
+                              textColor: "#1E90FF",
+                              trailColor: "#d6d6d6",
+                              textSize: "22px",
+                            })}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className='p-3 text-center'>
-                    <Link href={`/auditexpress/${item.id}`}>
-                      <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                        View Scan
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="p-3 text-center">
+                      <Link href={`/auditexpress/${item.id}`}>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          View Scan
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         )}
@@ -213,7 +218,7 @@ const Scanned = () => {
           disabled={page === 1}
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 ${
-            page === 1 ? 'opacity-50 cursor-not-allowed' : ''
+            page === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
           Previous
@@ -222,7 +227,7 @@ const Scanned = () => {
           disabled={page === totalPages}
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
           className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            page === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
           Next

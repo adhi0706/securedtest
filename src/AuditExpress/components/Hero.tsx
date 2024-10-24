@@ -258,25 +258,21 @@ const handleGetAuditReport = async () => {
           throw new Error("Unable to extract compiler version from source code.");
       }
 
-      // Validate contract name
       if (!extractedContractName) {
           throw new Error("Unable to extract contract name.");
       }
 
-      // Prepare the source code by removing comments and links
       sourceCode = cleanSourceCode(sourceCode);
-
-      // Calculate lines of code
       const linesOfCode = sourceCode.replace(/\r\n/g, "\n").split('\n').length;
 
-      // Prepare JSON data as per the provided format
       const jsonData: any = {
           compiler_version: compilerVersion,
           company_name: companyName,
           contract_name: extractedContractName,
           source_code: sourceCode,
           blockchain: blockchain,
-          // lines: linesOfCode, // Send as number
+          lines: linesOfCode,
+          address: address,
       };
 
       // Log data for debugging
