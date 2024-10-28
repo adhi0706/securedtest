@@ -38,11 +38,11 @@ const renderContent = (blogData) => {
     // Replace links with anchor tags and add color attribute
     modifiedText = modifiedText.replace(
       /<([^|]+)\|([^>]+)>/g,
-      '<Link target="_blank" href="$2" style="color: #07bc0c;">$1</Link>'
+      '<a target="_blank" href="$2" style="color: #12D576">$1</a>'
     );
     modifiedText = modifiedText.replace(
       /&lt;([^|]+)\|([^&]+)&gt;/g,
-      '<Link target="_blank" href="$2" style="color: #07bc0c;">$1</Link>'
+      '<a target="_blank" href="$2" style="color: #12D576">$1</a>'
     );
 
     // Replace '/n/' with line breaks
