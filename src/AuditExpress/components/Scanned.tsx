@@ -131,86 +131,89 @@ const Scanned = () => {
   return (
     <div>
       <div>
-        <h1 className="text-4xl text-center pb-7 text-white" id="poppins-semibold">
+        <h1 className="text-4xl text-center pb-7 text-white lg:mt-20 mt-14" id="poppins-semibold">
           Recent Scanned Contracts
         </h1>
       </div>
       <div className="overflow-x-auto lg:mx-20 mx-5 my-10">
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <ClipLoader color="#1E90FF" size={50} />
-          </div>
-        ) : error ? (
-          <p className="text-center text-red-500">Error: {error}</p>
-        ) : data.length === 0 ? (
-          <p className="text-center">No scans available.</p>
-        ) : (
-          <table className="min-w-full text-left table-auto">
-            <thead className="text-white text-xl">
-              <tr>
-                <th className="p-3 text-center">Blockchain</th>
-                <th className="p-3 text-center">Company Name</th>
-                <th className="p-3 text-center">Contract Name</th>
-                <th className="p-3 text-center">Contract Address</th>
-                <th className="p-3 text-center">Security Score</th>
-                <th className="p-3 text-center">Actions</th>
+  {loading ? (
+    <div className="flex justify-center items-center">
+      <ClipLoader color="#1E90FF" size={50} />
+    </div>
+  ) : error ? (
+    <p className="text-center text-red-500">Error: {error}</p>
+  ) : data.length === 0 ? (
+    <p className="text-center">No scans available.</p>
+  ) : (
+    <div className="max-w-full">
+      <table className="w-full text-left table-auto border-collapse">
+        <thead className="bg-green-500 rounded-lg text-white text-lg">
+          <tr>
+            <th className="p-3 text-center">Blockchain</th>
+            <th className="p-3 text-center">Company Name</th>
+            <th className="p-3 text-center">Contract Name</th>
+            <th className="p-3 text-center">Contract Address</th>
+            <th className="p-3 text-center">Security Score</th>
+            <th className="p-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data
+            .slice()
+            .reverse()
+            .map((item) => (
+              <tr key={item.id} className="border-b">
+                <td className="p-3 flex justify-center items-center">
+                  {blockchainLogos[item.blockchain] ? (
+                    <Image
+                      className="h-10 w-10"
+                      src={blockchainLogos[item.blockchain]}
+                      alt={`${item.blockchain} logo`}
+                      width={40}
+                      height={40}
+                    />
+                  ) : (
+                    <div className="h-10 w-10 bg-gray-300 flex justify-center items-center">
+                      <span className="text-gray-600">N/A</span>
+                    </div>
+                  )}
+                  <h1 className="ml-2 text-center">{item.blockchain}</h1>
+                </td>
+                <td className="p-3 text-center">{item.companyName}</td>
+                <td className="p-3 text-center">{item.contractName}</td>
+                <td className="p-3 text-center">{item.contractAddress}</td>
+                <td className="p-3">
+                  <div className="flex justify-center items-center">
+                    <div className="w-10 h-10 mr-3">
+                      <CircularProgressbar
+                        value={item.securityScore}
+                        maxValue={100}
+                        text={`${Math.round(item.securityScore)}%`}
+                        styles={buildStyles({
+                          pathColor: "#1E90FF",
+                          textColor: "#1E90FF",
+                          trailColor: "#d6d6d6",
+                          textSize: "22px",
+                        })}
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td className="p-3 text-center">
+                  <Link href={`/auditexpress/${item.id}`}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      View Scan
+                    </button>
+                  </Link>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {data
-                .slice()
-                .reverse() // Reverse the data so the latest scans are shown first
-                .map((item) => (
-                  <tr key={item.id} className="border-b">
-                    <td className="p-3 flex justify-center items-center">
-                      {blockchainLogos[item.blockchain] ? (
-                        <Image
-                          className="h-10 w-10"
-                          src={blockchainLogos[item.blockchain]}
-                          alt={`${item.blockchain} logo`}
-                          width={40}
-                          height={40}
-                        />
-                      ) : (
-                        <div className="h-10 w-10 bg-gray-300 flex justify-center items-center">
-                          <span className="text-gray-600">N/A</span>
-                        </div>
-                      )}
-                      <h1 className="ml-2 text-center">{item.blockchain}</h1>
-                    </td>
-                    <td className="p-3 text-center">{item.companyName}</td>
-                    <td className="p-3 text-center">{item.contractName}</td>
-                    <td className="p-3 text-center">{item.contractAddress}</td>
-                    <td className="p-3">
-                      <div className="flex justify-center items-center">
-                        <div className="w-10 h-10 mr-3">
-                          <CircularProgressbar
-                            value={item.securityScore}
-                            maxValue={100}
-                            text={`${Math.round(item.securityScore)}%`}
-                            styles={buildStyles({
-                              pathColor: "#1E90FF",
-                              textColor: "#1E90FF",
-                              trailColor: "#d6d6d6",
-                              textSize: "22px",
-                            })}
-                          />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="p-3 text-center">
-                      <Link href={`/auditexpress/${item.id}`}>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          View Scan
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+
 
       {/* Pagination Controls */}
       <div className="flex justify-center mt-4">

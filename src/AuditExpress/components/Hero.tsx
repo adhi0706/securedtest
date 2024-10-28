@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import img from "../assets/grid.png";
 import BlockchainModal from "./modal/BlockChainModal";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -23,6 +24,11 @@ const Hero = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  // const [scanDuration, setScanDuration] = useState<number>(0);
+  const Router = useRouter();
+
+  // console.log(scanDuration);
+  
 
   // Handlers for Modal
   const openModal = () => setIsModalOpen(true);
@@ -140,13 +146,15 @@ const Hero = (props: Props) => {
         throw new Error("Unsupported GitHub URL format.");
       }
 
+      
       const response = await fetch(rawUrl);
       if (!response.ok) {
         throw new Error("Failed to fetch contract from GitHub.");
       }
-
+      
       const content = await response.text();
       console.log("Fetched content from GitHub:", content);
+      localStorage.setItem("giturl",rawUrl);
 
       return content;
     } catch (error) {
@@ -168,6 +176,7 @@ const Hero = (props: Props) => {
           }
         };
         reader.readAsText(file);
+        localStorage.setItem("filename",file.name);
       });
     } catch (error) {
       console.error("Error reading contract from file:", error);
@@ -196,12 +205,12 @@ const Hero = (props: Props) => {
   };
 
   // Handler for Audit Report Submission
-const handleGetAuditReport = async () => {
-  setLoading(true);
-  setError(null);
-  setSuccessMessage(null);
+  const handleGetAuditReport = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccessMessage(null);
 
-  try {
+    try {
       let sourceCode: string | null = null;
       let address: string | null = null;
       let extractedContractName: string | null = null;
@@ -209,115 +218,137 @@ const handleGetAuditReport = async () => {
 
       // Fetch data based on selected source
       if (selectedSource === "contract_address" && contractAddress) {
-          const data = await fetchContractFromEtherscan(contractAddress);
-          sourceCode = data.sourceCode;
-          address = data.address;
-          extractedContractName = data.contractName;
+        const data = await fetchContractFromEtherscan(contractAddress);
+        sourceCode = data.sourceCode;
+        address = data.address;
+        extractedContractName = data.contractName;
 
+        if (extractedContractName) {
+          setContractName(extractedContractName);
+          setIsContractNameAutoFilled(true);
+        } else {
+          // Fallback to extracting from source code if ContractName is not available
+          extractedContractName = extractContractName(sourceCode);
           if (extractedContractName) {
-              setContractName(extractedContractName);
-              setIsContractNameAutoFilled(true);
-          } else {
-              // Fallback to extracting from source code if ContractName is not available
-              extractedContractName = extractContractName(sourceCode);
-              if (extractedContractName) {
-                  setContractName(extractedContractName);
-              }
+            setContractName(extractedContractName);
           }
+        }
 
-          if (!selectedBlockchain) {
-              throw new Error("Please select a blockchain.");
-          }
-          blockchain = selectedBlockchain;
+        if (!selectedBlockchain) {
+          throw new Error("Please select a blockchain.");
+        }
+        blockchain = selectedBlockchain;
       } else if (selectedSource === "github" && githubURL) {
-          sourceCode = await fetchContractFromGitHub(githubURL);
-          extractedContractName = contractName; // User input
-          if (!extractedContractName) {
-              throw new Error("Please enter the Contract Name.");
-          }
-          blockchain = "via github";
+        sourceCode = await fetchContractFromGitHub(githubURL);
+        extractedContractName = contractName; // User input
+        if (!extractedContractName) {
+          throw new Error("Please enter the Contract Name.");
+        }
+        blockchain = "via github";
       } else if (selectedSource === "upload" && uploadedFile) {
-          sourceCode = await fetchContractFromFile(uploadedFile);
-          extractedContractName = contractName; // User input
-          if (!extractedContractName) {
-              throw new Error("Please enter the Contract Name.");
-          }
-          blockchain = "via upload";
+        sourceCode = await fetchContractFromFile(uploadedFile);
+        extractedContractName = contractName; // User input
+        if (!extractedContractName) {
+          throw new Error("Please enter the Contract Name.");
+        }
+        blockchain = "via upload";
       } else {
-          throw new Error("Please fill in the required fields.");
+        throw new Error("Please fill in the required fields.");
       }
 
       // Validate sourceCode
       if (!sourceCode) {
-          throw new Error("Source code is empty.");
+        throw new Error("Source code is empty.");
       }
 
       // Extract compiler version
       const compilerVersion = extractCompilerVersion(sourceCode);
       if (!compilerVersion) {
-          throw new Error("Unable to extract compiler version from source code.");
+        throw new Error("Unable to extract compiler version from source code.");
       }
 
       if (!extractedContractName) {
-          throw new Error("Unable to extract contract name.");
+        throw new Error("Unable to extract contract name.");
       }
 
       sourceCode = cleanSourceCode(sourceCode);
       const linesOfCode = sourceCode.replace(/\r\n/g, "\n").split('\n').length;
 
       const jsonData: any = {
-          compiler_version: compilerVersion,
-          company_name: companyName,
-          contract_name: extractedContractName,
-          source_code: sourceCode,
-          blockchain: blockchain,
-          lines: linesOfCode,
-          address: address,
+        compiler_version: compilerVersion,
+        company_name: companyName,
+        contract_name: extractedContractName,
+        source_code: sourceCode,
+        blockchain: blockchain,
+        lines: linesOfCode,
+        address: address,
       };
+      localStorage.setItem("address", address)
+      localStorage.setItem("blockchain", blockchain)
 
       // Log data for debugging
       console.log("Submitting Audit Report with Data:", JSON.stringify(jsonData, null, 2));
 
       // Send data to backend
-      const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
+      const startTime = performance.now();
+
+        const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
           method: "POST",
           headers: {
-              "Content-Type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(jsonData),
-      });
+        });
+
+        const endTime = performance.now();
+        const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
+        console.log("Calculated duration:", durationInSeconds);
+
+      
+
 
       if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`API Error: ${errorText}`);
+        const errorText = await response.text();
+        throw new Error(`API Error: ${errorText}`);
       }
 
       const resultData = await response.json();
       console.log("API Response:", resultData);
       setSuccessMessage("Audit report submitted successfully!");
-  } catch (err) {
+      Router.push({
+        pathname: `/auditexpress/results/${resultData.id}`, // Use the actual scan ID if needed
+        query: {
+          score: resultData.score,
+          lines: linesOfCode,
+          duration: durationInSeconds,
+          vulnerabilityCount: JSON.stringify(resultData.vulnerabilityCount),
+        },
+      });
+
+
+    } catch (err) {
       setError((err as Error).message);
-  } finally {
+    } finally {
       setLoading(false);
-  }
-};
+    }
+  };
 
-// Function to clean the source code by removing comments and URLs
-const cleanSourceCode = (sourceCode: string): string => {
-  // Remove single-line comments
-  let cleanedCode = sourceCode.replace(/\/\/.*$/gm, "");
+  // Function to clean the source code by removing comments and URLs
+  const cleanSourceCode = (sourceCode: string): string => {
+    // Remove single-line comments
+    let cleanedCode = sourceCode.replace(/\/\/.*$/gm, "");
 
-  // Remove multi-line comments
-  cleanedCode = cleanedCode.replace(/\/\*[\s\S]*?\*\//g, "");
+    // Remove multi-line comments
+    cleanedCode = cleanedCode.replace(/\/\*[\s\S]*?\*\//g, "");
 
-  // Remove any lines that contain URLs
-  cleanedCode = cleanedCode.replace(/https?:\/\/[^\s]+/g, "");
+    // Remove any lines that contain URLs
+    cleanedCode = cleanedCode.replace(/https?:\/\/[^\s]+/g, "");
 
-  // Remove excess whitespace
-  cleanedCode = cleanedCode.replace(/\n\s*\n/g, "\n").trim();
+    // Remove excess whitespace
+    cleanedCode = cleanedCode.replace(/\n\s*\n/g, "\n").trim();
 
-  return cleanedCode;
-};
+    return cleanedCode;
+  };
 
 
   return (
@@ -546,12 +577,12 @@ const cleanSourceCode = (sourceCode: string): string => {
         </div>
       )}
       <div className="z-50">
-      <BlockchainModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onSelect={handleSelectBlockchain}
+        <BlockchainModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onSelect={handleSelectBlockchain}
         />
-        </div>
+      </div>
     </div>
   );
 };
