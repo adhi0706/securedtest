@@ -44,12 +44,12 @@ type ScanDetails = {
   vulnerabilities: Vulnerability[];
   created_at: string;
   lines: number
-  total_time_taken: string;
+  total_time_taken: any;
 };
 
 const ScanPage: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query; // Correct way to access dynamic route parameters in Next.js
+  const { id } = router.query;
 
   const [scanDetails, setScanDetails] = useState<ScanDetails | null>(null);
   const [scanDuration, setScanDuration] = useState<number>(0);
@@ -62,7 +62,6 @@ const ScanPage: React.FC = () => {
   const handleViewOnBlockscout = () => {
     if (!scanDetails) return;
 
-    // You can modify this base URL according to the blockchain used
     const blockscoutBaseURL = getBlockscoutURL(scanDetails.blockchain);
     const contractAddress = scanDetails.address;
 
@@ -317,7 +316,7 @@ const ScanPage: React.FC = () => {
               <p className='text-md sm:text-xl my-2' id='poppins-normal'>
                 Your Security Score is{' '}
                 <span className={`${getScoreDescription(score).color}`} id='poppins-semibold'>
-                  {getScoreDescription(score).text} {getScoreDescription(score).emoji}
+                  {getScoreDescription(score).text}
                 </span>
               </p>
 
@@ -337,7 +336,7 @@ const ScanPage: React.FC = () => {
               <Image src={scan} height={70} width={70} alt="scan" className="rounded-full" />
             </div>
             <div className='text-center w-full sm:w-8/12'>
-              <p className='text-md text-balance sm:text-xl' id='poppins-regular'>
+              <p className='text-md text-left sm:text-xl' id='poppins-regular'>
                 This audit report has not been verified by the SolidityScan team. To learn more about our published reports.
                 <button className='text-blue-400 underline ml-1' id='poppins-semibold'>click here</button>
               </p>
@@ -396,11 +395,11 @@ const ScanPage: React.FC = () => {
 };
 
 // Utility function to get score description
-const getScoreDescription = (score: number): { text: string; color: string; emoji: string } => {
-  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', emoji: '✅' };
-  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', emoji: '🟠' };
-  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', emoji: '🟡' };
-  return { text: 'POOR', color: 'text-red-500', emoji: '❌' };
+const getScoreDescription = (score: number): { text: string; color: string;} => {
+  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500',  };
+  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', }
+  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', };
+  return { text: 'POOR', color: 'text-red-500', };
 };
 
 

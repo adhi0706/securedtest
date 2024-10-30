@@ -209,7 +209,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
                 <p className='text-md sm:text-xl my-2' id='poppins-normal'>
                   Your Security Score is{' '}
                   <span className={`${getScoreDescription(score).color}`} id='poppins-semibold'>
-                    {getScoreDescription(score).text} {getScoreDescription(score).emoji}
+                    {getScoreDescription(score).text}
                   </span>
                 </p>
 
@@ -286,11 +286,11 @@ const VulnerabilityCount: React.FC<{ scanDetails: ScanDetails; reverse?: boolean
     </div>
   );
 };
-const getScoreDescription = (score: number): { text: string; color: string; emoji: string } => {
-  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', emoji: '✅' };
-  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', emoji: '🟠' };
-  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', emoji: '🟡' };
-  return { text: 'POOR', color: 'text-red-500', emoji: '❌' };
+const getScoreDescription = (score: number): { text: string; color: string;} => {
+  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500',  };
+  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500',  };
+  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500',  };
+  return { text: 'POOR', color: 'text-red-500',  };
 };
 
 
