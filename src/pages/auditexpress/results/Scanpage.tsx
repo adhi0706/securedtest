@@ -157,82 +157,86 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
 
       <div className="mt-20 mx-4 sm:mx-10 lg:mx-20 lg:mt-24">
         <div className="flex items-center">
-            {isGitHub ? (
-              <FaGithub className="text-2xl mr-2" />
-            ) : isUploadedFile ? (
-              <FaFileUpload className="text-2xl mr-2" />
-            ) : blockchainIcon ? (
-              <Image src={blockchainIcon} alt={`${blockchain} logo`} className="w-10 h-10 mr-2" />
-            ) : null}
+          {isGitHub ? (
+            <FaGithub className="text-2xl mr-2" />
+          ) : isUploadedFile ? (
+            <FaFileUpload className="text-2xl mr-2" />
+          ) : blockchainIcon ? (
+            <Image src={blockchainIcon} alt={`${blockchain} logo`} className="w-10 h-10 mr-2" />
+          ) : null}
           <div className="items-center">
-            <p className="text-xl sm:text-2xl">{blockchainIcon?address:""}</p>
+            <p className="text-xl sm:text-2xl">{blockchainIcon ? address : ""}</p>
             <p className="text-md sm:text-lg text-gray-400">
               {isGitHub ? (
                 <a href={github} target="_blank" rel="noopener noreferrer" className="text-white hover:underline truncate">
                   {github}
                 </a>
-              ) : isUploadedFile? (
+              ) : isUploadedFile ? (
                 <p>{filename}</p>
-              ):
-              blockchainIcon?(
-                <p>{blockchain}</p>
-              ):null}
+              ) :
+                blockchainIcon ? (
+                  <p>{blockchain}</p>
+                ) : null}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between space-y-5 md:space-y-0 mt-10">
+        <div className="flex flex-col md:flex-row justify-between space-y-5 md:space-y-0 mt-10" id='poppins-medium'>
           <ScoreCard label="Security Score" value={`${score}/100`} />
           <ScoreCard label="Scan Duration" value={`${scanDuration} secs`} />
           <ScoreCard label="Lines of Code" value={`${lineCount}`} />
         </div>
         <div className='md:flex justify-center items-center md:mt-10 md:my-0 my-10 px-4 sm:px-3'>
-        <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
-          <div className='flex justify-center items-center mb-4 lg:mb-0' id='poppins-semibold'>
-            <CircularProgressbar
-              className='md:w-40 md:h-40 w-40 h-40 text-white rounded-full'
-              text={`${scanDetails.score}%`}
-              value={scanDetails.score}
-              maxValue={100}
-              styles={buildStyles({
-                height: '100%',
-                pathColor: '#12D576',
-                textColor: '#ffffff',
-                backgroundColor: "#ffffff",
-                trailColor: '#d6d6d6',
-                textSize: '20px'
-              })}
-            />
-          </div>
-          <div className='flex justify-center items-center'>
-            <div className='ml-0 lg:ml-10 lg:text-left'>
-              <p className='text-md sm:text-xl my-2' id='poppins-normal'>
-                Your Security Score is <span className='' id='poppins-semibold'>{getScoreDescription(score)}</span>
-              </p>
-              <p className='text-md text-left sm:text-lg my-2' id='poppins-normal'>
-                The SolidityScan score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
-                To improve your score, view the detailed result and leverage the remediation solutions provided.
-              </p>
+          <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
+            <div className='flex justify-center items-center mb-4 lg:mb-0 ml-6' id='poppins-semibold'>
+              <CircularProgressbar
+                className='md:w-40 md:h-40 w-40 h-40 text-white rounded-full'
+                text={`${scanDetails.score}%`}
+                value={scanDetails.score}
+                maxValue={100}
+                styles={buildStyles({
+                  height: '100%',
+                  pathColor: '#12D576',
+                  textColor: '#ffffff',
+                  backgroundColor: "#ffffff",
+                  trailColor: '#d6d6d6',
+                  textSize: '20px'
+                })}
+              />
+            </div>
+            <div className='flex justify-center items-center' id='poppins-regular'>
+              <div className='ml-0 lg:ml-10 lg:text-left'>
+                <p className='text-md sm:text-xl my-2' id='poppins-normal'>
+                  Your Security Score is{' '}
+                  <span className={`${getScoreDescription(score).color}`} id='poppins-semibold'>
+                    {getScoreDescription(score).text} {getScoreDescription(score).emoji}
+                  </span>
+                </p>
+
+                <p className='text-md text-left sm:text-lg my-2' id='poppins-normal'>
+                  The SolidityScan score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
+                  To improve your score, view the detailed result and leverage the remediation solutions provided.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="md:flex justify-center hidden">
-      <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
-        <div className='md:flex gap-4 sm:gap-10 items-center'>
-          <div className='md:flex-shrink-0 flex justify-center'>
-            <Image src={scan} height={70} width={70} alt="scan" className="rounded-full" />
-          </div>
-          <div className='text-center w-full sm:w-8/12'>
-            <p className='text-md text-balance sm:text-xl' id='poppins-regular'>
-              This audit report has not been verified by the SolidityScan team. To learn more about our published reports.
-              <button className='text-blue-400 underline ml-1' id='poppins-semibold'>click here</button>
-            </p>
+        <div className="md:flex justify-center hidden">
+          <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
+            <div className='md:flex gap-4 sm:gap-10 items-center'>
+              <div className='md:flex-shrink-0 flex justify-center'>
+                <Image src={scan} height={70} width={70} alt="scan" className="rounded-full" />
+              </div>
+              <div className='text-center w-full sm:w-8/12'>
+                <p className='text-md text-left sm:text-xl' id='poppins-regular'>
+                  This audit report has not been verified by the SolidityScan team. To learn more about our published reports.
+                  <button className='text-blue-400 underline ml-1' id='poppins-semibold'>click here</button>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
 
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center mx-4 sm:mx-10 lg:mx-10 mt-0" id='poppins-normal'>
@@ -243,12 +247,12 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           <VulnerabilityCount scanDetails={scanDetails} reverse />
         </div>
         <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
-        <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-          <button className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
-          Get Detailed Report
-          </button>
+          <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
+            <button className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
+              Get Detailed Report
+            </button>
+          </div>
         </div>
-      </div>
 
         <Sales />
       </div>
@@ -261,8 +265,8 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
 // ScoreCard Component
 const ScoreCard: React.FC<{ label: string, value: string }> = ({ label, value }) => (
   <div className="border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex flex-col justify-center items-center rounded-full px-4">
-    <p className="text-lg sm:text-2xl">{label}</p>
-    <p className="text-lg sm:text-2xl">{value}</p>
+    <p className="text-lg sm:text-2xl" id='poppins-semibold'>{label}</p>
+    <p className="text-lg sm:text-2xl" id='poppins-medium'>{value}</p>
   </div>
 );
 
@@ -282,11 +286,12 @@ const VulnerabilityCount: React.FC<{ scanDetails: ScanDetails; reverse?: boolean
     </div>
   );
 };
-const getScoreDescription = (score: number): string => {
-  if (score >= 80) return 'EXCELLENT';
-  if (score >= 60) return 'GOOD';
-  if (score >= 40) return 'AVERAGE';
-  return 'POOR';
+const getScoreDescription = (score: number): { text: string; color: string; emoji: string } => {
+  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', emoji: '✅' };
+  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', emoji: '🟠' };
+  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', emoji: '🟡' };
+  return { text: 'POOR', color: 'text-red-500', emoji: '❌' };
 };
+
 
 export default ScanPage;

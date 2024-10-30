@@ -36,6 +36,9 @@ const Navbar = () => {
     case "/secure-pad":
       nextPath = "https://securepad.xyz/";
       break;
+    case "/auditexpress/home":
+      nextPath = "/auditexpress/home";
+      break;
     default:
       nextPath = null;
   }

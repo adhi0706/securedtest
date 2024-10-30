@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import path1 from '../assets/CTA.png'
 import path2 from '../assets/path-2.png'

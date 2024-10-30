@@ -44,6 +44,7 @@ type ScanDetails = {
   vulnerabilities: Vulnerability[];
   created_at: string;
   lines: number
+  total_time_taken: string;
 };
 
 const ScanPage: React.FC = () => {
@@ -130,10 +131,12 @@ const ScanPage: React.FC = () => {
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
         console.log("Calculated duration:", durationInSeconds);
 
-        setScanDuration(parseFloat(durationInSeconds));
 
         if (response.status === 200) {
           const fetchedData: ScanDetails = response.data;
+          console.log(fetchedData);
+          setScanDuration(fetchedData.total_time_taken);
+
 
           if (!fetchedData) {
             throw new Error('Scan data is incomplete.');
@@ -221,13 +224,17 @@ const ScanPage: React.FC = () => {
           </p>
         </div>
         <div className="flex justify-end">
-          <button
-            className="text-green-500 underline text-xl sm:text-2xl"
-            onClick={handleViewOnBlockscout}
-          >
-            View on Blockscout
-          </button>
+          {scanDetails.address && /^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) && (
+            <button
+              className="text-green-500 underline text-xl sm:text-2xl"
+              onClick={handleViewOnBlockscout}
+            >
+              View on Blockscout
+            </button>
+          )}
         </div>
+
+
       </div>
 
       <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
@@ -260,8 +267,8 @@ const ScanPage: React.FC = () => {
         {/* Scan Duration */}
         <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
           <div className='flex flex-col justify-center'>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>Scan duration</p>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration} secs</p>
+            <p className='text-lg sm:text-2xl' id='poppins-semibold'>Scan duration</p>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
           </div>
           <div className='flex items-center'>
             <CircularProgressbar
@@ -308,8 +315,12 @@ const ScanPage: React.FC = () => {
           <div className='flex justify-center items-center'>
             <div className='ml-0 lg:ml-10 lg:text-left'>
               <p className='text-md sm:text-xl my-2' id='poppins-normal'>
-                Your Security Score is <span className='' id='poppins-semibold'>{getScoreDescription(score)}</span>
+                Your Security Score is{' '}
+                <span className={`${getScoreDescription(score).color}`} id='poppins-semibold'>
+                  {getScoreDescription(score).text} {getScoreDescription(score).emoji}
+                </span>
               </p>
+
               <p className='text-md sm:text-lg my-2' id='poppins-normal'>
                 The SolidityScan score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
                 To improve your score, view the detailed result and leverage the remediation solutions provided.
@@ -320,19 +331,19 @@ const ScanPage: React.FC = () => {
       </div>
 
       <div className="md:flex justify-center hidden">
-      <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
-        <div className='md:flex gap-4 sm:gap-10 items-center'>
-          <div className='md:flex-shrink-0 flex justify-center'>
-            <Image src={scan} height={70} width={70} alt="scan" className="rounded-full" />
-          </div>
-          <div className='text-center w-full sm:w-8/12'>
-            <p className='text-md text-balance sm:text-xl' id='poppins-regular'>
-              This audit report has not been verified by the SolidityScan team. To learn more about our published reports.
-              <button className='text-blue-400 underline ml-1' id='poppins-semibold'>click here</button>
-            </p>
+        <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
+          <div className='md:flex gap-4 sm:gap-10 items-center'>
+            <div className='md:flex-shrink-0 flex justify-center'>
+              <Image src={scan} height={70} width={70} alt="scan" className="rounded-full" />
+            </div>
+            <div className='text-center w-full sm:w-8/12'>
+              <p className='text-md text-balance sm:text-xl' id='poppins-regular'>
+                This audit report has not been verified by the SolidityScan team. To learn more about our published reports.
+                <button className='text-blue-400 underline ml-1' id='poppins-semibold'>click here</button>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       </div>
 
 
@@ -372,7 +383,7 @@ const ScanPage: React.FC = () => {
       <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
           <button className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
-          Get Detailed Report
+            Get Detailed Report
           </button>
         </div>
       </div>
@@ -385,11 +396,12 @@ const ScanPage: React.FC = () => {
 };
 
 // Utility function to get score description
-const getScoreDescription = (score: number): string => {
-  if (score >= 80) return 'EXCELLENT';
-  if (score >= 60) return 'GOOD';
-  if (score >= 40) return 'AVERAGE';
-  return 'POOR';
+const getScoreDescription = (score: number): { text: string; color: string; emoji: string } => {
+  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', emoji: '✅' };
+  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', emoji: '🟠' };
+  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', emoji: '🟡' };
+  return { text: 'POOR', color: 'text-red-500', emoji: '❌' };
 };
+
 
 export default ScanPage;
