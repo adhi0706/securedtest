@@ -10,6 +10,7 @@ import Sales from '../../../AuditExpress/components/Sales';
 import Footer from '../../../components/footer/footer';
 import { FaGithub, FaFileUpload } from 'react-icons/fa';
 import Image, { StaticImageData } from 'next/image';
+import { motion, useAnimation } from "framer-motion";
 import scan from '../../../AuditExpress/assets/scan.png';
 
 // Import blockchain images
@@ -26,6 +27,7 @@ import Astar from "../../../AuditExpress/assets/chains/astar.png";
 import Celo from "../../../AuditExpress/assets/chains/celo.png";
 import fire from "../../../AuditExpress/assets/chains/firechain_light.png";
 import Polygon from "../../../AuditExpress/assets/chains/polygon.png";
+import { AiFillThunderbolt } from 'react-icons/ai';
 
 type Vulnerability = {
   type: string;
@@ -91,6 +93,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [score, setScore] = useState<number>(resultData.score);
+  const controls = useAnimation();
   const filename = localStorage.getItem("filename");
   const github = localStorage.getItem("giturl");
 
@@ -181,11 +184,62 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between space-y-5 md:space-y-0 mt-10" id='poppins-medium'>
-          <ScoreCard label="Security Score" value={`${score}/100`} />
-          <ScoreCard label="Scan Duration" value={`${scanDuration} secs`} />
-          <ScoreCard label="Lines of Code" value={`${lineCount}`} />
+        <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
+        {/* Security Score */}
+        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='flex flex-col justify-center'>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>Security Score</p>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDetails.score}/100</p>
+          </div>
+          <div className='flex items-center'>
+            <motion.div
+              initial={{ value: 0 }}
+              animate={controls}
+              onUpdate={(latest: any) => setScore(latest.value)}
+            >
+              <CircularProgressbar
+                className='w-10 h-10 sm:w-12 sm:h-12'
+                value={score}
+                maxValue={100}
+                styles={buildStyles({
+                  pathColor: '#12D576',
+                  textColor: '#1E90FF',
+                  trailColor: '#d6d6d6',
+                  textSize: '22px'
+                })}
+              />
+            </motion.div>
+          </div>
         </div>
+        {/* Scan Duration */}
+        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='flex flex-col justify-center'>
+            <p className='text-lg sm:text-2xl' id='poppins-semibold'>Scan duration</p>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
+          </div>
+          <div className='flex items-center'>
+            {/* <CircularProgressbar
+              className='w-10 h-10 sm:w-12 sm:h-12'
+              value={score}
+              maxValue={100}
+              styles={buildStyles({
+                pathColor: '#12D576',
+                textColor: '#1E90FF',
+                trailColor: '#d6d6d6',
+                textSize: '22px'
+              })}
+            /> */}
+            <AiFillThunderbolt className='text-yellow-500 size-14' />
+          </div>
+        </div>
+        {/* Lines of Code */}
+        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='flex flex-col justify-center'>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>Lines of code</p>
+            <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
+          </div>
+        </div>
+      </div>
         <div className='md:flex justify-center items-center md:mt-10 md:my-0 my-10 px-4 sm:px-3'>
           <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
             <div className='flex justify-center items-center mb-4 lg:mb-0 ml-6' id='poppins-semibold'>
@@ -214,7 +268,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
                 </p>
 
                 <p className='text-md text-left sm:text-lg my-2' id='poppins-normal'>
-                  The SolidityScan score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
+                  The score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
                   To improve your score, view the detailed result and leverage the remediation solutions provided.
                 </p>
               </div>
@@ -222,7 +276,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           </div>
         </div>
 
-        <div className="md:flex justify-center hidden">
+        {/* <div className="md:flex justify-center hidden">
           <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
             <div className='md:flex gap-4 sm:gap-10 items-center'>
               <div className='md:flex-shrink-0 flex justify-center'>
@@ -236,7 +290,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center mx-4 sm:mx-10 lg:mx-10 mt-0" id='poppins-normal'>

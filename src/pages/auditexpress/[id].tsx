@@ -14,7 +14,25 @@ import scan from '../../AuditExpress/assets/scan.png';
 import Image from 'next/image';
 import Sales from '../../AuditExpress/components/Sales';
 import Footer from '../../components/footer/footer';
-import { ClipLoader } from 'react-spinners'; // Importing ClipLoader for loading state
+import { ClipLoader } from 'react-spinners';
+import { AiFillThunderbolt, AiTwotoneThunderbolt } from "react-icons/ai"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaGithub,FaUpload } from 'react-icons/fa';
+
+// Import blockchain logos (ensure these paths are correct)
+import ethereum from "../../AuditExpress/assets/chains/ethereum.png";
+import BNB from "../../AuditExpress/assets/chains/binance.png";
+import Avalanche from "../../AuditExpress/assets/chains/avalanche.png";
+import Arbitrum from "../../AuditExpress/assets/chains/arbitrum.png";
+import Optimism from "../../AuditExpress/assets/chains/optimism.png";
+import Gnosis from "../../AuditExpress/assets/chains/gnosis.png";
+import Boba from "../../AuditExpress/assets/chains/boba.png";
+import Base from "../../AuditExpress/assets/chains/base.png";
+import Linea from "../../AuditExpress/assets/chains/lineascan.png";
+import Astar from "../../AuditExpress/assets/chains/astar.png";
+import Celo from "../../AuditExpress/assets/chains/celo.png";
+import fire from "../../AuditExpress/assets/chains/firechain_light.png";
+import Polygon from "../../AuditExpress/assets/chains/polygon.png";
 
 // Updated Type Definitions
 type Vulnerability = {
@@ -47,6 +65,22 @@ type ScanDetails = {
   total_time_taken: any;
 };
 
+const blockchainLogos = {
+  Ethereum: ethereum,
+  Binance: BNB,
+  Avalanche: Avalanche,
+  Arbitrum: Arbitrum,
+  Optimism: Optimism,
+  Gnosis: Gnosis,
+  Boba: Boba,
+  Base: Base,
+  Linea: Linea,
+  Astar: Astar,
+  Celo: Celo,
+  FireChain: fire,
+  Polygon: Polygon,
+};
+
 const ScanPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -60,16 +94,22 @@ const ScanPage: React.FC = () => {
   const controls = useAnimation();
 
   const handleViewOnBlockscout = () => {
-    if (!scanDetails) return;
+    if (!scanDetails || !scanDetails.address) return;
 
-    const blockscoutBaseURL = getBlockscoutURL(scanDetails.blockchain);
-    const contractAddress = scanDetails.address;
-
-    if (blockscoutBaseURL && contractAddress) {
-      const blockscoutURL = `${blockscoutBaseURL}/address/${contractAddress}`;
-      window.open(blockscoutURL, '_blank');
+    if (scanDetails.address.startsWith("https://github.com/")) {
+      // Open the GitHub URL if the address is a GitHub link
+      window.open(scanDetails.address, "_blank");
     } else {
-      console.error('Invalid blockchain or contract address.');
+      // Otherwise, open the Blockscout URL
+      const blockscoutBaseURL = getBlockscoutURL(scanDetails.blockchain);
+      const contractAddress = scanDetails.address;
+
+      if (blockscoutBaseURL && contractAddress) {
+        const blockscoutURL = `${blockscoutBaseURL}/address/${contractAddress}`;
+        window.open(blockscoutURL, "_blank");
+      } else {
+        console.error("Invalid blockchain or contract address.");
+      }
     }
   };
 
@@ -206,36 +246,67 @@ const ScanPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 bg-[#011A3B] text-white min-h-screen flex flex-col">
       <Navbar />
-      {/* <button
-          className='flex items-center mt-5 text-blue-400 font-bold text-xl mb-5 sm:mt-10'
-          onClick={() => router.back()}
-        >
-          <FaArrowLeft className="mr-2" />
-          Back
-        </button> */}
       <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 mt-24'>
-        <div className="mb-4 md:mb-0">
-          <button>
-            <span className='text-xl sm:text-2xl' id='poppins-semibold'>{scanDetails.address}</span>
-          </button>
-          <p>
-            <span className="text-md sm:text-lg text-gray-400" id='poppins-medium'>{scanDetails.blockchain}</span>
-          </p>
-        </div>
-        <div className="flex justify-end">
-          {scanDetails.address && /^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) && (
-            <button
-              className="text-green-500 underline text-xl sm:text-2xl"
-              onClick={handleViewOnBlockscout}
-            >
-              View on Blockscout
+        <div className="lg:mb-0 mb-4 md:mb-0 flex gap-4">
+          <div className='h-10 w-10'>
+            {/^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) ? (
+              blockchainLogos[scanDetails.blockchain] ? (
+                <Image
+                  className="h-10 w-10 mr-2"
+                  src={blockchainLogos[scanDetails.blockchain]}
+                  alt={`${scanDetails.blockchain} logo`}
+                  width={40}
+                  height={40}
+                />
+              ) : null
+            ) : scanDetails.address.startsWith("https://github.com/") ? (
+              <FaGithub className="h-10 w-10 text-5xl text-white size-16 mr-2" />
+            ) : (
+              <FaUpload className="h-10 w-10 text-5xl text-white size-16 mr-2" />
+            )}
+          </div>
+          <div>
+
+            <button>
+              <span className='text-xl sm:text-2xl' id='poppins-semibold'>
+                {scanDetails.address.startsWith("https://github.com/")
+                  ? "Source GitHub"
+                  : scanDetails.address.endsWith("Contract file")
+                    ? "Source Contract File"
+                    : scanDetails.address}
+              </span>
             </button>
+            <p>
+              <span className="text-md sm:text-lg text-gray-400" id='poppins-medium'>
+                {scanDetails.blockchain}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-end items-center">
+          {scanDetails.address && (
+            <>
+
+              {/^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) ? (
+                <button
+                  className="text-green-500 underline text-xl sm:text-2xl"
+                  onClick={handleViewOnBlockscout}
+                >
+                  View on Blockscout
+                </button>
+              ) : scanDetails.address.startsWith("https://github.com/") ? (
+                <button
+                  className="text-green-500 underline text-xl sm:text-2xl"
+                  onClick={handleViewOnBlockscout} // Ensure this function is defined to handle GitHub links
+                >
+                  View on Github
+                </button>
+              ) : null}
+            </>
           )}
         </div>
-
-
       </div>
-
       <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
         {/* Security Score */}
         <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
@@ -270,7 +341,7 @@ const ScanPage: React.FC = () => {
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
           </div>
           <div className='flex items-center'>
-            <CircularProgressbar
+            {/* <CircularProgressbar
               className='w-10 h-10 sm:w-12 sm:h-12'
               value={score}
               maxValue={100}
@@ -280,7 +351,8 @@ const ScanPage: React.FC = () => {
                 trailColor: '#d6d6d6',
                 textSize: '22px'
               })}
-            />
+            /> */}
+            <AiFillThunderbolt className='text-yellow-500 size-14' />
           </div>
         </div>
         {/* Lines of Code */}
@@ -321,7 +393,7 @@ const ScanPage: React.FC = () => {
               </p>
 
               <p className='text-md sm:text-lg my-2' id='poppins-normal'>
-                The SolidityScan score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
+                The Security score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
                 To improve your score, view the detailed result and leverage the remediation solutions provided.
               </p>
             </div>
@@ -329,7 +401,7 @@ const ScanPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="md:flex justify-center hidden">
+      {/* <div className="md:flex justify-center hidden">
         <div className='md:border-dashed md:border w-9/12 md:bg-[#071F3D] border-gray-50 mx-4 sm:mx-10 lg:mx-32 my-5 sm:my-10 py-3 flex sm:flex-row justify-between px-4 sm:px-10 md:rounded-full'>
           <div className='md:flex gap-4 sm:gap-10 items-center'>
             <div className='md:flex-shrink-0 flex justify-center'>
@@ -343,7 +415,7 @@ const ScanPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
 
       {/* Vulnerability Counts and Pie Chart */}
@@ -395,8 +467,8 @@ const ScanPage: React.FC = () => {
 };
 
 // Utility function to get score description
-const getScoreDescription = (score: number): { text: string; color: string;} => {
-  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500',  };
+const getScoreDescription = (score: number): { text: string; color: string; } => {
+  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', };
   if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', }
   if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', };
   return { text: 'POOR', color: 'text-red-500', };

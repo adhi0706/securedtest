@@ -21,6 +21,9 @@ import Astar from "../assets/chains/astar.png";
 import Celo from "../assets/chains/celo.png";
 import fire from "../assets/chains/firechain_light.png";
 import Polygon from "../assets/chains/polygon.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faCube, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 // Mapping of blockchain names to their logos
 const blockchainLogos: { [key: string]: StaticImageData } = {
@@ -58,6 +61,7 @@ type ScanData = {
   securityScore: number;
   vulnerabilityCount: VulnerabilityCount;
   createdAt: string;
+  sourceType: string; // Added to identify GitHub or Upload source
 };
 
 type ApiResponse = {
@@ -71,6 +75,7 @@ type ApiResponse = {
     score: string;
     vulnerability_count: VulnerabilityCount;
     created_at: string;
+    source_type: string; // Field to indicate source type (GitHub or Upload)
   }[];
   totalPages: number;
   currentPage: number;
@@ -115,6 +120,7 @@ const Scanned = () => {
           securityScore: parseFloat(scan.score) || 0,
           vulnerabilityCount: scan.vulnerability_count,
           createdAt: scan.created_at,
+          sourceType: scan.source_type, // Assign source type
         }));
 
         // Sort data by createdAt in descending order (most recent first)
@@ -172,16 +178,37 @@ const Scanned = () => {
                           width={40}
                           height={40}
                         />
+                      ) : item.contractAddress.startsWith("https://github.com/") ? (
+                        // Display GitHub icon if address is a GitHub URL
+                        <div className="h-10 w-10 flex justify-center items-center text-gray-500">
+                          <FontAwesomeIcon icon={faGithub} className="text-white" size="2x" />
+                        </div>
                       ) : (
-                        <div className="h-10 w-10 bg-gray-300 flex justify-center items-center">
-                          <span className="text-gray-600">N/A</span>
+                        // Display Upload icon if the source is Upload
+                        <div className="h-10 w-10 flex justify-center items-center text-gray-500">
+                          <FontAwesomeIcon icon={faUpload} className="text-white" size="2x" />
                         </div>
                       )}
-                      <h1 className="ml-2 text-center">{item.blockchain}</h1>
+
+                      <div className="ml-2 text-center">
+                        <h1>{item.blockchain}</h1>
+                      </div>
                     </td>
+
+
                     <td className="p-3 text-center">{item.companyName}</td>
                     <td className="p-3 text-center">{item.contractName}</td>
-                    <td className="p-3 text-center">{item.contractAddress}</td>
+                    <td className="p-3 text-center">
+                      {item.contractAddress.startsWith("https://github.com/") ? (
+                        <p href={item.contractAddress} target="_blank">
+                          {item.contractAddress.substring(0, 40) + "..."}
+                        </p>
+                      ) : (
+                        <p>
+                        {item.contractAddress}
+                        </p>
+                      )}
+                    </td>
                     <td className="p-3">
                       <div className="flex justify-center items-center">
                         <div className="w-10 h-10 mr-3">
@@ -219,18 +246,16 @@ const Scanned = () => {
         <button
           disabled={page === 1}
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 ${page === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           Previous
         </button>
         <button
           disabled={page === totalPages}
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${page === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           Next
         </button>

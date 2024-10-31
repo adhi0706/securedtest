@@ -240,18 +240,20 @@ const Hero = (props: Props) => {
         blockchain = selectedBlockchain;
       } else if (selectedSource === "github" && githubURL) {
         sourceCode = await fetchContractFromGitHub(githubURL);
-        extractedContractName = contractName; // User input
+        address = githubURL;
+        extractedContractName = contractName;
         if (!extractedContractName) {
           throw new Error("Please enter the Contract Name.");
         }
-        blockchain = "via github";
+        blockchain = "github";
       } else if (selectedSource === "upload" && uploadedFile) {
         sourceCode = await fetchContractFromFile(uploadedFile);
-        extractedContractName = contractName; // User input
+        extractedContractName = contractName;
+        address = 'Contract file'
         if (!extractedContractName) {
           throw new Error("Please enter the Contract Name.");
         }
-        blockchain = "via upload";
+        blockchain = "upload";
       } else {
         throw new Error("Please fill in the required fields.");
       }
