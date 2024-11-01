@@ -155,7 +155,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
   const blockchainIcon = blockchainIcons[blockchain ?? ""] || null;
 
   return (
-    <div className="mx-0 md:mx-auto p-4 bg-[#011A3B] text-white min-h-screen">
+    <div className="mx-0 md:mx-auto p-4 bg-[#011A3B] text-white min-h-screen overflow-x-hidden">
       <Navbar />
 
       <div className="mt-20 mx-4 sm:mx-10 lg:mx-20 lg:mt-24">
@@ -168,7 +168,11 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
             <Image src={blockchainIcon} alt={`${blockchain} logo`} className="w-10 h-10 mr-2" />
           ) : null}
           <div className="items-center">
-            <p className="text-xl sm:text-2xl">{blockchainIcon ? address : ""}</p>
+            <div className="text-xl sm:text-2xl">
+              <p className="truncate sm:hidden">{blockchainIcon ? address.slice(0, 16) + '...' : ""}</p>
+              <p className="hidden sm:block">{blockchainIcon ? address : ""}</p>
+            </div>
+
             <p className="text-md sm:text-lg text-gray-400">
               {isGitHub ? (
                 <a href={github} target="_blank" rel="noopener noreferrer" className="text-white hover:underline truncate">
@@ -185,40 +189,40 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
         </div>
 
         <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
-        {/* Security Score */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
-          <div className='flex flex-col justify-center'>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>Security Score</p>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDetails.score}/100</p>
+          {/* Security Score */}
+          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+            <div className='flex flex-col justify-center'>
+              <p className='text-lg sm:text-2xl' id='poppins-normal'>Security Score</p>
+              <p className='text-lg sm:text-2xl' id='poppins-normal'>{parseFloat(scanDetails.score.substring(0, 5))}/100</p>
+            </div>
+            <div className='flex items-center'>
+              <motion.div
+                initial={{ value: 0 }}
+                animate={controls}
+                onUpdate={(latest: any) => setScore(latest.value)}
+              >
+                <CircularProgressbar
+                  className='w-10 h-10 sm:w-12 sm:h-12'
+                  value={score}
+                  maxValue={100}
+                  styles={buildStyles({
+                    pathColor: '#12D576',
+                    textColor: '#1E90FF',
+                    trailColor: '#d6d6d6',
+                    textSize: '22px'
+                  })}
+                />
+              </motion.div>
+            </div>
           </div>
-          <div className='flex items-center'>
-            <motion.div
-              initial={{ value: 0 }}
-              animate={controls}
-              onUpdate={(latest: any) => setScore(latest.value)}
-            >
-              <CircularProgressbar
-                className='w-10 h-10 sm:w-12 sm:h-12'
-                value={score}
-                maxValue={100}
-                styles={buildStyles({
-                  pathColor: '#12D576',
-                  textColor: '#1E90FF',
-                  trailColor: '#d6d6d6',
-                  textSize: '22px'
-                })}
-              />
-            </motion.div>
-          </div>
-        </div>
-        {/* Scan Duration */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
-          <div className='flex flex-col justify-center'>
-            <p className='text-lg sm:text-2xl' id='poppins-semibold'>Scan duration</p>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
-          </div>
-          <div className='flex items-center'>
-            {/* <CircularProgressbar
+          {/* Scan Duration */}
+          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+            <div className='flex flex-col justify-center'>
+              <p className='text-lg sm:text-2xl' id='poppins-semibold'>Scan duration</p>
+              <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
+            </div>
+            <div className='flex items-center'>
+              {/* <CircularProgressbar
               className='w-10 h-10 sm:w-12 sm:h-12'
               value={score}
               maxValue={100}
@@ -229,23 +233,23 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
                 textSize: '22px'
               })}
             /> */}
-            <AiFillThunderbolt className='text-yellow-500 size-14' />
+              <AiFillThunderbolt className='text-yellow-500 size-14' />
+            </div>
+          </div>
+          {/* Lines of Code */}
+          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+            <div className='flex flex-col justify-center'>
+              <p className='text-lg sm:text-2xl' id='poppins-normal'>Lines of code</p>
+              <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
+            </div>
           </div>
         </div>
-        {/* Lines of Code */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
-          <div className='flex flex-col justify-center'>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>Lines of code</p>
-            <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
-          </div>
-        </div>
-      </div>
         <div className='md:flex justify-center items-center md:mt-10 md:my-0 my-10 px-4 sm:px-3'>
           <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
             <div className='flex justify-center items-center mb-4 lg:mb-0 ml-6' id='poppins-semibold'>
               <CircularProgressbar
                 className='md:w-40 md:h-40 w-40 h-40 text-white rounded-full'
-                text={`${scanDetails.score}%`}
+                text={`${scanDetails.score.substring(0, 5)}%`}
                 value={scanDetails.score}
                 maxValue={100}
                 styles={buildStyles({
@@ -302,7 +306,9 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
         </div>
         <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
           <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-            <button className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
+            <button
+            onClick={()=> typeof window!=="undefined" && window.open("https://securedapp.io/solidity-shield-scan/contact")}
+             className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
               Get Detailed Report
             </button>
           </div>
@@ -340,11 +346,11 @@ const VulnerabilityCount: React.FC<{ scanDetails: ScanDetails; reverse?: boolean
     </div>
   );
 };
-const getScoreDescription = (score: number): { text: string; color: string;} => {
-  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500',  };
-  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500',  };
-  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500',  };
-  return { text: 'POOR', color: 'text-red-500',  };
+const getScoreDescription = (score: number): { text: string; color: string; } => {
+  if (score >=90) return { text: 'EXCELLENT', color: 'text-green-500', };
+  if (score >= 75) return { text: 'GOOD', color: 'text-orange-500', };
+  if (score >= 60) return { text: 'AVERAGE', color: 'text-yellow-500', };
+  return { text: 'POOR', color: 'text-red-500', };
 };
 
 

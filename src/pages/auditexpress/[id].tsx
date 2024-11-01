@@ -97,7 +97,6 @@ const ScanPage: React.FC = () => {
     if (!scanDetails || !scanDetails.address) return;
 
     if (scanDetails.address.startsWith("https://github.com/")) {
-      // Open the GitHub URL if the address is a GitHub link
       window.open(scanDetails.address, "_blank");
     } else {
       // Otherwise, open the Blockscout URL
@@ -246,7 +245,7 @@ const ScanPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 bg-[#011A3B] text-white min-h-screen flex flex-col">
       <Navbar />
-      <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 mt-24'>
+      <div className='lg:flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 mt-24'>
         <div className="lg:mb-0 mb-4 md:mb-0 flex gap-4">
           <div className='h-10 w-10'>
             {/^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) ? (
@@ -267,7 +266,16 @@ const ScanPage: React.FC = () => {
           </div>
           <div>
 
-            <button>
+            <button className='truncate sm:hidden'>
+              <span className='text-xl sm:text-2xl' id='poppins-semibold'>
+                {scanDetails.address.startsWith("https://github.com/")
+                  ? "Source GitHub"
+                  : scanDetails.address.endsWith("Contract file")
+                    ? "Source Contract File"
+                    : scanDetails.address.substring(0,16)+"..."}
+              </span>
+            </button>
+            <button className='hidden sm:block'>
               <span className='text-xl sm:text-2xl' id='poppins-semibold'>
                 {scanDetails.address.startsWith("https://github.com/")
                   ? "Source GitHub"
@@ -284,7 +292,7 @@ const ScanPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-end items-center">
+        <div className="lg:flex lg:my-0 my-3 justify-end items-center">
           {scanDetails.address && (
             <>
 
@@ -453,7 +461,9 @@ const ScanPage: React.FC = () => {
       {/* View Audit Report PDF Button */}
       <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-          <button className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
+          <button
+          onClick={()=> typeof window!=="undefined" && window.open("https://securedapp.io/solidity-shield-scan/contact")}
+           className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
             Get Detailed Report
           </button>
         </div>
@@ -468,9 +478,9 @@ const ScanPage: React.FC = () => {
 
 // Utility function to get score description
 const getScoreDescription = (score: number): { text: string; color: string; } => {
-  if (score >= 80) return { text: 'EXCELLENT', color: 'text-green-500', };
-  if (score >= 60) return { text: 'GOOD', color: 'text-orange-500', }
-  if (score >= 40) return { text: 'AVERAGE', color: 'text-yellow-500', };
+  if (score >= 90) return { text: 'EXCELLENT', color: 'text-green-500', };
+  if (score >= 75) return { text: 'GOOD', color: 'text-orange-500', }
+  if (score >= 60) return { text: 'AVERAGE', color: 'text-yellow-500', };
   return { text: 'POOR', color: 'text-red-500', };
 };
 

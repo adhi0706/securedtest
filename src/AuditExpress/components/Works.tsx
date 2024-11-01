@@ -45,7 +45,7 @@ const cardData: Card[] = [
 const Works = () => {
   return (
     <div className='overflow-x-hidden'>
-      <div className='flex justify-center mt-7'>
+      <div className='flex justify-center lg:mt-20 md:mt-12 mt-10'>
         <div className='flex justify-center space-x-5 items-center'>
           <Image src={left} className='h-2 w-full' alt='left' height={0} width={0} />
           <div>
@@ -60,7 +60,7 @@ const Works = () => {
       {/* Subtitle Section */}
       <div className='py-10 flex justify-center overflow-x-hidden'>
         <h1 className='text-center text-white lg:text-4xl text-2xl lg:w-6/12' id='poppins-regular'>
-          How Solidity Shield Strengthens Smart Contract Security Audit
+          How Audit Express Strengthens Smart Contract Security Audit
         </h1>
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-5 py-10 text-white' id='poppins-regular'>
