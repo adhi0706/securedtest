@@ -17,7 +17,7 @@ import Footer from '../../components/footer/footer';
 import { ClipLoader } from 'react-spinners';
 import { AiFillThunderbolt, AiTwotoneThunderbolt } from "react-icons/ai"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaGithub,FaUpload } from 'react-icons/fa';
+import { FaGithub, FaUpload } from 'react-icons/fa';
 
 // Import blockchain logos (ensure these paths are correct)
 import ethereum from "../../AuditExpress/assets/chains/ethereum.png";
@@ -272,7 +272,7 @@ const ScanPage: React.FC = () => {
                   ? "Source GitHub"
                   : scanDetails.address.endsWith("Contract file")
                     ? "Source Contract File"
-                    : scanDetails.address.substring(0,16)+"..."}
+                    : scanDetails.address.substring(0, 16) + "..."}
               </span>
             </button>
             <button className='hidden sm:block'>
@@ -286,7 +286,11 @@ const ScanPage: React.FC = () => {
             </button>
             <p>
               <span className="text-md sm:text-lg text-gray-400" id='poppins-medium'>
-                {scanDetails.blockchain}
+                {(scanDetails.blockchain !== "github" && scanDetails.blockchain !== "upload") && (
+                  <div className="ml-3 flex flex-col justify-center text-left">
+                    <h1 className="text-base font-semibold">{scanDetails.blockchain}</h1>
+                  </div>
+                )}
               </span>
             </p>
           </div>
@@ -462,8 +466,8 @@ const ScanPage: React.FC = () => {
       <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
           <button
-          onClick={()=> typeof window!=="undefined" && window.open("https://securedapp.io/solidity-shield-scan/contact")}
-           className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
+            onClick={() => typeof window !== "undefined" && window.open("https://securedapp.io/solidity-shield-scan/contact")}
+            className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
             Get Detailed Report
           </button>
         </div>

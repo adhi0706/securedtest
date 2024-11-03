@@ -158,60 +158,62 @@ const Scanned = () => {
             <table className="w-full text-left table-auto border-collapse">
               <thead className="bg-green-500 rounded-lg text-white text-lg">
                 <tr>
-                  <th className="p-3 text-center">Blockchain</th>
-                  <th className="p-3 text-center">Company Name</th>
-                  <th className="p-3 text-center">Contract Name</th>
-                  <th className="p-3 text-center">Contract Address</th>
-                  <th className="p-3 text-center">Security Score</th>
-                  <th className="p-3 text-center">Actions</th>
+                  <th className="p-3 text-left">Blockchain</th>
+                  <th className="p-3 text-left">Company Name</th>
+                  <th className="p-3 text-left">Contract Name</th>
+                  <th className="p-3 text-left">Contract Address</th>
+                  <th className="p-3 text-left">Security Score</th>
+                  <th className="p-3 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item) => (
                   <tr key={item.id} className="border-b">
-                    <td className="p-3 flex justify-center items-center">
-                      {blockchainLogos[item.blockchain] ? (
-                        <Image
-                          className="h-10 w-10"
-                          src={blockchainLogos[item.blockchain]}
-                          alt={`${item.blockchain} logo`}
-                          width={40}
-                          height={40}
-                        />
-                      ) : item.contractAddress.startsWith("https://github.com/") ? (
-                        // Display GitHub icon if address is a GitHub URL
-                        <div className="h-10 w-10 flex justify-center items-center text-gray-500">
-                          <FontAwesomeIcon icon={faGithub} className="text-white" size="2x" />
-                        </div>
-                      ) : (
-                        // Display Upload icon if the source is Upload
-                        <div className="h-10 w-10 flex justify-center items-center text-gray-500">
-                          <FontAwesomeIcon icon={faUpload} className="text-white" size="2x" />
-                        </div>
-                      )}
+                    <td className="p-3 flex items-center justify-start mx-6 space-x-4">
+                      <div className="flex items-center justify-center h-12 w-12 bg-gray-800 rounded-full">
+                        {blockchainLogos[item.blockchain] ? (
+                          <Image
+                            src={blockchainLogos[item.blockchain]}
+                            alt={`${item.blockchain} logo`}
+                            width={40}
+                            height={40}
+                            className="h-8 w-8 object-contain"
+                          />
+                        ) : item.contractAddress.startsWith("https://github.com/") ? (
+                          <FontAwesomeIcon icon={faGithub} className="text-white text-3xl" />
+                        ) : (
+                          <FontAwesomeIcon icon={faUpload} className="text-white text-3xl" />
+                        )}
+                      </div>
 
-                      <div className="ml-2 text-center">
-                        <h1>{item.blockchain}</h1>
+                      {/* Text Container */}
+                      <div className="flex flex-col justify-center">
+                        <h1 className="text-base font-semibold text-left">
+                          {item.blockchain}
+                        </h1>
                       </div>
                     </td>
 
 
-                    <td className="p-3 text-center">{item.companyName}</td>
-                    <td className="p-3 text-center">{item.contractName}</td>
-                    <td className="p-3 text-center">
+
+
+
+                    <td className="p-3 text-left">{item.companyName}</td>
+                    <td className="p-3 text-left">{item.contractName}</td>
+                    <td className="p-3 text-left">
                       {item.contractAddress.startsWith("https://github.com/") ? (
                         <p href={item.contractAddress} target="_blank">
                           {item.contractAddress.substring(0, 40) + "..."}
                         </p>
                       ) : (
                         <p>
-                        {item.contractAddress}
+                          {item.contractAddress}
                         </p>
                       )}
                     </td>
                     <td className="p-3">
                       <div className="flex justify-center items-center">
-                        <div className="w-10 h-10 mr-3">
+                        <div className="w-12 h-12 mr-3">
                           <CircularProgressbar
                             value={item.securityScore}
                             maxValue={100}
@@ -226,7 +228,7 @@ const Scanned = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="p-3 text-center">
+                    <td className="p-3 text-left">
                       <Link href={`/auditexpress/${item.id}`}>
                         <button className="bg-transparent border border-green-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">
                           View Scan
