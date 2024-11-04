@@ -292,7 +292,7 @@ const BlogPost = () => {
                     return <BlogTag tag={tag} onClick={() => {}} />;
                   })}
                 </div>
-                <div className="body-header-title">{blogDetails.title}</div>
+                <h1 className="body-header-title">{blogDetails.title}</h1>
                 {/* <p>{blogDetails.preview}</p> */}
               </div>
               <div className="py-6">
@@ -306,6 +306,7 @@ const BlogPost = () => {
                         <img
                           layout="intrinsic"
                           src={blogDetails.Publisher.image}
+                          alt="publisher"
                         />
                       )}
                     </div>
@@ -396,7 +397,7 @@ const BlogPost = () => {
                                 paddingRight: 38,
                               }}
                               src={img.src}
-                              alt={img.alt}
+                              alt={"blog-post-img"}
                             />
                           </React.Fragment>
                         );

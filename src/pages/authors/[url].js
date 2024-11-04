@@ -49,16 +49,20 @@ export default function AuthorProfile({ authorDetail }) {
                   <div className="">{authorDetail.education}</div>
                 </div>
                 <div className="author-profile-card-socials">
-                  <div className="author-profile-card-social">
-                    <Link target="_blank" href={authorDetail.twitter}>
-                      <FontAwesomeIcon icon={faTwitter} />
-                    </Link>
-                  </div>
-                  <div className="author-profile-card-social">
-                    <Link target="_blank" href={authorDetail.linkedin}>
-                      <FontAwesomeIcon icon={faLinkedin} />
-                    </Link>
-                  </div>
+                  {authorDetail.twitter && (
+                    <div className="author-profile-card-social">
+                      <Link target="_blank" href={authorDetail.twitter}>
+                        <FontAwesomeIcon icon={faTwitter} />
+                      </Link>
+                    </div>
+                  )}
+                  {authorDetail.linkedin && (
+                    <div className="author-profile-card-social">
+                      <Link target="_blank" href={authorDetail.linkedin}>
+                        <FontAwesomeIcon icon={faLinkedin} />
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

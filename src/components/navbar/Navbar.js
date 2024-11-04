@@ -24,7 +24,7 @@ const Navbar = () => {
   const navigate = useRouter();
   let nextPath;
 
-  const currentPath = typeof window !== "undefined" && window.location.href;
+  const currentPath = navigate.asPath;
 
   switch (currentPath) {
     case "/solidity-shield":

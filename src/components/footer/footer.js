@@ -143,7 +143,7 @@ const navigationItems = [
 
 const socials = [
   {
-    to: "https://discord.gg/BweY4Ze4",
+    to: "https://discord.com/invite/pqDC8ddnYQ",
     icon: <FontAwesomeIcon size="xl" icon={faDiscord} />,
   },
   {

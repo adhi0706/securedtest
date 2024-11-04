@@ -30,7 +30,7 @@ const Hero = () => {
   return (
     <div className="hero flex flex-col justify-between">
       <div>
-        <p className="hero-title">Comprehensive Blockchain Security</p>
+        <h1 className="hero-title">Comprehensive Blockchain Security</h1>
         <p className="hero-subtitle">
           97% of Blockchain hacks are preventable. Securing your blockchain
           journey

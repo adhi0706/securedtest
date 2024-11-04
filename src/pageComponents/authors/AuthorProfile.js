@@ -62,14 +62,18 @@ const AuthorProfile = () => {
                 </div>
                 <div className="author-profile-card-socials">
                   <div className="author-profile-card-social">
-                    <Link target="_blank" href={authorDetail.twitter}>
-                      <FontAwesomeIcon icon={faTwitter} />
-                    </Link>
+                    {authorDetail.twitter && (
+                      <Link target="_blank" href={authorDetail.twitter}>
+                        <FontAwesomeIcon icon={faTwitter} />
+                      </Link>
+                    )}
                   </div>
                   <div className="author-profile-card-social">
-                    <Link target="_blank" href={authorDetail.linkedin}>
-                      <FontAwesomeIcon icon={faLinkedin} />
-                    </Link>
+                    {authorDetail.linkedin && (
+                      <Link target="_blank" href={authorDetail.linkedin}>
+                        <FontAwesomeIcon icon={faLinkedin} />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

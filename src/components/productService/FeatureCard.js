@@ -9,14 +9,16 @@ export const FeatureIcon = ({ icon, iconBackgroundColor }) => {
     icon && (
       <div
         className="feature-icon"
-        style={{ background: `${iconBackgroundColor}` }}>
+        style={{ background: `${iconBackgroundColor}` }}
+      >
         <img
           layout="intrinsic"
           style={{
             filter: darkMode && "invert(1)",
           }}
           src={`/assets/images/icons/${icon}.svg`}
-          alt="icon"></img>
+          alt="icon"
+        ></img>
       </div>
     )
   );
@@ -39,7 +41,8 @@ export const FeatureCard = ({
         {header && <div className="feature-card-content-header">{header}</div>}
         <div
           className="feature-card-content-description"
-          dangerouslySetInnerHTML={{ __html: description }}>
+          dangerouslySetInnerHTML={{ __html: description }}
+        >
           {}
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import Button from "../common/Button";
 import Image from "next/image";
 
@@ -11,6 +12,7 @@ const ProductWhyCard = ({
   image,
   imageAlt,
 }) => {
+  const router = useRouter();
   return (
     <div className="product-why-card">
       <div className="product-why-card-content-container">
@@ -42,7 +44,11 @@ const ProductWhyCard = ({
         </div>
       </div>
       <div className="product-why-card-image">
-        <img layout="intrinsic" src={image} alt={imageAlt} />
+        <img
+          layout="intrinsic"
+          src={image}
+          alt={router.asPath.replace("/", "")}
+        />
       </div>
     </div>
   );

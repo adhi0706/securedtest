@@ -73,7 +73,7 @@ const Solution = ({ title, items = [], to, image, isImageLeft = false }) => {
           layout="intrinsic"
           style={{ borderRadius: "25px 15px 0 0" }}
           src={image}
-          alt="solution#"
+          alt={title}
         />
       </div>
     </div>

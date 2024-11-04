@@ -19,7 +19,7 @@ const TeamCard = ({ details }) => {
           <div className="team-card-header-image-container">
             <img
               className="team-card-header-image"
-              alt=""
+              alt="about-us"
               src={details.image}
             />
           </div>
@@ -65,9 +65,9 @@ const AboutUs = () => {
       <Navbar />
       <div className="about-us-hero-container">
         <div className="about-us-hero">
-          <div className="about-us-hero-title">
+          <h1 className="about-us-hero-title">
             Our Story : From Vision to Reality
-          </div>
+          </h1>
           <div className="about-us-hero-description">
             SecureDApp emerged from a united vision to secure the future of
             Web3. Founded by two dedicated innovators from India, the company
@@ -91,7 +91,7 @@ const AboutUs = () => {
             <img
               style={{ maxWidth: "90%" }}
               src="/assets/images/about/photo1.png"
-              alt=""
+              alt="about-us"
             />
           </div>
           <hr />
@@ -106,7 +106,7 @@ const AboutUs = () => {
             <img
               style={{ maxWidth: "90%", margin: "0 auto" }}
               src="/assets/images/about/photo2.png"
-              alt=""
+              alt="about-us"
             />
           </div>
           <div className="about-us-company-eco-content-container">
@@ -172,7 +172,7 @@ const AboutUs = () => {
               layout="intrinsic"
               style={{ maxWidth: "90%" }}
               src="/assets/images/about/photo3.png"
-              alt=""
+              alt="about-us"
             />
           </div>
         </div>

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faL } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from "../common/CustomButton";
 import FileUpload from "../common/FileUpload";
@@ -102,6 +102,7 @@ const ScanNowModal = () => {
   const [chainTypeDropDown, setChainTypeDropDown] = useState(false);
   const [file, setFile] = useState(null);
   const [contract, setContract] = useState();
+  const [isScanning, setIsScanning] = useState(false);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -145,6 +146,8 @@ const ScanNowModal = () => {
   };
 
   async function handleSubmit() {
+    setIsScanning(true);
+    toast("Submitted to scan");
     var res = await scanSubmit({
       inputTypes: sourceType,
       companyName: company,
@@ -163,13 +166,16 @@ const ScanNowModal = () => {
       setContractUrl();
       setFile();
       setCompany();
+      setIsScanning(false);
     } else if (res === "error") {
       toast.error("Error Scanning!");
       setGithub();
       setContractUrl();
       setFile();
       setCompany();
+      setIsScanning(false);
     } else {
+      setIsScanning(false);
     }
   }
 
@@ -181,7 +187,7 @@ const ScanNowModal = () => {
             <div className="scan-now-modal-header-title">Scan Now</div>
             <div className="scan-now-modal-close-container">
               <i
-                onClick={closeModal}
+                onClick={!isScanning && closeModal}
                 className="fa-solid fa-xmark fa-xl cursor-pointer"
               />
             </div>
@@ -262,7 +268,7 @@ const ScanNowModal = () => {
           <div className="scan-now-modal-fotter">
             <div className="scan-now-modal-footer-button">
               <CustomButton
-                onClick={closeModal}
+                onClick={!isScanning && closeModal}
                 text={"Cancel"}
                 className={
                   "w-[120px] py-3 px-2 rounded-xl border border-tertiary active:bg-tertiary"
@@ -271,11 +277,11 @@ const ScanNowModal = () => {
             </div>
             <div className="scan-now-modal-footer-button">
               <CustomButton
-                text={"Scan"}
+                text={isScanning ? "Scanning..." : "Scan"}
                 className={
                   "w-[120px] border border-tertiary py-3 px-2 rounded-xl  bg-tertiary active:bg-white"
                 }
-                onClick={handleSubmit}
+                onClick={!isScanning && handleSubmit}
               />
             </div>
           </div>

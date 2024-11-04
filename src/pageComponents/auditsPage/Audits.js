@@ -159,6 +159,7 @@ const AuditsPage = () => {
             layout="intrinsic"
             style={{ marginRight: "12px", maxWidth: "90px" }}
             src={data.image}
+            alt={data.company}
           ></img>
         </div>
         <div style={{ margin: "auto", width: "100%", textAlign: "left" }}>
@@ -302,9 +303,9 @@ const AuditsPage = () => {
       <div className="audits-page">
         <div className="audits-page-header">
           <div className="audits-page-header-title">Audits</div>
-          <div className="audits-page-header-description">
-            Audits we've done
-          </div>
+          <h1 className="audits-page-header-description">
+            Audits done by SecureDapp
+          </h1>
         </div>
 
         <div className="audits-page-body">
@@ -329,7 +330,7 @@ const AuditsPage = () => {
                     <img
                       layout="intrinsic"
                       src={currentAudit.image}
-                      alt="img"
+                      alt={currentAudit.company}
                     />
                   </div>
                   <div className="audits-page-body-logo-desc">

@@ -61,7 +61,7 @@ const Header = () => {
             layout="intrinsic"
             className="w-1/3"
             src="/assets/images/securedapp-logo-light.svg"
-            alt=""
+            alt="SecureDapp"
           />
         </div>
         <div className="sss-header-right">

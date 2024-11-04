@@ -53,7 +53,7 @@ const PaymentModal = () => {
                     <img
                       layout="intrinsic"
                       src="/assets/images/solidity-shield-scan/phonepe-icon.svg"
-                      alt=""
+                      alt="Phonpe"
                     />
                   </div>
                   <div className="sss-payment-modal-body-method-button">
@@ -80,7 +80,7 @@ const PaymentModal = () => {
                     <img
                       layout="intrinsic"
                       src="/assets/images/solidity-shield-scan/crypto-icon.png"
-                      alt=""
+                      alt="USDT"
                     />
                   </div>
                   <div className="sss-payment-modal-body-method-button">

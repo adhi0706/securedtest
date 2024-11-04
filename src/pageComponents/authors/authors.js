@@ -28,17 +28,28 @@ const AuthorCard = ({
           <div className="">{designation}</div>
           <div className="">{education}</div>
         </div>
-        <div className="authors-card-socials">
-          <div className="authors-card-social">
-            <Link target="_blank" href={twitter}>
+        <div style={{ height: "auto" }} className="authors-card-socials">
+          {twitter ? (
+            <div className="authors-card-social">
+              <Link target="_blank" href={twitter}>
+                <FontAwesomeIcon icon={faTwitter} />
+              </Link>
+            </div>
+          ) : (
+            <div className="authors-card-social">
               <FontAwesomeIcon icon={faTwitter} />
-            </Link>
-          </div>
-          <div className="authors-card-social">
-            <Link target="_blank" href={linkedin}>
+            </div>
+          )}
+          {linkedin ? (
+            <div className="authors-card-social">
+              <Link target="_blank" href={linkedin}></Link>
               <FontAwesomeIcon icon={faLinkedin} />
-            </Link>
-          </div>
+            </div>
+          ) : (
+            <div className="authors-card-social">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -64,7 +75,7 @@ const Authors = () => {
       <Navbar />
       <div className="authors">
         <div className="authors-header">
-          <div className="authors-header-title">Our Authors</div>
+          <h1 className="authors-header-title">Our Authors</h1>
           <div className="authors-header-desc">
             We are a technology-driven platform, offering services that cover
             the legal needs of startups and established businesses.

@@ -28,15 +28,6 @@ export default function Index() {
 
   return (
     <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary">
-      <MetaTags
-        data={{
-          title: "Blockchain Security & Smart Contract Audits | SecureDApp.io",
-          desc: "SecureDApp offers blockchain security, smart contract audits, DApp development, and compliance services. Protect your digital assets today.",
-          keywords:
-            "blockchain security, smart contract audits, DApp development, compliance solutions, Layer 1 and Layer 2 chains, Ethereum security, Algorand security, Solana audits, Aptos blockchain, Hyperledger auditing, Binance Smart Chain security, DeFi protocol audits, NFT security, DAO audits, digital asset protection, non-custodial wallet security, custodial wallet protection, blockchain platform security, intellectual property protection, vulnerability detection blockchain",
-          image: "/assets/images/ProductPages/ss/hero.webp",
-        }}
-      />
       <Home />
     </div>
   );

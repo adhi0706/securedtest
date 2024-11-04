@@ -57,8 +57,7 @@ export const authorsData = [
     name: "Mr. Ram Kumar",
     designation: "Blockchain Security Expert",
     education: "B. Tech (IIT Kanpur)",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",
@@ -110,8 +109,7 @@ export const authorsData = [
     name: "Dr. Shyam Patel",
     designation: "Web3 Security Specialist",
     education: "B.Tech, M. Tech (VTU)",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",
@@ -163,8 +161,7 @@ export const authorsData = [
     name: "Mr. Kartikeya K",
     designation: "Blockchain Security Architect",
     education: "(Amity University, B Tech)",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",
@@ -216,8 +213,7 @@ export const authorsData = [
     name: "Dr. Irfan Ansari",
     designation: "Web3 Security Analyst",
     education: "",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",
@@ -269,8 +265,7 @@ export const authorsData = [
     name: "Ms. Hemlatha S",
     designation: "Blockchain Security Consultant",
     education: "(B.E, Delhi College of Engineering)",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",
@@ -322,8 +317,7 @@ export const authorsData = [
     name: "Mrs. Rashmi Bansal",
     designation: "Blockchain Architecture &",
     education: "Consultant Cyber Security (MCA)",
-    twitter: "x.com",
-    linkedin: "linkedin.com",
+
     details: [
       {
         title: "Experience",

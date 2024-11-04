@@ -11,7 +11,7 @@ const HowItWorksCard = ({ image, imageAlt, title, description }) => {
           <img
             layout="intrinsic"
             src={`/assets/images/icons/howitworks/${image}.svg`}
-            alt={imageAlt}
+            alt={"icon"}
           />
         </div>
       )}

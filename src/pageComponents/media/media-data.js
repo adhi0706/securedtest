@@ -1,5 +1,24 @@
 export const mediaData = [
   {
+    heading: "Transforming Blockchain Security and Preventing Cyber Threat",
+    description:
+      "For blockchain to reach its full potential, businesses must address its security challenges, writes Abhishek Singh, Co-founder and CEO of blockchain start-up SecureDApp.",
+    date: "September 18, 2024",
+    link: "https://thebusinessfrontier.com/transforming-blockchain-security-and-preventing-cyber-threat/",
+    image: "/assets/images/media/businessfrontier.png",
+    tags: "The Business Frontier",
+  },
+  {
+    heading:
+      "Navigating Regulatory Challenges in Web3: Balancing Compliance and Innovation",
+    description:
+      "The world wide web is growing, and the new generation is Web3. But what is Web3? In layman’s terms, it is the third generation of the internet that is based on the blockchain. Unlike today’s internet or more specifically Web2 where companies such as Google and Facebook dominate, Web3 seeks to decentralise control to the users by eliminating intermediaries.",
+    date: "September 18, 2024",
+    link: "https://mediacatalyst.in/navigating-regulatory-challenges-in-web3-balancing-compliance-and-innovation/",
+    image: "/assets/images/media/businessfrontier.png",
+    tags: "MediaCatalyst",
+  },
+  {
     heading:
       "Breaking Boundaries in Web3 Security: An Exclusive Interview with Himanshu Gautam, Co-founder SecureDApp",
     description:

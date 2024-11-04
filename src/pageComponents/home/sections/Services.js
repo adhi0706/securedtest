@@ -264,7 +264,7 @@ const Services = () => {
                     selectedService + 1
                   }-hero.webp`
             }
-            alt={servicesData[selectedService].alt}
+            alt={servicesData[selectedService].name}
           />
         </div>
       </div>

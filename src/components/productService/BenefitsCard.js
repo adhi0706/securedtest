@@ -14,7 +14,7 @@ export const BenefitsCardIcon = ({ img, imgAlt = "" }) => {
             : "brightness(1) invert(0)",
         }}
         src={img}
-        alt={imgAlt}
+        alt={"icon"}
       />
     </div>
   );

@@ -49,7 +49,7 @@ function BlogCard({ details, isMedia = false }) {
             layout="intrinsic"
             className="blog-card-header-image"
             src={details.image}
-            alt=""
+            alt={details.heading}
           />
         </div>
       </div>

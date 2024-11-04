@@ -38,7 +38,7 @@ const Benefits = ({ benefitsData, title, subTitle, button, img, link }) => {
           })}
         </div>
         <div className="benefits-body-image">
-          <img layout="intrinsic" src={img} alt="" />
+          <img layout="intrinsic" src={img} alt={"image"} />
         </div>
       </div>
     </div>

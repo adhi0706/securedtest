@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import Button from "../common/Button";
 import Image from "next/image";
 
@@ -11,10 +12,15 @@ const ProductCard = ({
   image,
   imageAlt,
 }) => {
+  const router = useRouter();
   return (
     <div className="product-card">
       <div className="product-card-image">
-        <img layout="intrinsic" src={image} alt={imageAlt} />
+        <img
+          layout="intrinsic"
+          src={image}
+          alt={router.asPath.replace("/", "")}
+        />
       </div>
       <div className="product-card-content">
         <div className="product-card-content-header">{header}</div>

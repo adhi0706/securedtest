@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
 import { getHomeSelector } from "../../redux/slices/main/homeSlice";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export const WhyChooseCardIcon = ({ image, imageBackground }) => {
   const { darkMode } = useSelector(getHomeSelector);
+  const router = useRouter();
   return (
     <div
       className="why-choose-card-icon"
@@ -18,7 +20,7 @@ export const WhyChooseCardIcon = ({ image, imageBackground }) => {
         }}
         className="p-2"
         src={image}
-        alt=""
+        alt={router.asPath.replace("/", "")}
       />
     </div>
   );

@@ -38,7 +38,7 @@ const PricingPlanCard = ({
         className="sss-pricing-plan-card"
       >
         <div className="sss-pricing-card-header">
-          <img layout="intrinsic" src={icon} alt="" />
+          <img layout="intrinsic" src={icon} alt="icon" />
           <div className="sss-pricing-card-header-plan-type">{planType}</div>
         </div>
         <div className="sss-pricing-card-body">
@@ -197,13 +197,13 @@ const Pricing = () => {
                                 <img
                                   layout="intrinsic"
                                   src="/assets/images/solidity-shield-scan/billing-price-tick.svg"
-                                  alt=""
+                                  alt="tick"
                                 />
                               ) : detail.details[feature].value === "DASH" ? (
                                 <img
                                   layout="intrinsic"
                                   src="/assets/images/solidity-shield-scan/billing-price-dash.svg"
-                                  alt=""
+                                  alt="-"
                                 />
                               ) : (
                                 detail.details[feature].value
@@ -213,7 +213,7 @@ const Pricing = () => {
                                   <img
                                     layout="intrinsic"
                                     src="/assets/images/solidity-shield-scan/pricing-plan-info.svg"
-                                    alt=""
+                                    alt="i"
                                   />
                                   <div className="sss-pricing-plan-detail-row-info">
                                     <div className="font-semibold">

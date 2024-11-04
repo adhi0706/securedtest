@@ -38,11 +38,11 @@ const renderContent = (blogData) => {
     // Replace links with anchor tags and add color attribute
     modifiedText = modifiedText.replace(
       /<([^|]+)\|([^>]+)>/g,
-      '<Link target="_blank" href="$2" style="color: #07bc0c;">$1</Link>'
+      '<a target="_blank" href="$2" style="color: #12D576">$1</a>'
     );
     modifiedText = modifiedText.replace(
       /&lt;([^|]+)\|([^&]+)&gt;/g,
-      '<Link target="_blank" href="$2" style="color: #07bc0c;">$1</Link>'
+      '<a target="_blank" href="$2" style="color: #12D576">$1</a>'
     );
 
     // Replace '/n/' with line breaks
@@ -226,18 +226,22 @@ export default function BlogPost() {
   };
 
   const currentBlog = fullData.find(
-    (item) => item.url.replace(":", "") === url.replace(":", "")
+    (item) =>
+      item.url.replace(":", "").replace("(", "").replace(")", "") ===
+      url.replace(":", "").replace("(", "").replace(")", "")
   );
+
+  console.log(currentBlog);
 
   return (
     <div className="blog-post-container">
-      {currentBlog && (
+      {blogDetails && (
         <MetaTags
           data={{
-            title: currentBlog.heading,
-            desc: `Read an interesting blog from SecureDapp on "${currentBlog.heading}"`,
-            image: currentBlog.image,
-            keywords: currentBlog.tags + ", " + currentBlog.category,
+            title: blogDetails.title,
+            desc: `Read an interesting blog from SecureDapp on "${blogDetails.preview}"`,
+            image: blogDetails.image,
+            keywords: blogDetails.tags,
           }}
         />
       )}
@@ -300,6 +304,7 @@ export default function BlogPost() {
                         <img
                           layout="intrinsic"
                           src={blogDetails.Publisher.image}
+                          alt={blogDetails.Publisher.name}
                         />
                       )}
                     </div>
