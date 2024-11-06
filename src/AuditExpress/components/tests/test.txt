@@ -1,0 +1,7 @@
+https://github.com/circlefin/stablecoin-evm/blob/master/contracts/util/MessageHashUtils.sol
+https://github.com/Synthetixio/synthetix/blob/develop/contracts/AddressSetLib.sol
+0xdac17f958d2ee523a2206206994597c13d831ec7
+0x6982508145454Ce325dDbE47a25d4ec3d2311933
+0x4632091b0DD0E0902d1fe0534e16eb7b20328D70
+https://github.com/Lucianomin/Luckycoin_LUCK/blob/main/Code_v0.8.1%2Bcommit.df193b15(.sol).txt
+https://github.com/manicdon7/kyc3-sdk/blob/master/src/Contract/Contract.sol

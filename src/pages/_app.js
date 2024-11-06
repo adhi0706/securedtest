@@ -7,7 +7,6 @@ import "../components/common/ProductServiceHero.css";
 import "../components/common/BrandLogos.css";
 import "..//components/blog/BlogTag.css";
 import "../components/blog/BlogCard.css";
-import "../components/blog/BlogTag.css";
 import "../components/common/SectionTitle.css";
 import "../components/common/Testimonials.css";
 import "../components/footer/Footer.css";
@@ -68,6 +67,7 @@ import { useRouter } from "next/router";
 import { MainLayout } from "../SolidityShield/components/sidebar/Layout";
 import MetaTags from "../components/common/MetaTags";
 import Loader from "../SolidityShield/components/common/Loader";
+import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -75,6 +75,14 @@ function MyApp({ Component, pageProps }) {
     router.asPath.includes("/solidity-shield-scan") &&
     router.asPath !== "/solidity-shield-scan/auth" &&
     router.asPath !== "/solidity-shield-scan/contact";
+    const [isClient, setIsClient] = useState(false);
+
+useEffect(() => {
+  setIsClient(true);
+}, []);
+
+if (!isClient) return null; // or some loading state while determining the path
+
 
   return (
     <>

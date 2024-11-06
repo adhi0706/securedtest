@@ -6,6 +6,7 @@ export const navItems = [
       { name: "Secure Watch", to: "/secure-watch" },
       { name: "Secure Trace", to: "/secure-trace" },
       { name: "Secure Pad", to: "/secure-pad" },
+      { name: "Audit Express", to: "/auditexpress/home" },
     ],
     label: "Product",
   },

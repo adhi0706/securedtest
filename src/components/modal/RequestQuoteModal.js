@@ -9,6 +9,7 @@ import {
 } from "../../redux/slices/main/homeSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const services = [
   "Dapp Development",
