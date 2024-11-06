@@ -6,16 +6,15 @@ import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import VulnerabilityPieChart from './utils/VulnerabilityPieChart';
 import 'react-circular-progressbar/dist/styles.css';
-import { FaArrowLeft } from 'react-icons/fa';
 import Navbar from '../../components/navbar/Navbar';
 import { motion, useAnimation } from "framer-motion";
 import { calculateSecurityScore, AuditReport } from './utils/calculateSecurityScore';
-import scan from '../../AuditExpress/assets/scan.png';
+// import scan from '../../AuditExpress/assets/scan.png';
 import Image from 'next/image';
 import Sales from '../../AuditExpress/components/Sales';
 import Footer from '../../components/footer/footer';
 import { ClipLoader } from 'react-spinners';
-import { AiFillThunderbolt, AiTwotoneThunderbolt } from "react-icons/ai"
+import { AiFillThunderbolt } from "react-icons/ai"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaGithub, FaUpload } from 'react-icons/fa';
 
