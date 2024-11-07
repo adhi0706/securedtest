@@ -3,6 +3,10 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import img from "../assets/grid.png";
 import BlockchainModal from "./modal/BlockChainModal";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import AuthScreen from "../../pages/solidity-shield-scan/auth"
+import OtpVerificationPopup from "./OTPverification";
+import OTPverification from "./OTPverification";
 
 type Props = {};
 
@@ -11,10 +15,10 @@ const bg = {
 };
 
 const Hero = (props: Props) => {
-  // State Management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSource, setSelectedSource] = useState<string>("contract_address"); // Initialize to empty string
   const [companyName, setCompanyName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [contractAddress, setContractAddress] = useState<string>("");
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>("");
   const [githubURL, setGithubURL] = useState<string>("");
@@ -24,6 +28,9 @@ const Hero = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [authRequired, setAuthRequired] = useState(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false); // New state for OTP verification
+
   // const [scanDuration, setScanDuration] = useState<number>(0);
   const Router = useRouter();
 
@@ -47,6 +54,7 @@ const Hero = (props: Props) => {
     setIsContractNameAutoFilled(false);
     setError(null);
     setSuccessMessage(null);
+    setEmail("");
   };
 
   // Handler for Input Changes
@@ -63,6 +71,9 @@ const Hero = (props: Props) => {
       case "URL":
         setGithubURL(value);
         break;
+      case "Email Address":
+        setEmail(value);
+        break
       case "Contract Name":
         if (!isContractNameAutoFilled) {
           setContractName(value);
@@ -113,7 +124,7 @@ const Hero = (props: Props) => {
 
       const response = await fetch(url);
       const data = await response.json();
-
+      
       if (data.status === "1" && data.result.length > 0) {
         return {
           sourceCode: data.result[0].SourceCode,
@@ -204,8 +215,18 @@ const Hero = (props: Props) => {
     return null;
   };
 
-  // Handler for Audit Report Submission
+  const openOTPModal = () => {
+    setAuthRequired(true);
+  };
+
+  const handleOTPVerificationSuccess = () => {
+    setIsVerified(true);
+    setAuthRequired(false); // Close OTP modal
+    handleGetAuditReport(); // Continue with audit report after verification
+  };
+
   const handleGetAuditReport = async () => {
+
     setLoading(true);
     setError(null);
     setSuccessMessage(null);
@@ -215,9 +236,16 @@ const Hero = (props: Props) => {
       let address: string | null = null;
       let extractedContractName: string | null = null;
       let blockchain: string = "";
+      let emailadress : string | null = null;
 
+      console.log(email);
+      
+      emailadress = email
+      if (!emailadress){
+        toast.warning("Please enter a email address");
+      }
       // Fetch data based on selected source
-      if (selectedSource === "contract_address" && contractAddress) {
+      if (selectedSource === "contract_address" && contractAddress && emailadress) {
         const data = await fetchContractFromEtherscan(contractAddress);
         sourceCode = data.sourceCode;
         address = data.address;
@@ -227,7 +255,6 @@ const Hero = (props: Props) => {
           setContractName(extractedContractName);
           setIsContractNameAutoFilled(true);
         } else {
-          // Fallback to extracting from source code if ContractName is not available
           extractedContractName = extractContractName(sourceCode);
           if (extractedContractName) {
             setContractName(extractedContractName);
@@ -238,7 +265,7 @@ const Hero = (props: Props) => {
           throw new Error("Please select a blockchain.");
         }
         blockchain = selectedBlockchain;
-      } else if (selectedSource === "github" && githubURL) {
+      } else if (selectedSource === "github" && githubURL && emailadress) {
         sourceCode = await fetchContractFromGitHub(githubURL);
         address = githubURL;
         extractedContractName = contractName;
@@ -246,7 +273,7 @@ const Hero = (props: Props) => {
           throw new Error("Please enter the Contract Name.");
         }
         blockchain = "github";
-      } else if (selectedSource === "upload" && uploadedFile) {
+      } else if (selectedSource === "upload" && uploadedFile && emailadress) {
         sourceCode = await fetchContractFromFile(uploadedFile);
         extractedContractName = contractName;
         address = 'Contract file'
@@ -277,6 +304,8 @@ const Hero = (props: Props) => {
       const linesOfCode = sourceCode.replace(/\r\n/g, "\n").split('\n').length;
 
       const jsonData: any = {
+        email:emailadress,
+        otp: localStorage.getItem("UserOtp"),
         compiler_version: compilerVersion,
         company_name: companyName,
         contract_name: extractedContractName,
@@ -446,6 +475,16 @@ const Hero = (props: Props) => {
               />
             </div>
 
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
+
             {/* Contract Address */}
             <div className="flex justify-center">
               <input
@@ -501,6 +540,16 @@ const Hero = (props: Props) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                type="email"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
 
             {/* Contract Name (Manual Input) */}
             <div className="flex justify-center">
@@ -538,6 +587,15 @@ const Hero = (props: Props) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
 
             {/* Contract Name (Manual Input) */}
             <div className="flex justify-center">
@@ -555,24 +613,29 @@ const Hero = (props: Props) => {
 
       {/* Submit Button */}
       <div className="flex justify-center text-black text-xl py-4">
+      {authRequired && !isVerified ? (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+          {/* Popup Modal for OTP verification */}
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full relative">
+            <OTPverification onSuccess={handleOTPVerificationSuccess} OTPemail={email} />
+          </div>
+        </div>
+      ) : (
         <button
           className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
           transform transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={handleGetAuditReport}
+          onClick={openOTPModal}
           disabled={loading}
         >
           {loading ? "Fetching..." : "Get Audit Report"}
         </button>
-      </div>
-
-      {/* Error Message */}
+      )}
+    </div>
       {error && (
         <div className="flex justify-center text-red-500">
           <p>{error}</p>
         </div>
       )}
-
-      {/* Success Message */}
       {successMessage && (
         <div className="flex justify-center text-green-500">
           <p>{successMessage}</p>
@@ -585,6 +648,11 @@ const Hero = (props: Props) => {
           onSelect={handleSelectBlockchain}
         />
       </div>
+      <div>
+      {/* {authRequired && !isVerified && (
+        <OTPverification onSuccess={handleGetAuditReport} />
+      )} */}
+  </div>
     </div>
   );
 };
