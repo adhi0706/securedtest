@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
+"use client";
+import { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Ensure CSS is imported
+import 'react-toastify/dist/ReactToastify.css';
+import { FaCheckCircle } from "react-icons/fa";
 import AuthButton from "../../SolidityShield/components/auth/AuthButton";
 import AuthCard from "../../SolidityShield/components/auth/AuthCard";
 import AuthInputField from "../../SolidityShield/components/auth/AuthInputField";
 import AuthScreenHeader from "../../SolidityShield/components/auth/AuthScreenHeader";
-
-// Function to send OTP using the expressOTP API
+  
 const sendOTP = async ({ email }) => {
   try {
     const response = await fetch("https://139-59-5-56.nip.io:3443/expressOTP", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     });
 
@@ -33,28 +32,29 @@ const sendOTP = async ({ email }) => {
 
 const OTPVerification = ({ onSuccess, OTPemail }) => {
   const [otp, setOtp] = useState("");
-  const [isOtpSent, setIsOtpSent] = useState(false);
+  const otpSentRef = useRef(false);
 
-  // Send OTP when the component mounts and OTPemail is available
   useEffect(() => {
-    if (OTPemail) {
-      handleSendOTP();
-    }
-  }, [OTPemail]);
+    const handleSendOTPOnce = async () => {
+      if (!OTPemail || otpSentRef.current) return;
 
-  const handleSendOTP = async () => {
-    try {
-      const response = await sendOTP({ email: OTPemail });
-      if (response.success) {
-        setIsOtpSent(true);
-        toast.success(response.message);
-      } else {
-        toast.error("Failed to send OTP. Please try again.");
+      otpSentRef.current = true;
+
+      try {
+        const response = await sendOTP({ email: OTPemail });
+        if (response.message) {
+          toast.success("The OTP for AuditExpress has been sent to your email address. Please verify it to continue with the audit.");
+        } else {
+          toast.error("Failed to send OTP. Please try again.");
+        }
+      } catch (error) {
+        toast.error(error.message || "An error occurred. Please try again.");
+        otpSentRef.current = false; // Reset if there was an error
       }
-    } catch (error) {
-      toast.error(error.message || "An error occurred. Please try again.");
-    }
-  };
+    };
+
+    handleSendOTPOnce();
+  }, [OTPemail]);
 
   const handleSubmitOTP = () => {
     if (otp) {
@@ -70,13 +70,13 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
   };
 
   return (
-    <div className="auth-screen-container">
-      <div className="auth-screen">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md px-6 py-8 bg-white shadow-lg rounded-lg">
         <AuthScreenHeader
-          title="Sign in to your account"
-          description="Enter your OTP for verification."
+          title="OTP Verification"
+          description="To continue with your audit, please enter the OTP sent to your registered email."
         />
-        <div className="auth-screen-body">
+        <div className="mt-4">
           <AuthCard>
             <AuthInputField
               authInputType="text"
@@ -86,7 +86,10 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
               message="Invalid OTP"
             />
             <AuthButton onClick={handleSubmitOTP}>
-              Submit OTP
+              <div className="flex items-center justify-center">
+                <FaCheckCircle className="mr-2" />
+                <p>Validate OTP</p>
+              </div>
             </AuthButton>
           </AuthCard>
         </div>
