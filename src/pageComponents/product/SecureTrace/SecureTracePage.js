@@ -37,6 +37,10 @@ function SecureTracePage() {
           name="SECURE TRACE"
           title="SecureTrace: Advanced AI for Blockchain Investigation & Forensic Analysis"
           image={"/assets/images/ProductPages/st/st-hero.webp"}
+          onClick={() =>
+            typeof window !== "undefined" &&
+            window.open("https://securetrace.securedapp.io/")
+          }
           isSecureTrace={true}
         />
         <ProductCard

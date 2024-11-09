@@ -3,6 +3,10 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import img from "../assets/grid.png";
 import BlockchainModal from "./modal/BlockChainModal";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import AuthScreen from "../../pages/solidity-shield-scan/auth"
+import OtpVerificationPopup from "./OTPverification";
+import OTPverification from "./OTPverification";
 
 type Props = {};
 
@@ -11,10 +15,10 @@ const bg = {
 };
 
 const Hero = (props: Props) => {
-  // State Management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSource, setSelectedSource] = useState<string>("contract_address"); // Initialize to empty string
   const [companyName, setCompanyName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [contractAddress, setContractAddress] = useState<string>("");
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>("");
   const [githubURL, setGithubURL] = useState<string>("");
@@ -24,6 +28,9 @@ const Hero = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [authRequired, setAuthRequired] = useState(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false); // New state for OTP verification
+
   // const [scanDuration, setScanDuration] = useState<number>(0);
   const Router = useRouter();
 
@@ -47,6 +54,7 @@ const Hero = (props: Props) => {
     setIsContractNameAutoFilled(false);
     setError(null);
     setSuccessMessage(null);
+    setEmail("");
   };
 
   // Handler for Input Changes
@@ -63,6 +71,9 @@ const Hero = (props: Props) => {
       case "URL":
         setGithubURL(value);
         break;
+      case "Email Address":
+        setEmail(value);
+        break
       case "Contract Name":
         if (!isContractNameAutoFilled) {
           setContractName(value);
@@ -113,7 +124,7 @@ const Hero = (props: Props) => {
 
       const response = await fetch(url);
       const data = await response.json();
-
+      
       if (data.status === "1" && data.result.length > 0) {
         return {
           sourceCode: data.result[0].SourceCode,
@@ -129,7 +140,7 @@ const Hero = (props: Props) => {
     }
   };
 
-  // Function to fetch contract from GitHub
+
   const fetchContractFromGitHub = async (repoUrl: string) => {
     try {
       if (!repoUrl.includes("github.com")) {
@@ -184,7 +195,7 @@ const Hero = (props: Props) => {
     }
   };
 
-  // Function to extract compiler version from source code
+
   const extractCompilerVersion = (sourceCode: string): string | null => {
     const pragmaRegex = /pragma solidity\s+([^;]+);/;
     const match = sourceCode.match(pragmaRegex);
@@ -194,7 +205,6 @@ const Hero = (props: Props) => {
     return null;
   };
 
-  // Function to extract contract name from source code (fallback)
   const extractContractName = (sourceCode: string): string | null => {
     const contractRegex = /contract\s+([A-Za-z0-9_]+)/;
     const match = sourceCode.match(contractRegex);
@@ -204,121 +214,190 @@ const Hero = (props: Props) => {
     return null;
   };
 
-  // Handler for Audit Report Submission
+  const validateFields = () => {
+    
+    if (!companyName) {
+      toast.warning("Please Enter your Company Name.");
+      return false;
+    }
+    if (!selectedSource) {
+      toast.warning("Please select a source (contract address, GitHub, or upload).");
+      return false;
+    }
+    
+    if (selectedSource === "contract_address" && !contractAddress) {
+      toast.warning("Please enter the contract address.");
+      return false;
+    }
+    
+    if (selectedSource === "github" && !githubURL) {
+      toast.warning("Please enter the GitHub URL.");
+      return false;
+    }
+    
+    if (selectedSource === "upload" && !uploadedFile) {
+      toast.warning("Please upload a contract file.");
+      return false;
+    }
+    
+    if (!email) {
+      toast.warning("Please enter your email address.");
+      return false;
+    }
+    if (!contractName && (selectedSource === "github" || selectedSource === "upload")) {
+      toast.warning("Please enter the Contract Name.");
+      return false;
+    }
+  
+    if (selectedSource === "contract_address" && !selectedBlockchain) {
+      toast.warning("Please select a blockchain.");
+      return false;
+    }
+
+  
+    return true;
+  };
+  
+  const openOTPModal = () => {
+    if (validateFields()) {
+      setAuthRequired(true);
+    }
+  };
+  
+
+  const handleOTPVerificationSuccess = () => {
+    setIsVerified(true);
+    setAuthRequired(false); 
+    handleGetAuditReport();
+  };
+
   const handleGetAuditReport = async () => {
     setLoading(true);
     setError(null);
     setSuccessMessage(null);
-
+  
     try {
-      let sourceCode: string | null = null;
-      let address: string | null = null;
-      let extractedContractName: string | null = null;
-      let blockchain: string = "";
+      let sourceCode = null;
+      let address = null;
+      let extractedContractName = null;
+      let blockchain = "";
+      let emailAddress = email;
+      
+      if (!emailAddress) {
+        toast.warning("Please enter your email address.");
+        setLoading(false);
+        return;
+      }
+      
+      if (!selectedSource) {
+        toast.warning("Please select a source (contract address, GitHub, or upload).");
+        setLoading(false);
+        return;
+      }
+      
+      if (selectedSource === "contract_address" && !contractAddress) {
+        toast.warning("Please enter the contract address.");
+        setLoading(false);
+        return;
+      }
+      
+      if (selectedSource === "github" && !githubURL) {
+        toast.warning("Please enter the GitHub URL.");
+        setLoading(false);
+        return;
+      }
+      
+      if (selectedSource === "upload" && !uploadedFile) {
+        toast.warning("Please upload a contract file.");
+        setLoading(false);
+        return;
+      }
+  
+      if (!contractName && (selectedSource === "github" || selectedSource === "upload")) {
+        toast.warning("Please enter the Contract Name.");
+        setLoading(false);
+        return;
+      }
+  
+      if (selectedSource === "contract_address" && !selectedBlockchain) {
+        toast.warning("Please select a blockchain.");
+        setLoading(false);
+        return;
+      }
+      
 
-      // Fetch data based on selected source
-      if (selectedSource === "contract_address" && contractAddress) {
+      if (selectedSource === "contract_address") {
         const data = await fetchContractFromEtherscan(contractAddress);
         sourceCode = data.sourceCode;
         address = data.address;
         extractedContractName = data.contractName;
-
-        if (extractedContractName) {
-          setContractName(extractedContractName);
-          setIsContractNameAutoFilled(true);
-        } else {
-          // Fallback to extracting from source code if ContractName is not available
-          extractedContractName = extractContractName(sourceCode);
-          if (extractedContractName) {
-            setContractName(extractedContractName);
-          }
-        }
-
-        if (!selectedBlockchain) {
-          throw new Error("Please select a blockchain.");
-        }
         blockchain = selectedBlockchain;
-      } else if (selectedSource === "github" && githubURL) {
+  
+        if (!extractedContractName) {
+          extractedContractName = extractContractName(sourceCode);
+        }
+  
+      } else if (selectedSource === "github") {
         sourceCode = await fetchContractFromGitHub(githubURL);
         address = githubURL;
         extractedContractName = contractName;
-        if (!extractedContractName) {
-          throw new Error("Please enter the Contract Name.");
-        }
         blockchain = "github";
-      } else if (selectedSource === "upload" && uploadedFile) {
+  
+      } else if (selectedSource === "upload") {
         sourceCode = await fetchContractFromFile(uploadedFile);
         extractedContractName = contractName;
-        address = 'Contract file'
-        if (!extractedContractName) {
-          throw new Error("Please enter the Contract Name.");
-        }
+        address = 'Contract file';
         blockchain = "upload";
-      } else {
-        throw new Error("Please fill in the required fields.");
       }
-
-      // Validate sourceCode
+  
       if (!sourceCode) {
         throw new Error("Source code is empty.");
       }
-
-      // Extract compiler version
+  
       const compilerVersion = extractCompilerVersion(sourceCode);
       if (!compilerVersion) {
         throw new Error("Unable to extract compiler version from source code.");
       }
-
-      if (!extractedContractName) {
-        throw new Error("Unable to extract contract name.");
-      }
-
-      sourceCode = cleanSourceCode(sourceCode);
+  
       const linesOfCode = sourceCode.replace(/\r\n/g, "\n").split('\n').length;
-
-      const jsonData: any = {
+  
+      const jsonData = {
+        email: emailAddress,
+        otp: localStorage.getItem("UserOtp"),
         compiler_version: compilerVersion,
         company_name: companyName,
         contract_name: extractedContractName,
         source_code: sourceCode,
-        blockchain: blockchain,
+        blockchain,
         lines: linesOfCode,
-        address: address,
+        address,
       };
-      localStorage.setItem("address", address)
-      localStorage.setItem("blockchain", blockchain)
-
-      // Log data for debugging
-      console.log("Submitting Audit Report with Data:", JSON.stringify(jsonData, null, 2));
-
-      // Send data to backend
-      const startTime = performance.now();
-
-        const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonData),
-        });
-
-        const endTime = performance.now();
-        const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
-        console.log("Calculated duration:", durationInSeconds);
-
       
-
-
+      localStorage.setItem("address", address);
+      localStorage.setItem("blockchain", blockchain);
+  
+      const startTime = performance.now();
+  
+      const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+  
+      const endTime = performance.now();
+      const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
+  
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`API Error: ${errorText}`);
       }
-
+  
       const resultData = await response.json();
-      console.log("API Response:", resultData);
       setSuccessMessage("Audit report submitted successfully!");
       Router.push({
-        pathname: `/auditexpress/results/${resultData.id}`, // Use the actual scan ID if needed
+        pathname: `/auditexpress/results/${resultData.id}`,
         query: {
           score: resultData.score,
           lines: linesOfCode,
@@ -326,18 +405,15 @@ const Hero = (props: Props) => {
           vulnerabilityCount: JSON.stringify(resultData.vulnerabilityCount),
         },
       });
-
-
+  
     } catch (err) {
-      setError((err as Error).message);
+      setError((err).message);
     } finally {
       setLoading(false);
     }
   };
-
-  // Function to clean the source code by removing comments and URLs
+  
   const cleanSourceCode = (sourceCode: string): string => {
-    // Remove single-line comments
     let cleanedCode = sourceCode.replace(/\/\/.*$/gm, "");
 
     // Remove multi-line comments
@@ -358,7 +434,6 @@ const Hero = (props: Props) => {
       className="dark:bg-custom-bg border-e-transparent mt-20 dark:text-white pb-10"
       style={bg}
     >
-      {/* Header Section */}
       <div className="pt-20 font-poppins-regular" id="poppins">
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
@@ -431,7 +506,6 @@ const Hero = (props: Props) => {
         </div>
       </div>
 
-      {/* Dynamic Input Fields Based on Selected Source */}
       <div className="mt-8">
         {selectedSource === "contract_address" && (
           <>
@@ -442,6 +516,16 @@ const Hero = (props: Props) => {
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
                 shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
                 value={companyName}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
                 onChange={handleInputChange}
               />
             </div>
@@ -501,6 +585,16 @@ const Hero = (props: Props) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                type="email"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
 
             {/* Contract Name (Manual Input) */}
             <div className="flex justify-center">
@@ -538,6 +632,15 @@ const Hero = (props: Props) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="flex justify-center">
+              <input
+                placeholder="Email Address"
+                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
 
             {/* Contract Name (Manual Input) */}
             <div className="flex justify-center">
@@ -552,27 +655,29 @@ const Hero = (props: Props) => {
           </>
         )}
       </div>
-
-      {/* Submit Button */}
       <div className="flex justify-center text-black text-xl py-4">
+      {authRequired && !isVerified ? (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
+            <OTPverification onSuccess={handleOTPVerificationSuccess} OTPemail={email} />
+          </div>
+        </div>
+      ) : (
         <button
           className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
           transform transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={handleGetAuditReport}
+          onClick={openOTPModal}
           disabled={loading}
         >
           {loading ? "Fetching..." : "Get Audit Report"}
         </button>
-      </div>
-
-      {/* Error Message */}
+      )}
+    </div>
       {error && (
         <div className="flex justify-center text-red-500">
           <p>{error}</p>
         </div>
       )}
-
-      {/* Success Message */}
       {successMessage && (
         <div className="flex justify-center text-green-500">
           <p>{successMessage}</p>
@@ -585,6 +690,8 @@ const Hero = (props: Props) => {
           onSelect={handleSelectBlockchain}
         />
       </div>
+      <div>
+  </div>
     </div>
   );
 };
