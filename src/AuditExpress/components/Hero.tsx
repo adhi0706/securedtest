@@ -140,7 +140,7 @@ const Hero = (props: Props) => {
     }
   };
 
-  // Function to fetch contract from GitHub
+
   const fetchContractFromGitHub = async (repoUrl: string) => {
     try {
       if (!repoUrl.includes("github.com")) {
@@ -195,7 +195,7 @@ const Hero = (props: Props) => {
     }
   };
 
-  // Function to extract compiler version from source code
+
   const extractCompilerVersion = (sourceCode: string): string | null => {
     const pragmaRegex = /pragma solidity\s+([^;]+);/;
     const match = sourceCode.match(pragmaRegex);
@@ -205,7 +205,6 @@ const Hero = (props: Props) => {
     return null;
   };
 
-  // Function to extract contract name from source code (fallback)
   const extractContractName = (sourceCode: string): string | null => {
     const contractRegex = /contract\s+([A-Za-z0-9_]+)/;
     const match = sourceCode.match(contractRegex);
@@ -256,7 +255,7 @@ const Hero = (props: Props) => {
     }
 
   
-    return true; // All validations passed
+    return true;
   };
   
   const openOTPModal = () => {
@@ -284,7 +283,6 @@ const Hero = (props: Props) => {
       let blockchain = "";
       let emailAddress = email;
       
-      // Perform field validations
       if (!emailAddress) {
         toast.warning("Please enter your email address.");
         setLoading(false);
@@ -327,7 +325,7 @@ const Hero = (props: Props) => {
         return;
       }
       
-      // Fetch data based on selected source
+
       if (selectedSource === "contract_address") {
         const data = await fetchContractFromEtherscan(contractAddress);
         sourceCode = data.sourceCode;
@@ -415,10 +413,7 @@ const Hero = (props: Props) => {
     }
   };
   
-
-  // Function to clean the source code by removing comments and URLs
   const cleanSourceCode = (sourceCode: string): string => {
-    // Remove single-line comments
     let cleanedCode = sourceCode.replace(/\/\/.*$/gm, "");
 
     // Remove multi-line comments
@@ -439,7 +434,6 @@ const Hero = (props: Props) => {
       className="dark:bg-custom-bg border-e-transparent mt-20 dark:text-white pb-10"
       style={bg}
     >
-      {/* Header Section */}
       <div className="pt-20 font-poppins-regular" id="poppins">
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
@@ -661,8 +655,6 @@ const Hero = (props: Props) => {
           </>
         )}
       </div>
-
-      {/* Submit Button */}
       <div className="flex justify-center text-black text-xl py-4">
       {authRequired && !isVerified ? (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
@@ -699,9 +691,6 @@ const Hero = (props: Props) => {
         />
       </div>
       <div>
-      {/* {authRequired && !isVerified && (
-        <OTPverification onSuccess={handleGetAuditReport} />
-      )} */}
   </div>
     </div>
   );

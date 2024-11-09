@@ -39,7 +39,6 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
       if (!OTPemail || otpSentRef.current) return;
 
       otpSentRef.current = true;
-
       try {
         const response = await sendOTP({ email: OTPemail });
         if (response.message) {
@@ -49,7 +48,7 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
         }
       } catch (error) {
         toast.error(error.message || "An error occurred. Please try again.");
-        otpSentRef.current = false; // Reset if there was an error
+        otpSentRef.current = false; 
       }
     };
 
