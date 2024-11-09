@@ -18,7 +18,9 @@ const GetStartedButton = ({
       className={`flex space-x-2 justify-center items-center px-2 py-1 w-36 whitespace-nowrap lg:px-4 lg:py-2 border-2 border-tertiary rounded-full ${hoverClassName} ${className}`}
       onClick={to ? () => navigate.push(to) : onClick}
     >
-      <div>Get Started</div>
+      <div>
+        Get Started
+        </div>
       <FontAwesomeIcon icon={faArrowRight} />
     </button>
   );

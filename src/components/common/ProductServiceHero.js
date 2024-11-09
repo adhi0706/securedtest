@@ -86,7 +86,7 @@ const ProductServiceHero = ({
               {service && isOnWeb && <br></br>}
               <GetStartedButton
                 onClick={
-                  service || isSecureTrace
+                  service
                     ? () => {
                         dispatch(setIsRequestModalOpen(true));
                       }
