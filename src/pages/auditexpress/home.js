@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../../AuditExpress/pages/Home'
+import Home from '../../AuditExpress/pages/Home';
 
 const home = () => {
   return (
@@ -7,4 +7,4 @@ const home = () => {
   )
 }
 
-export default home
+export default home;

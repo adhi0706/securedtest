@@ -17,7 +17,7 @@ const Sales = (props: Props) => {
           </h1>
           <div className="flex justify-center py-6">
             <p className="text-lg lg:w-6/12 px-10">
-              Protect your smart contracts with Audit Express. Integrate today for a rapid security assessment. Boost your project's security and user confidence. Integrate Audit Express now
+            Take your project security to the next level today! Protect your smart contracts with Audit Express. Integrate now for a rapid security assessment and boost your project's security and user confidence
             </p>
           </div>
           <div className="lg:flex lg:justify-center gap-10 lg:space-y-0 space-y-4 space-x-3 lg:space-x-0 py-5">

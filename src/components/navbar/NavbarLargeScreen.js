@@ -17,10 +17,11 @@ const NavbarLargeScreen = ({
       <div>
         <Logo />
       </div>
-      <div className="bg-cardBackgroundLight dark:bg-cardBackgroundDark px-4  rounded-full border-2 border-cardBorderColorLight dark:border-cardBorderColorDark flex items-center space-x-6">
+      <div className="bg-cardBackgroundLight dark:bg-cardBackgroundDark px-4 rounded-full border-2 border-cardBorderColorLight dark:border-cardBorderColorDark flex items-center space-x-6">
         {navItems.map((item) => {
           return (
             <NavbarItem
+              key={item["to"]}
               to={item["to"]}
               items={item["items"]}
               dropDown={dropDown}
@@ -40,14 +41,16 @@ const NavbarLargeScreen = ({
             <i className="fa-regular fa-moon fa-lg"></i>
           )}
         </button>
-        {nextPath !== undefined && nextPath !== null ? (
-          <Button className="w-36" text={"Login"} onClick={handleNavigation} />
-        ) : (
-          <Button
-            className="w-36"
-            text="Request Quote"
-            onClick={handleNavigation}
-          ></Button>
+        {nextPath !== "/auditexpress/home" && (
+          nextPath !== null ? (
+            <Button className="w-36" text={"Login"} onClick={handleNavigation} />
+          ) : (
+            <Button
+              className="w-36"
+              text="Request Quote"
+              onClick={handleNavigation}
+            />
+          )
         )}
       </div>
     </nav>

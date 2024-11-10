@@ -108,7 +108,6 @@ const AnalyseModal: React.FC<ModalProps> = ({ isOpen, onClose, scanId }) => {
           <p className="text-center text-red-500 mt-5">{error}</p>
         ) : scanDetails ? (
           <div className="mt-5">
-            {/* Contract Info */}
             <p><strong>Company Name:</strong> {scanDetails.company_name}</p>
             <p><strong>Contract Name:</strong> {scanDetails.contract_name}</p>
             <p><strong>Contract Address:</strong> {scanDetails.address}</p>

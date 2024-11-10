@@ -26,7 +26,7 @@ type BlockchainSelectionProps = {
 const blockchainData = [
   { id: 1, name: 'Ethereum', icon: ethereumLogo, description: 'Ethereum is a decentralized, open-source blockchain with smart contract functionality.' },
   { id: 2, name: 'Avalanche', icon: avalancheLogo, description: 'Avalanche is an open-source platform for launching highly decentralized applications.' },
-  { id: 3, name: 'Binance Smart Chain', icon: bnbLogo, description: 'Binance Smart Chain is a blockchain network built for running smart contract-based applications.' },
+  { id: 3, name: 'Binance', icon: bnbLogo, description: 'Binance Smart Chain is a blockchain network built for running smart contract-based applications.' },
   { id: 4, name: 'Arbitrum', icon: arbitrumLogo, description: 'Arbitrum is a Layer 2 solution designed to enhance Ethereum\'s scalability.' },
   { id: 5, name: 'Polygon', icon: polygonLogo, description: 'Polygon is a protocol and a framework for building and connecting Ethereum-compatible blockchain networks.' },
   { id: 6, name: 'Optimism', icon: optimismLogo, description: 'Optimism is a Layer 2 Optimistic Rollup network designed to enhance Ethereum scalability.' },

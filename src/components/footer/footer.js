@@ -32,7 +32,7 @@ const navigationItems = [
       },
       {
         name: "Audit Express",
-        to: "",
+        to: "/auditexpress/home",
       },
       {
         name: "Secure Trace",
@@ -197,7 +197,7 @@ const Footer = () => {
       <div className="footer-newsletter">
         <div className="footer-newsletter-left">
           <div className="text-lg font-bold">Join our newsletter</div>
-          <div className="font-light">Keep upto date everything SecureDapp</div>
+          <div className="font-light">Keep everything up to date through SecureDApp.</div>
         </div>
         <div className="footer-newsletter-right">
           <input

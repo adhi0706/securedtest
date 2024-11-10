@@ -27,7 +27,9 @@ import Astar from "../../../AuditExpress/assets/chains/astar.png";
 import Celo from "../../../AuditExpress/assets/chains/celo.png";
 import fire from "../../../AuditExpress/assets/chains/firechain_light.png";
 import Polygon from "../../../AuditExpress/assets/chains/polygon.png";
-import { AiFillThunderbolt } from 'react-icons/ai';
+import { AiFillThunderbolt, AiOutlineCode } from 'react-icons/ai';
+import { setIsRequestModalOpen } from '../../../redux/slices/main/homeSlice';
+import { useDispatch } from 'react-redux';
 
 type Vulnerability = {
   type: string;
@@ -96,6 +98,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
   const controls = useAnimation();
   const filename = localStorage.getItem("filename");
   const github = localStorage.getItem("giturl");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (resultData) {
@@ -158,8 +161,42 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
     <div className="mx-0 md:mx-auto p-4 bg-[#011A3B] text-white min-h-screen overflow-x-hidden">
       <Navbar />
 
+        <div className="lg:pt-32 pt-32 font-poppins-regular" id="poppins">
+        <div className="flex justify-center">
+          <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
+            <h1>
+              SecureDApp <span className="text-green-600">Audit Express</span>
+            </h1>
+            <div className="lg:flex gap-2 hidden">
+              {[...Array(5)].map((_, index) => (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-8 text-yellow-400"
+                  key={index}
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className="lg:text-lg text-xs text-center font-semilight my-2">
+          Trusted by more than 120+ companies
+        </p>
+      </div>
+      <div id='poppins-regular'>
+      <p className="text-center lg:px-10 px-10 text-balance">
+          Audit Express is a cutting-edge smart contract auditing tool designed to provide developers with a quick and easy assessment of their project's security. Developed by SecureDApp, Audit Express leverages advanced algorithms to identify potential vulnerabilities and bugs within smart contracts. Audit Express gives a clear and concise security score to gain a rapid understanding of your project's vulnerability profile.
+        </p>
+      </div>
       <div className="mt-20 mx-4 sm:mx-10 lg:mx-20 lg:mt-24">
-        <div className="flex items-center">
+      <div className="flex items-center">
           {isGitHub ? (
             <FaGithub className="text-2xl mr-2" />
           ) : isUploadedFile ? (
@@ -192,7 +229,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           {/* Security Score */}
           <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
-              <p className='text-lg sm:text-2xl' id='poppins-normal'>Security Score</p>
+              <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Security Score</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{parseFloat(scanDetails.score.substring(0, 5))}/100</p>
             </div>
             <div className='flex items-center'>
@@ -218,7 +255,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           {/* Scan Duration */}
           <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
-              <p className='text-lg sm:text-2xl' id='poppins-semibold'>Scan duration</p>
+              <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Scan duration</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
             </div>
             <div className='flex items-center'>
@@ -239,11 +276,15 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
           {/* Lines of Code */}
           <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
-              <p className='text-lg sm:text-2xl' id='poppins-normal'>Lines of code</p>
+              <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Lines of code</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
+            </div>
+            <div className='flex items-center'>
+              <AiOutlineCode className='text-white-500 size-14'/>
             </div>
           </div>
         </div>
+        
         <div className='md:flex justify-center items-center md:mt-10 md:my-0 my-10 px-4 sm:px-3'>
           <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
             <div className='flex justify-center items-center mb-4 lg:mb-0 ml-6' id='poppins-semibold'>
@@ -266,7 +307,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
               <div className='ml-0 lg:ml-10 lg:text-left'>
                 <p className='text-md sm:text-xl my-2' id='poppins-normal'>
                   Your Security Score is{' '}
-                  <span className={`${getScoreDescription(score).color}`} id='poppins-semibold'>
+                  <span className={`${getScoreDescription(score).color}`} id='poppins-bold'>
                     {getScoreDescription(score).text}
                   </span>
                 </p>
@@ -297,7 +338,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
         </div> */}
 
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center mx-4 sm:mx-10 lg:mx-10 mt-0" id='poppins-normal'>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center mx-4 sm:mx-10 lg:mx-10 mt-0" id='poppins-semibold'>
           <VulnerabilityCount scanDetails={scanDetails} />
           <div className="flex justify-center">
             <VulnerabilityPieChart scanDetails={scanDetails} />
@@ -306,11 +347,13 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
         </div>
         <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
           <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-            <button
-            onClick={()=> typeof window!=="undefined" && window.open("https://securedapp.io/solidity-shield-scan/contact")}
-             className='text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5' id='poppins-bold'>
-              Get Detailed Report
-            </button>
+          <button
+        onClick={() => dispatch(setIsRequestModalOpen(true))}
+        className="text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
+        id="poppins-bold"
+      >
+        Get Detailed Report
+      </button>
           </div>
         </div>
 
