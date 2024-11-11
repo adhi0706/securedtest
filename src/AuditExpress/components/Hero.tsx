@@ -107,9 +107,9 @@ const Hero = (props: Props) => {
     Gnosis: "A5EXMI6I79TG2UXXV3Y6S6PCE61GX6EFGT",
     Boba: "API_KEY_FOR_BOBA",
     Base: "7AU5TIMANNSS1R2TTMFMVD162IS5WH2CME",
-    Linea: "API_KEY_FOR_LINEA",
-    Astar: "API_KEY_FOR_ASTAR",
-    Celo: "API_KEY_FOR_CELO",
+    Linea: "T5AKV4SA4N8EBV2RTBKB6Q9ABZDRIXY5XU",
+    Astar: "8a3f647c-cc0a-4349-8d42-39ef5a5b00c3",
+    Celo: "JFYK9NFHTZJ7VEG8A7YFQR1XI6S4AF2KBG",
     "5ireChain": "API_KEY_FOR_5IRECHAIN",
   };
   
@@ -123,8 +123,8 @@ const Hero = (props: Props) => {
     Gnosis: "https://api.gnosisscan.io",
     Boba: "https://api.bobascan.com",
     Base: "https://api.basescan.org",
-    Linea: "https://api.lineascan.io",
-    Astar: "https://api.astarscan.io",
+    Linea: "https://api.lineascan.build",
+    Astar: "https://astar.blockscout.com",
     Celo: "https://api.celoscan.io",
     "5ireChain": "https://api.5irescan.com",
   };

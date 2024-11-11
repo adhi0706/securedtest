@@ -10,6 +10,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IoClose } from "react-icons/io5";
 
 const services = [
   "Dapp Development",
@@ -139,7 +140,7 @@ const RequestQuoteModal = () => {
       <div className="request-quote-modal-container">
         <div className="request-quote-modal">
           <div className="request-quote-modal-close-container">
-            <i
+            <IoClose
               onClick={closeModal}
               className="fa-solid fa-xmark fa-xl request-modal-close-button"
             />

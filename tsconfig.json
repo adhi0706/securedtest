@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/AuditExpress/components/NavbarLargeScreen.jsx", "src/AuditExpress/components/Navbar.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,8 +1,10 @@
-import NavbarItem from "./NavbarItem";
-import { navItems } from "./navItems";
+import NavbarItem from "../../components/navbar/NavbarItem";
+import { navItems } from "../../components/navbar/navItems";
 import { useState } from "react";
-import Button from "../common/Button";
-import Logo from "../common/Logo";
+import Button from "../../components/common/Button";
+import Logo from "../../components/common/Logo";
+import { TbBrightnessUp,  } from "react-icons/tb";
+import { IoMoonOutline } from "react-icons/io5";
 
 const NavbarLargeScreen = ({
   handleNavigation,
@@ -17,7 +19,7 @@ const NavbarLargeScreen = ({
       <div>
         <Logo />
       </div>
-      <div className="bg-cardBackgroundLight dark:bg-cardBackgroundDark px-4 rounded-full border-2 border-cardBorderColorLight dark:border-cardBorderColorDark flex items-center space-x-6">
+      <div className="bg-cardBackgroundLight dark:bg-cardBackgroundDark lg:mr-36 px-4 rounded-full border-2 border-cardBorderColorLight dark:border-cardBorderColorDark flex items-center space-x-6">
         {navItems.map((item) => {
           return (
             <NavbarItem
@@ -36,16 +38,16 @@ const NavbarLargeScreen = ({
       <div className="flex space-x-4 items-center">
         <button onClick={toggleTheme}>
           {darkMode ? (
-            <i className="fa-regular fa-brightness fa-lg"></i>
+            <TbBrightnessUp className="text-3xl" />
           ) : (
-            <i className="fa-regular fa-moon fa-lg"></i>
+            <IoMoonOutline className=" text-3xl" />
           )}
         </button>
         {nextPath !== undefined && nextPath !== null ? (
-          <Button className="w-36" text={"Login"} onClick={handleNavigation} />
+          <Button className="w-36 hidden" text={"Login"} onClick={handleNavigation} />
         ) : (
           <Button
-            className="w-36"
+            className="w-36 hidden"
             text="Request Quote"
             onClick={handleNavigation}
           ></Button>
