@@ -509,7 +509,7 @@ const Hero = (props: Props) => {
         <div className="flex justify-center mt-6">
           <div className="lg:w-5/12 w-10/12 relative">
             <select
-              className="w-full bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl text-white dark:text-white appearance-none"
+              className="w-full text-black bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl dark:text-white dark:text-white appearance-none"
               onChange={handleSourceChange}
               value={selectedSource} // Ensure it reflects the state
             >
@@ -551,7 +551,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Company Name"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={companyName}
                 onChange={handleInputChange}
               />
@@ -561,7 +561,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Email Address"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={email}
                 onChange={handleInputChange}
               />
@@ -572,7 +572,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Type or paste your contract address"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={contractAddress}
                 onChange={handleInputChange}
               />
@@ -695,7 +695,7 @@ const Hero = (props: Props) => {
       <div className="flex justify-center text-black text-xl py-4">
       {authRequired && !isVerified ? (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
+          <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
             <OTPverification onSuccess={handleOTPVerificationSuccess} OTPemail={email} />
           </div>
         </div>

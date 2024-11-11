@@ -230,7 +230,7 @@ const Scanned = () => {
                     </td>
                     <td className="p-3 text-left">
                       <Link href={`/auditexpress/${item.id}`}>
-                        <button className="bg-transparent border border-green-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">
+                        <button className="bg-transparent border border-green-500 hover:bg-green-500 dark:text-white text-green-500 font-bold py-2 px-4 rounded">
                           View Scan
                         </button>
                       </Link>
