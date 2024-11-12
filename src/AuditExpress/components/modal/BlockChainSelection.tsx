@@ -25,18 +25,18 @@ type BlockchainSelectionProps = {
 // Updated blockchain data with descriptions
 const blockchainData = [
   { id: 1, name: 'Ethereum', icon: ethereumLogo, description: 'Ethereum is a decentralized, open-source blockchain with smart contract functionality.' },
-  { id: 2, name: 'Avalanche', icon: avalancheLogo, description: 'Avalanche is an open-source platform for launching highly decentralized applications.' },
+  // { id: 2, name: 'Avalanche', icon: avalancheLogo, description: 'Avalanche is an open-source platform for launching highly decentralized applications.' },
   { id: 3, name: 'Binance', icon: bnbLogo, description: 'Binance Smart Chain is a blockchain network built for running smart contract-based applications.' },
   { id: 4, name: 'Arbitrum', icon: arbitrumLogo, description: 'Arbitrum is a Layer 2 solution designed to enhance Ethereum\'s scalability.' },
   { id: 5, name: 'Polygon', icon: polygonLogo, description: 'Polygon is a protocol and a framework for building and connecting Ethereum-compatible blockchain networks.' },
   { id: 6, name: 'Optimism', icon: optimismLogo, description: 'Optimism is a Layer 2 Optimistic Rollup network designed to enhance Ethereum scalability.' },
   { id: 7, name: 'Gnosis', icon: gnosisLogo, description: 'Gnosis Chain is an Ethereum sidechain for stable and scalable smart contracts.' },
-  { id: 8, name: 'Boba', icon: bobaLogo, description: 'Boba Network is a blockchain Layer-2 scaling solution and hybrid compute platform.' },
+  // { id: 8, name: 'Boba', icon: bobaLogo, description: 'Boba Network is a blockchain Layer-2 scaling solution and hybrid compute platform.' },
   { id: 9, name: 'Base', icon: baseLogo, description: 'Base is a secure, low-cost, developer-friendly Ethereum L2 built to bring the next billion users on-chain.' },
   { id: 10, name: 'Linea', icon: lineaLogo, description: 'Linea is a zkEVM rollup network that makes Ethereum secure, scalable, and decentralized.' },
   { id: 11, name: 'Astar', icon: astarLogo, description: 'Astar Network supports building dApps with EVM and WASM smart contracts and offers the best technology solutions.' },
   { id: 12, name: 'Celo', icon: celoLogo, description: 'Celo is a carbon-negative blockchain optimized for mobile and is focused on low-cost transactions.' },
-  { id: 13, name: '5ireChain', icon: fireLogo, description: '5ireChain is a sustainable blockchain focused on sustainability, security, and scalability.' },
+  // { id: 13, name: '5ireChain', icon: fireLogo, description: '5ireChain is a sustainable blockchain focused on sustainability, security, and scalability.' },
 ];
 
 // Define network types for certain blockchains, and fall back to a default if not found

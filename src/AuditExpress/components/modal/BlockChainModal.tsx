@@ -23,18 +23,18 @@ type BlockchainModalProps = {
 
 const blockchainIcons = [
     { id: 1, name: 'Ethereum', icon: ethereum },
-    { id: 2, name: 'Avalanche', icon: Avalanche },
+    // { id: 2, name: 'Avalanche', icon: Avalanche },
     { id: 3, name: 'Arbitrum', icon: Arbitrum },
     { id: 4, name: 'Binance', icon: BNB },
     { id: 5, name: 'Polygon', icon: Polygon },
     { id: 6, name: 'Optimism', icon: Optimism },
     { id: 7, name: 'Gnosis', icon: Gnosis },
-    { id: 8, name: 'Boba', icon: Boba },
+    // { id: 8, name: 'Boba', icon: Boba },
     { id: 9, name: 'Base', icon: Base },
     { id: 10, name: 'Linea', icon: Linea },
     { id: 11, name: 'Celo', icon: Celo },
     { id: 12, name: 'Astar', icon: Astar },
-    { id: 13, name: '5ireChain', icon: fire },
+    // { id: 13, name: '5ireChain', icon: fire },
 ];
 
 const BlockchainModal: React.FC<BlockchainModalProps> = ({ isOpen, onClose, onSelect }) => {
