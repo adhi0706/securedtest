@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import Navbar from '../../components/navbar/Navbar';
+import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Scanned from '../components/Scanned';
 import Works from '../components/Works';

@@ -16,7 +16,7 @@ export type AuditReport = {
   vulnerabilityCount: VulnerabilityCount;
   vulnerabilities: Vulnerability[];
 };
-const calculateSecurityScore = (report: AuditReport): number => {
+export const calculateSecurityScore = (report: AuditReport): number => {
   const { critical, high, medium } = report.vulnerabilityCount;
 
   // Ensure that critical, high, and medium are numbers

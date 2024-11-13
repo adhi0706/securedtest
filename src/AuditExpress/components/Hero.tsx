@@ -97,34 +97,70 @@ const Hero = (props: Props) => {
     return /^0x[a-fA-F0-9]{40}$/.test(address);
   };
 
-  // Function to fetch contract from Etherscan
-  const fetchContractFromEtherscan = async (addressOrUrl: string) => {
+  const apiKeys = {
+    Ethereum: "HSCU35TU2C6H937X9SN6K5KDW1YA26HN8U",
+    Avalanche: "API_KEY_FOR_AVALANCHE",
+    Binance: "W28N8GAQE7DJ44MNBADFM39QIM6FJ11Q2E",
+    Arbitrum: "UK8MK41QI3VXPAR3962KFCK5EB32B558T7",
+    Polygon: "4B8JZ5UMD5IVF5MZBZ3EJMTQ5A1XVKDU77",
+    Optimism: "P6V69J8CN8QTEDBXMPWF34ZVSXQKDVMDPS",
+    Gnosis: "A5EXMI6I79TG2UXXV3Y6S6PCE61GX6EFGT",
+    Boba: "API_KEY_FOR_BOBA",
+    Base: "7AU5TIMANNSS1R2TTMFMVD162IS5WH2CME",
+    Linea: "T5AKV4SA4N8EBV2RTBKB6Q9ABZDRIXY5XU",
+    Astar: "8a3f647c-cc0a-4349-8d42-39ef5a5b00c3",
+    Celo: "JFYK9NFHTZJ7VEG8A7YFQR1XI6S4AF2KBG",
+    "5ireChain": "API_KEY_FOR_5IRECHAIN",
+  };
+  
+  const chainUrls = {
+    Ethereum: "https://api.etherscan.io",
+    Avalanche: "https://api.snowtrace.io",
+    Binance: "https://api.bscscan.com",
+    Arbitrum: "https://api.arbiscan.io",
+    Polygon: "https://api.polygonscan.com",
+    Optimism: "https://api-optimistic.etherscan.io",
+    Gnosis: "https://api.gnosisscan.io",
+    Boba: "https://api.bobascan.com",
+    Base: "https://api.basescan.org",
+    Linea: "https://api.lineascan.build",
+    Astar: "https://astar.blockscout.com",
+    Celo: "https://api.celoscan.io",
+    "5ireChain": "https://api.5irescan.com",
+  };
+  
+  const fetchContractFromEtherscan = async (addressOrUrl:string, selectedChain:string) => {
     try {
-      const apiKey = "HSCU35TU2C6H937X9SN6K5KDW1YA26HN8U";
-
-      if (!apiKey) {
-        throw new Error("Etherscan API key is not set.");
+      const apiKey = apiKeys[selectedChain];
+      const baseUrl = chainUrls[selectedChain];
+  
+      if (!apiKey || !baseUrl) {
+        throw new Error(`API key or URL not set for ${selectedChain}.`);
       }
-
+  
       let contractAddress = addressOrUrl;
       if (addressOrUrl.includes("etherscan.io")) {
         const parts = addressOrUrl.split("/address/");
         if (parts.length > 1) {
-          contractAddress = parts[1].split("#")[0]; // Extract contract address before #code part
+          contractAddress = parts[1].split("#")[0];
         } else {
           throw new Error("Invalid Etherscan URL format.");
         }
       }
-
+  
       if (!isValidAddress(contractAddress)) {
         throw new Error("Invalid Ethereum address format.");
       }
-
-      const url = `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
-
+  
+      const url = `${baseUrl}/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
+      console.log(url);
+      
+  
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       
+  
       if (data.status === "1" && data.result.length > 0) {
         return {
           sourceCode: data.result[0].SourceCode,
@@ -139,6 +175,7 @@ const Hero = (props: Props) => {
       throw new Error("Error fetching contract from Etherscan.");
     }
   };
+  
 
 
   const fetchContractFromGitHub = async (repoUrl: string) => {
@@ -327,7 +364,7 @@ const Hero = (props: Props) => {
       
 
       if (selectedSource === "contract_address") {
-        const data = await fetchContractFromEtherscan(contractAddress);
+        const data = await fetchContractFromEtherscan(contractAddress,selectedBlockchain);
         sourceCode = data.sourceCode;
         address = data.address;
         extractedContractName = data.contractName;
@@ -438,7 +475,7 @@ const Hero = (props: Props) => {
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
             <h1>
-              Securedapp <span className="text-green-600">Audit Express</span>
+              SecureDApp <span className="text-green-600">Audit Express</span>
             </h1>
             <div className="lg:flex gap-2 hidden">
               {[...Array(5)].map((_, index) => (
@@ -472,7 +509,7 @@ const Hero = (props: Props) => {
         <div className="flex justify-center mt-6">
           <div className="lg:w-5/12 w-10/12 relative">
             <select
-              className="w-full bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl text-white dark:text-white appearance-none"
+              className="w-full text-black bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl dark:text-white dark:text-white appearance-none"
               onChange={handleSourceChange}
               value={selectedSource} // Ensure it reflects the state
             >
@@ -514,7 +551,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Company Name"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={companyName}
                 onChange={handleInputChange}
               />
@@ -524,7 +561,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Email Address"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={email}
                 onChange={handleInputChange}
               />
@@ -535,7 +572,7 @@ const Hero = (props: Props) => {
               <input
                 placeholder="Type or paste your contract address"
                 className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
                 value={contractAddress}
                 onChange={handleInputChange}
               />
@@ -658,7 +695,7 @@ const Hero = (props: Props) => {
       <div className="flex justify-center text-black text-xl py-4">
       {authRequired && !isVerified ? (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
+          <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
             <OTPverification onSuccess={handleOTPVerificationSuccess} OTPemail={email} />
           </div>
         </div>

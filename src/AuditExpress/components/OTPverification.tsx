@@ -69,7 +69,7 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-transparent">
       <div className="w-full max-w-md px-6 py-8 bg-white shadow-lg rounded-lg">
         <AuthScreenHeader
           title="OTP Verification"
