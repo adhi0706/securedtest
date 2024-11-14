@@ -132,29 +132,29 @@ const ScanPage: React.FC = () => {
   const getBlockscoutURL = (blockchain: string): string | null => {
     switch (blockchain.toLowerCase()) {
       case 'ethereum':
-        return 'https://blockscout.com/eth/mainnet'; // Ethereum Blockscout
+        return 'https://eth.blockscout.com'; // Ethereum Blockscout
       case 'polygon':
-        return 'https://blockscout.com/polygon/mainnet'; // Polygon Blockscout
+        return 'https://polygon.blockscout.com/'; // Polygon Blockscout
       case 'avalanche':
         return 'https://blockscout.com/avax/mainnet'; // Avalanche Blockscout
       case 'binance':
-        return 'https://blockscout.com/bsc/mainnet'; // Binance Smart Chain Blockscout
+        return 'https://bscscan.com'; // Binance Smart Chain Blockscout
       case 'arbitrum':
-        return 'https://blockscout.com/arbitrum/mainnet'; // Arbitrum Blockscout
+        return 'https://arbitrum.blockscout.com'; // Arbitrum Blockscout
       case 'optimism':
         return 'https://blockscout.com/optimism/mainnet'; // Optimism Blockscout
       case 'gnosis':
-        return 'https://blockscout.com/xdai/mainnet'; // Gnosis Chain (formerly xDAI)
+        return 'https://gnosis.blockscout.com'; // Gnosis Chain (formerly xDAI)
       case 'boba':
         return 'https://blockscout.com/boba/mainnet'; // Boba Network Blockscout
       case 'base':
-        return 'https://blockscout.com/base/mainnet'; // Base Blockscout
+        return 'https://base.blockscout.com'; // Base Blockscout
       case 'linea':
-        return 'https://blockscout.com/linea/mainnet'; // Linea Blockscout
+        return 'https://explorer.linea.build'; // Linea Blockscout
       case 'astar':
-        return 'https://blockscout.com/astar/mainnet'; // Astar Blockscout
+        return 'https://astar.blockscout.com'; // Astar Blockscout
       case 'celo':
-        return 'https://blockscout.com/celo/mainnet'; // Celo Blockscout
+        return 'https://celoscan.io/'; // Celo Blockscout
       case 'firechain':
         return 'https://blockscout.com/firechain/mainnet'; // Firechain Blockscout
       default:
