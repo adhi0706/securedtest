@@ -1,13 +1,8 @@
-"use client";
 import { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { FaCheckCircle } from "react-icons/fa";
-import AuthButton from "../../SolidityShield/components/auth/AuthButton";
-import AuthCard from "../../SolidityShield/components/auth/AuthCard";
-import AuthInputField from "../../SolidityShield/components/auth/AuthInputField";
-import AuthScreenHeader from "../../SolidityShield/components/auth/AuthScreenHeader";
-  
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
+
 const sendOTP = async ({ email }) => {
   try {
     const response = await fetch("https://139-59-5-56.nip.io:3443/expressOTP", {
@@ -30,28 +25,28 @@ const sendOTP = async ({ email }) => {
   }
 };
 
-const OTPVerification = ({ onSuccess, OTPemail }) => {
+const OTPVerification = ({ onSuccess, OTPemail, onClose }) => {
   const [otp, setOtp] = useState("");
   const otpSentRef = useRef(false);
+  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     const handleSendOTPOnce = async () => {
       if (!OTPemail || otpSentRef.current) return;
-
       otpSentRef.current = true;
       try {
         const response = await sendOTP({ email: OTPemail });
         if (response.message) {
-          toast.success("The OTP for AuditExpress has been sent to your email address. Please verify it to continue with the audit.");
+          toast.success("OTP sent successfully!");
         } else {
-          toast.error("Failed to send OTP. Please try again.");
+          toast.error("Failed to send OTP.");
         }
       } catch (error) {
-        toast.error(error.message || "An error occurred. Please try again.");
-        otpSentRef.current = false; 
+        toast.error("An error occurred. Please try again.");
+        console.log(error);
+        otpSentRef.current = false;
       }
     };
-
     handleSendOTPOnce();
   }, [OTPemail]);
 
@@ -59,41 +54,52 @@ const OTPVerification = ({ onSuccess, OTPemail }) => {
     if (otp) {
       localStorage.setItem("UserOtp", otp);
       toast.success("OTP stored successfully!");
-
-      if (onSuccess) {
-        onSuccess(otp);
-      }
+      if (onSuccess) onSuccess(otp);
     } else {
       toast.warning("Please enter the OTP.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-transparent">
-      <div className="w-full max-w-md px-6 py-8 bg-white shadow-lg rounded-lg">
-        <AuthScreenHeader
-          title="OTP Verification"
-          description="To continue with your audit, please enter the OTP sent to your registered email."
-        />
-        <div className="mt-4">
-          <AuthCard>
-            <AuthInputField
-              authInputType="text"
-              placeholder="Enter OTP"
-              onChange={setOtp}
-              regexCheck={/^\d{4}$/}
-              message="Invalid OTP"
-            />
-            <AuthButton onClick={handleSubmitOTP}>
-              <div className="flex items-center justify-center">
-                <FaCheckCircle className="mr-2" />
-                <p>Validate OTP</p>
-              </div>
-            </AuthButton>
-          </AuthCard>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+      <div className={`relative w-full max-w-sm p-6 rounded-lg shadow-lg ${theme === "dark" ? "bg-[#001938] text-white" : "bg-white text-black"}`}>
+        
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none"
+        >
+          <FaTimes />
+        </button>
+
+        {/* Header */}
+        <div className="text-center mb-4">
+          <h2 className="text-2xl font-semibold">OTP Verification</h2>
+          <p className="mt-2 text-sm text-gray-500">Enter the OTP sent to your registered email to continue.</p>
         </div>
+
+        {/* OTP Input Field */}
+        <div className="flex flex-col items-center">
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            className="w-full p-3 mb-4 text-lg text-black border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmitOTP}
+            className="w-full flex items-center justify-center gap-2 py-2 text-lg font-semibold text-white bg-green-500 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <FaCheckCircle />
+            Validate OTP
+          </button>
+        </div>
+
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };

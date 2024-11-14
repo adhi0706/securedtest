@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import AuthScreen from "../../pages/solidity-shield-scan/auth"
 import OtpVerificationPopup from "./OTPverification";
 import OTPverification from "./OTPverification";
+import OTPVerification from "./OTPverification";
 
 type Props = {};
 
@@ -30,16 +31,19 @@ const Hero = (props: Props) => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [authRequired, setAuthRequired] = useState(false);
   const [isVerified, setIsVerified] = useState<boolean>(false); // New state for OTP verification
+  
 
   // const [scanDuration, setScanDuration] = useState<number>(0);
   const Router = useRouter();
 
   // console.log(scanDuration);
-  
+
 
   // Handlers for Modal
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+
 
   // Handler for Source Change
   const handleSourceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -112,7 +116,7 @@ const Hero = (props: Props) => {
     Celo: "JFYK9NFHTZJ7VEG8A7YFQR1XI6S4AF2KBG",
     "5ireChain": "API_KEY_FOR_5IRECHAIN",
   };
-  
+
   const chainUrls = {
     Ethereum: "https://api.etherscan.io",
     Avalanche: "https://api.snowtrace.io",
@@ -128,16 +132,16 @@ const Hero = (props: Props) => {
     Celo: "https://api.celoscan.io",
     "5ireChain": "https://api.5irescan.com",
   };
-  
-  const fetchContractFromEtherscan = async (addressOrUrl:string, selectedChain:string) => {
+
+  const fetchContractFromEtherscan = async (addressOrUrl: string, selectedChain: string) => {
     try {
       const apiKey = apiKeys[selectedChain];
       const baseUrl = chainUrls[selectedChain];
-  
+
       if (!apiKey || !baseUrl) {
         throw new Error(`API key or URL not set for ${selectedChain}.`);
       }
-  
+
       let contractAddress = addressOrUrl;
       if (addressOrUrl.includes("etherscan.io")) {
         const parts = addressOrUrl.split("/address/");
@@ -147,20 +151,20 @@ const Hero = (props: Props) => {
           throw new Error("Invalid Etherscan URL format.");
         }
       }
-  
+
       if (!isValidAddress(contractAddress)) {
         throw new Error("Invalid Ethereum address format.");
       }
-  
+
       const url = `${baseUrl}/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
       console.log(url);
-      
-  
+
+
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      
-  
+
+
       if (data.status === "1" && data.result.length > 0) {
         return {
           sourceCode: data.result[0].SourceCode,
@@ -175,7 +179,7 @@ const Hero = (props: Props) => {
       throw new Error("Error fetching contract from Etherscan.");
     }
   };
-  
+
 
 
   const fetchContractFromGitHub = async (repoUrl: string) => {
@@ -194,15 +198,15 @@ const Hero = (props: Props) => {
         throw new Error("Unsupported GitHub URL format.");
       }
 
-      
+
       const response = await fetch(rawUrl);
       if (!response.ok) {
         throw new Error("Failed to fetch contract from GitHub.");
       }
-      
+
       const content = await response.text();
       console.log("Fetched content from GitHub:", content);
-      localStorage.setItem("giturl",rawUrl);
+      localStorage.setItem("giturl", rawUrl);
 
       return content;
     } catch (error) {
@@ -224,7 +228,7 @@ const Hero = (props: Props) => {
           }
         };
         reader.readAsText(file);
-        localStorage.setItem("filename",file.name);
+        localStorage.setItem("filename", file.name);
       });
     } catch (error) {
       console.error("Error reading contract from file:", error);
@@ -252,7 +256,7 @@ const Hero = (props: Props) => {
   };
 
   const validateFields = () => {
-    
+
     if (!companyName) {
       toast.warning("Please Enter your Company Name.");
       return false;
@@ -261,22 +265,22 @@ const Hero = (props: Props) => {
       toast.warning("Please select a source (contract address, GitHub, or upload).");
       return false;
     }
-    
+
     if (selectedSource === "contract_address" && !contractAddress) {
       toast.warning("Please enter the contract address.");
       return false;
     }
-    
+
     if (selectedSource === "github" && !githubURL) {
       toast.warning("Please enter the GitHub URL.");
       return false;
     }
-    
+
     if (selectedSource === "upload" && !uploadedFile) {
       toast.warning("Please upload a contract file.");
       return false;
     }
-    
+
     if (!email) {
       toast.warning("Please enter your email address.");
       return false;
@@ -285,26 +289,30 @@ const Hero = (props: Props) => {
       toast.warning("Please enter the Contract Name.");
       return false;
     }
-  
+
     if (selectedSource === "contract_address" && !selectedBlockchain) {
       toast.warning("Please select a blockchain.");
       return false;
     }
 
-  
+
     return true;
   };
-  
+
   const openOTPModal = () => {
     if (validateFields()) {
       setAuthRequired(true);
     }
   };
-  
+
+  const closeOTPModal = () => {
+    setAuthRequired(false);
+  };
+
 
   const handleOTPVerificationSuccess = () => {
     setIsVerified(true);
-    setAuthRequired(false); 
+    setAuthRequired(false);
     handleGetAuditReport();
   };
 
@@ -312,92 +320,92 @@ const Hero = (props: Props) => {
     setLoading(true);
     setError(null);
     setSuccessMessage(null);
-  
+
     try {
       let sourceCode = null;
       let address = null;
       let extractedContractName = null;
       let blockchain = "";
       let emailAddress = email;
-      
+
       if (!emailAddress) {
         toast.warning("Please enter your email address.");
         setLoading(false);
         return;
       }
-      
+
       if (!selectedSource) {
         toast.warning("Please select a source (contract address, GitHub, or upload).");
         setLoading(false);
         return;
       }
-      
+
       if (selectedSource === "contract_address" && !contractAddress) {
         toast.warning("Please enter the contract address.");
         setLoading(false);
         return;
       }
-      
+
       if (selectedSource === "github" && !githubURL) {
         toast.warning("Please enter the GitHub URL.");
         setLoading(false);
         return;
       }
-      
+
       if (selectedSource === "upload" && !uploadedFile) {
         toast.warning("Please upload a contract file.");
         setLoading(false);
         return;
       }
-  
+
       if (!contractName && (selectedSource === "github" || selectedSource === "upload")) {
         toast.warning("Please enter the Contract Name.");
         setLoading(false);
         return;
       }
-  
+
       if (selectedSource === "contract_address" && !selectedBlockchain) {
         toast.warning("Please select a blockchain.");
         setLoading(false);
         return;
       }
-      
+
 
       if (selectedSource === "contract_address") {
-        const data = await fetchContractFromEtherscan(contractAddress,selectedBlockchain);
+        const data = await fetchContractFromEtherscan(contractAddress, selectedBlockchain);
         sourceCode = data.sourceCode;
         address = data.address;
         extractedContractName = data.contractName;
         blockchain = selectedBlockchain;
-  
+
         if (!extractedContractName) {
           extractedContractName = extractContractName(sourceCode);
         }
-  
+
       } else if (selectedSource === "github") {
         sourceCode = await fetchContractFromGitHub(githubURL);
         address = githubURL;
         extractedContractName = contractName;
         blockchain = "github";
-  
+
       } else if (selectedSource === "upload") {
         sourceCode = await fetchContractFromFile(uploadedFile);
         extractedContractName = contractName;
         address = 'Contract file';
         blockchain = "upload";
       }
-  
+
       if (!sourceCode) {
         throw new Error("Source code is empty.");
       }
-  
+
       const compilerVersion = extractCompilerVersion(sourceCode);
       if (!compilerVersion) {
         throw new Error("Unable to extract compiler version from source code.");
       }
-  
+
       const linesOfCode = sourceCode.replace(/\r\n/g, "\n").split('\n').length;
-  
+
       const jsonData = {
         email: emailAddress,
         otp: localStorage.getItem("UserOtp"),
@@ -409,12 +417,12 @@ const Hero = (props: Props) => {
         lines: linesOfCode,
         address,
       };
-      
+
       localStorage.setItem("address", address);
       localStorage.setItem("blockchain", blockchain);
-  
+
       const startTime = performance.now();
-  
+
       const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
         method: "POST",
         headers: {
@@ -422,15 +430,15 @@ const Hero = (props: Props) => {
         },
         body: JSON.stringify(jsonData),
       });
-  
+
       const endTime = performance.now();
       const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`API Error: ${errorText}`);
       }
-  
+
       const resultData = await response.json();
       setSuccessMessage("Audit report submitted successfully!");
       Router.push({
@@ -442,14 +450,14 @@ const Hero = (props: Props) => {
           vulnerabilityCount: JSON.stringify(resultData.vulnerabilityCount),
         },
       });
-  
+
     } catch (err) {
       setError((err).message);
     } finally {
       setLoading(false);
     }
   };
-  
+
   const cleanSourceCode = (sourceCode: string): string => {
     let cleanedCode = sourceCode.replace(/\/\/.*$/gm, "");
 
@@ -693,23 +701,28 @@ const Hero = (props: Props) => {
         )}
       </div>
       <div className="flex justify-center text-black text-xl py-4">
-      {authRequired && !isVerified ? (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
-            <OTPverification onSuccess={handleOTPVerificationSuccess} OTPemail={email} />
+        {authRequired && !isVerified ? (
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
+              <OTPVerification
+                onSuccess={handleOTPVerificationSuccess}
+                OTPemail={email}
+                onClose={closeOTPModal} // This should be a function to close the component
+                theme="dark" // or "light", depending on the desired theme
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        <button
-          className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
+        ) : (
+          <button
+            className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
           transform transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={openOTPModal}
-          disabled={loading}
-        >
-          {loading ? "Fetching..." : "Get Audit Report"}
-        </button>
-      )}
-    </div>
+            onClick={openOTPModal}
+            disabled={loading}
+          >
+            {loading ? "Fetching..." : "Get Audit Report"}
+          </button>
+        )}
+      </div>
       {error && (
         <div className="flex justify-center text-red-500">
           <p>{error}</p>
@@ -728,7 +741,7 @@ const Hero = (props: Props) => {
         />
       </div>
       <div>
-  </div>
+      </div>
     </div>
   );
 };
