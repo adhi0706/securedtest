@@ -10,7 +10,7 @@ type Props = {}
 const Sales = (props: Props) => {
   return (
     <div>
-      <div className="bg-grid-bg min-h-screen bg-no-repeat bg-center flex items-center justify-center">
+      <div className="bg-grid-bg min-h-screen bg-no-repeat bg-center dark:text-white text-black flex items-center justify-center">
         <div className="text-center dark:text-white">
           <h1 className="lg:text-4xl text-2xl px-10" id="poppins-semibold">
             Take Your Project Security to the next level, Today!
