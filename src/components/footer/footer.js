@@ -197,7 +197,7 @@ const Footer = () => {
       <div className="footer-newsletter">
         <div className="footer-newsletter-left">
           <div className="text-lg font-bold">Join our newsletter</div>
-          <div className="font-light">Keep everything up to date through SecureDApp.</div>
+          <div className="font-light">Stay up to date with latest news and updates from SecureDApp</div>
         </div>
         <div className="footer-newsletter-right">
           <input
