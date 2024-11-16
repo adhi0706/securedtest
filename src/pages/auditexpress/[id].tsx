@@ -5,7 +5,6 @@ import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import VulnerabilityPieChart from './utils/VulnerabilityPieChart';
 import 'react-circular-progressbar/dist/styles.css';
-import Navbar from '../../components/navbar/Navbar';
 import { motion, useAnimation } from "framer-motion";
 import { calculateSecurityScore, AuditReport } from './utils/calculateSecurityScore';
 // import scan from '../../AuditExpress/assets/scan.png';
@@ -34,6 +33,7 @@ import Polygon from "../../AuditExpress/assets/chains/polygon.png";
 import RequestQuoteModal from '../../components/modal/RequestQuoteModal';
 import { useDispatch } from 'react-redux';
 import { setIsRequestModalOpen } from '../../redux/slices/main/homeSlice';
+import Navbar from '../../AuditExpress/components/Navbar';
 
 // Updated Type Definitions
 type Vulnerability = {
@@ -85,7 +85,22 @@ const blockchainLogos = {
 const ScanPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [textColor, setTextColor] = useState(localStorage.getItem('theme') === "dark" ? "#ffffff" : "#000000");
 
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const theme = localStorage.getItem('theme');
+      setTextColor(theme === "dark" ? "#ffffff" : "#000000");
+    };
+
+    // Listen to storage changes (for example, if theme changes elsewhere)
+    window.addEventListener('storage', handleThemeChange);
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('storage', handleThemeChange);
+    };
+  }, []);
   const [scanDetails, setScanDetails] = useState<ScanDetails | null>(null);
   const [scanDuration, setScanDuration] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -117,29 +132,29 @@ const ScanPage: React.FC = () => {
   const getBlockscoutURL = (blockchain: string): string | null => {
     switch (blockchain.toLowerCase()) {
       case 'ethereum':
-        return 'https://blockscout.com/eth/mainnet'; // Ethereum Blockscout
+        return 'https://eth.blockscout.com'; // Ethereum Blockscout
       case 'polygon':
-        return 'https://blockscout.com/polygon/mainnet'; // Polygon Blockscout
+        return 'https://polygon.blockscout.com/'; // Polygon Blockscout
       case 'avalanche':
         return 'https://blockscout.com/avax/mainnet'; // Avalanche Blockscout
       case 'binance':
-        return 'https://blockscout.com/bsc/mainnet'; // Binance Smart Chain Blockscout
+        return 'https://bscscan.com'; // Binance Smart Chain Blockscout
       case 'arbitrum':
-        return 'https://blockscout.com/arbitrum/mainnet'; // Arbitrum Blockscout
+        return 'https://arbitrum.blockscout.com'; // Arbitrum Blockscout
       case 'optimism':
         return 'https://blockscout.com/optimism/mainnet'; // Optimism Blockscout
       case 'gnosis':
-        return 'https://blockscout.com/xdai/mainnet'; // Gnosis Chain (formerly xDAI)
+        return 'https://gnosis.blockscout.com'; // Gnosis Chain (formerly xDAI)
       case 'boba':
         return 'https://blockscout.com/boba/mainnet'; // Boba Network Blockscout
       case 'base':
-        return 'https://blockscout.com/base/mainnet'; // Base Blockscout
+        return 'https://base.blockscout.com'; // Base Blockscout
       case 'linea':
-        return 'https://blockscout.com/linea/mainnet'; // Linea Blockscout
+        return 'https://explorer.linea.build'; // Linea Blockscout
       case 'astar':
-        return 'https://blockscout.com/astar/mainnet'; // Astar Blockscout
+        return 'https://astar.blockscout.com'; // Astar Blockscout
       case 'celo':
-        return 'https://blockscout.com/celo/mainnet'; // Celo Blockscout
+        return 'https://celoscan.io/'; // Celo Blockscout
       case 'firechain':
         return 'https://blockscout.com/firechain/mainnet'; // Firechain Blockscout
       default:
@@ -245,15 +260,15 @@ const ScanPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 bg-[#011A3B] text-white min-h-screen flex flex-col">
+    <div className="container mx-auto p-4 dark:bg-[#001938] text-white min-h-screen flex flex-col">
       <Navbar />
-      <div className="pt-32 font-poppins-regular" id="poppins">
+      <div className="pt-32 font-poppins-regular dark:text-white text-black" id="poppins">
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
-            <h1>
+            <h1 className='dark:text-white text-black'>
               SecureDApp <span className="text-green-600">Audit Express</span>
             </h1>
-            <div className="lg:flex gap-2 hidden">
+            <div className="lg:flex gap-2 hidden dark:text-white text-black">
               {[...Array(5)].map((_, index) => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -272,17 +287,17 @@ const ScanPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <p className="lg:text-lg text-xs text-center font-semilight my-2">
+        <p className="lg:text-lg text-xs dark:text-white text-black text-center font-semilight my-2">
           Trusted by more than 120+ companies
         </p>
       </div>
       <div id='poppins-regular'>
-      <p className="text-center lg:px-10 px-10 text-balance">
+      <p className="text-center lg:px-10 px-10 text-balance dark:text-white text-black">
           Audit Express is a cutting-edge smart contract auditing tool designed to provide developers with a quick and easy assessment of their project's security. Developed by SecureDApp, Audit Express leverages advanced algorithms to identify potential vulnerabilities and bugs within smart contracts. Audit Express gives a clear and concise security score to gain a rapid understanding of your project's vulnerability profile.
         </p>
       </div>
       <div className='lg:flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 mt-12'>
-        <div className="lg:mb-0 mb-4 md:mb-0 flex gap-4">
+        <div className="lg:mb-0 mb-4 md:mb-0 flex gap-4 dark:text-white text-black">
           <div className='h-10 w-10'>
             {/^0x[a-fA-F0-9]{40}$/.test(scanDetails.address) ? (
               blockchainLogos[scanDetails.blockchain] ? (
@@ -331,7 +346,7 @@ const ScanPage: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="lg:flex lg:my-0 my-3 justify-end items-center">
+        <div className="lg:flex lg:my-0 my-3 justify-end items-center dark:text-white text-black">
           {scanDetails.address && (
             <>
 
@@ -354,9 +369,9 @@ const ScanPage: React.FC = () => {
           )}
         </div>
       </div>
-      <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
+      <div className='flex flex-col md:flex-row justify-between dark:text-white text-black mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
         {/* Security Score */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+        <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
           <div className='flex flex-col justify-center'>
             <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Security Score</p>
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDetails.score}/100</p>
@@ -382,7 +397,7 @@ const ScanPage: React.FC = () => {
           </div>
         </div>
         {/* Scan Duration */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+        <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
           <div className='flex flex-col justify-center'>
             <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Scan duration</p>
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
@@ -403,7 +418,7 @@ const ScanPage: React.FC = () => {
           </div>
         </div>
         {/* Lines of Code */}
-        <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+        <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
           <div className='flex flex-col justify-center'>
             <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Lines of code</p>
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
@@ -416,7 +431,7 @@ const ScanPage: React.FC = () => {
 
       {/* Security Score Description */}
       <div className='md:flex justify-center items-center md:my-0 my-10 px-4 sm:px-10'>
-        <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-10 py-0 md:rounded-full rounded-lg'>
+        <div className='md:border md:border-black md:dark:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-10 py-0 md:rounded-full rounded-lg'>
           <div className='flex justify-center items-center mb-4 lg:mb-0' id='poppins-semibold'>
             <CircularProgressbar
               className='md:w-40 md:h-40 w-40 h-40 text-white rounded-full'
@@ -426,14 +441,14 @@ const ScanPage: React.FC = () => {
               styles={buildStyles({
                 height: '100%',
                 pathColor: '#12D576',
-                textColor: '#ffffff',
+                textColor: textColor,
                 backgroundColor: "#ffffff",
                 trailColor: '#d6d6d6',
                 textSize: '20px'
               })}
             />
           </div>
-          <div className='flex justify-center items-center'>
+          <div className='flex justify-center items-center dark:text-white text-black'>
             <div className='ml-0 lg:ml-10 lg:text-left'>
               <p className='text-md sm:text-xl my-2' id='poppins-normal'>
                 Your Security Score is{' '}
@@ -442,7 +457,7 @@ const ScanPage: React.FC = () => {
                 </span>
               </p>
 
-              <p className='text-md sm:text-lg my-2' id='poppins-normal'>
+              <p className='text-md sm:text-lg my-2 dark:text-white text-black' id='poppins-normal'>
                 The Security score is calculated based on lines of code and weights assigned to each issue depending on the severity and confidence.
                 To improve your score, view the detailed result and leverage the remediation solutions provided.
               </p>
@@ -469,16 +484,16 @@ const ScanPage: React.FC = () => {
 
 
       {/* Vulnerability Counts and Pie Chart */}
-      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 items-center mx-4 sm:mx-10 lg:mx-40 my-2 sm:my-10'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 dark:text-white text-black gap-6 lg:gap-10 items-center mx-4 sm:mx-10 lg:mx-40 my-2 sm:my-10'>
         {/* Left Column */}
         <div className='space-y-4 lg:space-y-8' id='poppins-semibold'>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>Critical: {scanDetails.vulnerability_count.critical}</p>
           </div>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>High: {scanDetails.vulnerability_count.high}</p>
           </div>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>Medium: {scanDetails.vulnerability_count.medium}</p>
           </div>
         </div>
@@ -488,24 +503,24 @@ const ScanPage: React.FC = () => {
         </div>
         {/* Right Column */}
         <div className='space-y-4 lg:space-y-8' id='poppins-semibold'>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>Low: {scanDetails.vulnerability_count.low}</p>
           </div>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>Informational: {scanDetails.vulnerability_count.informational}</p>
           </div>
-          <div className='border border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
+          <div className='border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 sm:px-7 py-4 sm:py-7 w-full rounded-full'>
             <p className='text-lg sm:text-2xl text-center'>Gas: {scanDetails.vulnerability_count.gas}</p>
           </div>
         </div>
       </div>
 
       {/* View Audit Report PDF Button */}
-      <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10'>
+      <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10 dark:text-white text-black'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
         <button
         onClick={() => dispatch(setIsRequestModalOpen(true))}
-        className="text-xl sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
+        className="text-xl  sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
         id="poppins-bold"
       >
         Get Detailed Report
@@ -516,7 +531,9 @@ const ScanPage: React.FC = () => {
 
       {/* Sales and Footer */}
       <Sales />
+      <div className='dark:text-white text-black'>
       <Footer />
+      </div>
       <RequestQuoteModal/>
     </div>
   );

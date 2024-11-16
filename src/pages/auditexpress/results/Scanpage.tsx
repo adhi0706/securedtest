@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import VulnerabilityPieChart from '../utils/VulnerabilityPieChart';
 import 'react-circular-progressbar/dist/styles.css';
-import Navbar from '../../../components/navbar/Navbar';
 import { ClipLoader } from 'react-spinners';
 import Sales from '../../../AuditExpress/components/Sales';
 import Footer from '../../../components/footer/footer';
@@ -30,6 +29,7 @@ import Polygon from "../../../AuditExpress/assets/chains/polygon.png";
 import { AiFillThunderbolt, AiOutlineCode } from 'react-icons/ai';
 import { setIsRequestModalOpen } from '../../../redux/slices/main/homeSlice';
 import { useDispatch } from 'react-redux';
+import Navbar from '../../../AuditExpress/components/Navbar';
 
 type Vulnerability = {
   type: string;
@@ -90,6 +90,24 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
   const [address, setAddress] = useState<string | "">(null);
   const [scanDuration, setScanDuration] = useState<number>(0);
   const [lineCount, setLineCount] = useState<number>(0);
+  const [textColor, setTextColor] = useState(localStorage.getItem('theme') === "dark" ? "#ffffff" : "#000000");
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const theme = localStorage.getItem('theme');
+      setTextColor(theme === "dark" ? "#ffffff" : "#000000");
+    };
+
+    // Listen to storage changes (for example, if theme changes elsewhere)
+    window.addEventListener('storage', handleThemeChange);
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('storage', handleThemeChange);
+    };
+  }, []);
+
+
   const [blockchain, setBlockchain] = useState<string | null>(null);
   const [scanDetails, setScanDetails] = useState<ScanDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -158,7 +176,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
   const blockchainIcon = blockchainIcons[blockchain ?? ""] || null;
 
   return (
-    <div className="mx-0 md:mx-auto p-4 bg-[#011A3B] text-white min-h-screen overflow-x-hidden">
+    <div className="mx-0 md:mx-auto p-4 dark:bg-[#001938] text-black dark:text-white min-h-screen overflow-x-hidden">
       <Navbar />
 
         <div className="lg:pt-32 pt-32 font-poppins-regular" id="poppins">
@@ -227,7 +245,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
 
         <div className='flex flex-col md:flex-row justify-between mx-4 sm:mx-10 lg:mx-20 my-2 sm:my-10 space-y-2 md:space-y-0'>
           {/* Security Score */}
-          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
               <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Security Score</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{parseFloat(scanDetails.score.substring(0, 5))}/100</p>
@@ -253,7 +271,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
             </div>
           </div>
           {/* Scan Duration */}
-          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
               <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Scan duration</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{scanDuration}</p>
@@ -274,7 +292,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
             </div>
           </div>
           {/* Lines of Code */}
-          <div className='border border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
+          <div className='border border-black dark:border-gray-50 w-full md:w-1/3 lg:w-1/4 h-24 flex justify-between px-4 sm:px-10 rounded-full'>
             <div className='flex flex-col justify-center'>
               <p className='text-lg sm:text-2xl lg:text-xl' id='poppins-semibold'>Lines of code</p>
               <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
@@ -286,7 +304,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
         </div>
         
         <div className='md:flex justify-center items-center md:mt-10 md:my-0 my-10 px-4 sm:px-3'>
-          <div className='md:border md:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
+          <div className='md:border md:border-black  md:dark:border-gray-50 w-full lg:w-10/12 md:flex md:flex-col lg:flex-row justify-between px-4 sm:px-3 py-0 md:rounded-full rounded-lg'>
             <div className='flex justify-center items-center mb-4 lg:mb-0 ml-6' id='poppins-semibold'>
               <CircularProgressbar
                 className='md:w-40 md:h-40 w-40 h-40 text-white rounded-full'
@@ -296,7 +314,7 @@ const ScanPage: React.FC<ScanPageProps> = ({ scanId, resultData }) => {
                 styles={buildStyles({
                   height: '100%',
                   pathColor: '#12D576',
-                  textColor: '#ffffff',
+                  textColor: textColor,
                   backgroundColor: "#ffffff",
                   trailColor: '#d6d6d6',
                   textSize: '20px'
@@ -380,7 +398,7 @@ const VulnerabilityCount: React.FC<{ scanDetails: ScanDetails; reverse?: boolean
   return (
     <div className="space-y-4 lg:space-y-8">
       {vulnerabilities.map((type) => (
-        <div key={type} className="border border-gray-100 hover:border-green-500 cursor-default px-4 py-4 rounded-full">
+        <div key={type} className="border border-black dark:border-gray-100 hover:border-green-500 cursor-default px-4 py-4 rounded-full">
           <p className="text-lg sm:text-2xl text-center capitalize">
             {type}: {scanDetails.vulnerability_count[type as keyof VulnerabilityCount]}
           </p>
