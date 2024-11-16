@@ -61,9 +61,8 @@ const OTPVerification = ({ onSuccess, OTPemail, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+    <div id="poppins-regular" className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
       <div className={`relative w-full max-w-sm p-6 rounded-lg shadow-lg ${theme === "dark" ? "bg-[#001938] text-white" : "bg-white text-black"}`}>
-        
         {/* Close Button */}
         <button
           onClick={onClose}
