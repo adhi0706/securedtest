@@ -8,6 +8,7 @@ import AuthScreen from "../../pages/solidity-shield-scan/auth"
 import OtpVerificationPopup from "./OTPverification";
 import OTPverification from "./OTPverification";
 import OTPVerification from "./OTPverification";
+import { ClipLoader } from "react-spinners";
 
 type Props = {};
 
@@ -476,273 +477,284 @@ const Hero = (props: Props) => {
 
   return (
     <div
-      className="dark:bg-custom-bg border-e-transparent mt-20 dark:text-white pb-10"
-      style={bg}
-    >
-      <div className="pt-20 font-poppins-regular" id="poppins">
-        <div className="flex justify-center">
-          <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
-            <h1>
-              SecureDApp <span className="text-green-600">Audit Express</span>
-            </h1>
-            <div className="lg:flex gap-2 hidden">
-              {[...Array(5)].map((_, index) => (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-8 text-yellow-400"
-                  key={index}
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ))}
-            </div>
-          </div>
-        </div>
-        <p className="lg:text-lg text-xs text-center font-semilight my-2">
-          Trusted by more than 120+ companies
-        </p>
-      </div>
-
-      {/* Description Section */}
-      <div id="poppins-regular" className="px-4">
-        <p className="text-center lg:px-10 px-10 text-balance">
-          Audit Express is a cutting-edge smart contract auditing tool designed to provide developers with a quick and easy assessment of their project's security. Developed by SecureDApp, Audit Express leverages advanced algorithms to identify potential vulnerabilities and bugs within smart contracts. Audit Express gives a clear and concise security score to gain a rapid understanding of your project's vulnerability profile.
-        </p>
-        <div className="flex justify-center mt-6">
-          <div className="lg:w-5/12 w-10/12 relative">
-            <select
-              className="w-full text-black bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl dark:text-white dark:text-white appearance-none"
-              onChange={handleSourceChange}
-              value={selectedSource} // Ensure it reflects the state
-            >
-              <option className="text-black" value="">
-                Select Source
-              </option>
-              <option className="text-black" value="contract_address">
-                Contract Address
-              </option>
-              <option className="text-black" value="github">
-                GitHub
-              </option>
-              <option className="text-black" value="upload">
-                Upload
-              </option>
-            </select>
+  className={`dark:bg-custom-bg border-e-transparent mt-20 dark:text-white pb-10 relative`}
+  style={bg}
+>
+  {loading && (
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="animate-spin rounded-full h-14 w-14 border-t-2 border-b-2 border-green-700"></div>
+    </div>
+  )}
+  <div className="pt-20 font-poppins-regular" id="poppins">
+    <div className="flex justify-center">
+      <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
+        <h1>
+          SecureDApp <span className="text-green-600">Audit Express</span>
+        </h1>
+        <div className="lg:flex gap-2 hidden">
+          {[...Array(5)].map((_, index) => (
             <svg
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 h-10 w-10 text-white dark:text-white pointer-events-none"
-              fill="none"
-              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-8 text-yellow-400"
+              key={index}
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
+                fillRule="evenodd"
+                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                clipRule="evenodd"
               />
             </svg>
-          </div>
+          ))}
         </div>
-      </div>
-
-      <div className="mt-8">
-        {selectedSource === "contract_address" && (
-          <>
-            {/* Company Name */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Company Name"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
-                value={companyName}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="flex justify-center">
-              <input
-                placeholder="Email Address"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
-                value={email}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Contract Address */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Type or paste your contract address"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
-                value={contractAddress}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Blockchain Selector */}
-            <div className="flex justify-center">
-              <button
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 text-gray-800 dark:text-gray-200 flex justify-center items-center"
-                onClick={openModal}
-              >
-                {selectedBlockchain || "Select Blockchain"}
-              </button>
-            </div>
-
-            {/* Indicate Auto-filled Contract Name */}
-            {isContractNameAutoFilled && (
-              <div className="flex justify-center">
-                <p className="text-sm text-gray-400 mt-1">
-                  Contract name fetched from Etherscan.
-                </p>
-              </div>
-            )}
-          </>
-        )}
-
-        {selectedSource === "github" && (
-          <>
-            {/* GitHub URL */}
-            <div className="flex justify-center">
-              <input
-                placeholder="URL"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={githubURL}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Company Name */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Company Name"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={companyName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex justify-center">
-              <input
-                placeholder="Email Address"
-                type="email"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={email}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Contract Name (Manual Input) */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Contract Name"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={contractName}
-                onChange={handleInputChange}
-              />
-            </div>
-          </>
-        )}
-
-        {selectedSource === "upload" && (
-          <>
-            {/* File Upload */}
-            <div className="flex justify-center">
-              <input
-                type="file"
-                accept=".sol"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Company Name */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Company Name"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={companyName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex justify-center">
-              <input
-                placeholder="Email Address"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={email}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Contract Name (Manual Input) */}
-            <div className="flex justify-center">
-              <input
-                placeholder="Contract Name"
-                className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
-                shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
-                value={contractName}
-                onChange={handleInputChange}
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className="flex justify-center text-black text-xl py-4">
-        {authRequired && !isVerified ? (
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
-              <OTPVerification
-                onSuccess={handleOTPVerificationSuccess}
-                OTPemail={email}
-                onClose={closeOTPModal} // This should be a function to close the component
-                theme="dark" // or "light", depending on the desired theme
-              />
-            </div>
-          </div>
-        ) : (
-          <button
-            className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
-          transform transition disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={openOTPModal}
-            disabled={loading}
-          >
-            {loading ? "Fetching..." : "Get Audit Report"}
-          </button>
-        )}
-      </div>
-      {error && (
-        <div className="flex justify-center text-red-500">
-          <p>{error}</p>
-        </div>
-      )}
-      {successMessage && (
-        <div className="flex justify-center text-green-500">
-          <p>{successMessage}</p>
-        </div>
-      )}
-      <div className="z-50">
-        <BlockchainModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          onSelect={handleSelectBlockchain}
-        />
-      </div>
-      <div>
       </div>
     </div>
+    <p className="lg:text-lg text-xs text-center font-semilight my-2">
+      Trusted by more than 120+ companies
+    </p>
+  </div>
+
+  {/* Description Section */}
+  <div id="poppins-regular" className="px-4">
+    <p className="text-center lg:px-10 px-10 text-balance">
+      Audit Express is a cutting-edge smart contract auditing tool designed to
+      provide developers with a quick and easy assessment of their project's
+      security. Developed by SecureDApp, Audit Express leverages advanced
+      algorithms to identify potential vulnerabilities and bugs within smart
+      contracts. Audit Express gives a clear and concise security score to gain
+      a rapid understanding of your project's vulnerability profile.
+    </p>
+    <div className="flex justify-center mt-6">
+      <div className="lg:w-5/12 w-10/12 relative">
+        <select
+          className="w-full text-black bg-[#3a3688] border backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20 rounded-xl px-4 py-3 text-2xl dark:text-white appearance-none"
+          onChange={handleSourceChange}
+          value={selectedSource}
+        >
+          <option className="text-black" value="">
+            Select Source
+          </option>
+          <option className="text-black" value="contract_address">
+            Contract Address
+          </option>
+          <option className="text-black" value="github">
+            GitHub
+          </option>
+          <option className="text-black" value="upload">
+            Upload
+          </option>
+        </select>
+        <svg
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 h-10 w-10 text-white dark:text-white pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div className="mt-8">
+    {selectedSource === "contract_address" && (
+      <>
+        {/* Company Name */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Company Name"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
+            value={companyName}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="flex justify-center">
+          <input
+            placeholder="Email Address"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Contract Address */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Type or paste your contract address"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-black dark:placeholder:text-gray-400 placeholder:text-gray-800"
+            value={contractAddress}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Blockchain Selector */}
+        <div className="flex justify-center">
+          <button
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 text-gray-800 dark:text-gray-200 flex justify-center items-center"
+            onClick={openModal}
+          >
+            {selectedBlockchain || "Select Blockchain"}
+          </button>
+        </div>
+
+        {/* Indicate Auto-filled Contract Name */}
+        {isContractNameAutoFilled && (
+          <div className="flex justify-center">
+            <p className="text-sm text-gray-400 mt-1">
+              Contract name fetched from Etherscan.
+            </p>
+          </div>
+        )}
+      </>
+    )}
+
+    {selectedSource === "github" && (
+      <>
+        {/* GitHub URL */}
+        <div className="flex justify-center">
+          <input
+            placeholder="URL"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={githubURL}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Company Name */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Company Name"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={companyName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="flex justify-center">
+          <input
+            placeholder="Email Address"
+            type="email"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Contract Name (Manual Input) */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Contract Name"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={contractName}
+            onChange={handleInputChange}
+          />
+        </div>
+      </>
+    )}
+
+    {selectedSource === "upload" && (
+      <>
+        {/* File Upload */}
+        <div className="flex justify-center">
+          <input
+            type="file"
+            accept=".sol"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Company Name */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Company Name"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={companyName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="flex justify-center">
+          <input
+            placeholder="Email Address"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* Contract Name (Manual Input) */}
+        <div className="flex justify-center">
+          <input
+            placeholder="Contract Name"
+            className="lg:w-5/12 w-8/12 text-xl font-light bg-[#3a3688] backdrop-filter backdrop-blur-lg
+            shadow-2xl bg-opacity-10 rounded-2xl px-4 my-4 py-3 dark:text-gray-200 text-gray-800"
+            value={contractName}
+            onChange={handleInputChange}
+          />
+        </div>
+      </>
+    )}
+  </div>
+  <div className="flex justify-center text-black text-xl py-4">
+    {authRequired && !isVerified ? (
+      <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-transparent p-6 rounded-lg shadow-lg lg:w-8/12 w-11/12 relative">
+          <OTPVerification
+            onSuccess={handleOTPVerificationSuccess}
+            OTPemail={email}
+            onClose={closeOTPModal} // This should be a function to close the component
+            theme="dark" // or "light", depending on the desired theme
+          />
+        </div>
+      </div>
+    ) : (
+      <button
+        className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 hover:scale-105
+      transform transition disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={openOTPModal}
+        disabled={loading}
+      >
+        {loading ? "Fetching..." : "Get Audit Report"}
+      </button>
+    )}
+  </div>
+  {error && (
+    <div className="flex justify-center text-red-500">
+      <p>{error}</p>
+    </div>
+  )}
+  {successMessage && (
+    <div className="flex justify-center text-green-500">
+      <p>{successMessage}</p>
+    </div>
+  )}
+  <div className="z-50">
+    <BlockchainModal
+      isOpen={isModalOpen}
+      onClose={closeModal}
+      onSelect={handleSelectBlockchain}
+    />
+  </div>
+  <div></div>
+</div>
+
+    
   );
 };
 
