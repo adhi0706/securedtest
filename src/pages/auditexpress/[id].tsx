@@ -14,7 +14,7 @@ import Footer from '../../components/footer/footer';
 import { ClipLoader } from 'react-spinners';
 import { AiFillThunderbolt, AiOutlineCode } from "react-icons/ai"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaGithub, FaUpload } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin, FaTelegram, FaTwitter, FaUpload, FaWhatsapp } from 'react-icons/fa';
 
 // Import blockchain logos (ensure these paths are correct)
 import ethereum from "../../AuditExpress/assets/chains/ethereum.png";
@@ -34,6 +34,7 @@ import RequestQuoteModal from '../../components/modal/RequestQuoteModal';
 import { useDispatch } from 'react-redux';
 import { setIsRequestModalOpen } from '../../redux/slices/main/homeSlice';
 import Navbar from '../../AuditExpress/components/Navbar';
+import Head from 'next/head';
 
 // Updated Type Definitions
 type Vulnerability = {
@@ -85,6 +86,7 @@ const blockchainLogos = {
 const ScanPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id);
   const [textColor, setTextColor] = useState(localStorage.getItem('theme') === "dark" ? "#ffffff" : "#000000");
 
   useEffect(() => {
@@ -243,7 +245,7 @@ const ScanPage: React.FC = () => {
     }
   }, [scanDetails, controls]);
 
-  if (loading) {
+  if (router.isReady && !id && loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <ClipLoader color="#1E90FF" size={50} />
@@ -256,13 +258,121 @@ const ScanPage: React.FC = () => {
   }
 
   if (!scanDetails) {
-    return <p className='text-center mt-5'>No details available.</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="#1E90FF" size={50} />
+      </div>
+    )
   }
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io';
+  const pageUrl = `${baseUrl}/auditexpress/${id}`;
+
+  // Share content
+  const title = 'SecureDApp Audit Express Report';
+  const description = 'View detailed security audit report for smart contracts on SecureDApp Audit Express.';
+  const imageUrl = `${baseUrl}/audit-preview.jpg`;
+
+  const handleShare = (platform: String) => {
+    // Encode components for URL safety
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const encodedTitle = encodeURIComponent(title);
+    const encodedDescription = encodeURIComponent(description);
+
+    let shareUrl: String;
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}: ${encodedDescription}`;
+        break;
+      case 'discord':
+        // Copy to clipboard for Discord since it doesn't support direct sharing
+        const discordMessage = `${title} - ${description}\n${pageUrl}`;
+        navigator.clipboard.writeText(discordMessage);
+        alert('Link copied to clipboard! You can now paste it in Discord.');
+        return;
+        case 'linkedin':
+          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}&source=${encodedUrl}`;
+          break;
+      case 'telegram':
+        shareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle} - ${encodedDescription}`;
+        break;
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${encodedTitle} - ${encodedDescription} ${encodedUrl}`;
+        break;
+      default:
+        return;
+    }
+    // Open in a new tab with proper sizing
+    const width = 600;
+    const height = 400;
+    const left = window.innerWidth / 2 - width / 2;
+    const top = window.innerHeight / 2 - height / 2;
+
+    window.open(
+      shareUrl,
+      '_blank',
+      `width=${width},height=${height},left=${left},top=${top},location=no,menubar=no`
+    );
+  };
 
   return (
     <div className="container mx-auto p-4 dark:bg-[#001938] text-white min-h-screen flex flex-col">
+      <Head>
+        {/* Essential Meta Tags */}
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        {/* Open Graph Meta Tags for social sharing */}
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={imageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl} />
+      </Head>
       <Navbar />
       <div className="pt-32 font-poppins-regular dark:text-white text-black" id="poppins">
+        <div className="flex justify-end font-poppins-semibold items-center mx-40 mb-10 gap-6">
+          <p className='text-green-500 text-xl'>Share Your Report in Socials</p>
+          <button
+            onClick={() => handleShare('twitter')}
+            aria-label="Share on Twitter"
+            className="transition-transform hover:scale-110"
+          >
+            <FaTwitter className="text-3xl text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('discord')}
+            aria-label="Share on Discord"
+            className="transition-transform hover:scale-110"
+          >
+            <FaDiscord className="text-3xl text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('linkedin')}
+            aria-label="Share on LinkedIn"
+            className="transition-transform hover:scale-110"
+          >
+            <FaLinkedin className="text-3xl text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('telegram')}
+            aria-label="Share on Telegram"
+            className="transition-transform hover:scale-110"
+          >
+            <FaTelegram className="text-3xl text-white hover:text-green-500" />
+          </button>
+          {/* <button
+            onClick={() => handleShare('whatsapp')}
+            aria-label="Share on Telegram"
+            className="transition-transform hover:scale-110"
+          >
+            <FaWhatsapp className="text-3xl text-green-500 hover:text-green-600" />
+          </button> */}
+        </div>
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
             <h1 className='dark:text-white text-black'>
@@ -292,7 +402,7 @@ const ScanPage: React.FC = () => {
         </p>
       </div>
       <div id='poppins-regular'>
-      <p className="text-center lg:px-10 px-10 text-balance dark:text-white text-black">
+        <p className="text-center lg:px-10 px-10 text-balance dark:text-white text-black">
           Audit Express is a cutting-edge smart contract auditing tool designed to provide developers with a quick and easy assessment of their project's security. Developed by SecureDApp, Audit Express leverages advanced algorithms to identify potential vulnerabilities and bugs within smart contracts. Audit Express gives a clear and concise security score to gain a rapid understanding of your project's vulnerability profile.
         </p>
       </div>
@@ -424,8 +534,8 @@ const ScanPage: React.FC = () => {
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
           </div>
           <div className='flex items-center'>
-              <AiOutlineCode className='text-white-500 size-14'/>
-            </div>
+            <AiOutlineCode className='text-white-500 size-14' />
+          </div>
         </div>
       </div>
 
@@ -518,13 +628,13 @@ const ScanPage: React.FC = () => {
       {/* View Audit Report PDF Button */}
       <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10 dark:text-white text-black'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-        <button
-        onClick={() => dispatch(setIsRequestModalOpen(true))}
-        className="text-xl  sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
-        id="poppins-bold"
-      >
-        Get Detailed Report
-      </button>
+          <button
+            onClick={() => dispatch(setIsRequestModalOpen(true))}
+            className="text-xl  sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
+            id="poppins-bold"
+          >
+            Get Detailed Report
+          </button>
 
         </div>
       </div>
@@ -532,9 +642,9 @@ const ScanPage: React.FC = () => {
       {/* Sales and Footer */}
       <Sales />
       <div className='dark:text-white text-black'>
-      <Footer />
+        <Footer />
       </div>
-      <RequestQuoteModal/>
+      <RequestQuoteModal />
     </div>
   );
 };
