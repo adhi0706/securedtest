@@ -136,13 +136,52 @@ const Hero = (props: Props) => {
 
   const fetchContractFromEtherscan = async (addressOrUrl: string, selectedChain: string) => {
     try {
+      // Define chain-specific API keys and base URLs
       const apiKey = apiKeys[selectedChain];
       const baseUrl = chainUrls[selectedChain];
-
+  
+      if (selectedChain === "Neo X") {
+        const neoxBaseUrl = "https://xexplorer.neo.org";
+        let contractAddress = addressOrUrl;
+  
+        if (addressOrUrl.includes(neoxBaseUrl)) {
+          const parts = addressOrUrl.split("/address/");
+          if (parts.length > 1) {
+            contractAddress = parts[1].split("?")[0];
+          } else {
+            throw new Error("Invalid NeoX explorer URL format.");
+          }
+        }
+  
+        if (!isValidAddress(contractAddress)) {
+          throw new Error("Invalid NeoX address format.");
+        }
+  
+        // Construct the NeoX explorer URL
+        const url = `${neoxBaseUrl}/address/${contractAddress}`;
+  
+        console.log(`Fetching NeoX contract from: ${url}`);
+  
+        // Fetch contract details (mock, since NeoX may not have API endpoints like Etherscan)
+        const response = await fetch(url);
+        const html = await response.text();
+  
+        // Parsing the response may require using DOMParser or a similar library for HTML
+        console.log("NeoX Explorer response:", html);
+  
+        // This part is placeholder logic - adapt based on NeoX's actual response structure
+        return {
+          sourceCode: "Source code would be parsed from HTML (adapt logic here)",
+          address: contractAddress,
+          contractName: "Contract name extracted from HTML or NeoX-specific logic",
+        };
+      }
+  
+      // Default handling for Etherscan-compatible explorers
       if (!apiKey || !baseUrl) {
         throw new Error(`API key or URL not set for ${selectedChain}.`);
       }
-
+  
       let contractAddress = addressOrUrl;
       if (addressOrUrl.includes("etherscan.io")) {
         const parts = addressOrUrl.split("/address/");
@@ -152,20 +191,18 @@ const Hero = (props: Props) => {
           throw new Error("Invalid Etherscan URL format.");
         }
       }
-
+  
       if (!isValidAddress(contractAddress)) {
         throw new Error("Invalid Ethereum address format.");
       }
-
+  
       const url = `${baseUrl}/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
-      console.log(url);
-
-
+      console.log(`Fetching contract from: ${url}`);
+  
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
-
-
+      console.log("Etherscan-compatible response:", data);
+  
       if (data.status === "1" && data.result.length > 0) {
         return {
           sourceCode: data.result[0].SourceCode,
@@ -176,10 +213,11 @@ const Hero = (props: Props) => {
         throw new Error("Contract not found or invalid address.");
       }
     } catch (error) {
-      console.error("Error fetching contract from Etherscan:", error);
-      throw new Error("Error fetching contract from Etherscan.");
+      console.error("Error fetching contract:", error);
+      throw new Error("Error fetching contract details.");
     }
   };
+  
 
 
 

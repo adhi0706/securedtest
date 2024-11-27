@@ -15,6 +15,7 @@ import astarLogo from '../../assets/chains/astar.png';
 import celoLogo from '../../assets/chains/celo.png';
 import fireLogo from '../../assets/chains/firechain_light.png';
 import polygonLogo from '../../assets/chains/polygon.png';
+import NeoXLogo from '../../assets/chains/NeoX.png';
 
 type BlockchainSelectionProps = {
   blockchainName: string;
@@ -36,6 +37,7 @@ const blockchainData = [
   { id: 10, name: 'Linea', icon: lineaLogo, description: 'Linea is a zkEVM rollup network that makes Ethereum secure, scalable, and decentralized.' },
   { id: 11, name: 'Astar', icon: astarLogo, description: 'Astar Network supports building dApps with EVM and WASM smart contracts and offers the best technology solutions.' },
   { id: 12, name: 'Celo', icon: celoLogo, description: 'Celo is a carbon-negative blockchain optimized for mobile and is focused on low-cost transactions.' },
+  { id: 13, name: 'Neo X', icon: NeoXLogo, description: 'Neo X is an EVM-compatible sidechain creating a bridge between Neo N3 and the widely adopted EVM network.' },
   // { id: 13, name: '5ireChain', icon: fireLogo, description: '5ireChain is a sustainable blockchain focused on sustainability, security, and scalability.' },
 ];
 

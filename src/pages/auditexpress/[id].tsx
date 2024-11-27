@@ -30,6 +30,7 @@ import Astar from "../../AuditExpress/assets/chains/astar.png";
 import Celo from "../../AuditExpress/assets/chains/celo.png";
 import fire from "../../AuditExpress/assets/chains/firechain_light.png";
 import Polygon from "../../AuditExpress/assets/chains/polygon.png";
+import Neox from "../../AuditExpress/assets/chains/NeoX.png";
 import RequestQuoteModal from '../../components/modal/RequestQuoteModal';
 import { useDispatch } from 'react-redux';
 import { setIsRequestModalOpen } from '../../redux/slices/main/homeSlice';
@@ -81,6 +82,7 @@ const blockchainLogos = {
   Celo: Celo,
   FireChain: fire,
   Polygon: Polygon,
+  NeoX: Neox,
 };
 
 const ScanPage: React.FC = () => {
@@ -335,44 +337,6 @@ const ScanPage: React.FC = () => {
       </Head>
       <Navbar />
       <div className="pt-32 font-poppins-regular dark:text-white text-black" id="poppins">
-        <div className="flex justify-end font-poppins-semibold items-center mx-40 mb-10 gap-6">
-          <p className='text-green-500 text-xl'>Share Your Report in Socials</p>
-          <button
-            onClick={() => handleShare('twitter')}
-            aria-label="Share on Twitter"
-            className="transition-transform hover:scale-110"
-          >
-            <FaTwitter className="text-3xl text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('discord')}
-            aria-label="Share on Discord"
-            className="transition-transform hover:scale-110"
-          >
-            <FaDiscord className="text-3xl text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('linkedin')}
-            aria-label="Share on LinkedIn"
-            className="transition-transform hover:scale-110"
-          >
-            <FaLinkedin className="text-3xl text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('telegram')}
-            aria-label="Share on Telegram"
-            className="transition-transform hover:scale-110"
-          >
-            <FaTelegram className="text-3xl text-white hover:text-green-500" />
-          </button>
-          {/* <button
-            onClick={() => handleShare('whatsapp')}
-            aria-label="Share on Telegram"
-            className="transition-transform hover:scale-110"
-          >
-            <FaWhatsapp className="text-3xl text-green-500 hover:text-green-600" />
-          </button> */}
-        </div>
         <div className="flex justify-center">
           <div className="lg:text-4xl text-2xl text-center font-bold lg:flex space-x-3">
             <h1 className='dark:text-white text-black'>
@@ -638,6 +602,44 @@ const ScanPage: React.FC = () => {
 
         </div>
       </div>
+      <div className="flex justify-center font-poppins-bold items-center mx-40 my-10 gap-6">
+          <p className='text-green-500 font-poppins-bold lg:text-3xl text-xl hidden lg:block'>Share Your Report in Socials</p>
+          <button
+            onClick={() => handleShare('twitter')}
+            aria-label="Share on Twitter"
+            className="transition-transform hover:scale-110"
+          >
+            <FaTwitter className="text-3xl text-black dark:text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('discord')}
+            aria-label="Share on Discord"
+            className="transition-transform hover:scale-110"
+          >
+            <FaDiscord className="text-3xl text-black dark:text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('linkedin')}
+            aria-label="Share on LinkedIn"
+            className="transition-transform hover:scale-110"
+          >
+            <FaLinkedin className="text-3xl text-black dark:text-white hover:text-green-500" />
+          </button>
+          <button
+            onClick={() => handleShare('telegram')}
+            aria-label="Share on Telegram"
+            className="transition-transform hover:scale-110"
+          >
+            <FaTelegram className="text-3xl text-black dark:text-white hover:text-green-500" />
+          </button>
+          {/* <button
+            onClick={() => handleShare('whatsapp')}
+            aria-label="Share on Telegram"
+            className="transition-transform hover:scale-110"
+          >
+            <FaWhatsapp className="text-3xl text-green-500 hover:text-green-600" />
+          </button> */}
+        </div>
 
       {/* Sales and Footer */}
       <Sales />
