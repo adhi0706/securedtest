@@ -292,9 +292,9 @@ const ScanPage: React.FC = () => {
         navigator.clipboard.writeText(discordMessage);
         alert('Link copied to clipboard! You can now paste it in Discord.');
         return;
-        case 'linkedin':
-          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}&source=${encodedUrl}`;
-          break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodedTitle} : ${encodedDescription} - https://securedapp.io/auditexpress/${id}`;
+        break;
       case 'telegram':
         shareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle} - ${encodedDescription}`;
         break;
@@ -603,43 +603,43 @@ const ScanPage: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center font-poppins-bold items-center mx-40 my-10 gap-6">
-          <p className='text-green-500 font-poppins-bold lg:text-3xl text-xl hidden lg:block'>Share Your Report in Socials</p>
-          <button
-            onClick={() => handleShare('twitter')}
-            aria-label="Share on Twitter"
-            className="transition-transform hover:scale-110"
-          >
-            <FaTwitter className="text-3xl text-black dark:text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('discord')}
-            aria-label="Share on Discord"
-            className="transition-transform hover:scale-110"
-          >
-            <FaDiscord className="text-3xl text-black dark:text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('linkedin')}
-            aria-label="Share on LinkedIn"
-            className="transition-transform hover:scale-110"
-          >
-            <FaLinkedin className="text-3xl text-black dark:text-white hover:text-green-500" />
-          </button>
-          <button
-            onClick={() => handleShare('telegram')}
-            aria-label="Share on Telegram"
-            className="transition-transform hover:scale-110"
-          >
-            <FaTelegram className="text-3xl text-black dark:text-white hover:text-green-500" />
-          </button>
-          {/* <button
+        <p className='text-green-500 font-poppins-bold lg:text-3xl text-xl hidden lg:block'>Share Your Report in Socials</p>
+        <button
+          onClick={() => handleShare('twitter')}
+          aria-label="Share on Twitter"
+          className="transition-transform hover:scale-110"
+        >
+          <FaTwitter className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        <button
+          onClick={() => handleShare('discord')}
+          aria-label="Share on Discord"
+          className="transition-transform hover:scale-110"
+        >
+          <FaDiscord className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        <button
+          onClick={() => handleShare('linkedin')}
+          aria-label="Share on LinkedIn"
+          className="transition-transform hover:scale-110"
+        >
+          <FaLinkedin className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        <button
+          onClick={() => handleShare('telegram')}
+          aria-label="Share on Telegram"
+          className="transition-transform hover:scale-110"
+        >
+          <FaTelegram className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        {/* <button
             onClick={() => handleShare('whatsapp')}
             aria-label="Share on Telegram"
             className="transition-transform hover:scale-110"
           >
             <FaWhatsapp className="text-3xl text-green-500 hover:text-green-600" />
           </button> */}
-        </div>
+      </div>
 
       {/* Sales and Footer */}
       <Sales />
