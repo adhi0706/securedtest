@@ -469,6 +469,8 @@ const Hero = (props: Props) => {
         },
         body: JSON.stringify(jsonData),
       });
+      console.log(response);
+      
 
       const endTime = performance.now();
       const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);

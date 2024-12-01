@@ -267,59 +267,122 @@ const ScanPage: React.FC = () => {
     )
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io';
-  const pageUrl = `${baseUrl}/auditexpress/${id}`;
-
-  // Share content
-  const title = 'SecureDApp Audit Express Report';
-  const description = 'View detailed security audit report for smart contracts on SecureDApp Audit Express.';
-  const imageUrl = `${baseUrl}/audit-preview.jpg`;
-
-  const handleShare = (platform: String) => {
-    // Encode components for URL safety
-    const encodedUrl = encodeURIComponent(pageUrl);
-    const encodedTitle = encodeURIComponent(title);
-    const encodedDescription = encodeURIComponent(description);
-
-    let shareUrl: String;
-    switch (platform) {
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}: ${encodedDescription}`;
-        break;
-      case 'discord':
-        // Copy to clipboard for Discord since it doesn't support direct sharing
-        const discordMessage = `${title} - ${description}\n${pageUrl}`;
-        navigator.clipboard.writeText(discordMessage);
-        alert('Link copied to clipboard! You can now paste it in Discord.');
-        return;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodedTitle} : ${encodedDescription} - https://securedapp.io/auditexpress/${id}`;
-        break;
-      case 'telegram':
-        shareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle} - ${encodedDescription}`;
-        break;
-      case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${encodedTitle} - ${encodedDescription} ${encodedUrl}`;
-        break;
-      default:
-        return;
-    }
-    // Open in a new tab with proper sizing
-    const width = 600;
-    const height = 400;
-    const left = window.innerWidth / 2 - width / 2;
-    const top = window.innerHeight / 2 - height / 2;
-
-    window.open(
-      shareUrl,
-      '_blank',
-      `width=${width},height=${height},left=${left},top=${top},location=no,menubar=no`
+  const socialMediaTemplates = {
+    twitter: [
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Just got ${projectName || 'my project'} audited by @secure_DApp! 🔒 Super easy and informative process. Highly recommend! #BlockchainSecurity #SmartContractAudit ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `SecureDApp made auditing ${projectName || 'my project'} a breeze. Check out the results! 🛡️ #CryptoSecurity #DAppAudit @secure_DApp ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `${projectName || 'My project'}'s security is top-notch, thanks to @secure_DApp's comprehensive audit. Check out the results! 🚀 #BlockchainTrust #SecureDevelopment ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Blockchain security matters! Proud to have @secure_DApp audit ${projectName || 'our smart contracts'}. Transparency is key! 🔐 #CyberSecurity #Web3 ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Elevating ${projectName || 'project'} security with @secure_DApp. Professional, thorough, and reliable audit services! 💯 #SmartContractSecurity ${pageUrl}`
+      }
+    ],
+    linkedin: [
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `🔒 Blockchain Security Audit Completed ${projectName ? `for ${projectName}` : 'with SecureDApp'}!
+  
+  Ensuring the highest standards of smart contract security is crucial in the blockchain ecosystem. Our recent audit provides comprehensive insights and peace of mind.
+  
+  Key Highlights:
+  - Thorough security analysis
+  - Detailed report
+  - Expert recommendations
+  
+  Check out the full audit report: ${pageUrl}
+  
+  #BlockchainSecurity #SmartContractAudit #CryptoSecurity #DAppDevelopment @secure_DApp`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `🛡️ Investing in Security: ${projectName ? `${projectName}'s` : 'Our'} Smart Contract Audit Journey
+  
+  In the fast-evolving world of blockchain, security isn't just an option—it's a necessity. We partnered with SecureDApp to ensure our project meets the highest security standards.
+  
+  What we learned:
+  - Vulnerabilities can hide in plain sight
+  - Proactive auditing prevents potential risks
+  - Expert insights are invaluable
+  
+  Full audit details: ${pageUrl}
+  
+  #Web3Security #BlockchainInnovation #TechDueDiligence @secure_DApp`
+      }
+    ]
+  };
+  
+  const getRandomTemplate = (platform: 'twitter' | 'linkedin', projectName?: string) => {
+    const templates = socialMediaTemplates[platform];
+    const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+    return randomTemplate.template(
+      `${process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io'}/auditexpress/${id}`, 
+      projectName
     );
   };
+  
+  const AuditReport = ({ 
+    id, 
+    title, 
+    description, 
+    imageUrl, 
+    projectName 
+  }: {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    projectName?: string;
+  }) => {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io';
+    const pageUrl = `${baseUrl}/auditexpress/${id}`;
+  
+    // State to store randomly selected captions
+    const [twitterCaption, setTwitterCaption] = useState('');
+    const [linkedinCaption, setLinkedinCaption] = useState('');
+  
+    // Regenerate captions on component mount
+    useEffect(() => {
+      setTwitterCaption(getRandomTemplate('twitter', projectName));
+      setLinkedinCaption(getRandomTemplate('linkedin', projectName));
+    }, [id, projectName]);
+  
+    const handleShare = (platform: string) => {
+      switch (platform) {
+        case 'twitter':
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterCaption)}`,
+            '_blank'
+          );
+          break;
+        case 'linkedin':
+          window.open(
+            `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(linkedinCaption)}`,
+            '_blank'
+          );
+          break;
+        case 'discord':
+          navigator.clipboard.writeText(`SecureDApp Audit Report: ${pageUrl}`);
+          alert('Link copied to clipboard! You can now paste it in Discord.');
+          break;
+      }
+    };
 
   return (
     <div className="container mx-auto p-4 dark:bg-[#001938] text-white min-h-screen flex flex-col">
-      <Head>
+       <Head>
         {/* Essential Meta Tags */}
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -330,11 +393,22 @@ const ScanPage: React.FC = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:alt" content="SecureDApp Audit Express Report" />
+
+        {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@secure_DApp" />
+        <meta name="twitter:creator" content="@secure_DApp" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={imageUrl} />
+        <meta name="twitter:image:alt" content="SecureDApp Audit Express Report" />
+
+        {/* Additional SEO and Sharing Improvements */}
+        <link rel="canonical" href={pageUrl} />
+        <meta name="robots" content="index, follow" />
       </Head>
+
       <Navbar />
       <div className="pt-32 font-poppins-regular dark:text-white text-black" id="poppins">
         <div className="flex justify-center">
@@ -609,7 +683,21 @@ const ScanPage: React.FC = () => {
           aria-label="Share on Twitter"
           className="transition-transform hover:scale-110"
         >
-          <FaTwitter className="text-3xl text-black dark:text-white hover:text-green-500" />
+          <svg
+            width="20"
+            height="20"
+            className="text-3xl text-black dark:text-white hover:text-green-500"
+            viewBox="0 0 1200 1227"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+              fill="currentColor"
+            />
+          </svg>
+
+
         </button>
         <button
           onClick={() => handleShare('discord')}
@@ -657,6 +745,7 @@ const getScoreDescription = (score: number): { text: string; color: string; } =>
   if (score >= 75) return { text: 'GOOD', color: 'text-orange-500', }
   if (score >= 60) return { text: 'AVERAGE', color: 'text-yellow-500', };
   return { text: 'POOR', color: 'text-red-500', };
+};
 };
 
 
