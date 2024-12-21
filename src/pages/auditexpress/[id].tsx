@@ -14,7 +14,7 @@ import Footer from '../../components/footer/footer';
 import { ClipLoader } from 'react-spinners';
 import { AiFillThunderbolt, AiOutlineCode } from "react-icons/ai"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaGithub, FaUpload } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin, FaTelegram, FaTwitter, FaUpload, FaWhatsapp } from 'react-icons/fa';
 
 // Import blockchain logos (ensure these paths are correct)
 import ethereum from "../../AuditExpress/assets/chains/ethereum.png";
@@ -30,10 +30,12 @@ import Astar from "../../AuditExpress/assets/chains/astar.png";
 import Celo from "../../AuditExpress/assets/chains/celo.png";
 import fire from "../../AuditExpress/assets/chains/firechain_light.png";
 import Polygon from "../../AuditExpress/assets/chains/polygon.png";
+import Neox from "../../AuditExpress/assets/chains/NeoX.png";
 import RequestQuoteModal from '../../components/modal/RequestQuoteModal';
 import { useDispatch } from 'react-redux';
 import { setIsRequestModalOpen } from '../../redux/slices/main/homeSlice';
 import Navbar from '../../AuditExpress/components/Navbar';
+import Head from 'next/head';
 
 // Updated Type Definitions
 type Vulnerability = {
@@ -80,11 +82,13 @@ const blockchainLogos = {
   Celo: Celo,
   FireChain: fire,
   Polygon: Polygon,
+  NeoX: Neox,
 };
 
 const ScanPage: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id);
   const [textColor, setTextColor] = useState(localStorage.getItem('theme') === "dark" ? "#ffffff" : "#000000");
 
   useEffect(() => {
@@ -243,7 +247,7 @@ const ScanPage: React.FC = () => {
     }
   }, [scanDetails, controls]);
 
-  if (loading) {
+  if (router.isReady && !id && loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <ClipLoader color="#1E90FF" size={50} />
@@ -256,11 +260,155 @@ const ScanPage: React.FC = () => {
   }
 
   if (!scanDetails) {
-    return <p className='text-center mt-5'>No details available.</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="#1E90FF" size={50} />
+      </div>
+    )
   }
+
+  const socialMediaTemplates = {
+    twitter: [
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Just got ${projectName || 'my project'} audited by @secure_DApp! 🔒 Super easy and informative process. Highly recommend! #BlockchainSecurity #SmartContractAudit ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `SecureDApp made auditing ${projectName || 'my project'} a breeze. Check out the results! 🛡️ #CryptoSecurity #DAppAudit @secure_DApp ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `${projectName || 'My project'}'s security is top-notch, thanks to @secure_DApp's comprehensive audit. Check out the results! 🚀 #BlockchainTrust #SecureDevelopment ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Blockchain security matters! Proud to have @secure_DApp audit ${projectName || 'our smart contracts'}. Transparency is key! 🔐 #CyberSecurity #Web3 ${pageUrl}`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `Elevating ${projectName || 'project'} security with @secure_DApp. Professional, thorough, and reliable audit services! 💯 #SmartContractSecurity ${pageUrl}`
+      }
+    ],
+    linkedin: [
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `🔒 Blockchain Security Audit Completed ${projectName ? `for ${projectName}` : 'with SecureDApp'}!
+  
+  Ensuring the highest standards of smart contract security is crucial in the blockchain ecosystem. Our recent audit provides comprehensive insights and peace of mind.
+  
+  Key Highlights:
+  - Thorough security analysis
+  - Detailed report
+  - Expert recommendations
+  
+  Check out the full audit report: ${pageUrl}
+  
+  #BlockchainSecurity #SmartContractAudit #CryptoSecurity #DAppDevelopment @secure_DApp`
+      },
+      {
+        template: (pageUrl: string, projectName?: string) => 
+          `🛡️ Investing in Security: ${projectName ? `${projectName}'s` : 'Our'} Smart Contract Audit Journey
+  
+  In the fast-evolving world of blockchain, security isn't just an option—it's a necessity. We partnered with SecureDApp to ensure our project meets the highest security standards.
+  
+  What we learned:
+  - Vulnerabilities can hide in plain sight
+  - Proactive auditing prevents potential risks
+  - Expert insights are invaluable
+  
+  Full audit details: ${pageUrl}
+  
+  #Web3Security #BlockchainInnovation #TechDueDiligence @secure_DApp`
+      }
+    ]
+  };
+  
+  const getRandomTemplate = (platform: 'twitter' | 'linkedin', projectName?: string) => {
+    const templates = socialMediaTemplates[platform];
+    const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+    return randomTemplate.template(
+      `${process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io'}/auditexpress/${id}`, 
+      projectName
+    );
+  };
+  
+  const AuditReport = ({ 
+    id, 
+    title, 
+    description, 
+    imageUrl, 
+    projectName 
+  }: {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    projectName?: string;
+  }) => {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://securedapp.io';
+    const pageUrl = `${baseUrl}/auditexpress/${id}`;
+  
+    // State to store randomly selected captions
+    const [twitterCaption, setTwitterCaption] = useState('');
+    const [linkedinCaption, setLinkedinCaption] = useState('');
+  
+    // Regenerate captions on component mount
+    useEffect(() => {
+      setTwitterCaption(getRandomTemplate('twitter', projectName));
+      setLinkedinCaption(getRandomTemplate('linkedin', projectName));
+    }, [id, projectName]);
+  
+    const handleShare = (platform: string) => {
+      switch (platform) {
+        case 'twitter':
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterCaption)}`,
+            '_blank'
+          );
+          break;
+        case 'linkedin':
+          window.open(
+            `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(linkedinCaption)}`,
+            '_blank'
+          );
+          break;
+        case 'discord':
+          navigator.clipboard.writeText(`SecureDApp Audit Report: ${pageUrl}`);
+          alert('Link copied to clipboard! You can now paste it in Discord.');
+          break;
+      }
+    };
 
   return (
     <div className="container mx-auto p-4 dark:bg-[#001938] text-white min-h-screen flex flex-col">
+       <Head>
+        {/* Essential Meta Tags */}
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        {/* Open Graph Meta Tags for social sharing */}
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:alt" content="SecureDApp Audit Express Report" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@secure_DApp" />
+        <meta name="twitter:creator" content="@secure_DApp" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl} />
+        <meta name="twitter:image:alt" content="SecureDApp Audit Express Report" />
+
+        {/* Additional SEO and Sharing Improvements */}
+        <link rel="canonical" href={pageUrl} />
+        <meta name="robots" content="index, follow" />
+      </Head>
+
       <Navbar />
       <div className="pt-32 font-poppins-regular dark:text-white text-black" id="poppins">
         <div className="flex justify-center">
@@ -292,7 +440,7 @@ const ScanPage: React.FC = () => {
         </p>
       </div>
       <div id='poppins-regular'>
-      <p className="text-center lg:px-10 px-10 text-balance dark:text-white text-black">
+        <p className="text-center lg:px-10 px-10 text-balance dark:text-white text-black">
           Audit Express is a cutting-edge smart contract auditing tool designed to provide developers with a quick and easy assessment of their project's security. Developed by SecureDApp, Audit Express leverages advanced algorithms to identify potential vulnerabilities and bugs within smart contracts. Audit Express gives a clear and concise security score to gain a rapid understanding of your project's vulnerability profile.
         </p>
       </div>
@@ -424,8 +572,8 @@ const ScanPage: React.FC = () => {
             <p className='text-lg sm:text-2xl' id='poppins-normal'>{lineCount}</p>
           </div>
           <div className='flex items-center'>
-              <AiOutlineCode className='text-white-500 size-14'/>
-            </div>
+            <AiOutlineCode className='text-white-500 size-14' />
+          </div>
         </div>
       </div>
 
@@ -518,23 +666,75 @@ const ScanPage: React.FC = () => {
       {/* View Audit Report PDF Button */}
       <div className='flex justify-center my-5 sm:my-10 px-4 sm:px-10 dark:text-white text-black'>
         <div className='flex justify-center border border-green-500 hover:scale-105 transform transition duration-150 ease-in-out rounded-3xl w-full sm:w-8/12 lg:w-4/12 shadow-2xl shadow-green-800 backdrop:opacity-15'>
-        <button
-        onClick={() => dispatch(setIsRequestModalOpen(true))}
-        className="text-xl  sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
-        id="poppins-bold"
-      >
-        Get Detailed Report
-      </button>
+          <button
+            onClick={() => dispatch(setIsRequestModalOpen(true))}
+            className="text-xl  sm:text-3xl text-green-500 px-4 sm:px-6 py-3 sm:py-5"
+            id="poppins-bold"
+          >
+            Get Detailed Report
+          </button>
 
         </div>
+      </div>
+      <div className="flex justify-center font-poppins-bold items-center mx-40 my-10 gap-6">
+        <p className='text-green-500 font-poppins-bold lg:text-3xl text-xl hidden lg:block'>Share Your Report in Socials</p>
+        <button
+          onClick={() => handleShare('twitter')}
+          aria-label="Share on Twitter"
+          className="transition-transform hover:scale-110"
+        >
+          <svg
+            width="20"
+            height="20"
+            className="text-3xl text-black dark:text-white hover:text-green-500"
+            viewBox="0 0 1200 1227"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+              fill="currentColor"
+            />
+          </svg>
+
+
+        </button>
+        <button
+          onClick={() => handleShare('discord')}
+          aria-label="Share on Discord"
+          className="transition-transform hover:scale-110"
+        >
+          <FaDiscord className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        <button
+          onClick={() => handleShare('linkedin')}
+          aria-label="Share on LinkedIn"
+          className="transition-transform hover:scale-110"
+        >
+          <FaLinkedin className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        <button
+          onClick={() => handleShare('telegram')}
+          aria-label="Share on Telegram"
+          className="transition-transform hover:scale-110"
+        >
+          <FaTelegram className="text-3xl text-black dark:text-white hover:text-green-500" />
+        </button>
+        {/* <button
+            onClick={() => handleShare('whatsapp')}
+            aria-label="Share on Telegram"
+            className="transition-transform hover:scale-110"
+          >
+            <FaWhatsapp className="text-3xl text-green-500 hover:text-green-600" />
+          </button> */}
       </div>
 
       {/* Sales and Footer */}
       <Sales />
       <div className='dark:text-white text-black'>
-      <Footer />
+        <Footer />
       </div>
-      <RequestQuoteModal/>
+      <RequestQuoteModal />
     </div>
   );
 };
@@ -545,6 +745,7 @@ const getScoreDescription = (score: number): { text: string; color: string; } =>
   if (score >= 75) return { text: 'GOOD', color: 'text-orange-500', }
   if (score >= 60) return { text: 'AVERAGE', color: 'text-yellow-500', };
   return { text: 'POOR', color: 'text-red-500', };
+};
 };
 
 

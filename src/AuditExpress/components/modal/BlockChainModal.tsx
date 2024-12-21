@@ -13,7 +13,8 @@ import Astar from '../../assets/chains/astar.png';
 import Celo from '../../assets/chains/celo.png';
 import fire from '../../assets/chains/firechain_light.png';
 import Polygon from '../../assets/chains/polygon.png';
-import BlockchainSelection from './BlockChainSelection'; // Import the selection component
+import BlockchainSelection from './BlockChainSelection';
+import NeoX from "../../assets/chains/NeoX.png";
 
 type BlockchainModalProps = {
     isOpen: boolean;
@@ -34,6 +35,7 @@ const blockchainIcons = [
     { id: 10, name: 'Linea', icon: Linea },
     { id: 11, name: 'Celo', icon: Celo },
     { id: 12, name: 'Astar', icon: Astar },
+    { id: 13, name: 'Neo X', icon: NeoX },
     // { id: 13, name: '5ireChain', icon: fire },
 ];
 
@@ -81,16 +83,33 @@ const BlockchainModal: React.FC<BlockchainModalProps> = ({ isOpen, onClose, onSe
                                 className="flex flex-col items-center cursor-pointer group"
                                 onClick={() => setSelectedBlockchain(blockchain.name)}
                             >
-                                <div className="m-3 p-2 rounded-full bg-gray-200 bg-opacity-20 transition transform group-hover:scale-105">
+                                <div
+                                    className="m-3 p-2 rounded-full bg-gray-200 bg-opacity-20 transition transform group-hover:scale-105"
+                                    style={{
+                                        width: '70px', // Ensure consistent size
+                                        height: '70px', // Ensure consistent size
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
                                     <Image
                                         src={blockchain.icon}
                                         alt={blockchain.name}
                                         width={50}
                                         height={50}
+                                        className="rounded-full"
+                                        style={{
+                                            width: '50px', // Set explicit width for images
+                                            height: '50px', // Set explicit height for images
+                                            objectFit: 'contain', // Ensure images fill their container proportionally
+                                            borderRadius: '50%', // Ensure rounded appearance
+                                        }}
                                     />
                                 </div>
                                 <span className="text-sm text-white mt-2">{blockchain.name}</span>
                             </div>
+
                         ))
                     ) : (
                         <p className="col-span-full text-center text-gray-400">No blockchains found.</p>

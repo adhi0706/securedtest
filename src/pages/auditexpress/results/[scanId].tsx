@@ -4,6 +4,8 @@ import ScanPage from './Scanpage'; // Adjust the path to where your ScanPage com
 const ScanResultPage = () => {
   const router = useRouter();
   const { scanId, score, vulnerabilityCount, lines, duration } = router.query;
+  console.log(scanId);
+  
   console.log(lines);
   
 
@@ -12,7 +14,7 @@ const ScanResultPage = () => {
 
   // If score or parsedVulnerabilityCount is not available, you may want to handle it (e.g., show loading state or error)
   if (!score || !parsedVulnerabilityCount) {
-    return <div>Loading...</div>; // Or some loading/error UI
+    return <div>Loading...</div>;
   }
 
   // Construct resultData based on parsed query parameters
