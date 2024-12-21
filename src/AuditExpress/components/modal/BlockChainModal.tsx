@@ -14,7 +14,7 @@ import Celo from '../../assets/chains/celo.png';
 import fire from '../../assets/chains/firechain_light.png';
 import Polygon from '../../assets/chains/polygon.png';
 import BlockchainSelection from './BlockChainSelection';
-import NeoX from "../../assets/chains/Neox.png";
+import NeoX from "../../assets/chains/NeoX.png";
 
 type BlockchainModalProps = {
     isOpen: boolean;
