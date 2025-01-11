@@ -120,3 +120,7 @@ h2 {
 .card-read-more {
   @apply cursor-pointer font-light text-sm pt-6 flex justify-end items-center;
 }
+
+.author-box {
+  @apply bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark;
+}

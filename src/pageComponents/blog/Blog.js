@@ -53,7 +53,7 @@ function Blog() {
 
     if (searchText.length > 0) {
       filteredBlogs = filteredBlogs.filter((a) =>
-        a.content.toLowerCase().includes(searchText.toLowerCase())
+        JSON.stringify(a).toLowerCase().includes(searchText.toLowerCase())
       );
     }
 

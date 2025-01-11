@@ -22,6 +22,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { blogsData as fullData } from "../../pageComponents/blog/blog-data";
+import { authorsData } from "../../pageComponents/authors/authors.data";
+
+const isLargeScreen = typeof window !== "undefined" && window.innerWidth > 960;
 
 const renderContent = (blogData) => {
   const filteredBlog = blogData;
@@ -157,9 +160,14 @@ export default function BlogPost() {
       tags: blog.tags,
       Date: dateObj,
       Publisher: {
-        name: "Lance Bogrol",
-        image: "",
+        name: blog.author
+          ? authorsData.find((e) => e.to === blog.author).name
+          : "SecureDapp",
+        image: blog.author
+          ? authorsData.find((e) => e.to === blog.author).image
+          : "",
       },
+      author: blog.author,
       Index: extractHeadings(blog.content),
       Summary: preview,
       Content: renderContent(blog),
@@ -420,6 +428,34 @@ export default function BlogPost() {
               />
             </div>
           </div>
+          {blogDetails.author && (
+            <div
+              style={{
+                width: isLargeScreen ? "50%" : "90%",
+                margin: "0 auto",
+                padding: "20px",
+              }}
+              className="author-box"
+            >
+              <h3 style={{ fontWeight: "800", fontSize: "20px" }}>
+                {authorsData.find((e) => e.to === blogDetails.author).name}
+              </h3>
+              <br />
+              <p>
+                {
+                  authorsData.find((e) => e.to === blogDetails.author)
+                    .details[0].info
+                }
+              </p>
+              <br />
+              <p>
+                {
+                  authorsData.find((e) => e.to === blogDetails.author)
+                    .details[1].info
+                }
+              </p>
+            </div>
+          )}
           <div className="py-6 px-4 lg:px-32">
             <CustomHr />
           </div>
