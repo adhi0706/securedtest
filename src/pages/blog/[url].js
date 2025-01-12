@@ -307,7 +307,14 @@ export default function BlogPost() {
               <div className="publisher">
                 <div className="publisher-details">
                   <div className="publisher-profile">
-                    <div className="publisher-image">
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() =>
+                        blogDetails.author &&
+                        router.push("/authors/" + blogDetails.author)
+                      }
+                      className="publisher-image"
+                    >
                       {blogDetails.Publisher.image && (
                         <img
                           layout="intrinsic"
@@ -437,7 +444,14 @@ export default function BlogPost() {
               }}
               className="author-box"
             >
-              <h3 style={{ fontWeight: "800", fontSize: "20px" }}>
+              <h3
+                onClick={() => router.push("/authors/" + blogDetails.author)}
+                style={{
+                  fontWeight: "800",
+                  fontSize: "20px",
+                  cursor: "pointer",
+                }}
+              >
                 {authorsData.find((e) => e.to === blogDetails.author).name}
               </h3>
               <br />

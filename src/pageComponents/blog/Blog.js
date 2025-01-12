@@ -16,15 +16,19 @@ import {
 import BlogTag from "../../components/blog/BlogTag";
 import MetaTags from "../../components/common/MetaTags";
 import { getBlogs } from "../../SolidityShield/functions";
+import { useRouter } from "next/router";
 
-function Blog() {
+function Blog({ category }) {
   if (typeof window !== "undefined") {
     typeof window !== "undefined" && window.scrollTo(0, 0);
   }
+
+  const navigate = useRouter();
+
   const [blogs, setBlogs] = useState([]);
   const [originalBlogs, setOriginalBlogs] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [selectedTag, setSelectedTags] = useState("");
+  const [selectedTag, setSelectedTags] = useState(category);
 
   // async function getBlogs() {
   //   const response = await fetch("https://139-59-5-56.nip.io:3443/getBlogList");
@@ -57,7 +61,7 @@ function Blog() {
       );
     }
 
-    if (selectedTag !== "All") {
+    if (selectedTag !== "all") {
       filteredBlogs = filteredBlogs.filter((a) =>
         a.tags.toLowerCase().includes(selectedTag.toLowerCase())
       );
@@ -71,11 +75,7 @@ function Blog() {
   };
 
   const toggleTagClick = (tag) => {
-    if (tag === selectedTag) {
-      setSelectedTags("");
-    } else {
-      setSelectedTags(tag);
-    }
+    navigate.push("/blog/category/" + tag);
   };
 
   // Pagination state

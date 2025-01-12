@@ -828,6 +828,6 @@ const blogsData = [
   },
 ];
 
-const tags = ["Token", "Legal", "Blockchain", "Web3", "Finance"];
+const tags = ["token", "legal", "blockchain", "web3", "finance"];
 
 export { blogsData, tags };
