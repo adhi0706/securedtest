@@ -892,8 +892,8 @@ const fetchContractSourceCode = async (contractAddress, _chain) => {
   try {
     const chain_list = {
       0: "https://api.etherscan.io/api",
-      1: "https://api-sepolia.etherscan.io/api",
-      2: "https://api.polygonscan.com/api",
+      2: "https://api-sepolia.etherscan.io/api",
+      1: "https://api.polygonscan.com/api",
       3: "https://api-amoy.polygonscan.com/api",
     };
 
