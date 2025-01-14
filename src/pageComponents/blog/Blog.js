@@ -45,9 +45,7 @@ function Blog({ category }) {
     async function fetch() {
       var data = await getBlogs();
       setOriginalBlogs(data);
-      setBlogs(
-        data.sort((a, b) => new Date(b.createdon) - new Date(a.createdon))
-      );
+      setBlogs(data.sort((a, b) => new Date(b.date) - new Date(a.date)));
     }
     fetch();
   }, []);

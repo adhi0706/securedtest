@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 function BlogCard({ details, isMedia = false }) {
   const navigate = useRouter();
-  var dateObj = new Date(details.createdon);
+  var dateObj = new Date(details.date);
 
   const dateOptions = { month: "long", day: "numeric" };
   var dateObj = dateObj.toLocaleDateString("en-US", dateOptions);
@@ -38,10 +38,8 @@ function BlogCard({ details, isMedia = false }) {
       }}
     >
       <div className="blog-card-header">
-        {details.createdon ? (
+        {details.date ? (
           <div className="blog-card-header-date">{dateObj}</div>
-        ) : details.date ? (
-          <div className="blog-card-header-date">{details.date}</div>
         ) : (
           ""
         )}

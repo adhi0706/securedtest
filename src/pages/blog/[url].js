@@ -140,7 +140,7 @@ export default function BlogPost() {
     }
 
     const dateOptions = { year: "numeric", month: "long", day: "numeric" };
-    var dateObj = new Date(blog.createdon);
+    var dateObj = new Date(blog.date);
     var dateObj = dateObj.toLocaleDateString("en-US", dateOptions);
     var updatedDateObj = new Date(blog.modifiedon);
     var updatedDateObj = updatedDateObj.toLocaleDateString(
