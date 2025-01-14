@@ -21,7 +21,13 @@ const AuthorCard = ({
     <div className="authors-card-container">
       <div className="authors-card">
         <div className="authors-card-image">
-          <img layout="intrinsic" src={image} alt={name} />
+          <img
+            style={{ borderRadius: "50%" }}
+            width="150px"
+            layout="intrinsic"
+            src={image}
+            alt={name}
+          />
         </div>
         <div className="authors-card-name">{name}</div>
         <div className="authors-card-details">

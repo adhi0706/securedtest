@@ -1,7 +1,7 @@
 export const authorsData = [
   {
     to: "aryaman-tiwari",
-    image: "/assets/images/team/aryaman.png",
+    image: "/assets/images/authors/aryaman.png",
     name: "Aryaman Tiwari",
     designation: "Legal Manager and Content Writer",
     twitter: "https://x.com/at_aryaman",
