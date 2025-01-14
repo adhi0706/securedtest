@@ -139,9 +139,14 @@ export default function BlogPost() {
       return;
     }
 
-    var dateObj = new Date(blog.modifiedon);
     const dateOptions = { year: "numeric", month: "long", day: "numeric" };
+    var dateObj = new Date(blog.createdon);
     var dateObj = dateObj.toLocaleDateString("en-US", dateOptions);
+    var updatedDateObj = new Date(blog.modifiedon);
+    var updatedDateObj = updatedDateObj.toLocaleDateString(
+      "en-US",
+      dateOptions
+    );
 
     var preview;
     preview = blog.content.replaceAll("[", " ");
@@ -159,6 +164,7 @@ export default function BlogPost() {
       image: blog.image,
       tags: blog.tags,
       Date: dateObj,
+      Updated: updatedDateObj,
       Publisher: {
         name: blog.author
           ? authorsData.find((e) => e.to === blog.author).name
@@ -325,7 +331,8 @@ export default function BlogPost() {
                     </div>
                     <div>
                       <div>{blogDetails.Publisher.name}</div>
-                      <div>{`Published on ${blogDetails.Date}`}</div>
+                      <div>{`Published on : ${blogDetails.Date}`}</div>
+                      <div>{`Updated on : ${blogDetails.Updated}`}</div>
                     </div>
                   </div>
                   <div className="publisher-socials">

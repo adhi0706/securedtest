@@ -46,7 +46,7 @@ function Blog({ category }) {
       var data = await getBlogs();
       setOriginalBlogs(data);
       setBlogs(
-        data.sort((a, b) => new Date(b.modifiedon) - new Date(a.modifiedon))
+        data.sort((a, b) => new Date(b.createdon) - new Date(a.createdon))
       );
     }
     fetch();
