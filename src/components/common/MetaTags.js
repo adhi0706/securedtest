@@ -106,6 +106,10 @@ const MetaTags = ({ data }) => {
         <title>{data.title}</title>
         <meta name="author" content="SecureDapp" />
         <meta name="theme-color" content="#000000" />
+
+        {/* Iframe deny */}
+        <meta http-equiv="X-Frame-Options" content="deny" />
+
         <link
           rel="icon"
           type="image/x-icon"

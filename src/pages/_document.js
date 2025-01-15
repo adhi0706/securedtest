@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="author" content="SecureDapp" />
           <meta name="theme-color" content="#000000" />
+          <meta http-equiv="X-Frame-Options" content="deny" />
           <link
             rel="icon"
             type="image/x-icon"
