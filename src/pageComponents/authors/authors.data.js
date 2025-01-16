@@ -1,5 +1,53 @@
 export const authorsData = [
   {
+    to: "aryaman-tiwari",
+    image: "/assets/images/authors/aryaman.png",
+    name: "Aryaman Tiwari",
+    designation: "Legal Manager and Content Writer",
+    twitter: "https://x.com/at_aryaman",
+    linkedin: "https://www.linkedin.com/in/advaryaman007",
+    details: [
+      {
+        title: "Experience",
+        info: "Adv. Aryaman Shirish Tiwari is the Legal Manager and Content Writer at SecureDApp, where he leverages his expertise in blockchain technology and cybersecurity law. With extensive experience in the legal and tech sectors, Aryaman ensures that SecureDApp’s solutions align with regulatory standards while delivering clear, insightful content for businesses navigating digital transformation.",
+      },
+      {
+        title: "Expertise",
+        info: "Aryaman specializes in the legal aspects of blockchain, smart contracts, and Web3 technologies. His ability to simplify complex legal and technical topics makes him an invaluable resource for both legal professionals and blockchain developers, providing guidance on compliance and security in decentralized applications.",
+      },
+      {
+        title: "Authoritativeness",
+        info: "Through his work at SecureDApp, Aryaman has become a trusted authority in blockchain security and legal compliance. His thought leadership helps organizations understand the intersection of technology and law, ensuring their blockchain projects are legally sound and secure.",
+      },
+      {
+        title: "Trustworthiness",
+        info: "Committed to accuracy and transparency, Aryaman is known for delivering well-researched, reliable content. His meticulous approach to legal analysis and focus on cybersecurity ensures clients and readers can trust his guidance in securing their blockchain-based solutions.",
+      },
+    ],
+    expertServices: [
+      {
+        name: "Dapp Development",
+        to: "/crypto-compliance-aml",
+      },
+      {
+        name: "Web3 KYC",
+        to: "/web3-kyc",
+      },
+      {
+        name: "Dapp Security",
+        to: "/dapp-security-audit",
+      },
+      {
+        name: "Web3 Security",
+        to: "/web3-security",
+      },
+      {
+        name: "DeFi Development",
+        to: "/blockchain-forensic",
+      },
+    ],
+  },
+  {
     to: "harshajit",
     image: "/assets/images/authors/harshajit-sarmah.png",
     name: "Mr. Harshajit Sarmah",

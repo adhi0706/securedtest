@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 function BlogCard({ details, isMedia = false }) {
   const navigate = useRouter();
-  var dateObj = new Date(details.modifiedon);
+  var dateObj = new Date(details.date);
 
   const dateOptions = { month: "long", day: "numeric" };
   var dateObj = dateObj.toLocaleDateString("en-US", dateOptions);
@@ -32,15 +32,14 @@ function BlogCard({ details, isMedia = false }) {
       className="blog-card"
       onClick={() => {
         details.url
-          ? navigate.push(`/blog/${details.url}`)
-          : typeof window !== "undefined" && window.open(details.link);
+          ? navigate.push(`/blog/${details.url.replace(":", "")}`)
+          : typeof window !== "undefined" &&
+            window.open(details.link.replace(":", ""));
       }}
     >
       <div className="blog-card-header">
-        {details.modifiedon ? (
+        {details.date ? (
           <div className="blog-card-header-date">{dateObj}</div>
-        ) : details.date ? (
-          <div className="blog-card-header-date">{details.date}</div>
         ) : (
           ""
         )}
