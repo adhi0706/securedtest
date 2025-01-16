@@ -243,7 +243,7 @@ export const scanSubmit = async ({
   let compilerVersion;
   const formData = new FormData();
 
-  if (user.remainingCredits+100 < 1) {
+  if (user.remainingCredits < 1) {
     toast.error("No Credit, Please Purchase a Plan to scan");
     return;
   }
@@ -287,9 +287,6 @@ export const scanSubmit = async ({
     }
   }
   
- 
-  
-
   // Handling Etherscan URL
   if (etherscanUrl && etherscanUrl.length > 0) {
     try {
@@ -328,8 +325,6 @@ export const scanSubmit = async ({
       return;
     }
   }
-
-
 
   // Handling file upload 
   // if (inputTypes.includes("Upload File") && file) {
