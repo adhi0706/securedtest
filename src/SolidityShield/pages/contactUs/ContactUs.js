@@ -3,6 +3,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import AuthInputField from "../../components/auth/AuthInputField";
 import AuthButton from "../../components/auth/AuthButton";
+import Footer from "../../components/common/Footer";
 
 export const AuthInputFieldContainer = ({ label, InputField }) => {
   return (
@@ -139,6 +140,7 @@ const ContactUs = () => {
               Send Message
             </AuthButton>
           </div>
+          <Footer />
         </div>
       </div>
     </div>

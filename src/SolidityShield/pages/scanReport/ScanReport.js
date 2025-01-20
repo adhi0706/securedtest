@@ -9,6 +9,7 @@ import { getUserData } from "../../redux/auth/authSlice";
 import { toast } from "react-toastify";
 import { getScanHistory } from "../../redux/scanHistory/scanHistorySlice";
 import { setLoader } from "../../redux/commonSlice";
+import Footer from "../../components/common/Footer";
 
 const ScanReportBar = ({ type, number, color, width = "100%" }) => {
   return (
@@ -275,6 +276,7 @@ const ScanReport = ({ downloadId }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

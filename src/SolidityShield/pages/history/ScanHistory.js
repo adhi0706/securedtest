@@ -14,6 +14,7 @@ import { scanHistoryDummyData } from "./scanHistory.data";
 import Pagination from "../../components/common/Pagination";
 import { getUserData } from "../../redux/auth/authSlice";
 import { setLoader } from "../../redux/commonSlice";
+import Footer from "../../components/common/Footer";
 
 const scanHistoryStatusFilter = ["Succeeded", "Failed", "Inprogress", "All"];
 
@@ -114,6 +115,7 @@ const ScanHistory = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

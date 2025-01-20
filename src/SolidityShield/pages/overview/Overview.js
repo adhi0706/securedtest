@@ -9,6 +9,7 @@ import { getScanHistoryData, getJwt, getUser } from "../../functions";
 import { getScanHistory } from "../../redux/scanHistory/scanHistorySlice";
 import { setScanNowModal, setLoader } from "../../redux/commonSlice";
 import MetaTags from "../../../components/common/MetaTags";
+import Footer from "../../components/common/Footer";
 
 const OverviewScreen = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ const OverviewScreen = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

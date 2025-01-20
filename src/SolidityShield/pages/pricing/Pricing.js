@@ -18,6 +18,7 @@ import {
 import { getUserData } from "../../redux/auth/authSlice";
 import { useRouter } from "next/router";
 import MetaTags from "../../../components/common/MetaTags";
+import Footer from "../../components/common/Footer";
 
 const PricingPlanCard = ({
   icon,
@@ -249,6 +250,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

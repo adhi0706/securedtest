@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { pricingDetails } from "../pricing/pricing.data";
 import { getUser, getJwt } from "../../functions";
 import { setLoader } from "../../redux/commonSlice";
+import Footer from "../../components/common/Footer";
 
 const BillingScreen = () => {
   const { paymentModal } = useSelector(getPaymentSelector);
@@ -159,6 +160,7 @@ const BillingScreen = () => {
         </div>
          */}
       </div>
+      <Footer />
     </div>
   );
 };

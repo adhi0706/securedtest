@@ -3,6 +3,7 @@ import Image from "next/image";
 import ProfileScreen from "./ProfileScreen";
 import ConnectedAccounts from "./ConnectedAccounts";
 import Notifications from "./Notifications";
+import Footer from "../../components/common/Footer";
 
 const settingsTypes = ["Profile", "Connected Accounts", "Notifications"];
 
@@ -48,6 +49,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
