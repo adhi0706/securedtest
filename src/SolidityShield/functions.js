@@ -123,7 +123,7 @@ export const payCrypto = async ({ planid, email }) => {
         },
       })
         .then(async (response) => {
-          const data = await response.json();
+        const data = await response.json();
           return await fetch(apiUrl + "/payment-insert-web3", {
             method: "POST",
             body: JSON.stringify({
@@ -286,61 +286,130 @@ export const scanSubmit = async ({
       return;
     }
   }
-
+  
   // Handling Etherscan URL
   if (etherscanUrl && etherscanUrl.length > 0) {
     try {
-      const sourceCode = await fetchContractSourceCode(etherscanUrl, chain);
+      const contractDetails = await fetchContractDetails(etherscanUrl, chain);
+
+      if (!contractDetails) {
+        toast.error("Error fetching contract details.");
+        return;
+      }
+
+      const { sourceCode, compilerVersion: fetchedVersion } = contractDetails;
+
+      if (!sourceCode) {
+        toast.error("Failed to fetch contract source code.");
+        return;
+      }
+
       console.log(sourceCode);
+
       const blob = new Blob([sourceCode], { type: "text/plain" });
       const etherscanFile = new File([blob], `${companyName}.sol`, {
         type: "text/plain",
       });
       formData.append("files", etherscanFile);
 
-      compilerVersion = isContractFlattened(sourceCode);
-      if (!compilerVersion) {
+      if (!fetchedVersion) {
         alert("The contract is not flattened.");
         return;
       }
-      console.log("contract processed");
+
+      compilerVersion = fetchedVersion; // Assign the formatted compiler version
+      console.log(`Compiler version: ${compilerVersion}`);
     } catch (error) {
-      toast.error("Error fetching the contract");
+      toast.error("Error fetching the contract.");
       console.error("Etherscan fetch error:", error);
       return;
     }
   }
 
+  // Handling file upload 
+  // if (inputTypes.includes("Upload File") && file) {
+  //   formData.append("files", file);
+  //   if (!file) {
+  //     toast.error("Please select a file.");
+  //     return;
+  //   }
+
+  //   if (!contract) {
+  //     toast.error("No contract file uploaded.");
+  //     return;
+  //   }
+
+  //   if (!isFlattened(contract)) {
+  //     toast.error("The contract must be flattened before submission.");
+  //     return;
+  //   }
+    
+    
+   
+  //   if (!compilerVersion) {
+  //     toast.error("Could not detect the compiler version.");
+  //     return;
+  //   }
+
+  //   console.log(`Compiler version: ${compilerVersion}`);
+  // }
   if (inputTypes.includes("Upload File") && file) {
-    formData.append("files", file);
-    if (!file) {
-      toast.error("Please select a file.");
+    try {
+      // Append the file to formData
+      formData.append("files", file);
+  
+      // Check if a file is uploaded
+      if (!file) {
+        toast.error("Please select a file.");
+        return;
+      }
+  
+      // Read the file content
+      const fileContent = await file.text();
+  
+      // Validate contract content
+      if (!fileContent) {
+        toast.error("No contract file content found.");
+        return;
+      }
+  
+      // Check if the contract is flattened
+      if (!isFlattened(fileContent)) {
+        toast.error("The contract must be flattened before submission.");
+        return;
+      }
+  
+      // Extract compiler version from the file
+      const pragmaMatch = fileContent.match(/pragma\s+solidity\s+[\^~]?(\d+\.\d+\.\d+)/);
+      if (pragmaMatch) {
+        compilerVersion = pragmaMatch[1]; // Extract the version number
+        console.log(`Compiler version extracted: ${compilerVersion}`);
+      } else {
+        toast.error("Could not detect the compiler version in the contract.");
+        return;
+      }
+  
+      // Proceed with the next steps
+      console.log(`Compiler version: ${compilerVersion}`);
+    } catch (error) {
+      toast.error("Error handling the uploaded file.");
+      console.error("File upload error:", error);
       return;
     }
-
-    if (!contract) {
-      toast.error("No contract file uploaded.");
-      return;
-    }
-
-    if (!isFlattened(contract)) {
-      toast.error("The contract must be flattened before submission.");
-      return;
-    }
-
-    compilerVersion = detectCompilerVersion(contract);
-    if (!compilerVersion) {
-      toast.error("Could not detect the compiler version.");
-      return;
-    }
-
-    console.log(`Compiler version: ${compilerVersion}`);
   }
+  
 
   formData.append("mail", user.email);
-  formData.append("version", compilerVersion);
+  formData.append("version", compilerVersion || ""); // Ensure a fallback
   formData.append("company", companyName);
 
+  console.log("Form Data Payload:", {
+    files: formData.get("files"),
+    mail: formData.get("mail"),
+    version: formData.get("version"),
+    company: formData.get("company"),
+
+  });
   return await fetch(apiUrl + "/audits", {
     method: "POST",
     body: formData,
@@ -888,7 +957,9 @@ const detectCompilerVersion = (contracts) => {
   return versions[0];
 };
 
-const fetchContractSourceCode = async (contractAddress, _chain) => {
+
+// to normalize compiler version format:0.x.x
+const fetchContractDetails = async (contractAddress, _chain) => {
   try {
     const chain_list = {
       0: "https://api.etherscan.io/api",
@@ -907,21 +978,49 @@ const fetchContractSourceCode = async (contractAddress, _chain) => {
     const apiUrl = `${chain_list[_chain]}?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${api_list[_chain]}`;
 
     const response = await fetch(apiUrl);
-
     const data = await response.json();
-    // console.log("API resposne = ", response.json());
-    if (data.status == "1" && data.result.length > 0) {
-      return data.result[0].SourceCode;
+
+    if (data.status === "1" && data.result.length > 0) {
+      // Extract the source code
+      const sourceCode = data.result[0].SourceCode;
+
+      // Extract and format the compiler version
+      const compilerVersion = data.result[0].CompilerVersion;
+
+      let formattedVersion = null;
+      if (compilerVersion) {
+        console.log("Original compiler version:", compilerVersion);
+
+        // Extract the version in a `^x.x.x` format
+        const versionMatch = compilerVersion.match(/v?(\d+\.\d+\.\d+)/);
+        if (versionMatch) {
+          formattedVersion = `^${versionMatch[1]}`; // Format as ^0.x.x
+        } else {
+          console.error("Compiler version format is incorrect.");
+        }
+      } else {
+        console.error("Compiler version not found.");
+      }
+
+      // Log the formatted version
+      if (formattedVersion) {
+        console.log("Formatted compiler version:", formattedVersion);
+      }
+
+      // Return both source code and formatted compiler version
+      return { sourceCode, compilerVersion: formattedVersion };
     } else {
-      toast.error("Error fetching source code");
-      return false;
+      toast.error("Error fetching contract details.");
+      return null;
     }
   } catch (error) {
-    toast.error("Error fetching source code");
-    console.error("Error fetching contract source code:", error);
-    return false;
+    toast.error("Error fetching contract details.");
+    console.error("Error fetching contract details:", error);
+    return null;
   }
 };
+
+
 
 export const githuburlfetch = async (repoUrl, companyName) => {
   try {
