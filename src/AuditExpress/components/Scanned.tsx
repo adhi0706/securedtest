@@ -94,17 +94,22 @@ const Scanned = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("https://139-59-5-56.nip.io:3443/getscansAE", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ page }),
-        });
+        const response = await fetch(
+          "https://139-59-5-56.nip.io:3443/getscansAE",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ page }),
+          }
+        );
         console.log("Fetch Response:", response);
 
         if (!response.ok) {
-          throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+          throw new Error(
+            `Failed to fetch: ${response.status} ${response.statusText}`
+          );
         }
 
         const result: ApiResponse = await response.json();
@@ -124,7 +129,10 @@ const Scanned = () => {
         }));
 
         // Sort data by createdAt in descending order (most recent first)
-        formattedData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        formattedData.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
 
         setData(formattedData);
         setTotalPages(result.totalPages || 1);
@@ -140,7 +148,10 @@ const Scanned = () => {
   return (
     <div>
       <div>
-        <h1 className="text-4xl text-center pb-7 text-white lg:mt-20 mt-14" id="poppins-semibold">
+        <h1
+          className="text-4xl text-center pb-7 text-white lg:mt-20 mt-14"
+          id="poppins-semibold"
+        >
           Recent Scanned Contracts
         </h1>
       </div>
@@ -179,10 +190,18 @@ const Scanned = () => {
                             height={40}
                             className="h-8 w-8 object-contain"
                           />
-                        ) : item.contractAddress.startsWith("https://github.com/") ? (
-                          <FontAwesomeIcon icon={faGithub} className="text-white text-3xl" />
+                        ) : item.contractAddress.startsWith(
+                            "https://github.com/"
+                          ) ? (
+                          <FontAwesomeIcon
+                            icon={faGithub}
+                            className="text-white text-3xl"
+                          />
                         ) : (
-                          <FontAwesomeIcon icon={faUpload} className="text-white text-3xl" />
+                          <FontAwesomeIcon
+                            icon={faUpload}
+                            className="text-white text-3xl"
+                          />
                         )}
                       </div>
 
@@ -194,21 +213,17 @@ const Scanned = () => {
                       </div>
                     </td>
 
-
-
-
-
                     <td className="p-3 text-left">{item.companyName}</td>
                     <td className="p-3 text-left">{item.contractName}</td>
                     <td className="p-3 text-left">
-                      {item.contractAddress.startsWith("https://github.com/") ? (
-                        <p href={item.contractAddress} target="_blank">
+                      {item.contractAddress.startsWith(
+                        "https://github.com/"
+                      ) ? (
+                        <a href={item.contractAddress} target="_blank">
                           {item.contractAddress.substring(0, 40) + "..."}
-                        </p>
+                        </a>
                       ) : (
-                        <p>
-                          {item.contractAddress}
-                        </p>
+                        <p>{item.contractAddress}</p>
                       )}
                     </td>
                     <td className="p-3">
@@ -248,16 +263,18 @@ const Scanned = () => {
         <button
           disabled={page === 1}
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 ${page === 1 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 ${
+            page === 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Previous
         </button>
         <button
           disabled={page === totalPages}
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${page === totalPages ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Next
         </button>

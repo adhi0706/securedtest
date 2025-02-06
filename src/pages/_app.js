@@ -75,14 +75,13 @@ function MyApp({ Component, pageProps }) {
     router.asPath.includes("/solidity-shield-scan") &&
     router.asPath !== "/solidity-shield-scan/auth" &&
     router.asPath !== "/solidity-shield-scan/contact";
-    const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-useEffect(() => {
-  setIsClient(true);
-}, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
-if (!isClient) return null; // or some loading state while determining the path
-
+  // if (!isClient) return null; // or some loading state while determining the path
 
   return (
     <>

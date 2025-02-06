@@ -37,4 +37,4 @@ export const calculateSecurityScore = (report: AuditReport): number => {
   return Math.max(0, Math.min(100, scaledScore));
 };
 
-export default calculateSecurityScore;
+// export default calculateSecurityScore;

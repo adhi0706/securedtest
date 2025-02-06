@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
 
 const sendOTP = async ({ email }) => {
@@ -61,8 +61,15 @@ const OTPVerification = ({ onSuccess, OTPemail, onClose }) => {
   };
 
   return (
-    <div id="poppins-regular" className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className={`relative w-full max-w-sm p-6 rounded-lg shadow-lg ${theme === "dark" ? "bg-[#001938] text-white" : "bg-white text-black"}`}>
+    <div
+      id="poppins-regular"
+      className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+    >
+      <div
+        className={`relative w-full max-w-sm p-6 rounded-lg shadow-lg ${
+          theme === "dark" ? "bg-[#001938] text-white" : "bg-white text-black"
+        }`}
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -74,7 +81,9 @@ const OTPVerification = ({ onSuccess, OTPemail, onClose }) => {
         {/* Header */}
         <div className="text-center mb-4">
           <h2 className="text-2xl font-semibold">OTP Verification</h2>
-          <p className="mt-2 text-sm text-gray-500">Enter the OTP sent to your registered email to continue.</p>
+          <p className="mt-2 text-sm text-gray-500">
+            Enter the OTP sent to your registered email to continue.
+          </p>
         </div>
 
         {/* OTP Input Field */}
@@ -86,7 +95,7 @@ const OTPVerification = ({ onSuccess, OTPemail, onClose }) => {
             onChange={(e) => setOtp(e.target.value)}
             className="w-full p-3 mb-4 text-lg text-black border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           />
-          
+
           {/* Submit Button */}
           <button
             onClick={handleSubmitOTP}
