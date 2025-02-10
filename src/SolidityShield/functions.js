@@ -241,6 +241,7 @@ export const scanSubmit = async ({
 }) => {
   let result;
   let compilerVersion;
+  let highestVersion;
   const formData = new FormData();
 
   if (user.remainingCredits < 1) {
@@ -379,28 +380,36 @@ export const scanSubmit = async ({
         return;
       }
   
-      // Extract compiler version from the file
-      const pragmaMatch = fileContent.match(/pragma\s+solidity\s+[\^~]?(\d+\.\d+\.\d+)/);
-      if (pragmaMatch) {
-        compilerVersion = pragmaMatch[1]; // Extract the version number
-        console.log(`Compiler version extracted: ${compilerVersion}`);
-      } else {
-        toast.error("Could not detect the compiler version in the contract.");
+      // Extract all compiler versions from the file
+      const pragmaMatches = [...fileContent.matchAll(/pragma\s+solidity\s+[\^~]?(\d+\.\d+\.\d+)/g)];
+      
+      if (pragmaMatches.length === 0) {
+        toast.error("Could not detect any compiler version in the contract.");
         return;
       }
   
-      // Proceed with the next steps
-      console.log(`Compiler version: ${compilerVersion}`);
+      // Convert versions to comparable format
+      const versions = pragmaMatches.map(match => match[1]);
+      versions.sort((a, b) => {
+        const [majorA, minorA, patchA] = a.split('.').map(Number);
+        const [majorB, minorB, patchB] = b.split('.').map(Number);
+        
+        return majorB - majorA || minorB - minorA || patchB - patchA;
+      });
+  
+      // Highest version found
+       highestVersion = versions[0];
+      console.log(`Highest compiler version extracted: ${highestVersion}`);
+  
     } catch (error) {
       toast.error("Error handling the uploaded file.");
       console.error("File upload error:", error);
       return;
     }
   }
-  
 
   formData.append("mail", user.email);
-  formData.append("version", compilerVersion || ""); // Ensure a fallback
+  formData.append("version", highestVersion || ""); // Ensure a fallback
   formData.append("company", companyName);
 
   console.log("Form Data Payload:", {
