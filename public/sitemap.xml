@@ -439,4 +439,52 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+  <loc>https://securedapp.io/blog/top-security-tools-for-dapp-developers</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/what-is-a-token-audit</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/why-token-audits-are-critical</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/token-standards-explained</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/10-common-vulnerabilities-identified-in-token-audit</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/post-audit-best-practices</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://securedapp.io/blog/how-to-interpret-a-token-audit-report</loc>
+  <lastmod>2024-09-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 </urlset>
