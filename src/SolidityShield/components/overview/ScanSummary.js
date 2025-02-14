@@ -16,6 +16,11 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import CustomButton from "../common/CustomButton";
 import { getScanHistoryData, getScanSummaryData } from "../../functions";
+import {
+  getCommonSelector,
+  setScanNowModal,
+  setSideBar,
+} from "../../redux/commonSlice";
 
 const scanSummaryTimeFilter = ["Monthly", "Weekly", "Today"];
 
@@ -69,7 +74,7 @@ const FigureComponent = ({ value, text, color }) => {
   );
 };
 
-const ScanSummary = () => {
+const ScanSummary = ({ firstTime }) => {
   const { dateFilter, scanSummary } = useSelector(getOverviewSelector);
   const scanHistory = useSelector(getScanHistory);
   const dispatch = useDispatch();
@@ -149,27 +154,43 @@ const ScanSummary = () => {
               </div>
               <div className="sss-scan-summary-body-result">
                 <div className="sss-scan-summary-body-result-title">
-                  Summary
+                  {firstTime ? "No Scan found" : "Summary"}
                 </div>
                 <div className="sss-scan-summary-body-result-description">
-                  {scanSummary.summary}
+                  {firstTime
+                    ? "Start with your first scan now"
+                    : scanSummary.summary}
                 </div>
                 <div className="sss-scan-summary-body-result-button">
-                  <CustomButton
-                    text={"More Details"}
-                    className={
-                      "bg-[#12D576] rounded-3xl text-[#ffffff] py-3 w-[150px] active:bg-white active:border active:border-tertiary active:text-black"
-                    }
-                    onClick={() =>
-                      navigate.push(
-                        `/solidity-shield-scan/report?id=${
-                          scanHistory.history.reduce((max, item) => {
-                            return item.id > max.id ? item : max;
-                          }, scanHistory.history[0]).id
-                        }`
-                      )
-                    }
-                  />
+                  {firstTime ? (
+                    <CustomButton
+                      onClick={() =>
+                        auth.user.email
+                          ? dispatch(setScanNowModal(true))
+                          : navigate.push("/solidity-shield-scan/auth")
+                      }
+                      className={
+                        "w-[100px] sm:w-[125px] px-1 sm:px-3 py-1 sm:py-2 rounded-xl bg-tertiary text-black active:bg-white active:border active:border-tertiary active:text-black"
+                      }
+                      text={"Scan Now"}
+                    />
+                  ) : (
+                    <CustomButton
+                      text={"More Details"}
+                      className={
+                        "bg-[#12D576] rounded-3xl text-[#ffffff] py-3 w-[150px] active:bg-white active:border active:border-tertiary active:text-black"
+                      }
+                      onClick={() =>
+                        navigate.push(
+                          `/solidity-shield-scan/report?id=${
+                            scanHistory.history.reduce((max, item) => {
+                              return item.id > max.id ? item : max;
+                            }, scanHistory.history[0]).id
+                          }`
+                        )
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </div>

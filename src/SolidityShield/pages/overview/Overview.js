@@ -77,7 +77,9 @@ const OverviewScreen = () => {
             </div>
           ) : (
             <div className="sss-overview-top-cards">
-              <ScanSummary />
+              <ScanSummary
+                firstTime={auth.user.credits === auth.user.remainingCredits}
+              />
               <IssuesChart />
             </div>
           )}

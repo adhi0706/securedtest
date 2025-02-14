@@ -3,7 +3,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 const initialScanSummaryState = {
   dateFilter: "Today",
   scanSummary: {
-    percentageValue: 85,
+    percentageValue: 0,
     values: [],
     summary: "",
     id: 0,
