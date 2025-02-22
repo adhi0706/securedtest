@@ -1,5 +1,5 @@
 "use client";
-
+import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
 
@@ -100,83 +100,82 @@ const MetaTags = ({ data }) => {
   };
 
   return (
-    <html>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{data.title}</title>
-        <meta name="author" content="SecureDapp" />
-        <meta name="theme-color" content="#000000" />
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{data.title}</title>
+      <meta name="author" content="SecureDapp" />
+      <meta name="theme-color" content="#000000" />
 
-        {/* Iframe deny */}
-        <meta http-equiv="X-Frame-Options" content="deny" />
+      {/* Iframe deny */}
+      <meta http-equiv="X-Frame-Options" content="deny" />
 
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href="https://securedapp.io/assets/images/logo.png"
+      <link
+        rel="icon"
+        type="image/x-icon"
+        href="https://securedapp.io/assets/images/logo.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        href="https://securedapp.io/assets/images/logo.png"
+      />
+
+      {/* Basic Meta Tags */}
+      {<meta name="description" content={data.desc} />}
+      {<meta name="keywords" content={data.keywords} />}
+
+      {/* Open Graph Meta Tags (for social media) */}
+      {<meta property="og:title" content={data.title} />}
+      {<meta property="og:description" content={data.desc} />}
+      {data.image && (
+        <meta
+          property="og:image"
+          content={
+            data.image.includes("https://")
+              ? data.image
+              : "https://securedapp.io" + data.image
+          }
         />
-        <link
-          rel="apple-touch-icon"
-          href="https://securedapp.io/assets/images/logo.png"
+      )}
+      {<meta property="og:url" content={url} />}
+      {<meta property="og:type" content="website" />}
+
+      {/* Twitter Meta Tags */}
+      {<meta name="twitter:card" content="summary_large_image" />}
+      {<meta name="twitter:title" content={data.title} />}
+      {<meta name="twitter:description" content={data.desc} />}
+      {data.image && (
+        <meta
+          name="twitter:image"
+          content={
+            data.image.includes("https://")
+              ? data.image
+              : "https://securedapp.io" + data.image
+          }
         />
+      )}
 
-        {/* Basic Meta Tags */}
-        {<meta name="description" content={data.desc} />}
-        {<meta name="keywords" content={data.keywords} />}
+      {/* SEO Meta Tags */}
+      {<meta name="robots" content="index, follow" />}
+      {<meta name="googlebot" content="index, follow" />}
 
-        {/* Open Graph Meta Tags (for social media) */}
-        {<meta property="og:title" content={data.title} />}
-        {<meta property="og:description" content={data.desc} />}
-        {data.image && (
-          <meta
-            property="og:image"
-            content={
-              data.image.includes("https://")
-                ? data.image
-                : "https://securedapp.io" + data.image
-            }
-          />
-        )}
-        {<meta property="og:url" content={url} />}
-        {<meta property="og:type" content="website" />}
+      <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css"
+      />
 
-        {/* Twitter Meta Tags */}
-        {<meta name="twitter:card" content="summary_large_image" />}
-        {<meta name="twitter:title" content={data.title} />}
-        {<meta name="twitter:description" content={data.desc} />}
-        {data.image && (
-          <meta
-            name="twitter:image"
-            content={
-              data.image.includes("https://")
-                ? data.image
-                : "https://securedapp.io" + data.image
-            }
-          />
-        )}
+      {/* Google Fonts */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+      />
 
-        {/* SEO Meta Tags */}
-        {<meta name="robots" content="index, follow" />}
-        {<meta name="googlebot" content="index, follow" />}
+      <link rel="canonical" href={url} />
 
-        <link
-          rel="stylesheet"
-          href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css"
-        />
-
-        {/* Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
-
-        <link rel="canonical" href={url} />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       dataLayer.push(arguments);
@@ -184,25 +183,24 @@ const MetaTags = ({ data }) => {
     gtag("js", new Date());
 
     gtag("config", "G-GXZX7PXY8D");`,
-          }}
-        />
+        }}
+      />
 
-        <GoogleAnalytics gaId="G-GXZX7PXY8D" dataLayerName="ga" />
+      <GoogleAnalytics gaId="G-GXZX7PXY8D" dataLayerName="ga" />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      </head>
-    </html>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+    </Head>
   );
 };
 
