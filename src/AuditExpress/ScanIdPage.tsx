@@ -44,7 +44,7 @@ import RequestQuoteModal from "../components/modal/RequestQuoteModal";
 import { useDispatch } from "react-redux";
 import { setIsRequestModalOpen } from "../redux/slices/main/homeSlice";
 import Navbar from "./components/Navbar";
-import Head from "next/head";
+import MetaTags from "../components/common/MetaTags";
 
 // Updated Type Definitions
 type Vulnerability = {
@@ -412,39 +412,11 @@ const ScanPage: React.FC<{ id: any }> = ({ id }) => {
 
     return (
       <div className="container mx-auto p-4 dark:bg-[#001938] text-white min-h-screen flex flex-col">
-        {/* <Head>
-          
-          <title>{title}</title>
-          <meta name="description" content={description} />
-
-         
-          <meta property="og:url" content={pageUrl} />
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={imageUrl} />
-          <meta
-            property="og:image:alt"
-            content="SecureDApp Audit Express Report"
-          />
-
-         
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site" content="@secure_DApp" />
-          <meta name="twitter:creator" content="@secure_DApp" />
-          <meta name="twitter:title" content={title} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={imageUrl} />
-          <meta
-            name="twitter:image:alt"
-            content="SecureDApp Audit Express Report"
-          />
-
-         
-          <link rel="canonical" href={pageUrl} />
-          <meta name="robots" content="index, follow" />
-        </Head> */}
-
+        <MetaTags
+          data={{
+            title: "SecureDApp : Audit Express Report",
+          }}
+        />
         <Navbar />
         <div
           className="pt-32 font-poppins-regular dark:text-white text-black"
