@@ -7,7 +7,7 @@ import {
   setPaymentModal,
 } from "../../redux/dashboard/paymentSlice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import CustomButton from "../common/CustomButton";
 import {
@@ -30,6 +30,16 @@ const PaymentModal = () => {
   const navigate = useRouter();
   const [phase, setPhase] = useState(1);
   const [web3PayDetails, setWeb3PayDetails] = useState();
+
+  const [isLargeScreen, setIsLargeScreen] = useState(null);
+  useEffect(() => {
+    var vw = window.innerWidth;
+    if (vw < 900) {
+      setIsLargeScreen(true);
+    } else {
+      setIsLargeScreen(false);
+    }
+  }, [isLargeScreen === null]);
 
   const closeModal = () => {
     setPhase(1);
@@ -73,14 +83,16 @@ const PaymentModal = () => {
                   style={{ maxHeight: "120px" }}
                   className="sss-payment-modal-body-method"
                 >
-                  <div className="sss-payment-modal-body-method-image">
-                    <img
-                      layout="intrinsic"
-                      src="/assets/images/solidity-shield-scan/phonepe-icon.svg"
-                      alt="Phonpe"
-                      style={{ maxHeight: "80px" }}
-                    />
-                  </div>
+                  {!isLargeScreen && (
+                    <div className="sss-payment-modal-body-method-image">
+                      <img
+                        layout="intrinsic"
+                        src="/assets/images/solidity-shield-scan/phonepe-icon.svg"
+                        alt="Phonpe"
+                        style={{ maxHeight: "80px" }}
+                      />
+                    </div>
+                  )}
                   <div className="sss-payment-modal-body-method-button">
                     <CustomButton
                       text={"Pay via PhonPe"}
@@ -104,13 +116,15 @@ const PaymentModal = () => {
                   style={{ maxHeight: "120px" }}
                   className="sss-payment-modal-body-method"
                 >
-                  <div className="sss-payment-modal-body-method-image">
-                    <img
-                      layout="intrinsic"
-                      src="/assets/images/solidity-shield-scan/crypto-icon.png"
-                      alt="USDT"
-                    />
-                  </div>
+                  {!isLargeScreen && (
+                    <div className="sss-payment-modal-body-method-image">
+                      <img
+                        layout="intrinsic"
+                        src="/assets/images/solidity-shield-scan/crypto-icon.png"
+                        alt="USDT"
+                      />
+                    </div>
+                  )}
                   <div className="sss-payment-modal-body-method-button">
                     <CustomButton
                       onClick={async () => {
