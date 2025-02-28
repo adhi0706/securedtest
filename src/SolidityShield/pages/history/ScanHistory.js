@@ -53,7 +53,7 @@ const ScanHistory = () => {
     } else {
       navigate.push("/solidity-shield-scan/auth");
     }
-  }, [history.length === 0 && history]);
+  }, [history.length === 0]);
 
   return (
     <div className="sss-scan-history-container">

@@ -19,6 +19,8 @@ import { getUserData } from "../../redux/auth/authSlice";
 import { useRouter } from "next/router";
 import MetaTags from "../../../components/common/MetaTags";
 import Footer from "../../components/common/Footer";
+import { setLoader } from "../../redux/commonSlice";
+import { getUser, getJwt } from "../../functions";
 
 const PricingPlanCard = ({
   icon,
@@ -109,6 +111,25 @@ const Pricing = () => {
       navigate.push("/solidity-shield-scan/auth");
     }
   };
+
+  const [user, setUser] = useState(auth.user);
+
+  useEffect(() => {
+    //alert(auth.user.plan);
+    async function fetch() {
+      dispatch(setLoader(true));
+      const userJwt = getJwt();
+      if (userJwt) {
+        var data = await getUser({ dispatch });
+        setUser(data);
+        dispatch(setLoader(false));
+      } else {
+        navigate.push("/solidity-shield-scan/auth");
+        dispatch(setLoader(false));
+      }
+    }
+    fetch();
+  }, [!user && user]);
 
   return (
     <div className="sss-pricing-container">

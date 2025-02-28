@@ -12,10 +12,32 @@ import { login } from "../SolidityShield/redux/auth/authSlice";
 import { setIssuesData } from "./redux/dashboard/issuesSlice";
 import { setScanHistory } from "./redux/scanHistory/scanHistorySlice";
 import { setScanSummary } from "./redux/dashboard/scanSummarySlice";
+import { setCouponCode } from "./redux/dashboard/paymentSlice";
 import { pricingDetails } from "./pages/pricing/pricing.data";
 
 const logo = "/assets/images/securedapp_logo.svg";
 const apiUrl = "https://139-59-5-56.nip.io:3443";
+
+export async function checkCoupon(code, disptach) {
+  const response = await fetch(
+    apiUrl + `/api/coupons/get-coupons?code=${code}`
+  );
+  let data = await response.json();
+  let coupon = data.coupons[0];
+  const expirationDate = new Date(coupon.expirationDate).getTime();
+  const currentTime = Date.now();
+  if (
+    data.success &&
+    coupon.status === "active" &&
+    coupon.max_usage > coupon.used_count &&
+    expirationDate > currentTime
+  ) {
+    disptach(setCouponCode(code));
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export async function getBlogs() {
   const response = await fetch(apiUrl + "/getBlogList");
@@ -95,73 +117,79 @@ export const payCryptoVerify = async ({ id, transactionId, amount }) => {
   }
 };
 
-export const payCrypto = async ({ planid, email }) => {
+export const payCrypto = async ({ planid, email, couponCode }) => {
   if (planid > 0) {
     const { v4: uuidv4 } = require("uuid");
     const transactionid = "Tr-" + uuidv4().toString(36).slice(-6);
-    var price = pricingDetails[Number(planid) + 1].pricingCard.price
+    let price = pricingDetails[Number(planid) + 1].pricingCard.price
       .replace("/-", "")
       .replace("₹", "")
       .replace(",", "");
     price = Number(price);
     try {
-      return await fetch("https://api.nowpayments.io/v1/payment", {
+      // First, insert the Web3 payment
+      const data = await fetch(apiUrl + "/payment-insert-web3", {
         method: "POST",
         body: JSON.stringify({
-          price_amount: price,
-          price_currency: "inr",
-          pay_currency: "USDTMATIC",
-          pay_amount: price,
-          order_id: "21314",
-          order_description: "Securedapp Subscription Plan A",
-          is_fixed_rate: true,
-          is_fee_paid_by_user: false,
+          mail: email,
+          planid,
+          paymentid: transactionid,
+          couponCode,
         }),
         headers: {
           "Content-type": "application/json",
-          "X-api-key": "F2TDXCK-K0Q4N8J-JWSHQW1-P5AM1RH",
+          Authorization: getJwt(),
         },
-      })
-        .then(async (response) => {
-        const data = await response.json();
-          return await fetch(apiUrl + "/payment-insert-web3", {
-            method: "POST",
-            body: JSON.stringify({
-              mail: email,
-              planid,
-              paymentid: transactionid,
-            }),
-            headers: {
-              "Content-type": "application/json",
-              Authorization: getJwt(),
-            },
-          }).then(async (response2) => {
-            const res = await response2.json();
-            if (res.status) {
-              localStorage.setItem(
-                "latestPayment",
-                JSON.stringify({
-                  transactionId: transactionid,
-                  amount: price,
-                })
-              );
-              toast(
-                "Payment initiated successfully. Please transfer the amount & verify."
-              );
-              return {
-                ...data,
-                newTransactionId: transactionid,
-                payAmount: price,
-              };
-            } else {
-              toast.error("Error initiating the payment!");
-            }
-          });
+      });
+
+      const result = await data.json();
+
+      if (!result.status) {
+        toast.error("Error initiating the USDT payment!");
+        return;
+      }
+
+      // If Web3 insertion is successful, proceed with NowPayments
+      const nowPaymentsResponse = await fetch(
+        "https://api.nowpayments.io/v1/payment",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            price_amount: result.inrPlanCost,
+            price_currency: "inr",
+            pay_currency: "USDTMATIC",
+            pay_amount: price,
+            order_id: "21314",
+            order_description: "Securedapp Subscription Plan A",
+            is_fixed_rate: true,
+            is_fee_paid_by_user: false,
+          }),
+          headers: {
+            "Content-type": "application/json",
+            "X-api-key": "F2TDXCK-K0Q4N8J-JWSHQW1-P5AM1RH",
+          },
+        }
+      );
+
+      const nowPaymentsData = await nowPaymentsResponse.json();
+
+      localStorage.setItem(
+        "latestPayment",
+        JSON.stringify({
+          transactionId: transactionid,
+          amount: price,
         })
-        .catch((error) => {
-          toast.error("Error initiating payment!");
-          console.log(error);
-        });
+      );
+
+      toast(
+        "Payment initiated successfully. Please transfer the amount & verify."
+      );
+
+      return {
+        ...nowPaymentsData,
+        newTransactionId: transactionid,
+        payAmount: price,
+      };
     } catch (error) {
       toast.error("Unexpected error! Try again.");
       console.log(error);
@@ -194,7 +222,7 @@ export const checkPhonpe = async ({ id }) => {
     });
 };
 
-export const payPhonpe = async ({ planid, email }) => {
+export const payPhonpe = async ({ planid, email, couponCode }) => {
   const { v4: uuidv4 } = require("uuid");
 
   let cost = 0;
@@ -207,6 +235,7 @@ export const payPhonpe = async ({ planid, email }) => {
         mail: email,
         paymentid: transactionid,
         planid: planid,
+        couponCode,
       }),
       headers: {
         "Content-type": "application/json",
@@ -287,7 +316,7 @@ export const scanSubmit = async ({
       return;
     }
   }
-  
+
   // Handling Etherscan URL
   if (etherscanUrl && etherscanUrl.length > 0) {
     try {
@@ -327,7 +356,7 @@ export const scanSubmit = async ({
     }
   }
 
-  // Handling file upload 
+  // Handling file upload
   // if (inputTypes.includes("Upload File") && file) {
   //   formData.append("files", file);
   //   if (!file) {
@@ -344,9 +373,7 @@ export const scanSubmit = async ({
   //     toast.error("The contract must be flattened before submission.");
   //     return;
   //   }
-    
-    
-   
+
   //   if (!compilerVersion) {
   //     toast.error("Could not detect the compiler version.");
   //     return;
@@ -358,49 +385,50 @@ export const scanSubmit = async ({
     try {
       // Append the file to formData
       formData.append("files", file);
-  
+
       // Check if a file is uploaded
       if (!file) {
         toast.error("Please select a file.");
         return;
       }
-  
+
       // Read the file content
       const fileContent = await file.text();
-  
+
       // Validate contract content
       if (!fileContent) {
         toast.error("No contract file content found.");
         return;
       }
-  
+
       // Check if the contract is flattened
       if (!isFlattened(fileContent)) {
         toast.error("The contract must be flattened before submission.");
         return;
       }
-  
+
       // Extract all compiler versions from the file
-      const pragmaMatches = [...fileContent.matchAll(/pragma\s+solidity\s+[\^~]?(\d+\.\d+\.\d+)/g)];
-      
+      const pragmaMatches = [
+        ...fileContent.matchAll(/pragma\s+solidity\s+[\^~]?(\d+\.\d+\.\d+)/g),
+      ];
+
       if (pragmaMatches.length === 0) {
         toast.error("Could not detect any compiler version in the contract.");
         return;
       }
-  
+
       // Convert versions to comparable format
-      const versions = pragmaMatches.map(match => match[1]);
+      const versions = pragmaMatches.map((match) => match[1]);
       versions.sort((a, b) => {
-        const [majorA, minorA, patchA] = a.split('.').map(Number);
-        const [majorB, minorB, patchB] = b.split('.').map(Number);
-        
+        const [majorA, minorA, patchA] = a.split(".").map(Number);
+        const [majorB, minorB, patchB] = b.split(".").map(Number);
+
         return majorB - majorA || minorB - minorA || patchB - patchA;
       });
-  
+
       // Highest version found
-       highestVersion = versions[0];
+      highestVersion = versions[0];
       console.log(`Highest compiler version extracted: ${highestVersion}`);
-  
     } catch (error) {
       toast.error("Error handling the uploaded file.");
       console.error("File upload error:", error);
@@ -417,7 +445,6 @@ export const scanSubmit = async ({
     mail: formData.get("mail"),
     version: formData.get("version"),
     company: formData.get("company"),
-
   });
   return await fetch(apiUrl + "/audits", {
     method: "POST",
@@ -966,7 +993,6 @@ const detectCompilerVersion = (contracts) => {
   return versions[0];
 };
 
-
 // to normalize compiler version format:0.x.x
 const fetchContractDetails = async (contractAddress, _chain) => {
   try {
@@ -1028,8 +1054,6 @@ const fetchContractDetails = async (contractAddress, _chain) => {
     return null;
   }
 };
-
-
 
 export const githuburlfetch = async (repoUrl, companyName) => {
   try {

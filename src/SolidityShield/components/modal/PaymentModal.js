@@ -3,20 +3,28 @@ import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
 import {
   getPaymentSelector,
+  setCouponCode,
   setPaymentModal,
 } from "../../redux/dashboard/paymentSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Image from "next/image";
 import CustomButton from "../common/CustomButton";
-import { payPhonpe, payCrypto, payCryptoVerify } from "../../functions";
+import {
+  payPhonpe,
+  payCrypto,
+  payCryptoVerify,
+  checkCoupon,
+} from "../../functions";
 import { getUserData } from "../../redux/auth/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { pricingDetails } from "../../pages/pricing/pricing.data";
 
 const PaymentModal = () => {
-  const { paymentModal, selectedPlan } = useSelector(getPaymentSelector);
+  const { paymentModal, selectedPlan, couponCode } =
+    useSelector(getPaymentSelector);
   const auth = useSelector(getUserData);
   const dispatch = useDispatch();
   const navigate = useRouter();
@@ -32,12 +40,25 @@ const PaymentModal = () => {
     setPhase(2);
   };
 
+  const price = pricingDetails.find((item) => item.id === selectedPlan)
+    .pricingCard.price;
+
   return (
     paymentModal && (
       <div className="sss-payment-modal-container">
         <div style={{ minWidth: "50vw" }} className="sss-payment-modal">
           <div className="sss-payment-modal-header">
-            <div className="sss-payment-modal-header-title">Payment</div>
+            <div className="sss-payment-modal-header-title flex gap-2">
+              Payment of {price} {couponCode.length > 0 && "(-) Coupon"}
+              {couponCode && (
+                <span
+                  className="text-400 text-[12px] underline text-red-500 cursor-pointer"
+                  onClick={() => dispatch(setCouponCode(""))}
+                >
+                  remove coupon
+                </span>
+              )}
+            </div>
             <div className="sss-payment-modal-close-container">
               <i
                 onClick={closeModal}
@@ -48,12 +69,16 @@ const PaymentModal = () => {
           <div className="sss-payment-modal-body">
             {phase === 1 && (
               <div className="sss-payment-modal-body-methods">
-                <div className="sss-payment-modal-body-method">
+                <div
+                  style={{ maxHeight: "120px" }}
+                  className="sss-payment-modal-body-method"
+                >
                   <div className="sss-payment-modal-body-method-image">
                     <img
                       layout="intrinsic"
                       src="/assets/images/solidity-shield-scan/phonepe-icon.svg"
                       alt="Phonpe"
+                      style={{ maxHeight: "80px" }}
                     />
                   </div>
                   <div className="sss-payment-modal-body-method-button">
@@ -66,16 +91,19 @@ const PaymentModal = () => {
                         payPhonpe({
                           planid: selectedPlan,
                           email: auth.user.email,
+                          couponCode,
                         });
                       }}
                     />
-                    <br />
-                    <p style={{ textAlign: "center" }}>
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>
                       (UPI, Card & Net Banking)
                     </p>
                   </div>
                 </div>
-                <div className="sss-payment-modal-body-method">
+                <div
+                  style={{ maxHeight: "120px" }}
+                  className="sss-payment-modal-body-method"
+                >
                   <div className="sss-payment-modal-body-method-image">
                     <img
                       layout="intrinsic"
@@ -89,6 +117,7 @@ const PaymentModal = () => {
                         var pay = await payCrypto({
                           planid: selectedPlan,
                           email: auth.user.email,
+                          couponCode,
                         });
                         console.log(pay);
                         setWeb3PayDetails(pay);
@@ -99,10 +128,50 @@ const PaymentModal = () => {
                         "w-[200px] bg-tertiary border rounded-xl border-tertiary py-3 active:bg-white"
                       }
                     />
-                    <br />
-                    <p style={{ textAlign: "center" }}>(USDT Polygon)</p>
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>
+                      (USDT Polygon)
+                    </p>
                   </div>
                 </div>
+                {!couponCode && (
+                  <div
+                    style={{ maxHeight: "120px" }}
+                    className="sss-payment-modal-body-method"
+                  >
+                    <div className="sss-payment-modal-body-method-button">
+                      <p style={{ marginBottom: "10px" }}>
+                        Have a coupon code ? Apply here.
+                      </p>
+                      <div className="flex justify-start items-center">
+                        <input
+                          className="sss-settings-screen-input-text-field"
+                          type="text"
+                          placeholder="Coupon Code"
+                          id="coupon"
+                        />
+                        <CustomButton
+                          onClick={async () => {
+                            var status = await checkCoupon(
+                              document.getElementById("coupon").value,
+                              dispatch
+                            );
+                            if (status) {
+                              toast.success(
+                                "Coupon Applied Successfully. Proceed with Payment"
+                              );
+                            } else {
+                              //toast.error("Invalid Coupon Code");
+                            }
+                          }}
+                          text={"Apply"}
+                          className={
+                            "w-[100px] bg-tertiary border rounded-xl border-tertiary py-3 active:bg-white"
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             {phase === 2 && web3PayDetails.network && (

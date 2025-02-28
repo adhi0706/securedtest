@@ -3,6 +3,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 const initialPaymentState = {
   paymentModal: false,
   selectedPlan: 1,
+  couponCode: "",
 };
 
 const paymentSlice = createSlice({
@@ -15,6 +16,9 @@ const paymentSlice = createSlice({
     setPlan(state, action) {
       state.selectedPlan = action.payload;
     },
+    setCouponCode(state, action) {
+      state.couponCode = action.payload;
+    },
   },
 });
 
@@ -23,6 +27,6 @@ export const getPaymentSelector = createSelector(
   (state) => state
 );
 
-export const { setPaymentModal, setPlan } = paymentSlice.actions;
+export const { setPaymentModal, setPlan, setCouponCode } = paymentSlice.actions;
 
 export default paymentSlice.reducer;
