@@ -53,17 +53,22 @@ const PaymentModal = () => {
   const price = pricingDetails.find((item) => item.id === selectedPlan)
     .pricingCard.price;
 
+  const [discountedPrice, setDiscount] = useState();
+
   return (
     paymentModal && (
       <div className="sss-payment-modal-container">
         <div style={{ minWidth: "50vw" }} className="sss-payment-modal">
           <div className="sss-payment-modal-header">
             <div className="sss-payment-modal-header-title flex gap-2">
-              Payment of {price} {couponCode.length > 0 && "(-) Coupon"}
+              Payment of ₹ {discountedPrice ?? price.replace("₹ ", "")}
               {couponCode && (
                 <span
                   className="text-400 text-[12px] underline text-red-500 cursor-pointer"
-                  onClick={() => dispatch(setCouponCode(""))}
+                  onClick={() => {
+                    dispatch(setCouponCode(""));
+                    setDiscount();
+                  }}
                 >
                   remove coupon
                 </span>
@@ -165,16 +170,24 @@ const PaymentModal = () => {
                         />
                         <CustomButton
                           onClick={async () => {
-                            var status = await checkCoupon(
+                            var data = await checkCoupon(
                               document.getElementById("coupon").value,
                               dispatch
                             );
-                            if (status) {
+                            if (data) {
                               toast.success(
                                 "Coupon Applied Successfully. Proceed with Payment"
                               );
+
+                              setDiscount(
+                                data.discountType === "flat"
+                                  ? Number(price.replace("₹ ", "")) -
+                                      Number(data.discountValue)
+                                  : (Number(data.discountValue) / 100) *
+                                      price.replace("₹ ", "")
+                              );
                             } else {
-                              //toast.error("Invalid Coupon Code");
+                              toast.error("Invalid Coupon Code");
                             }
                           }}
                           text={"Apply"}

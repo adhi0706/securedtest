@@ -33,7 +33,7 @@ export async function checkCoupon(code, disptach) {
     expirationDate > currentTime
   ) {
     disptach(setCouponCode(code));
-    return true;
+    return coupon;
   } else {
     return false;
   }
