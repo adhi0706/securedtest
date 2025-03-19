@@ -100,8 +100,7 @@ const MetaTags = ({ data }) => {
   };
 
   return (
-    <html>
-      <Head>
+   <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{data.title}</title>
         <meta name="author" content="SecureDapp" />
@@ -197,7 +196,6 @@ const MetaTags = ({ data }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </Head>
-    </html>
   );
 };
 
