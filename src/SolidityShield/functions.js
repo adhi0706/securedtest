@@ -733,7 +733,7 @@ export const verifyOTP = async ({ email, otp, dispatch }) => {
       let userdata = data[0];
 
       jwt = userdata.jwt;
-      localStorage.setItem("UserJwt", userdata.jwt);
+      localStorage.setItem("UserJwtToken", userdata.jwt);
       localStorage.setItem("UserEmail", email);
 
       let plandetail = "Free Plan";
@@ -775,7 +775,7 @@ export const verifyOTP = async ({ email, otp, dispatch }) => {
 };
 
 export function getJwt() {
-  const jwt = localStorage.getItem("UserJwt");
+  const jwt = localStorage.getItem("UserJwtToken");
   if (!jwt) {
     toast("Please sign in with your email.");
     typeof window !== "undefined" &&

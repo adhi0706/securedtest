@@ -22,7 +22,7 @@ const OverviewScreen = () => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    const userJwt = localStorage.getItem("UserJwt");
+    const userJwt = localStorage.getItem("UserJwtToken");
     async function fetch() {
       dispatch(setLoader(true));
       if (userJwt) {
