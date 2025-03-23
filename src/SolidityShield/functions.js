@@ -806,6 +806,9 @@ export const getUser = async ({ dispatch, email }) => {
     },
   })
     .then((response) => {
+      if (response.status == 401 || response.status == 403) {
+        localStorage.removeItem("UserJwtToken");
+      }
       if (response.ok) {
         //console.log(response);
         return response.json();
