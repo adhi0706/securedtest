@@ -32,7 +32,7 @@ const AuthScreen = () => {
         <AuthScrenHeader
           title={"Sign in to your account"}
           description={
-            "Clarity gives you the blocks and components you need to create a truly professional website."
+            "Solidity Shield: Instantly scan your smart contracts, uncover vulnerabilities with fixes, get a safety score, and download a full audit report—all in under a minute!"
           }
         />
         <div className="auth-screen-body">

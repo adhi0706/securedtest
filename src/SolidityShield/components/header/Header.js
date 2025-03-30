@@ -17,9 +17,11 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import CustomDivider from "../common/CustomDivider";
 import { scanSubmit } from "../../functions";
 import { getUserData } from "../../redux/auth/authSlice";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 const Header = () => {
   const { showSideBar, scanNowModal } = useSelector(getCommonSelector);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 900;
   const auth = useSelector(getUserData);
   const dispatch = useDispatch();
   const navigate = useRouter();
@@ -36,6 +38,17 @@ const Header = () => {
               <FontAwesomeIcon icon={faBars} size="lg" />
             </div>
           )}
+          {!isMobile && auth.user.credits == 1 ? (
+            <div>
+              Start Free Trial – No card required, for first security scan.
+            </div>
+          ) : (
+            !isMobile && (
+              <div>
+                "Solidity Shield to protect the heart of your Web3 project"
+              </div>
+            )
+          )}
           {/* <div className="sss-header-search-container">
             <div className="sss-header-search">
               <div className="sss-header-search-icon">
@@ -50,11 +63,6 @@ const Header = () => {
               />
             </div>
           </div> */}
-          <div>
-            {typeof window !== "undefined" &&
-              window.width > 1024 &&
-              "Solidity Shield to protect the heart of your Web3 project"}
-          </div>
         </div>
         <div className="sss-header-center">
           <img

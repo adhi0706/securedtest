@@ -212,7 +212,7 @@ const ScanNowModal = () => {
                     value={github}
                   />
                 </ScanNowModalField>
-                <ScanNowModalField label={"Company Name"}>
+                <ScanNowModalField label={"Project Name / Company Name"}>
                   <ScanNowModalInputTextField
                     type={"text"}
                     placeHolder={"Enter Company Name"}
@@ -241,7 +241,7 @@ const ScanNowModal = () => {
                     onChangee={setContractUrl}
                   />
                 </ScanNowModalField>
-                <ScanNowModalField label={"Company Name"}>
+                <ScanNowModalField label={"Project Name / Company Name"}>
                   <ScanNowModalInputTextField
                     type={"text"}
                     placeHolder={"Enter company name"}
@@ -254,7 +254,7 @@ const ScanNowModal = () => {
             {sourceType === "Upload File" && (
               <div className="scan-now-modal-body-items">
                 <FileUpload file={file} handleChange={handleFileChange} />
-                <ScanNowModalField label={"Company Name"}>
+                <ScanNowModalField label={"Project Name / Company Name"}>
                   <ScanNowModalInputTextField
                     type={"text"}
                     placeHolder={"Enter company name"}
