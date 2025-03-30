@@ -14,6 +14,8 @@ import Statitics from "./sections/Statistics";
 import { reviews, faqHeaders, faqsData } from "./home.data";
 import MetaTags from "../../components/common/MetaTags";
 import dynamic from "next/dynamic";
+import BrandLogos from "../../components/common/BrandLogos";
+import BookMeetCta from "../../components/common/bookMeetCta";
 
 const Home = () => {
   if (typeof window !== "undefined") {
@@ -38,9 +40,12 @@ const Home = () => {
       <HowItWorks />
       <Services />
       <Testimonials reviews={reviews} />
+      <br />
+      <BrandLogos type="chains" />
       <FAQs faqHeaders={faqHeaders} faqsData={faqsData} />
       <CTA />
       <Footer />
+      <BookMeetCta />
     </div>
   );
 };
