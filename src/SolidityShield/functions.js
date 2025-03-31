@@ -871,7 +871,7 @@ export const getUser = async ({ dispatch, email }) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("UserJwt");
+  localStorage.removeItem("UserJwtToken");
   typeof window !== "undefined" &&
     window.location.replace("/solidity-shield-scan/auth");
 };
