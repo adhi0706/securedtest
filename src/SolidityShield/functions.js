@@ -1000,18 +1000,48 @@ const detectCompilerVersion = (contracts) => {
 const fetchContractDetails = async (contractAddress, _chain) => {
   try {
     const chain_list = {
-      0: "https://api.etherscan.io/api",
-      2: "https://api-sepolia.etherscan.io/api",
-      1: "https://api.polygonscan.com/api",
-      3: "https://api-amoy.polygonscan.com/api",
+      0: "https://api.etherscan.io/api", // Ethereum Mainnet
+      1: "https://api.polygonscan.com/api", // Polygon Mainnet
+      2: "https://api-sepolia.etherscan.io/api", // Sepolia
+      3: "https://api-amoy.polygonscan.com/api", // Polygon Amoy
+      4: "https://api.arbiscan.io/api", // Arbitrum One
+      5: "https://api.snowtrace.io/api", // Avalanche C-Chain
+      6: "https://api.basescan.org/api", // Base
+      7: "https://api.bscscan.com/api", // Binance Smart Chain (BSC)
+      8: "https://api-optimistic.etherscan.io/api", // Optimism
+      9: "https://api.opbnbscan.com/api", // opBNB
+      10: "https://api-zkevm.polygonscan.com/api", // Polygon zkEVM
+      11: "https://api.ftmscan.com/api", // Fantom
+      12: "https://api.cronoscan.com/api", // Cronos
+      13: "https://api.lineascan.build/api", // Linea
+      14: "https://api.gnosisscan.io/api", // Gnosis (xDai)
+      15: "https://api.celoscan.io/api", // Celo
+      16: "https://api.zksync.io/api", // ZkSync Era
+      17: "https://api.scrollscan.com/api", // Scroll
     };
 
+
     const api_list = {
-      0: "6MKDUY9RMC8JDHQYY73V1G49SF3HHYGFVB",
-      1: "6MKDUY9RMC8JDHQYY73V1G49SF3HHYGFVB",
-      2: "WBAH3VYD76KXB7RXCXK81P8SC9GTVMDB3W",
-      3: "WBAH3VYD76KXB7RXCXK81P8SC9GTVMDB3W",
-    };
+       0: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       1: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       2: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       3: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       4: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       5: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       6: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       7: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       8: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       9: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       10: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       11: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       12: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       13: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       14: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       15: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       16: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       17: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+     };
+ 
 
     const apiUrl = `${chain_list[_chain]}?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${api_list[_chain]}`;
 
