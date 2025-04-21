@@ -39,6 +39,9 @@ const Navbar = () => {
     case "/auditexpress/home":
       nextPath = "/auditexpress/home";
       break;
+    case "/web3-kyc":
+      nextPath = "/web3-kyc";
+      break;
     default:
       nextPath = null;
   }

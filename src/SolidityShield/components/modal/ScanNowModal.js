@@ -23,6 +23,20 @@ const chainTypes = [
   "Polygon Mainnet",
   "Sepolia",
   "Polygon Amoy",
+  "Arbitrum Mainnet",
+  "Avalanche C-Chain",
+  "Base Mainnet",
+  "Binance Smart Chain Mainnet",
+  "Optimism",
+  "OpBNB",
+  "Polygon zkEVM",
+  "Fantom",
+  "Cronos",
+  "Linea",
+  "Gnosis Mainnet",
+  "Celo",
+  "zkSync Era",
+  "Scroll",
 ];
 
 const ScanNowModalField = ({ label, children }) => {
@@ -69,21 +83,21 @@ const ScanNowModalFieldDropDown = ({
         <FontAwesomeIcon icon={faChevronDown} />
       </div>
       {dropDown && (
-        <div className="scan-now-modal-body-dropdown-options">
-          {values.map((filter) => {
-            return (
-              <div
-                onClick={() => setValueTypeEvent(filter)}
-                className="scan-now-modal-body-dropdown-option-container"
-              >
-                <div className="scan-now-modal-body-dropdown-option">
-                  {filter}
-                </div>
-              </div>
-            );
-          })}
+  <div className="scan-now-modal-body-dropdown-options max-h-48 overflow-y-auto">
+    {values.map((filter) => {
+      return (
+        <div
+          onClick={() => setValueTypeEvent(filter)}
+          className="scan-now-modal-body-dropdown-option-container"
+        >
+          <div className="scan-now-modal-body-dropdown-option">
+            {filter}
+          </div>
         </div>
-      )}
+      );
+    })}
+  </div>
+)}
     </div>
   );
 };
