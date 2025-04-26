@@ -20,7 +20,6 @@ import { useRouter } from "next/router";
 import MetaTags from "../../../components/common/MetaTags";
 import Footer from "../../components/common/Footer";
 import { setLoader } from "../../redux/commonSlice";
-import { getUser, getJwt } from "../../functions";
 
 const PricingPlanCard = ({
   icon,
@@ -75,6 +74,7 @@ const Pricing = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const auth = useSelector(getUserData);
   const navigate = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -93,15 +93,12 @@ const Pricing = () => {
   }, []);
 
   const nextPricingCard = () => {
-    console.log(currentVisible);
     if (currentVisible < 3) setCurrentVisible(currentVisible + 1);
   };
 
   const previousPricingCard = () => {
-    console.log(currentVisible);
     if (currentVisible > 1) setCurrentVisible(currentVisible - 1);
   };
-  const dispatch = useDispatch();
 
   const openModal = (plan) => {
     if (localStorage.getItem("UserEmail")) {
@@ -115,21 +112,22 @@ const Pricing = () => {
   const [user, setUser] = useState(auth.user);
 
   useEffect(() => {
-    //alert(auth.user.plan);
-    async function fetch() {
+    async function fetchUserData() {
       dispatch(setLoader(true));
-      const userJwt = getJwt();
-      if (userJwt) {
-        var data = await getUser({ dispatch });
+      try {
+        // Assuming getUser is a function that fetches user data without JWT dependency
+        const data = await getUser({ dispatch });
         setUser(data);
-        dispatch(setLoader(false));
-      } else {
+      } catch (error) {
         navigate.push("/solidity-shield-scan/auth");
+      } finally {
         dispatch(setLoader(false));
       }
     }
-    fetch();
-  }, [!user && user]);
+    if (!user) {
+      fetchUserData();
+    }
+  }, [user, dispatch, navigate]);
 
   return (
     <div className="sss-pricing-container">
