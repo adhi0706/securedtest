@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { platforms, facts, projectIndustries, faqsData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function SmartContractAudit() {
   if (typeof window !== "undefined") {
@@ -114,6 +115,7 @@ function SmartContractAudit() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, whyChooseData, whyData, importanceData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function CryptoComplianceAml() {
   if (typeof window !== "undefined") {
@@ -126,6 +127,7 @@ function CryptoComplianceAml() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

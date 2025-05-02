@@ -17,6 +17,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { compliances, faqsData, benefits } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function TokenAudit() {
   if (typeof window !== "undefined") {
@@ -102,6 +103,7 @@ function TokenAudit() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

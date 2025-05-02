@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { services, benefits, faqsData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function Web3KYC() {
   if (typeof window !== "undefined") {
@@ -34,16 +35,22 @@ function Web3KYC() {
       />
       <Navbar />
       <div className="service">
-        <ProductServiceHero
-          name="WEB 3.0 KYC"
-          title="Advance Blockchain Identity Verification for Modern Compliance"
-          image={"/assets/images/ServicePages/s5-hero.webp"}
-          service={true}
-        />
+      <ProductServiceHero
+  name={
+    <>
+      <span className="white-text">Secure</span>
+      <span className="green-x">X</span>
+      <span className="white-text">-ID: Decentralized KYC/AML for Web3</span>
+    </>
+  }
+  title="Your Gateway to Compliant and Secure Decentralized Finance"
+  image={"/assets/images/ServicePages/s5-hero.webp"}
+  service={true}
+/>
         <ProductCard
-          header={"What is Web 3.0 KYC ?"}
+          header={"What is SecureX-ID ?"}
           description={
-            "Web3 KYC (Know Your Customer) is an advanced blockchain identity verification tool designed specifically for the decentralized Web3 ecosystem. <br/><br/>This service enables businesses to authenticate user identities, ensuring compliance with regulatory standards and mitigating risks associated with anonymous transactions in decentralized finance (DeFi) applications, NFT marketplaces, and cryptocurrency exchanges."
+            "SecureX-ID is a comprehensive, decentralised KYC/AML platform designed to address the unique needs of Web3, DeFi, and DApps.<br></br> It offers a suite of tools and services that allow businesses to meet regulatory obligations while maintaining a user-centric approach. SecureX-ID uses blockchain technology to establish a secure, transparent, and efficient identity verification process.."
           }
           buttonText={"Scan now"}
           image={"/assets/images/ServicePages/s5-1.webp"}
@@ -51,7 +58,7 @@ function Web3KYC() {
         <div>
           <SectionTitle
             name={"Benefits"}
-            title="Benefits of Web 3.0 KYC"
+            title="Benefits of SecureX-ID"
             description={
               "As we approach a new digital era, it's essential to reimagine KYC for the Web 3.0 landscape. Although the fundamental objective of KYC—to verify customer identities—remains unchanged, the methods and approaches to achieving this goal have significantly advanced."
             }
@@ -85,6 +92,7 @@ function Web3KYC() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

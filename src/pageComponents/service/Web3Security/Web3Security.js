@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, services, technologies } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function Web3Security() {
   if (typeof window !== "undefined") {
@@ -100,6 +101,7 @@ function Web3Security() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

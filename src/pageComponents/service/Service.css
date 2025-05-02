@@ -53,3 +53,10 @@
 .how-it-works-section-end-image {
   @apply lg:col-span-2;
 }
+
+.white-text {
+  color: #FFFFFF;
+}
+.green-x {
+  color: #00FF85;
+}

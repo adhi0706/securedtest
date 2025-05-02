@@ -14,6 +14,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import ProductWhyCard from "../../../components/productService/ProductWhyCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import { faqsData, threats, features } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function SecureWatchPage() {
   if (typeof window !== "undefined") {
@@ -120,6 +121,7 @@ function SecureWatchPage() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

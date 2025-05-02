@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, benefitsData, needData, securityAspectData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function RwaAudit() {
   if (typeof window !== "undefined") {
@@ -122,6 +123,7 @@ function RwaAudit() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

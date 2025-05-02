@@ -14,6 +14,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import ProductWhyCard from "../../../components/productService/ProductWhyCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import { faqsData, howItWorksData, benefits } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function SecurePadPage() {
   if (typeof window !== "undefined") {
@@ -112,6 +113,7 @@ function SecurePadPage() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, servicesData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function NftsDevelopment() {
   if (typeof window !== "undefined") {
@@ -95,6 +96,7 @@ function NftsDevelopment() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

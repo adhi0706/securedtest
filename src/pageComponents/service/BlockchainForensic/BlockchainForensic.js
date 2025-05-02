@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, impactData, whyChooseData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function BlockchainForensic() {
   if (typeof window !== "undefined") {
@@ -93,6 +94,7 @@ function BlockchainForensic() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }
