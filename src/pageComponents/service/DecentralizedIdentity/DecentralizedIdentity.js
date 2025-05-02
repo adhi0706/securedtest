@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, benefits, differenceData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function DecentralizedIdentity() {
   if (typeof window !== "undefined") {
@@ -112,6 +113,7 @@ function DecentralizedIdentity() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

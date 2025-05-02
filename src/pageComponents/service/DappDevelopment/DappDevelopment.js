@@ -16,6 +16,7 @@ import WhyChooseCard from "../../../components/productService/WhyChooseCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { platforms, faqsData, functions, benefits, industries } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function DappDevelopment() {
   if (typeof window !== "undefined") {
@@ -115,6 +116,7 @@ function DappDevelopment() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

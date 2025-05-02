@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, calendar } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function LevelUpAcademy() {
   if (typeof window !== "undefined") {
@@ -90,6 +91,7 @@ function LevelUpAcademy() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

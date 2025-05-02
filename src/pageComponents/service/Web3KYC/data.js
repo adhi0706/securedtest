@@ -34,26 +34,26 @@ export const faqsData = [
 
 export const benefits = [
   {
-    header: "Eliminating Third-party Interruptions",
-    description: `Decentralized KYC service transforms Web3 identity verification by eliminating third-party intermediaries, leading to cost-effective processes.`,
+    header: "Streamlined Compliance",
+    description: `Simplifies complex regulatory requirements with our user-friendly platform.`,
     icon: "iii",
     image: "flower",
   },
   {
-    header: "Decentralized KYC",
-    description: `By leveraging a distributed ledger for storing credentials, decentralized KYC ensures that user identities are verified accurately and reliably, eliminating repeated checks and maintaining consistency across platforms.`,
+    header: "Enhanced Security",
+    description: `Protects your platform and users with our robust, blockchain-based security infrastructure.`,
     icon: "iii",
     image: "box",
   },
   {
-    header: "Enhance Regulatory Compliance",
-    description: `Blockchain KYC solutions enhance regulatory compliance by providing transparent and immutable records, making it simpler for businesses to adhere to AML and other regulatory requirements.`,
+    header: "Reduced Fraud",
+    description: `Minimises the risk of fraud and illicit activity with our advanced AML monitoring tools.`,
     icon: "iii",
     image: "pentagon-1",
   },
   {
-    header: "Great User Control",
-    description: `Decentralized KYC solutions empower users by giving them control over their personal data. Users can decide who has access to their information, enhancing transparency and trust.`,
+    header: "Improved User Experience",
+    description: `Facilitates quick and efficient user onboarding with a smooth verification process.`,
     icon: "iii",
     image: "feathers",
   },
@@ -61,18 +61,22 @@ export const benefits = [
 
 export const services = [
   {
-    header: "Web3 KYC for DeFi Applications",
-    description: `• Ensures that DeFi platforms adhere to legal and regulatory requirements by verifying user identities.
-                  <br/> • Mitigates the risk of fraudulent activities and illegal transactions by thoroughly vetting participants.
-                  <br/> • Provides a robust layer of security, protecting against the misuse of decentralized platforms.
-                  <br/> • Builds confidence among users and stakeholders through transparent and secure identity verification processes.`,
+    header: "How SecureX-ID Strengthens Decentralized KYC/AML:",
+    description: `• Enhanced Security: Blockchain's inherent security features, including immutability and cryptographic hashing, protect    sensitive data from tampering and unauthorised access.
+                  <br/> • Increased Transparency: Delivers an auditable and transparent record of verification processes, fostering trust and accountability.
+                  <br/> • Improved Efficiency: Automates KYC/AML procedures, reducing manual effort and streamlining user onboarding.
+                  <br/> • Reduced Costs: Eliminates intermediaries, lowering the expenses associated with KYC/AML compliance.
+                  <br/> • Greater User Control: Gives users the ability to manage their identity data and control data access.
+                  <br/> • Interoperability: Enables seamless data sharing and verification across diverse platforms and applications.`,
   },
   {
-    header: "Blockchain Identity Verification for NFT Marketplaces",
-    description: `• Verification of blockchain identity in NFT marketplaces assures users and creators are genuine, thus reducing fraud and fake NFTs.
-                  <br/> • Identity checking makes it possible for an NFT platform to ensure conformance to regulations, hence providing the legal grounds for a transparent marketplace.
-                  <br/> • With blockchain verification of digital identity, NFT marketplaces improve security and confidence between the seller and the purchaser against a number of malicious activities.
-                  <br/> • Blockchain verification minimizes the chances of fraudulent transactions and fake identities, hence safeguarding the sanctity of the NFT ecosystem.`,
+    header: "SecureX-ID Features",
+    description: `• Decentralised Identity Verification: Leverages blockchain technology for secure and tamper-proof identity verification.
+                  <br/> • AML Transaction Monitoring: Provides real-time monitoring of transactions for suspicious activity.
+                  <br/> • Regulatory Compliance Tools: Offers tools and APIs to facilitate adherence to global and regional KYC/AML regulations.
+                  <br/> • Non-Custodial Data Management: Empowers users to retain control over their identity data.
+                  <br/> • Cross-Platform Compatibility: Ensures seamless integration with various DApps and DeFi platforms.
+                  <br/> • X-ID Scoring: Employs a proprietary methodology for user risk assessment`,
   },
   {
     header: "Web3 Anti-money Laundering Solutions",
@@ -82,14 +86,12 @@ export const services = [
                   <br/> • Cryptocurrency AML compliance is important if cryptocurrency exchanges and businesses are to meet legal requirements and prevent huge legal penalties and penalties for themselves.`,
   },
   {
-    header: "Web 3.0 KYC Applications",
-    description: `• Cryptocurrency Exchanges
-                  <br/> • Gaming
-                  <br/> • Telecom
-                  <br/> • Insurance
-                  <br/> • Healthcare
-                  <br/> • Real Estate
-                  <br/> • Supply Chain and Logistics
-                  <br/> • Government and Public Sector`,
+    header: "What is the X-ID Score Methodology?",
+    description: `The X-ID Score is a unique risk assessment methodology used by SecureX-ID to evaluate user identity and transaction risk. It considers several factors, including:<br/>
+                  <br/> • Identity Verification Level: The robustness and reliability of the user's identity verification.
+                  <br/> • Transaction History: Analysis of past transactions to detect potential suspicious patterns.
+                  <br/> • Data Consistency: Verification of provided information for discrepancies and inconsistencies.
+                  <br/> • Sanctions and Watchlist Screening: Screening against international sanctions lists and watchlists.
+                  <br/> • Behavioural Analysis: Examination of user behaviour patterns to identify potential risks.`,
   },
 ];

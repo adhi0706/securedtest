@@ -14,6 +14,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import ProductWhyCard from "../../../components/productService/ProductWhyCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import { faqsData, UsesData, benefits } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function SecureTracePage() {
   if (typeof window !== "undefined") {
@@ -99,6 +100,7 @@ function SecureTracePage() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

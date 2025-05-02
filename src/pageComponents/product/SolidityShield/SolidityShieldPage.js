@@ -14,6 +14,7 @@ import ProductCard from "../../../components/productService/ProductCard";
 import { FeatureCards } from "../../../components/productService/FeatureCard";
 import ProductWhyCard from "../../../components/productService/ProductWhyCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 import {
   faqsData,
   howItWorksData,
@@ -148,6 +149,7 @@ function SolidityShieldPage() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { howData, faqsData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function DappSecurityAudit() {
   if (typeof window !== "undefined") {
@@ -85,6 +86,7 @@ function DappSecurityAudit() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }

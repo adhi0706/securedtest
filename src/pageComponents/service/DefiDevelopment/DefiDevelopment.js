@@ -15,6 +15,7 @@ import { FeatureCards } from "../../../components/productService/FeatureCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import Benefits from "../sections/Benefits";
 import { faqsData, applicationsData, usesData, workingGuideData } from "./data";
+import BookMeetCta from "../../../components/common/bookMeetCta";
 
 function DefiDevelopment() {
   if (typeof window !== "undefined") {
@@ -100,6 +101,7 @@ function DefiDevelopment() {
         </div>
       </div>
       <Footer />
+      <BookMeetCta />
     </div>
   );
 }
