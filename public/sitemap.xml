@@ -656,5 +656,41 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://securedapp.io/blog/crypto-tax-reporting-in-2025-best-practices-for-web3-developers</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <url>
+    <loc>https://securedapp.io/blog/markets-in-crypto-assets-regulations-affect-blockchain-security</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <url>
+    <loc>https://securedapp.io/blog/exploring-blockchain's-toughest-questions</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <url>
+    <loc>https://securedapp.io/blog/fatf-travel-rule-compliance-for-crypto-and-dapps</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <url>
+    <loc>https://securedapp.io/blog/revolutionizing-smart-contract-security</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <url>
+    <loc>https://securedapp.io/blog/secureDApp-bharat-security-initiative</loc>
+    <lastmod>2025-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
 </urlset>
