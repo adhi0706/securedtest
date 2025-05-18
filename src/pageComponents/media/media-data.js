@@ -1,5 +1,195 @@
 export const mediaData = [
   {
+    heading:
+      "SecureDApp’s Mission: Making Blockchain Security Proactive, Not Reactive",
+    description:
+      "In an insightful interaction with The Info Edge, Abhishek Singh, Co-founder of SecureDApp, shared how the company is redefining cybersecurity for the Web3 era. SecureDApp specializes in safeguarding decentralized ecosystems by identifying smart contract vulnerabilities and offering continuous protection with tools like SecureWatch and Solidity Shield.",
+    date: "April 14, 2025",
+    link: "https://theinfoedge.com/securedapps-mission-making-blockchain-security-proactive-not-reactive/",
+    image: "/assets/images/media/info_edge1.png",
+    tags: "Info Edge",
+  },
+  {
+    heading:
+      "Blockchain Security Trends to Watch in 2025",
+    description:
+      "As businesses continue integrating blockchain into their operations, securing these digital infrastructures has become a priority—to protect assets, maintain trust, and ensure regulatory compliance. This urgency stems from the rising wave of Web3-related security breaches and crypto scams. High-profile cases, including scams and AI-driven fraud, have revealed weaknesses in blockchain networks",
+    date: "April 14, 2025",
+    link: "https://www.bitcoininsider.org/article/272612/blockchain-security-trends-watch-2025",
+    image: "/assets/images/media/btc_insider.png",
+    tags: "Bitcoin Insider",
+  },
+  {
+    heading:
+      "Era Of Autonomous AI And Digital SideKicks: What Are AI Agents And Why Should You Care?",
+    description:
+      "The public release of ChatGPT in December 2023 marked a turning point for the tech industry as it redirected its attention from blockchain to artificial intelligence, generative AI, and conversational chatbots. In no time, AI became the only thing everyone could talk about as major tech players raced to harness its potential. Since then, AI has continued to evolve, becoming better, more efficient, and expanding its capabilities, which now include an agentic nature.",
+    date: "March 29, 2025",
+    link: "https://www.etvbharat.com/en/!technology/era-of-autonomous-ai-and-digital-sidekicks-what-are-ai-agents-and-why-should-you-care-enn25032903969?123",
+    image: "/assets/images/media/etv_bharat.png",
+    tags: "ETV Bharat",
+  },
+  {
+    heading:
+      "The Rise of Cybersecurity Start-ups: Innovations Shaping the Industry in 2025",
+    description:
+      "With strong government backing and growing investor confidence, cybersecurity start-ups are gaining momentum, enabling businesses to scale securely. A thriving environment is taking shape, where specialized incubators actively support start-ups with resources, mentorship, and funding to drive innovation in security solutions. One prime example is that out of the 146 start-ups incubated at NCoE (National Centre of Excellence), 34 are dedicated to cybersecurity, highlighting the sector’s growing importance.",
+    date: "March 26, 2025",
+    link: "https://observenow.com/2025/03/the-rise-of-cybersecurity-start-ups-innovations-shaping-the-industry-in-2025/",
+    image: "/assets/images/media/observe_now.png",
+    tags: "Observe Now",
+  },
+  {
+    heading:
+      "Securing the Future of Web3: An Exclusive Interview with Himanshu Gautam, Co-founder & CTO of SecureDApp",
+    description:
+      "As blockchain technology continues to evolve, so do the security challenges surrounding it. While decentralization offers transparency and autonomy, vulnerabilities in smart contracts and decentralized applications (DApps) have led to significant losses. To address these challenges, SecureDApp was founded with a vision to create a safer blockchain ecosystem. In an exclusive interview, Himanshu Gautam, Co-founder & CTO of SecureDApp, shares insights into the company’s journey, innovative solutions, and the future of blockchain security.",
+    date: "March 13, 2025",
+    link: "https://www.indianstartuptimes.com/interviews/securing-the-future-of-web3-an-exclusive-interview-with-himanshu-gautam-co-founder-cto-of-securedapp/",
+    image: "/assets/images/media/india_startup1.png",
+    tags: "India Startup Times",
+  },
+  {
+    heading:
+      "Web3 Security & Compliance: Abhishek Singh, Co-founder of SecureDApp, on Protecting Blockchain Businesses",
+    description:
+      "Web3 technology promises decentralization and security, yet cyber threats and smart contract vulnerabilities continue to challenge businesses operating in the space. As blockchain adoption grows, so does the need for robust security solutions that go beyond one-time audits.",
+    date: "March 6, 2025",
+    link: "https://smestreet.in/cybersecurity/web3-security-compliance-abhishek-singh-co-founder-of-securedapp-on-protecting-blockchain-businesses-8824638",
+    image: "/assets/images/media/sme_street.png",
+    tags: "SME Street",
+  },
+  {
+    heading:
+      "Cyber Threats 2025: How AI, APIs And Quantum Computing Are Redefining Business Security?",
+    description:
+      "Cyber threats have become a persistent global risk with far-reaching implications across industries. The financial stability of almost every sector is at stake, as evidenced by the staggering 369.01 million malware detections across 8.44 million endpoints as of September 2024. ",
+    date: "Feb 22, 2025",
+    link: "https://zeenews.india.com/technology/cyber-threats-2025-how-ai-apis-and-quantum-computing-are-redefining-business-security-2862637.html",
+    image: "/assets/images/media/zee1.png",
+    tags: "Zee News",
+  },
+  {
+    heading:
+      "Top five innovations in blockchain security to watch in 2025",
+    description:
+      "Envision a scenario where every transaction a business made online could be verified in seconds without relying on banks, payment processors, or other intermediaries. Once just a concept, this has now become a reality with blockchain. The most exciting part of blockchain is its widespread impact across industries and economies through its decentralised nature. From finance and banking to energy, healthcare, and education, blockchain is rewriting the rules of security and accountability. In 2025, it’s reshaping the narrative around trust. With advanced security advancements, blockchain is fortifying assets, ensuring compliance, and setting new standards for a more transparent and resilient digital world.",
+    date: "Feb 20, 2025",
+    link: "https://etedge-insights.com/technology/top-five-innovations-in-blockchain-security-to-watch-in-2025/#google_vignette",
+    image: "/assets/images/media/et.png",
+    tags: "ET Edge",
+  },
+  {
+    heading:
+      "Budget 2025 Highlights Expectations: Railway, GST, Tech, Real Estate, and Education Among Key Focus Areas",
+    description:
+      "The Union Budget 2025 is set to be presented on February 1 will mark a significant moment as it is the second full budget under the Modi 3.0 government.  Finance Minister Nirmala Sitharaman, who will be delivering her eighth consecutive budget speech, is expected to address a wide range of issues.",
+    date: "Jan 27, 2025",
+    link: "https://zeenews.india.com/economy/live-updates/budget-2025-expectations-live-updates-income-tax-slab-salaried-employees-infra-defence-railway-stock-market-education-fm-nirmala-sitharaman-union-budget-latest-news-2849104.html",
+    image: "/assets/images/media/zee.png",
+    tags: "Zee News",
+  },
+  {
+    heading:
+      "Union Budget 2025 Expectations Live: Finance Minister to meet bank heads on Wed to review financial inclusion schemes",
+    description:
+      "Union Budget 2025 Expectations Live: As the Budget 2025 draws closer, individual taxpayers across the country are drafting their wishlists, hoping that Finance Minister Nirmala Sitharaman will address their concerns when she unveils the annual budget on February 1.",
+    date: "Jan 12, 2025",
+    link: "https://www.moneycontrol.com/budget/union-budget-2025-expectations-live-news-updates-fm-nirmala-sitharaman-income-tax-reforms-gst-simplification-january-12-liveblog-12908206.html",
+    image: "/assets/images/media/money_control.png",
+    tags: "Money Control",
+  },
+  {
+    heading:
+      "Data Localisation To Consent Challenges: How Draft DPDP Act Impacts Web3 And Blockchain",
+    description:
+      "The draft rules for the Digital Personal Data Protection (DPDP) Act, 2023, released on 3 January by the Ministry of Electronics and Information Technology (MietY), have sparked extensive debate, especially within India's Web3 community which already faces tall regulatory and compliance challenges. While the Act’s intent to strengthen data privacy and security has been applauded, industry stakeholders have raised concerns about the Act’s provisions, such as data localisation, cross-border data transfer restrictions and explicit consent requirements, which may conflict with the core principles of blockchain and Web3.",
+    date: "Jan 11, 2025",
+    link: "https://www.businessworld.in/article/data-localisation-to-consent-challenges-how-draft-dpdp-act-impacts-web3-and-blockchain-544543",
+    image: "/assets/images/media/bw_business.png",
+    tags: "BW Businessworld",
+  },
+  {
+    heading:
+      "What’s Next for Blockchain Security in 2025?",
+    description:
+      "The blockchain industry is racing ahead, redefining global financial systems with more innovative and interconnected frameworks. Reflecting on 2024, the year has already delivered remarkable progress. The Web3 ecosystem alone has secured an impressive $462 million in investments during its first nine months, highlighting the sector’s unstoppable growth. With its versatile nature, blockchain technology ensures transparency and efficiency. This ranges from creating secure, time-stamped, and encrypted transaction records to enabling real-time fraud prevention and anti-money laundering efforts.",
+    date: "Jan 8, 2025",
+    link: "https://theinfoedge.com/whats-next-for-blockchain-security-in-2025/",
+    image: "/assets/images/media/info_edge.png",
+    tags: "Info Edge",
+  },
+  {
+    heading:
+      "China's state-owned enterprises lead blockchain innovation",
+    description:
+      "China state and enterprises are taking centre stage in the countries efforts to lead the world in blockchain technology the government as made significant investments and introduced strategic policies to accelerate blockchain adoption viewing it as a key technology for modernising industries and boosting economic growth",
+    date: "November 19, 2024",
+    link: "https://blockwind.news/2024/11/19/chinas-state-owned-enterprises-lead-blockchain-innovation/",
+    image: "/assets/images/media/cryptotimes1.png",
+    tags: "Odisha Biz news",
+  },
+  {
+    heading:
+      "SecureDApp: Pioneering Unbreakable Blockchain Security in the Dynamic Web3 Landscape",
+    description:
+      "SecureDApp, founded by Abhishek Singh, is transforming blockchain security in the evolving Web3 space. With over 15 years in the dot-com and media industries, Singh identified critical vulnerabilities and gaps in blockchain security, which drove his pivot into this fast-growing field. As blockchain applications expand across industries, SecureDApp is leading the charge in protecting digital assets and decentralized applications. The company’s innovative solutions, like Solidity Shield and SecureWatch, have positioned it as a crucial player in securing the future of decentralized technology. In this interview, Singh dives into the insights that shaped SecureDApp’s approach, the company’s commitment to Web3 security, and its mission to build a safer digital future",
+    date: "November 11, 2024",
+    link: "https://www.prittleprattlenews.com/technology/securedapp/",
+    image: "/assets/images/media/prittle_prattle.png",
+    tags: "Prittle Prattle",
+  },
+  {
+    heading:
+      "5 Cybersecurity Startups Poised to Lead India’s Digital Transformation in 2025",
+    description:
+      "As India continues its journey toward becoming a digital-first economy, protecting critical infrastructure, data, and systems from cyber threats is more important than ever. With the rise in ransomware attacks, data breaches, and increasingly sophisticated cybercrime, several startups are stepping up with innovative solutions that promise to transform the country’s cybersecurity landscape.",
+    date: "December 17, 2024",
+    link: "https://cxotoday.com/specials/5-cybersecurity-startups-poised-to-lead-indias-digital-transformation-in-2025/",
+    image: "/assets/images/media/cxo_today.png",
+    tags: "CXO Today",
+  },
+  {
+    heading:
+      "SecureDapp launches SecureWatch",
+    description:
+      "SecureDapp launches SecureWatch, a real-time threat detection tool, to tackle rising cyber threats in blockchain",
+    date: "October 24, 2024",
+    link: "https://odishabiznewz.com/technology-news/securedapp-launches-securewatch/",
+    image: "/assets/images/media/techie_expert.png",
+    tags: "Odisha Biz news",
+  },
+  {
+    heading:
+      "SecureDapp launches SecureWatch, a real-time threat detection tool",
+    description:
+      "SecureDapp, a leading blockchain security platform, has launched SecureWatch, a real-time threat detection and mitigation tool designed to protect industries leveraging blockchain technology at IIT Kanpur’s C3iHub’s Conference on Emerging Trends in Cybersecurity. With a focus on safeguarding critical digital assets, SecureWatch aims to provide security for sectors including financial services, supply chains, healthcare, insurance, real estate, and government, addressing the rising cybersecurity challenges of today’s digital world.",
+    date: "October 24, 2024",
+    link: "https://www.techiexpert.com/securedapp-launches-securewatch-a-real-time-threat-detection-tool/",
+    image: "/assets/images/media/techie_expert.png",
+    tags: "Techie Expert",
+  },
+  {
+    heading:
+      "SecureDapp launches SecureWatch, a real-time threat detection tool, to tackle rising cyber threats in blockchain",
+    description:
+      "SecureDapp, a leading blockchain security platform, has launched SecureWatch, a real-time threat detection and mitigation tool designed to protect industries leveraging blockchain technology at IIT Kanpur’s C3iHub’s Conference on Emerging Trends in Cybersecurity. With a focus on safeguarding critical digital assets, SecureWatch aims to provide security for sectors including financial services, supply chains, healthcare, insurance, real estate, and government, addressing the rising cybersecurity challenges of today’s digital world.",
+    date: "October 24, 2024",
+    link: "https://www.indianstartuptimes.com/policy-press-release/securedapp-launches-securewatch-a-real-time-threat-detection-tool-to-tackle-rising-cyber-threats-in-blockchain/",
+    image: "/assets/images/media/indian_startup_times.png",
+    tags: "Indian Startup Times",
+  },
+  {
+    heading:
+      "SecureDApp CEO Abhishek Singh on Revolutionizing Blockchain Security for Web3",
+    description:
+      "In an interview with TimesTech, Abhishek Singh, Co-founder and CEO of SecureDApp, discussed how his company is reshaping blockchain security. With advanced tools for smart contract monitoring and real-time transaction tracking, SecureDApp aims to strengthen the Web3 ecosystem by reducing security risks and fostering greater adoption globally.",
+    date: "October 18, 2024",
+    link: "https://timestech.in/securedapp-ceo-abhishek-singh-on-revolutionizing-blockchain-security-for-web3/",
+    image: "/assets/images/media/times_tech.png",
+    tags: "Times Tech",
+  },
+  {
     heading: "Transforming Blockchain Security and Preventing Cyber Threat",
     description:
       "For blockchain to reach its full potential, businesses must address its security challenges, writes Abhishek Singh, Co-founder and CEO of blockchain start-up SecureDApp.",
@@ -47,6 +237,16 @@ export const mediaData = [
     link: "https://yourstory.com/2024/08/future-blockchain-security-emerging-trends-technologies",
     image: "/assets/images/media/yourstory.png",
     tags: "Yourstory",
+  },
+  {
+    heading:
+      "Shielding the Future: Top 10 Cybersecurity Startups Transforming India’s Digital Landscape",
+    description:
+      "In our interconnected world, cybersecurity is vital for protecting against evolving threats. Technologies like cloud computing, IoT, and AI/ML are transforming industries, making cybersecurity crucial for securing digital infrastructure and ensuring safe transactions.",
+    date: "August 8, 2024",
+    link: "https://digitalterminal.in/trending/shielding-the-future-top-10-cybersecurity-startups-transforming-indias-digital-landscape",
+    image: "/assets/images/media/digitalterminal.png",
+    tags: "Digital Terminal",
   },
   {
     heading: "Q&A: Securing the Future of Web3 with SecureDApp’s Co-Founders",

@@ -18,7 +18,7 @@
 }
 
 .hero-header-line {
-  @apply w-32 lg:h-3 border-b border-[#FF6A55];
+  @apply w-32 lg:h-3;
 }
 
 .hero-header-right {

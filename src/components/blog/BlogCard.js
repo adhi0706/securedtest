@@ -31,10 +31,7 @@ function BlogCard({ details, isMedia = false }) {
     <div
       className="blog-card"
       onClick={() => {
-        details.url
-          ? navigate.push(`/blog/${details.url.replace(":", "")}`)
-          : typeof window !== "undefined" &&
-            window.open(details.link.replace(":", ""));
+        details.url && navigate.push(`/blog/${details.url.replace(":", "")}`);
       }}
     >
       <div className="blog-card-header">
@@ -61,15 +58,26 @@ function BlogCard({ details, isMedia = false }) {
         </div>
         <div className="blog-card-body-header">{details.heading}</div>
         <div className="blog-card-body-preview">{preview}</div>
-        <div className="blog-card-body-button">
-          <Button
-            text="Read more"
-            filled={true}
-            blogButton={true}
-            onClick={() => {
-              !isMedia && navigate.push(`/blog/${details.url}`);
-            }}
-          />
+        <div className="search-input-box">
+          {isMedia ? (
+            <a
+              href={details.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="blog-card-body-button"
+            >
+              Read More
+            </a>
+          ) : (
+            <Button
+              text="Read more"
+              filled={true}
+              blogButton={true}
+              onClick={() => {
+                navigate.push(`/blog/${details.url}`);
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
