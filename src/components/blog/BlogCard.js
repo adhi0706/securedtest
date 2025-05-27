@@ -71,6 +71,7 @@ function BlogCard({ details, isMedia = false }) {
           ) : (
             <Button
               text="Read more"
+              className="blog-card-body-button"
               filled={true}
               blogButton={true}
               onClick={() => {

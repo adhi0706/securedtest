@@ -32,5 +32,5 @@
 }
 
 .blog-card-body-button {
-  @apply mt-auto w-full flex justify-center items-center;
+  @apply mt-auto w-full flex justify-center items-center bg-transparent border-none text-white;
 }
