@@ -28,13 +28,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/cadineshkherodia/",
   },
   {
-    name: "Akshit Mokani",
-    designation: "Manager Community",
-    image: "/assets/images/team/akshit.png",
-    twitter: "https://x.com/akshit_mokani",
-    linkedin: "https://www.linkedin.com/in/akshit-mokani",
-  },
-  {
     name: "Thejaswi PB",
     designation: "Head HR",
     image: "/assets/images/team/thejaswi.png",
@@ -49,11 +42,32 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/advaryaman007",
   },
   {
-    name: "Manish Kumar",
-    designation: "Growth & Delivery Advisor",
-    image: "/assets/images/team/manish.png",
-    twitter: "https://x.com/manishimt2009",
-    linkedin: "https://www.linkedin.com/in/manish-kumar-9a7a2615/",
+    name: "Prasanna Lohar",
+    designation: "Advisor - Growth & BD",
+    image: "/assets/images/team/prasanna.png",
+    twitter: "https://x.com/LoharPrasanna",
+    linkedin: "https://www.linkedin.com/in/prasannalohar",
+  },
+  {
+    name: "Kunal Chowdhury",
+    designation: "Community & Content",
+    image: "/assets/images/team/kunal.png",
+    twitter: "https://x.com/KunalCh38207888",
+    linkedin: "https://www.linkedin.com/in/kunal-chowdhury-046149176",
+  },
+  {
+    name: "Karan Sontakke",
+    designation: "Assitant Mananger Growth",
+    image: "/assets/images/team/karan.png",
+    twitter: "https://x.com/AIA_Ken",
+    linkedin: "https://www.linkedin.com/in/karan-sontakke",
+  },
+  {
+    name: "Athindra Kowjalgi",
+    designation: "Growth Associate",
+    image: "/assets/images/team/athindra.png",
+    twitter: "https://x.com/AthindraK21",
+    linkedin: "https://www.linkedin.com/in/athindrakowjalgi25",
   },
 ];
 
