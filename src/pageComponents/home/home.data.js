@@ -5,10 +5,27 @@ export const faqsData = [
       q: "What is SecureDApp?",
       a: "SecureDApp is a leading blockchain security firm specializing in smart contract audits, decentralized application (DApp) development, and comprehensive compliance solutions. We help businesses secure their blockchain operations, ensuring their projects are safe, reliable, and aligned with industry standards",
     },
-    {
+        {
       id: 1,
       q: "What blockchain platforms does SecureDApp support?",
-      a: "SecureDApp supports many blockchain platforms, including Ethereum, Algorand, Solana, Aptos, Hyperledger, Arbitrum, Binance Smart Chain, etc. We cater to both Layer 1 and Layer 2 chains and custodial and non-custodial wallets, offering extensive coverage for your blockchain security needs.",
+      a: "SecureDApp supports many blockchain platforms. We cater to both Layer 1 and Layer 2 chains and custodial and non-custodial wallets, offering extensive coverage for your blockchain security needs.",
+      scrollList: [
+        "Ethereum",
+        "Algorand",
+        "Solana",
+        "Aptos",
+        "Hyperledger",
+        "Arbitrum",
+        "Binance Smart Chain",
+        "Polygon",
+        "Avalanche",
+        "Optimism",
+        "Fantom",
+        "Tron",
+        "Cosmos",
+        "Polkadot"
+      ],
+      isScrollable: true
     },
     {
       id: 2,

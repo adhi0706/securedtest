@@ -52,6 +52,8 @@ const FAQs = ({ faqHeaders = [], faqsData }) => {
     );
   };
 
+  
+
   const NextArrow = () => {
     return (
       <div className="faq-mobile-navbar-arrow-container" onClick={moveRight}>
@@ -81,7 +83,7 @@ const FAQs = ({ faqHeaders = [], faqsData }) => {
     },
   };
 
-  const Faq = ({ question, answer, onClick, isActive }) => {
+  const Faq = ({ question, answer, onClick, isActive, faq }) => {
     return (
       <div
         onClick={onClick}
@@ -91,10 +93,31 @@ const FAQs = ({ faqHeaders = [], faqsData }) => {
           <div className="flex flex-col space-y-2">
             <div className="faq-item-question">{question}</div>
             {isActive && (
-              <div
-                className="faq-item-answer"
-                dangerouslySetInnerHTML={{ __html: answer }}
-              ></div>
+              <>
+                <div
+                  className="faq-item-answer"
+                  dangerouslySetInnerHTML={{ __html: answer }}
+                ></div>
+                {faq && faq.isScrollable && (
+                  <div className="scrollable-list" style={{ 
+                    maxHeight: "150px", 
+                    overflowY: "auto",
+                    border: "1px solid #eee",
+                    borderRadius: "8px",
+                    padding: "10px",
+                    marginTop: "10px"
+                  }}>
+                    {faq.scrollList.map((item, index) => (
+                      <div key={index} className="platform-item" style={{
+                        padding: "8px 0",
+                        borderBottom: index < faq.scrollList.length - 1 ? "1px solid #f0f0f0" : "none"
+                      }}>
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -165,17 +188,18 @@ const FAQs = ({ faqHeaders = [], faqsData }) => {
         </div>
       )}
       <div className="faq-items">
-        {faqsData[topic].map((faq, index) => {
-          return (
-            <Faq
-              isActive={detail === index}
-              onClick={() => toggleDetail(index)}
-              question={faq.q}
-              answer={faq.a}
-            />
-          );
-        })}
-      </div>
+  {faqsData[topic].map((faq, index) => {
+    return (
+      <Faq
+        isActive={detail === index}
+        onClick={() => toggleDetail(index)}
+        question={faq.q}
+        answer={faq.a}
+        faq={faq}  // Add this line to pass the entire faq object
+      />
+    );
+  })}
+</div>
     </div>
   );
 };
