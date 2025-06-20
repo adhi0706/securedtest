@@ -103,6 +103,12 @@ const getTags = (tags) => {
   return tags.split(",");
 };
 
+// Get the category (first tag) from the tags string
+const getCategory = (tags) => {
+  // Split by comma and return the first item as the category
+  return getTags(tags)[0].trim().toLowerCase();
+};
+
 export const fetchBlogs = async (setBlogsData) => {
   var data = await getBlogs();
   setBlogsData && setBlogsData(data);
@@ -180,19 +186,69 @@ export default function BlogPost() {
     });
   };
 
-  const findRelated = () => {
-    if (blogDetails) {
-      const tagSet = new Set(getTags(blogDetails.tags.toLowerCase()));
+  // Helper function to check if a category contains any of the specified terms
+  const isCategoryRelated = (category, currentCategory) => {
+    // List of terms that should be considered related
+    const relatedTerms = ["token", "legal", "blockchain", "web3", "finance"];
 
+    // Direct match case
+    if (category === currentCategory) return true;
+
+    // Check if both categories contain any of the related terms
+    for (const term of relatedTerms) {
+      if (category.includes(term) && currentCategory.includes(term)) {
+        return true;
+      }
+    }
+
+    // Check if either category is one of the related terms
+    for (const term of relatedTerms) {
+      if (category === term || currentCategory === term) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // Helper function to extract key terms from a category
+  const getCategoryTerm = (category) => {
+    const keyTerms = ["token", "legal", "blockchain", "web3", "finance"];
+
+    // Find the first matching term in the category
+    for (const term of keyTerms) {
+      if (category.includes(term)) {
+        return term;
+      }
+    }
+
+    // If no specific term found, return the whole category
+    return category;
+  };
+
+  // Update the findRelated function to match posts with the same category term
+  const findRelated = () => {
+    if (blogDetails && blogsData) {
+      // Get the current blog's category
+      const currentCategory = getCategory(blogDetails.tags);
+
+      // Extract the key term from the category (e.g., "token" from "erc20 token")
+      const keyTerm = getCategoryTerm(currentCategory);
+
+      // Find blogs that share the same key term
       const related = blogsData.filter((blog) => {
-        const blogTags = getTags(blog.tags.toLowerCase());
-        return (
-          blog.heading !== blogDetails.title &&
-          blogTags.some((tag) => tagSet.has(tag))
-        );
+        // Skip the current blog and unpublished blogs
+        if (blog.url.replace(":", "") === url || blog.status !== 1) return false;
+
+        // Get the blog's category
+        const blogCategory = getCategory(blog.tags);
+
+        // Check if the blog category contains the same key term
+        return blogCategory.includes(keyTerm);
       });
 
-      setRelated(related);
+      // Limit to 3 related posts
+      setRelated(related.slice(0, 3));
     }
   };
 
@@ -201,8 +257,11 @@ export default function BlogPost() {
   }, [!blogsData && blogsData]);
 
   useEffect(() => {
-    findRelated();
-  }, [!blogDetails && blogDetails]);
+    // Only run findRelated when blogDetails and blogsData are available
+    if (blogDetails && blogsData) {
+      findRelated();
+    }
+  }, [blogDetails, blogsData]);
 
   useEffect(() => {
     getBlog();
@@ -482,14 +541,17 @@ export default function BlogPost() {
           </div>
           <div className="related-blogs">
             <div className="related-blogs-title">Related Posts</div>
-            {relatedArticles.length > 0 ? (
+            {relatedArticles && relatedArticles.length > 0 ? (
               <div className="related-blog-cards">
-                {relatedArticles.map((i) => (
-                  <BlogCard details={i} />
+                {relatedArticles.map((blog, index) => (
+                  <BlogCard key={`related-${index}`} details={blog} />
                 ))}
               </div>
             ) : (
-              <div className="no-related-posts">No Related Posts</div>
+              <div className="no-related-posts">
+                No related posts found in category:{" "}
+                {blogDetails ? getCategory(blogDetails.tags) : ""}
+              </div>
             )}
           </div>
         </div>
