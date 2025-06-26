@@ -2,12 +2,27 @@
 import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const MetaTags = ({ data }) => {
   // Use the provided data.url if available, otherwise fallback to path
   const url = data.url || (typeof window !== "undefined" ? window.location.href : "https://securedapp.io");
   const path = usePathname();
   var fullPath = "https://securedapp.io" + path;
+
+  const [blogImage, setBlogImage] = useState(null);
+
+  useEffect(() => {
+    fetch("https://139-59-5-56.nip.io:3443/getBlogList")
+      .then((res) => res.json())
+      .then((list) => {
+        const latest = list.find(
+          (item) => item.image && item.image.startsWith("http")
+        );
+        if (latest) setBlogImage(latest.image);
+      })
+      .catch(() => {});
+  }, []);
 
   const metadata = [
     {
@@ -101,6 +116,10 @@ const MetaTags = ({ data }) => {
     name: "securedapp.io",
   };
 
+  const metaImage =
+    blogImage ||
+    (data.image && (data.image.includes("https://") ? data.image : "https://securedapp.io" + data.image));
+
   return (
    <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -125,14 +144,10 @@ const MetaTags = ({ data }) => {
         {/* Open Graph Meta Tags (for social media) */}
         {<meta property="og:title" content={data.title} />}
         {<meta property="og:description" content={data.desc} />}
-        {data.image && (
+        {metaImage && (
           <meta
             property="og:image"
-            content={
-              data.image.includes("https://")
-                ? data.image
-                : "https://securedapp.io" + data.image
-            }
+            content={metaImage}
           />
         )}
         {<meta property="og:url" content={url} />}
@@ -142,14 +157,10 @@ const MetaTags = ({ data }) => {
         {<meta name="twitter:card" content="summary_large_image" />}
         {<meta name="twitter:title" content={data.title} />}
         {<meta name="twitter:description" content={data.desc} />}
-        {data.image && (
+        {metaImage && (
           <meta
             name="twitter:image"
-            content={
-              data.image.includes("https://")
-                ? data.image
-                : "https://securedapp.io" + data.image
-            }
+            content={metaImage}
           />
         )}
 
