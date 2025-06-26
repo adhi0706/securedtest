@@ -11,7 +11,7 @@ const MetaTags = ({ data }) => {
   var fullPath = "https://securedapp.io" + path;
 
   // Remove blogImage and metaImage logic, use default image only
-  const defaultImage = "/assets/images/ProductPages/ss/hero.webp";
+  const defaultImage = "/assets/images/Home.png";
 
   const metadata = [
     {
