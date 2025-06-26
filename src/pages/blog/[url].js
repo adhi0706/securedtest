@@ -315,6 +315,7 @@ export default function BlogPost() {
             desc: `Read an interesting blog from SecureDapp on "${blogDetails.preview}"`,
             image: blogDetails.image,
             keywords: blogDetails.tags,
+            url: `https://securedapp.io/blog/${url}`,
           }}
         />
       )}
