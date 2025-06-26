@@ -147,7 +147,7 @@ const MetaTags = ({ data }) => {
         {metaImage && (
           <meta
             property="og:image"
-            content={metaImage}
+            content="/public/assets/images/ProductPages/ss/hero.webp"
           />
         )}
         {<meta property="og:url" content={url} />}
