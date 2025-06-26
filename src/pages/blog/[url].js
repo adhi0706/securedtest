@@ -115,15 +115,62 @@ export const fetchBlogs = async (setBlogsData) => {
   return data;
 };
 
-export default function BlogPost() {
+export default function BlogPost({ blog }) {
   const router = useRouter();
-
   var { url } = router.query;
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  const [blogDetails, setBlogDetails] = useState();
+  // Use the blog prop for initial render
+  const [blogDetails, setBlogDetails] = useState(
+    blog
+      ? {
+          title: blog.heading,
+          preview:
+            blog.content
+              .replaceAll("[", " ")
+              .replaceAll("]", " ")
+              .replaceAll("/n", " ")
+              .replaceAll("\n", " ")
+              .replaceAll("/", " ")
+              .replaceAll("*", " ")
+              .slice(0, 300) + "...",
+          image: blog.image,
+          tags: blog.tags,
+          Date: new Date(blog.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+          Updated: new Date(blog.modifiedon).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+          Publisher: {
+            name: blog.author
+              ? authorsData.find((e) => e.to === blog.author)?.name
+              : "SecureDapp",
+            image: blog.author
+              ? authorsData.find((e) => e.to === blog.author)?.image
+              : "",
+          },
+          author: blog.author,
+          Index: extractHeadings(blog.content),
+          Summary:
+            blog.content
+              .replaceAll("[", " ")
+              .replaceAll("]", " ")
+              .replaceAll("/n", " ")
+              .replaceAll("\n", " ")
+              .replaceAll("/", " ")
+              .replaceAll("*", " ")
+              .slice(0, 300) + "...",
+          Content: renderContent(blog),
+        }
+      : undefined
+  );
   const [blogsData, setBlogsData] = useState();
   const [shortIndexView, setShortIndexView] = useState(true);
   const [relatedArticles, setRelated] = useState([]);
