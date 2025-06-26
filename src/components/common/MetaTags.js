@@ -4,8 +4,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
 
 const MetaTags = ({ data }) => {
+  // Use the provided data.url if available, otherwise fallback to path
+  const url = data.url || (typeof window !== "undefined" ? window.location.href : "https://securedapp.io");
   const path = usePathname();
-  var url = "https://securedapp.io" + path;
+  var fullPath = "https://securedapp.io" + path;
 
   const metadata = [
     {
@@ -134,7 +136,7 @@ const MetaTags = ({ data }) => {
           />
         )}
         {<meta property="og:url" content={url} />}
-        {<meta property="og:type" content="website" />}
+        {<meta property="og:type" content="article" />}
 
         {/* Twitter Meta Tags */}
         {<meta name="twitter:card" content="summary_large_image" />}
@@ -162,7 +164,7 @@ const MetaTags = ({ data }) => {
 
         {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link
           href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet"
