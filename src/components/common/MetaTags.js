@@ -2,7 +2,7 @@
 import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const MetaTags = ({ data }) => {
   // Use the provided data.url if available, otherwise fallback to path
@@ -10,19 +10,8 @@ const MetaTags = ({ data }) => {
   const path = usePathname();
   var fullPath = "https://securedapp.io" + path;
 
-  const [blogImage, setBlogImage] = useState(null);
-
-  useEffect(() => {
-    fetch("https://139-59-5-56.nip.io:3443/getBlogList")
-      .then((res) => res.json())
-      .then((list) => {
-        const latest = list.find(
-          (item) => item.image && item.image.startsWith("http")
-        );
-        if (latest) setBlogImage(latest.image);
-      })
-      .catch(() => {});
-  }, []);
+  // Remove blogImage and metaImage logic, use default image only
+  const defaultImage = "/assets/images/ProductPages/ss/hero.webp";
 
   const metadata = [
     {
@@ -116,10 +105,6 @@ const MetaTags = ({ data }) => {
     name: "securedapp.io",
   };
 
-  const metaImage =
-    blogImage ||
-    (data.image && (data.image.includes("https://") ? data.image : "https://securedapp.io" + data.image));
-
   return (
    <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -144,12 +129,7 @@ const MetaTags = ({ data }) => {
         {/* Open Graph Meta Tags (for social media) */}
         {<meta property="og:title" content={data.title} />}
         {<meta property="og:description" content={data.desc} />}
-        {metaImage && (
-          <meta
-            property="og:image"
-            content="/public/assets/images/ProductPages/ss/hero.webp"
-          />
-        )}
+        <meta property="og:image" content={defaultImage} />
         {<meta property="og:url" content={url} />}
         {<meta property="og:type" content="article" />}
 
@@ -157,12 +137,7 @@ const MetaTags = ({ data }) => {
         {<meta name="twitter:card" content="summary_large_image" />}
         {<meta name="twitter:title" content={data.title} />}
         {<meta name="twitter:description" content={data.desc} />}
-        {metaImage && (
-          <meta
-            name="twitter:image"
-            content={metaImage}
-          />
-        )}
+        <meta name="twitter:image" content={defaultImage} />
 
         {/* SEO Meta Tags */}
         {<meta name="robots" content="index, follow" />}
