@@ -24,7 +24,8 @@ export const faqsData = [
         "Tron",
         "Cosmos",
         "Polkadot",
-        "Scroll"
+        "Scroll",
+        "Xdc"
       ],
       isScrollable: true
     },
