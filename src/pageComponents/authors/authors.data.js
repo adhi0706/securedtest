@@ -470,7 +470,7 @@ export const authorsData = [
     image: "/assets/images/authors/kunal.png",
     name: "Mr. Kunal Chowdhury",
     designation: "Marketing Associate",
-    education: "MCA (Harvard School of Business)",
+    education: "Honours in Media Studies",
     twitter: "https://x.com/KunalCh38207888",
     linkedin: "https://www.linkedin.com/in/kunal-chowdhury-046149176",
 
