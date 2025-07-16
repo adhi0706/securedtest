@@ -25,7 +25,7 @@ export const faqsData = [
         "Cosmos",
         "Polkadot",
         "Scroll",
-        "Xdc"
+        "XDC Network"
       ],
       isScrollable: true
     },
