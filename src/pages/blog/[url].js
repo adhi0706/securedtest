@@ -322,11 +322,11 @@ export default function BlogPost({ blog }) {
             title: blog.heading,
             desc: `Read an interesting blog from SecureDapp on "${getMetaDescription(blog.content)}..."`,
             image:
-              blog.image && blog.image.startsWith("http")
-                ? blog.image
-                : `https://securedapp.io${
-                    blog.image.startsWith("/") ? "" : "/"
-                  }${blog.image || ""}`,
+              blog.image && typeof blog.image === "string" && blog.image.trim() !== "" && (blog.image.startsWith("http") || blog.image.startsWith("/"))
+                ? (blog.image.startsWith("http")
+                    ? blog.image
+                    : `https://securedapp.io${blog.image}`)
+                : "https://securedapp.io/assets/images/Home.png",
             keywords: blog.tags,
             url: `https://securedapp.io/blog/${blog.url.replace(":", "")}`,
           }}
