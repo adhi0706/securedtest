@@ -326,7 +326,7 @@ export default function BlogPost({ blog }) {
                 ? (blog.image.startsWith("http")
                     ? blog.image
                     : `https://securedapp.io${blog.image}`)
-                : "https://securedapp.io/assets/images/Home.png",
+                : "https://securedapp-v2.vercel.app/assets/images/Home.png",
             keywords: blog.tags,
             url: `https://securedapp.io/blog/${blog.url.replace(":", "")}`,
           }}
