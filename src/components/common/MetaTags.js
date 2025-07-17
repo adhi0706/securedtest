@@ -13,6 +13,12 @@ const MetaTags = ({ data }) => {
   // Remove blogImage and metaImage logic, use default image only
   const defaultImage = "/assets/images/Home.png";
 
+  // Ensure image is absolute URL
+  let imageUrl = data.image || defaultImage;
+  if (imageUrl && !imageUrl.startsWith("http")) {
+    imageUrl = "https://securedapp.io" + (imageUrl.startsWith("/") ? imageUrl : "/" + imageUrl);
+  }
+
   const metadata = [
     {
       title: "Blockchain Security & Smart Contract Audits | SecureDApp.io",
@@ -129,7 +135,7 @@ const MetaTags = ({ data }) => {
         {/* Open Graph Meta Tags (for social media) */}
         {<meta property="og:title" content={data.title} />}
         {<meta property="og:description" content={data.desc} />}
-        <meta property="og:image" content={defaultImage} />
+        <meta property="og:image" content={imageUrl} />
         {<meta property="og:url" content={url} />}
         {<meta property="og:type" content="article" />}
 
@@ -137,7 +143,7 @@ const MetaTags = ({ data }) => {
         {<meta name="twitter:card" content="summary_large_image" />}
         {<meta name="twitter:title" content={data.title} />}
         {<meta name="twitter:description" content={data.desc} />}
-        <meta name="twitter:image" content={defaultImage} />
+        <meta name="twitter:image" content={imageUrl} />
 
         {/* SEO Meta Tags */}
         {<meta name="robots" content="index, follow" />}
