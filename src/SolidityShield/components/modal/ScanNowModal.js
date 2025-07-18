@@ -37,6 +37,7 @@ const chainTypes = [
   "Celo",
   "zkSync Era",
   "Scroll",
+  "XDC Network",
 ];
 
 const ScanNowModalField = ({ label, children }) => {

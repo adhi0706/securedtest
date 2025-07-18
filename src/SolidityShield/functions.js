@@ -1018,6 +1018,7 @@ const fetchContractDetails = async (contractAddress, _chain) => {
       15: "https://api.celoscan.io/api", // Celo
       16: "https://api.zksync.io/api", // ZkSync Era
       17: "https://api.scrollscan.com/api", // Scroll
+      18: "https://api.xdcscan.com/api", // XDC Network
     };
 
 
@@ -1040,6 +1041,7 @@ const fetchContractDetails = async (contractAddress, _chain) => {
        15: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        16: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        17: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       18: "C8U4QX17IFZMP1Z94NNVV9P5QSTX9456BC",
      };
  
 

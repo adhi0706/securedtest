@@ -57,7 +57,7 @@ const teamData = [
   },
   {
     name: "Karan Sontakke",
-    designation: "Assitant Mananger Growth",
+    designation: "Assistant Mananger Growth",
     image: "/assets/images/team/karan.png",
     twitter: "https://x.com/AIA_Ken",
     linkedin: "https://www.linkedin.com/in/karan-sontakke",
