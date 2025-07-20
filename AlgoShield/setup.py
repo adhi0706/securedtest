@@ -36,7 +36,7 @@ setup(
     version="0.1.0",
     description="Algorand Multi-Language Vulnerability Scanner",
     long_description=long_description,
-    long_description_content_type="text/markdown", 
+    long_description_content_type="text/markdown",
     python_requires=">=3.8",
     install_requires=requirements,
     extras_require={
@@ -59,6 +59,8 @@ setup(
     },
     include_package_data=True,
     package_data={
-        "algorand_scanner": ["config/*.yaml", "config/*.json"],
+        "algorand_scanner": ["config/.yaml", "config/.json"],
     },
+    # 🔧 The Fix: Only include your scanner package!
+    packages=find_packages(include=["algorand_scanner", "algorand_scanner.*"]),
 )

@@ -56,11 +56,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "concurrently \"npm run dev:main\" \"npm run dev:algoshield\"",
-    "dev:main": "next dev -p 3000",
+    "dev": "next dev",
     "dev:algoshield": "cd AlgoShield/frontend/algorand-scanner-ui && npm run dev",
-    "build": "next build",
-    "start": "npx serve@latest ./build"
+    "build": "next build && npm run setup",
+    "setup": "cd AlgoShield && ./install.sh",
+    "start": "next start"
   },
   "eslintConfig": {
     "extends": [
