@@ -1,0 +1,66 @@
+.sss-overview-issues-card-container {
+  @apply w-full p-5 flex flex-col items-center justify-center;
+}
+
+.sss-overview-issues-card {
+  @apply w-full;
+}
+
+.sss-overview-issues-card-header {
+  @apply w-full flex justify-between items-center;
+}
+
+.sss-overview-issues-header-left {
+  @apply flex flex-col gap-y-1;
+}
+
+.sss-overview-issues-header-left-desc {
+  @apply text-xs text-[#969BA0] font-light;
+}
+
+.sss-overview-issues-header-right {
+}
+
+.sss-overview-issues-header-right-dropdown {
+  @apply w-[120px] md:w-[150px] lg:w-[200px] relative cursor-pointer py-1 md:py-3 px-2 md:px-5 bg-[#FAFAFA] rounded-full border border-tertiary;
+}
+
+.sss-overview-issues-header-right-dropdown-content {
+  @apply flex justify-between items-center;
+}
+
+.sss-overview-issues-header-right-dropdown-options {
+  @apply shadow-md w-full z-20 absolute left-0 bg-[#FAFAFA] border border-tertiary rounded-lg;
+}
+
+.sss-overview-issues-header-right-dropdown-option-container:hover {
+  @apply border border-tertiary rounded-lg;
+}
+
+.sss-overview-issues-header-right-dropdown-option {
+  @apply py-1 lg:py-3 px-4;
+}
+
+.sss-overview-issues-card-body {
+  @apply w-full;
+}
+
+.sss-overview-issues-card-chart-header {
+  @apply py-4 w-full flex flex-col md:flex-row justify-between items-center;
+}
+
+.sss-overview-issues-card-chart-header-text {
+  @apply w-full py-5 flex gap-x-3 justify-center md:justify-start;
+}
+
+.sss-overview-issues-card-chart-header-options {
+  @apply flex flex-col sm:flex-row sm:gap-x-3 gap-y-2 sm:gap-y-0 gap-x-0 items-center justify-center;
+}
+
+.sss-overview-issues-card-chart-header-option {
+  @apply cursor-pointer text-sm w-[120px] sm:w-[200px] lg:w-[180px] py-1 md:py-3 px-2  border rounded-xl text-center;
+}
+
+.sss-overview-issues-card-chart-main {
+  @apply w-full pt-6 flex items-start justify-start;
+}

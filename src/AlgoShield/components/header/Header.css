@@ -1,0 +1,46 @@
+.sss-header-container {
+  @apply w-full;
+}
+
+.sss-header {
+  @apply py-4 px-4 sm:px-8 flex justify-between items-center;
+}
+
+.sss-header-left {
+  @apply sm:w-1/2 flex gap-x-4 justify-start items-center;
+}
+
+.sss-header-center {
+  @apply sm:hidden flex-1 flex items-center justify-center;
+}
+
+.sss-header-sidebar-opener {
+  @apply cursor-pointer text-[#B2ABAB];
+}
+.sss-header-search-container {
+  @apply w-full hidden md:block;
+}
+
+.sss-header-search {
+  @apply w-5/6 font-light flex py-2 px-3 gap-x-3 items-center justify-start border border-[#F5F5F5] bg-white rounded-3xl shadow-sm;
+}
+
+.sss-header-search-input {
+  @apply w-full;
+}
+
+.sss-header-search-input:focus {
+  @apply outline-none;
+}
+
+.sss-header-right {
+  @apply flex gap-x-5 items-center justify-end;
+}
+
+.sss-header-right-calendar {
+  @apply hidden md:flex items-center justify-center gap-x-2 text-[#404040];
+}
+
+.sss-header-right-notifications {
+  @apply hidden md:block border rounded-full p-3 flex items-center justify-center;
+}

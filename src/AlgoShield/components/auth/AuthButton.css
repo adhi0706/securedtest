@@ -1,0 +1,6 @@
+.auth-button-container {
+}
+
+.auth-button {
+  @apply rounded-lg w-full p-4 font-semibold;
+}

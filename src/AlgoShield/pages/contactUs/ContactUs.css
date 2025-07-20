@@ -1,0 +1,59 @@
+.auth-input-field-div {
+  @apply w-full flex flex-col gap-y-1;
+}
+
+.auth-input-field-div-label {
+  @apply text-[#344054];
+}
+
+.contact-us-container {
+  @apply font-poppins min-h-screen flex justify-center items-center;
+}
+
+.contact-us {
+  @apply px-4 lg:px-0 lg:w-5/12 flex flex-col gap-y-4 items-center justify-center;
+}
+
+.contact-us-header {
+  @apply flex flex-col items-center gap-y-4 text-center;
+}
+
+.contact-us-header-label {
+  @apply text-[#12D576] font-semibold;
+}
+
+.contact-us-header-title {
+  @apply text-4xl lg:text-5xl font-semibold;
+}
+
+.contact-us-header-description {
+  @apply text-labelGray font-light;
+}
+
+.contact-us-body {
+  @apply pt-6 lg:pt-10 w-full flex flex-col gap-y-5;
+}
+
+.contact-us-body-name {
+  @apply flex flex-col lg:flex-row gap-y-5 lg:gap-x-4 lg:gap-y-0 justify-center items-center;
+}
+
+.contact-us-body-message {
+  @apply w-full flex flex-col gap-y-1;
+}
+
+.contact-us-body-message-textarea {
+  @apply p-4 border border-[#E4E4E7] rounded-lg w-full;
+}
+
+.contact-us-body-privacy {
+  @apply flex gap-x-2;
+}
+
+.contact-us-body-privacy-message {
+  @apply flex gap-x-1;
+}
+
+.contact-us-body-privacy-link {
+  @apply font-light underline;
+}

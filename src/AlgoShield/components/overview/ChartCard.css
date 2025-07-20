@@ -1,0 +1,4 @@
+.sss-chart-card-container {
+  @apply w-full bg-white rounded-xl;
+  box-shadow: 0px 2px 4px 0px rgba(62, 73, 84, 0.04);
+}

@@ -1,0 +1,128 @@
+.sss-pricing-plan-card-container {
+  @apply md:mx-4 md:min-h-[300px] xl:min-h-[280px] rounded-lg md:rounded-2xl border border-[#D2E6FF] bg-[#FAFAFA] flex items-center justify-center;
+}
+
+.sss-pricing-plan-card {
+  @apply w-full px-2 py-4 md:p-6 flex flex-col gap-y-5;
+}
+
+.sss-pricing-card-header {
+  @apply flex gap-x-4;
+}
+
+.sss-pricing-card-header-plan-type {
+  @apply text-sm;
+}
+
+.sss-pricing-card-body {
+  @apply w-full text-sm md:text-base flex justify-between items-baseline;
+}
+
+.sss-pricing-card-body-price {
+  @apply text-sm md:text-3xl font-semibold;
+}
+
+.sss-pricing-card-description {
+  @apply font-light text-sm md:text-base lg:h-[80px];
+}
+
+.sss-pricing-card-button-container {
+  @apply w-full;
+}
+
+.sss-pricing-card-button {
+  @apply w-full p-2 text-sm md:text-base rounded-lg border border-tertiary bg-tertiary active:bg-white flex justify-center items-center gap-x-2;
+}
+
+.sss-pricing-container {
+  @apply font-poppins h-screen;
+}
+
+.sss-pricing-plans-scrollable {
+  @apply overflow-x-auto;
+}
+
+.sss-pricing-plans {
+  @apply py-6 px-4 md:px-8 lg:px-12;
+}
+
+.sss-pricing-plan-headers {
+}
+
+.sss-pricing-plan-headers-cards {
+  @apply flex;
+}
+
+.sss-pricing-plan-headers-card-container {
+  @apply flex-1 w-full md:min-w-[300px];
+}
+
+.sss-pricing-plan-body {
+  @apply pt-8;
+}
+
+.sss-pricing-plan-details-container {
+  @apply w-full flex;
+}
+
+.sss-pricing-plan-detail-row {
+  @apply flex flex-col w-full md:min-w-[300px] text-xs md:text-base;
+}
+
+.sss-pricing-plan-detail-row-value-container {
+}
+
+.sss-pricing-plan-detail-row-value {
+  @apply h-[50px] py-3 border-b border-[#D2E6FF] flex items-center justify-center gap-x-2;
+}
+
+.sss-pricing-plan-detail-row-value-first {
+  @apply justify-start;
+}
+
+.sss-pricing-plan-detail-row-info-container {
+  @apply relative inline-block;
+}
+
+.sss-pricing-plan-detail-row-info {
+  @apply absolute top-1/2 left-full transform translate-x-[10px] -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-black text-white text-xs rounded py-1 px-2 whitespace-nowrap transition-opacity duration-300 flex flex-col gap-y-0.5;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #000 transparent transparent; /* Adjust the color of the pointer */
+  }
+}
+
+.sss-pricing-plan-footer {
+  @apply py-12 w-full px-4 md:px-8 lg:px-12;
+}
+
+.sss-pricing-plan-footer-buttons {
+  @apply py-4 w-full border-[#D2E6FF] bg-[#FAFAFA] flex flex-col md:flex-row justify-center items-center gap-x-0 gap-y-4 md:gap-x-4 md:gap-y-0;
+}
+
+.sas-pricing-plan-footer-button-container {
+}
+
+.sss-pricing-card-changer-buttons {
+  @apply pt-5 flex md:hidden  gap-x-2 items-center justify-center;
+}
+
+.sss-pricing-card-changer-button-container {
+  @apply h-8 w-8 flex items-center justify-center border rounded-full text-center;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.sss-pricing-card-changer-current-button {
+  @apply bg-tertiary;
+}
+
+.sss-pricing-card-changer-button {
+  @apply p-2;
+}

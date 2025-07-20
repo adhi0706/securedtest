@@ -1,0 +1,11 @@
+.auth-screen-container {
+  @apply font-poppins flex justify-center items-center min-h-screen;
+}
+
+.auth-screen {
+  @apply w-full lg:w-1/2 flex flex-col items-center;
+}
+
+.auth-screen-body {
+  @apply pt-12 px-4 w-full lg:w-3/4;
+}
