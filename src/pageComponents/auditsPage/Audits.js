@@ -118,6 +118,15 @@ const AuditsPageCard = ({ headers, details, children }) => {
   );
 };
 
+const convertGitHubUrl = (url) => {
+  if (url && url.includes("github.com") && url.includes("/blob/")) {
+    return url
+      .replace("github.com", "raw.githubusercontent.com")
+      .replace("/blob/", "/");
+  }
+  return url;
+};
+
 const AuditsPage = () => {
   let url;
   if (typeof window !== "undefined") {
@@ -158,7 +167,7 @@ const AuditsPage = () => {
           <img
             layout="intrinsic"
             style={{ marginRight: "12px", maxWidth: "90px" }}
-            src={data.image}
+            src={convertGitHubUrl(data.image)}
             alt={data.company}
           ></img>
         </div>
@@ -329,8 +338,9 @@ const AuditsPage = () => {
                   <div className="audits-page-body-logo-image">
                     <img
                       layout="intrinsic"
-                      src={currentAudit.image}
+                      src={convertGitHubUrl(currentAudit.image)}
                       alt={currentAudit.company}
+                      style={{ maxWidth: "90px" }}
                     />
                   </div>
                   <div className="audits-page-body-logo-desc">
