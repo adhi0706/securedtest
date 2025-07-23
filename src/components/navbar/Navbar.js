@@ -30,6 +30,9 @@ const Navbar = () => {
     case "/solidity-shield":
       nextPath = "/solidity-shield-scan";
       break;
+    case "/algoshield-product":
+      nextPath = "/algoshield";
+      break;
     case "/secure-watch":
       nextPath = "https://securewatch.securedapp.io/";
       break;

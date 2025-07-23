@@ -1,0 +1,66 @@
+.sss-scan-report-bar-container {
+  @apply w-full;
+}
+
+.sss-scan-report-bar {
+  @apply py-4 px-4 rounded-lg w-full flex justify-between items-center;
+}
+
+.sss-scan-report-screen-container {
+  @apply h-full py-4 px-2 lg:px-8 font-poppins;
+}
+
+.sss-scan-report-screen {
+}
+
+.sss-scan-report-header {
+  @apply font-semibold text-4xl;
+}
+
+.sss-scan-report-body-container {
+  @apply py-6;
+}
+
+.sss-scan-report-body {
+  @apply p-4 md:p-8 border border-[#D2E6FF] rounded-xl flex flex-col gap-y-8;
+}
+
+.sss-scan-report-body-header {
+  @apply flex flex-col gap-y-1;
+}
+
+.sss-scan-report-body-header-title {
+  @apply text-2xl;
+}
+
+.sss-scan-report-body-header-time {
+  @apply font-light;
+}
+
+.sss-scan-report-body-bars {
+  @apply flex flex-col gap-y-4;
+}
+
+.sss-scan-report-body-audit-stats {
+  @apply pt-3 flex flex-col gap-y-4;
+}
+
+.sss-scan-report-body-audit-title {
+  @apply text-2xl;
+}
+
+.sss-scan-report-body-audit-stats-table {
+  @apply px-6 py-3 border border-[#D2E6FF] rounded-xl flex flex-col;
+}
+
+.sss-scan-report-body-audit-stats-table-row {
+  @apply flex font-light gap-x-3 w-full py-3 border-[#D2E6FF];
+}
+
+.sss-scan-report-body-audit-stats-table-row-name {
+  @apply min-w-[210px] md:min-w-[350px];
+}
+
+.sss-scan-report-body-audit-stats-table-row-value {
+  @apply break-all flex-1;
+}

@@ -6,3 +6,5 @@ build/
 .env.local
 .env
 package-lock.json
+AlgoShield/algorand_scanner.egg-info/
+uploads/

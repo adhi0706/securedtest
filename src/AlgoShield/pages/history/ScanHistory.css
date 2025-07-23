@@ -1,0 +1,58 @@
+.sss-scan-history-container {
+  @apply py-4 px-2 lg:px-8 font-poppins;
+}
+
+.sss-scan-history {
+}
+
+.sss-scan-history-header-container {
+  @apply w-full flex justify-between items-center;
+}
+
+.sss-scan-history-header {
+  @apply font-semibold text-4xl;
+}
+
+.sss-scan-history-header-right {
+  @apply flex gap-x-3 justify-end items-center;
+}
+
+.sss-scan-history-header-button {
+  @apply px-2 py-1 cursor-pointer flex items-center justify-center gap-x-2 rounded-lg border border-[#DDE2E4] text-sm;
+}
+
+.sss-scan-history-header-button:hover {
+  border-color: black;
+}
+
+.sss-scan-history-body {
+  @apply pt-4;
+}
+
+.sss-scan-history-body-header {
+  @apply w-full;
+}
+
+.sss-scan-history-body-header-filter-container {
+  @apply flex gap-x-5 font-light text-sm;
+}
+
+.sss-scan-history-body-header-filter {
+  @apply cursor-pointer flex flex-col gap-y-2;
+}
+
+.sss-scan-history-body-header-filter-selected {
+  @apply font-normal;
+}
+
+.sss-scan-history-body-header-filter-under {
+  @apply w-full h-[1px] bg-[#E5EAEF];
+}
+
+.sss-scan-history-body-header-filter-under-selected {
+  @apply h-[2px] bg-black;
+}
+
+.sss-scan-history-footer {
+  @apply py-6 lg:py-8;
+}

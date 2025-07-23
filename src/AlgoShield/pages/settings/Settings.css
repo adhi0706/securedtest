@@ -1,0 +1,218 @@
+.sss-settings-screen-field-container {
+}
+
+.sss-settings-screen-field {
+  @apply flex flex-col gap-y-3;
+}
+
+.sss-settings-screen-field-label {
+}
+
+.sss-settings-screen-field-children {
+  @apply w-full;
+}
+
+.sss-settings-screen-input-text-field-container {
+  @apply w-[300px] md:w-[350px] lg:w-[400px];
+}
+
+.sss-settings-screen-input-text-field {
+  @apply py-3 px-4 rounded-lg border w-full;
+}
+
+.sss-settings-screen-container {
+  @apply h-full py-4 px-2 lg:px-8 font-poppins;
+}
+
+.sss-settings-screen {
+}
+
+.sss-settings-header {
+  @apply font-semibold text-4xl;
+}
+
+.sss-settings-body {
+  @apply py-4;
+}
+
+.sss-settings-body-header {
+  @apply w-full;
+}
+
+.sss-settings-body-header-filter-container {
+  @apply flex gap-x-5 font-light text-sm;
+}
+
+.sss-settings-body-header-filter {
+  @apply cursor-pointer flex flex-col gap-y-2;
+}
+
+.sss-settings-body-header-filter-selected {
+  @apply font-normal;
+}
+
+.sss-settings-body-header-filter-under {
+  @apply w-full h-[1px] bg-[#E5EAEF];
+}
+
+.sss-settings-body-header-filter-under-selected {
+  @apply h-[2px] bg-black;
+}
+
+.sss-settings-body-main {
+  @apply pt-6;
+}
+
+/* -------------- */
+/* Profile Screen */
+.sss-settings-body-profile-container {
+  @apply flex flex-col gap-y-8;
+}
+
+.sss-settings-body-profile-fields-row {
+  @apply flex flex-col md:flex-row gap-y-8 md:gap-x-8 md:gap-y-0;
+}
+
+.sss-settings-body-profile-checkboxes {
+  @apply flex flex-col gap-y-3;
+}
+
+.sss-settings-body-profile-checkbox {
+  @apply flex gap-x-4 text-[#809FB8] font-light;
+}
+
+.sss-settings-body-profile-button {
+  @apply flex items-start w-[250px];
+}
+/* -------------- */
+
+/* -------------- */
+/* Connected Accounts */
+.sss-settings-account-card-container {
+  @apply border-b;
+}
+
+.sss-settings-account-card {
+  @apply py-8 px-2 flex justify-between items-center w-full;
+}
+
+.sss-settings-account-card-left {
+  @apply flex gap-x-4 items-center justify-start;
+}
+
+.sss-settings-account-card-left-details {
+  @apply flex flex-col gap-y-0.5;
+}
+
+.sss-settings-account-card-left-details-title {
+  @apply font-semibold;
+}
+
+.sss-settings-account-card-left-details-desc {
+  @apply text-[#898989] font-light text-sm md:text-base;
+}
+
+.sss-settings-connected-accounts-container {
+  @apply bg-white rounded-lg shadow-lg;
+}
+
+.sss-settings-connected-accounts {
+  @apply p-6;
+}
+
+.sss-settings-connected-accounts-box {
+  @apply bg-[#F9F9F9] p-6 flex flex-col md:flex-row items-start gap-y-2 md:gap-x-3 md:gap-y-0 rounded-lg;
+}
+
+.sss-settings-connected-accounts-box-icon {
+  @apply w-1/12;
+}
+
+.sss-settings-connected-accounts-box-content {
+  @apply flex flex-col gap-y-1;
+}
+
+.sss-settings-connected-accounts-box-content-title {
+  @apply text-lg;
+}
+
+.sss-settings-connected-accounts-box-content-description {
+  @apply font-light text-sm;
+}
+
+.sss-settings-connected-accounts-socials {
+  @apply py-4;
+}
+
+.sss-settings-connected-accounts-footer {
+  @apply pt-4;
+}
+
+.sss-settings-connected-accounts-footer-buttons {
+  @apply w-full flex gap-x-4 justify-end items-center;
+}
+
+/* -------------- */
+
+/* -------------- */
+/* Notifications */
+.sss-notifications-section-container {
+}
+
+.sss-notifications-section {
+  @apply flex flex-col gap-y-3;
+}
+
+.sss-notifications-section-title {
+  @apply text-lg font-semibold;
+}
+
+.sss-notifications-section-description {
+  @apply w-full md:w-8/12 font-light text-sm text-[#5A5A5A];
+}
+
+.sss-notifications-section-children {
+  @apply text-sm font-light;
+}
+
+.sss-settings-notifications-container {
+  @apply bg-white rounded-lg shadow-lg;
+}
+
+.sss-settings-notifications {
+  @apply p-6 flex flex-col gap-y-8;
+}
+
+.sss-settings-notifications-email-notif-selections {
+  @apply flex flex-col gap-y-2;
+}
+
+.sss-settings-notifications-email-notif-selection {
+  @apply flex gap-x-3 items-center;
+}
+
+.sss-settings-notifications-email-news {
+  @apply flex flex-col gap-y-3;
+}
+
+.sss-settings-notifications-email-news-row {
+  @apply flex gap-x-3 items-center;
+}
+
+.sss-settings-notifications-sign-in {
+  @apply flex flex-col gap-y-2;
+}
+
+.sss-settings-notifs-sign-in-row {
+  @apply flex gap-x-3 items-center;
+}
+
+.sss-settings-notifs-sign-in-row-detail-container-title {
+  @apply text-base font-normal;
+}
+
+.sss-settings-notifs-sign-in-row-detail-container-desc {
+  @apply text-[#5A5A5A];
+}
+
+/* -------------- */

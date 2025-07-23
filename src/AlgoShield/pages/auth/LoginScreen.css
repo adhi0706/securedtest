@@ -1,0 +1,15 @@
+.login-screen-body-options {
+  @apply flex justify-between items-center font-light;
+}
+
+.login-screen-remember-me {
+  @apply flex gap-x-2;
+}
+
+.auth-screen-google {
+  @apply flex items-center justify-center gap-x-2;
+}
+
+.auth-logos-cards {
+  @apply flex gap-x-2 w-full  items-center;
+}

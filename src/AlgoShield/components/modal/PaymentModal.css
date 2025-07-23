@@ -1,0 +1,56 @@
+.sss-payment-modal-container {
+  @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-50;
+  z-index: 100;
+}
+
+.sss-payment-modal {
+  @apply px-4 py-6 m-2 lg:m-0 bg-primary dark:bg-secondary rounded-lg shadow-xl w-full lg:w-5/12 flex flex-col items-center gap-y-6 border border-[#A4CDFF];
+}
+
+.sss-payment-modal-header {
+  @apply w-full flex justify-between items-center;
+}
+
+.sss-payment-modal-header-title {
+  @apply w-full font-bold text-xl;
+}
+
+.sss-payment-modal-close-container {
+  @apply w-full flex justify-end items-center;
+}
+
+.sss-payment-modal-close-button {
+  @apply cursor-pointer;
+}
+
+.sss-payment-modal-body {
+  @apply px-8 w-full;
+}
+
+.sss-payment-modal-body-methods {
+  @apply flex flex-col gap-y-6;
+}
+
+.sss-payment-modal-body-method {
+  @apply w-full border rounded-2xl p-8 flex justify-between items-center;
+}
+
+.sss-payment-modal-body-method-image {
+  @apply w-[100px];
+}
+
+.sss-payment-modal-body-crypto-container {
+  @apply w-full flex flex-col items-center justify-center;
+}
+
+.sss-payment-modal-body-cyrpto-details {
+  @apply text-xl flex flex-col gap-y-3;
+}
+
+.sss-payment-modal-fotter {
+  @apply pt-4 w-full flex justify-between items-center;
+}
+
+.sss-payment-modal-footer-button {
+  @apply w-[120px];
+}

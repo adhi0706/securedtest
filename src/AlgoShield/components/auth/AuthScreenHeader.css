@@ -1,0 +1,11 @@
+.auth-screen-header {
+  @apply flex flex-col items-center justify-center text-center gap-y-6;
+}
+
+.auth-screen-header-title {
+  @apply text-3xl lg:text-5xl font-semibold;
+}
+
+.auth-screen-header-description {
+  @apply font-light w-2/3 text-labelGray;
+}
