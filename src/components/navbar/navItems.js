@@ -2,7 +2,6 @@ export const navItems = [
   {
     to: "",
     items: [
-      { name: "AlgoShield", to: "/algoshield-product" },
       { name: "Solidity Shield", to: "/solidity-shield" },
       { name: "Secure Watch", to: "/secure-watch" },
       { name: "Secure Trace", to: "/secure-trace" },

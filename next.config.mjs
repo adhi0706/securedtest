@@ -14,8 +14,8 @@ const nextConfig = {
     return config;
   },
 
-  // output: "export", // Commented out to enable API routes
-  // distDir: "./build", // Commented out to enable API routes
+  output: "export", // Outputs a Single-Page Application (SPA).
+  distDir: "./build", // Changes the build output directory to `./dist`.
   images: {
     unoptimized: true,
   },
