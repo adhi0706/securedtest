@@ -75,10 +75,6 @@ function MyApp({ Component, pageProps }) {
     router.asPath.includes("/solidity-shield-scan") &&
     router.asPath !== "/solidity-shield-scan/auth" &&
     router.asPath !== "/solidity-shield-scan/contact";
-  const isAlgoShieldScan =
-    router.asPath.includes("/algoshield-scan") &&
-    router.asPath !== "/algoshield-scan/auth" &&
-    router.asPath !== "/algoshield-scan/contact";
   const [isClient, setIsClient] = useState(false);
 
   // useEffect(() => {
@@ -100,17 +96,15 @@ function MyApp({ Component, pageProps }) {
           {isSolidityShieldScan && <ScanNowModal />}
           {isSolidityShieldScan && <PaymentModal />}
           {isSolidityShieldScan && <RequestQuoteModal />}
-          {(isSolidityShieldScan || isAlgoShieldScan) ? (
+          {isSolidityShieldScan ? (
             <MainLayout>
               <MetaTags
                 data={{
-                  title: isAlgoShieldScan ? "AlgoShield Scan" : "Solidity Shield Scan",
-                  desc: isAlgoShieldScan 
-                    ? "Get your Algorand smart contracts audited here by SecureDapps's AlgoShield with AI scanning."
-                    : "Get your smart contracts audited here by SecureDapps's Solidity Shield with AI scanning.",
+                  title: "Solidity Shield Scan",
+                  desc: "Get your smart contracts audited here by SecureDapps's Solidity Shield with AI scanning.",
                 }}
               />
-              {(isSolidityShieldScan || isAlgoShieldScan) && <Loader />}
+              {isSolidityShieldScan && <Loader />}
               <Component {...pageProps} />
             </MainLayout>
           ) : (
