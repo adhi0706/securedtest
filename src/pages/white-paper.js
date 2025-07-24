@@ -105,7 +105,7 @@ function WhitePaper() {
 					className="blog-cards"
 					style={{
 						display: "grid",
-						gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+						gridTemplateColumns: "repeat(3, 1fr)",
 						gap: "2rem",
 						justifyContent: "center",
 						padding: "0 1rem",
@@ -123,7 +123,7 @@ function WhitePaper() {
 								objectFit: "cover",
 								borderRadius: "0.75rem",
 							}}
-							style={{ minHeight: "420px" }}
+							style={{ minHeight: "420px", minWidth: "0" }}
 						/>
 					))}
 				</div>
