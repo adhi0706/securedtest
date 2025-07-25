@@ -56,7 +56,7 @@ function WhitePaperCard({ details }) {
             className="blog-card-header-image"
             src={details.image}
             alt={details.heading}
-            style={{ width: "100%", height: "400px", objectFit: "cover" }}
+            style={{ width: "100%", height: "500px", objectFit: "cover" }}
           />
         </div>
       </div>
