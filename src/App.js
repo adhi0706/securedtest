@@ -20,6 +20,8 @@ import SmartContractAudit from "./pages/service/SmartContractAudit/SmartContract
 import DappSecurityAudit from "./pages/service/DappSecurityAudit/DappSecurityAudit";
 import TokenAudit from "./pages/service/TokenAudit/TokenAudit";
 import Web3KYC from "./pages/service/Web3KYC/Web3KYC";
+import SoxCompliance from "./pages/service/SoxCompliance/SoxCompliance.js";
+import ITGCService from "./pages/service/ITGC/ITGCService";
 import Web3Security from "./pages/service/Web3Security/Web3Security";
 import BlockchainForensic from "./pages/service/BlockchainForensic/BlockchainForensic";
 import RwaAudit from "./pages/service/RwaAudit/RwaAudit";
@@ -107,6 +109,7 @@ function App() {
         <Route path="web3-security" element={<Web3Security />} />
         <Route path="blockchain-forensic" element={<BlockchainForensic />} />
         <Route path="rwa-audit" element={<RwaAudit />} />
+        <Route path="itgc-audit-services" element={<ITGCService />} />
         <Route path="crypto-compliance-aml" element={<CryptoComplianceAml />} />
         <Route
           path="decentralized-identity-did"
@@ -115,6 +118,7 @@ function App() {
         <Route path="nfts-development" element={<NftsDvelopment />} />
         <Route path="defi-development" element={<DefiDevelopment />} />
         <Route path="levelup-academy" element={<LevelUpAcademy />} />
+        <Route path="sox-compliance-sarbanes-oxley-compliance-audit" element={<SoxCompliance />} />
         <Route path="blog" element={<Blog />} />
         <Route path="blog/:url" element={<BlogPost />} />
         <Route path="media" element={<Media />} />
