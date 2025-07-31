@@ -41,6 +41,8 @@ export const navItems = [
           { name: "DApp Development", to: "/dapp-development" },
           { name: "NFTs Development", to: "/nfts-development" },
           { name: "DeFi Development", to: "/defi-development" },
+          { name: "SOX Compliance", to: "/sox-compliance-sarbanes-oxley-compliance-audit" },
+          { name: "ITGC Compliance", to: "/itgc-audit-services" },
         ],
       },
       {
