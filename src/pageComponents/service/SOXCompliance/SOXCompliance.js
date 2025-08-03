@@ -51,7 +51,7 @@ function SoxCompliance() {
             "SOX (Sarbanes-Oxley) Compliance refers to a set of financial and IT control standards mandated under the Sarbanes-Oxley Act of 2002. This US federal law aims to protect investors by improving the accuracy and reliability of corporate financial disclosures. SOX enforces strict internal controls and governance frameworks around financial reporting processes. <br/><br/>In the digital era, SOX Compliance also covers IT systems that manage financial data. This includes implementing Information Technology General Controls (ITGC), managing access rights, tracking system changes, securing data backups, and ensuring overall IT security. For Indian businesses operating globally, especially in BFSI, SaaS, IT services, and crypto sectors. SOX Compliance is essential for building trust, ensuring transparency, and meeting client or investor requirements."
           }
           buttonText={"Scan now"}
-          image={"/assets/images/ServicePages/itgc-1.png"}
+          image={"/assets/images/ServicePages/s1-1.png"}
         />
         <div>
           <div className="sox-compliance-section">
