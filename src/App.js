@@ -3,8 +3,7 @@ import { ToastContainer } from "react-toastify";
 import {
   Routes,
   Route,
-  BrowserRouter as Router,
-  useLocation,
+  BrowserRouter as Router,        
 } from "next/router";
 import Home from "./pages/home/HomePage";
 import { useEffect } from "react";
@@ -34,6 +33,7 @@ import Blog from "./pages/blog/Blog";
 import BlogPost from "./pages/blogpost/BlogPost";
 import Media from "./pages/media/Media";
 import AboutUs from "./pages/aboutUs/AboutUs";
+import WhitePaper from "./pages/white-paper";
 import RequestQuoteModal from "./components/modal/RequestQuoteModal";
 import SolidityShield from "./SolidityShield/index";
 import { useDispatch } from "react-redux";
@@ -131,6 +131,7 @@ function App() {
           path="solidity-shield-vulnerabilities"
           element={<VulnerabilityInfo />}
         />
+        <Route path="white-paper" element={<WhitePaper />} />
         <Route path="solidity-shield-scan/*" element={<SolidityShield />} />
       </Routes>
     </div>

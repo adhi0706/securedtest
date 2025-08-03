@@ -59,6 +59,8 @@ export const navItems = [
       { name: "About Us", to: "/about" },
       { name: "Our Authors", to: "/authors" },
       { name: "Media", to: "/media" },
+            {name: "White Papers", to: "/white-paper" },
+
     ],
     label: "Resources",
   },
