@@ -281,7 +281,12 @@ function WhitePaperCard({ details }) {
                       }}
                       onClick={() => {
                         setShowModal(false);
-                        window.open(details.pdfUrl, "_blank");
+                        const link = document.createElement("a");
+                        link.href = details.pdfUrl;
+                        link.download = "whitepaper.pdf"; // ✅ Force download name
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
                       }}
                     >
                       <svg
