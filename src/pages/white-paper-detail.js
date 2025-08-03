@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "next/router";
+import { useRouter } from "next/router";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/footer";
 import MetaTags from "../components/common/MetaTags";
@@ -108,7 +108,9 @@ const whitePaperData = [
 ];
 
 export default function WhitePaperDetail() {
-  const { url } = useParams();
+  const router = useRouter();
+  const { url } = router.query; // Get the [url] param from the route
+
   const paper = whitePaperData.find((item) => item.url === url);
 
   if (!paper) {
