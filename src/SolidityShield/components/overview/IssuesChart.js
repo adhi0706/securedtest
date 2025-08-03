@@ -72,7 +72,7 @@ const IssuesChart = () => {
         dispatch,
         email: localStorage.getItem("UserEmail"),
       });
-      console.log(issuesData);
+      // console.log(issuesData);
     }
     fetch();
   }, [!issuesData && issuesData]);

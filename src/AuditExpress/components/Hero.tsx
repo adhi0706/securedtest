@@ -469,7 +469,7 @@ const Hero = (props: Props) => {
         },
         body: JSON.stringify(jsonData),
       });
-      console.log(response);
+      // console.log(response);
       
 
       const endTime = performance.now();

@@ -133,7 +133,7 @@ const ScanNowModal = () => {
       setFile(null);
       setContract("");
     }
-    console.log(contract);
+    // console.log(contract);
   };
 
   const closeModal = () => {

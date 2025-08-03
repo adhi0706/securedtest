@@ -88,7 +88,7 @@ const ScanSummary = ({ firstTime }) => {
         email: localStorage.getItem("UserEmail"),
         dispatch,
       });
-      console.log(scanSummary);
+      // console.log(scanSummary);
     };
     fetch();
   }, [!scanSummary && scanSummary]);

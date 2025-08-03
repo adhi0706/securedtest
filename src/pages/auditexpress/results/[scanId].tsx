@@ -4,9 +4,9 @@ import ScanPage from "../../../AuditExpress/ScanPage"; // Adjust the path to whe
 const ScanResultPage = () => {
   const router = useRouter();
   const { scanId, score, vulnerabilityCount, lines, duration } = router.query;
-  console.log(scanId);
+  // console.log(scanId);
 
-  console.log(lines);
+  // console.log(lines);
 
   // Parse vulnerabilityCount from string back to object
   const parsedVulnerabilityCount = vulnerabilityCount
@@ -19,7 +19,7 @@ const ScanResultPage = () => {
   }
 
   // Construct resultData based on parsed query parameters
-  console.log(duration);
+  // console.log(duration);
 
   const resultData = {
     score: Number(score),
@@ -27,7 +27,7 @@ const ScanResultPage = () => {
     duration: Number(duration),
     vulnerabilityCount: parsedVulnerabilityCount,
   };
-  console.log(resultData);
+  // console.log(resultData);
 
   return <ScanPage scanId={scanId} resultData={resultData} />;
 };

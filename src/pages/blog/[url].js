@@ -303,7 +303,7 @@ export default function BlogPost({ blog }) {
       url.replace(":", "").replace("(", "").replace(")", "")
   );
 
-  console.log(currentBlog);
+  // console.log(currentBlog);
 
   // Helper to clean up blog content for meta description
   function getMetaDescription(content) {

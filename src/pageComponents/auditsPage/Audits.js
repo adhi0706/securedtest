@@ -189,7 +189,7 @@ const AuditsPage = () => {
   }
 
   async function fetch(e) {
-    console.log(e);
+    // console.log(e);
     const data = await getReport({ id: e, email: "" });
     data
       ? setReport({
@@ -240,7 +240,7 @@ const AuditsPage = () => {
           score: data.score,
         })
       : setReport();
-    console.log(data);
+    // console.log(data);
     var current = auditsData.find((item) => Number(item.id) === Number(id));
     setCurrentAudit(current);
   }

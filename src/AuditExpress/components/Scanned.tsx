@@ -104,7 +104,7 @@ const Scanned = () => {
             body: JSON.stringify({ page }),
           }
         );
-        console.log("Fetch Response:", response);
+        // console.log("Fetch Response:", response);
 
         if (!response.ok) {
           throw new Error(
@@ -113,7 +113,7 @@ const Scanned = () => {
         }
 
         const result: ApiResponse = await response.json();
-        console.log("API Result:", result);
+        // console.log("API Result:", result);
 
         const formattedData: ScanData[] = result.scans.map((scan) => ({
           id: scan.id,

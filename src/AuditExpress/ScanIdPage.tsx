@@ -196,7 +196,7 @@ const ScanPage: React.FC<{ id: any }> = ({ id }) => {
           { id: idNumber }
         );
 
-        console.log(response);
+        // console.log(response);
 
         const endTime = performance.now(); // Record the end time
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(2);
@@ -204,7 +204,7 @@ const ScanPage: React.FC<{ id: any }> = ({ id }) => {
 
         if (response.status === 200) {
           const fetchedData: ScanDetails = response.data;
-          console.log(fetchedData);
+          // console.log(fetchedData);
           setScanDuration(fetchedData.total_time_taken);
 
           if (!fetchedData) {

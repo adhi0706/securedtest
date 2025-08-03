@@ -43,7 +43,7 @@ export async function getBlogs() {
   const response = await fetch(apiUrl + "/getBlogList");
   let data = await response.json();
   data = data.filter((item) => item.status === 1);
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
@@ -57,11 +57,11 @@ export const getAudits = async () => {
   })
     .then(async (res) => {
       var data = await res.json();
-      console.log(data);
+      // console.log(data);
       return data;
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       toast.error("Error fetching audits");
     });
 };
@@ -244,7 +244,7 @@ export const payPhonpe = async ({ planid, email, couponCode }) => {
     });
 
     const data = await response2.json();
-    console.log(transactionid);
+    // console.log(transactionid);
 
     if (!data.status) {
       toast.error("Failed to proceed to payment! Try again.");
@@ -334,7 +334,7 @@ export const scanSubmit = async ({
         return;
       }
 
-      console.log(sourceCode);
+      // console.log(sourceCode);
 
       const blob = new Blob([sourceCode], { type: "text/plain" });
       const etherscanFile = new File([blob], `${companyName}.sol`, {
@@ -509,14 +509,14 @@ export const getScanSummaryData = async ({ dispatch, email }) => {
     userEmail: email,
     dispatch,
   });
-  console.log(history);
+  // console.log(history);
   var latestScan = history.reduce((max, item) => {
     return item.id > max.id ? item : max;
   }, history[0]);
 
   if (latestScan) {
     latestScan = await getReport({ id: latestScan.id, email });
-    console.log(latestScan);
+    // console.log(latestScan);
     var summary = `Scanned ${latestScan.contracts} contracts, ${
       latestScan.lines
     } lines of code and found ${Object.values(latestScan.findings).reduce(
@@ -622,7 +622,7 @@ export const getReport = async ({ id, email }) => {
     .then((data) => {
       var report = JSON.parse(data);
       console.log(id);
-      console.log(report);
+      // console.log(report);
       report = report[0].reportdata;
       report = JSON.parse(report);
 
