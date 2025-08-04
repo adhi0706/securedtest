@@ -21,7 +21,7 @@ const whitePaperData = [
 		heading: "Technical Architecture Whitepaper",
 		subHeading:
 			"Comprehensive Overview of SecuredApp's Technical Infrastructure",
-		pdfUrl: "/assets/whitepaper/technical_architecture.pdf",
+		pdfUrl: "/assets/whitepaper/smart-contract-security.pdf",
 		image: "/assets/whitepaper/technical-arch.png",
 		tags: "blockchain, web3",
 	},
