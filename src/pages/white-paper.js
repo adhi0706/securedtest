@@ -25,9 +25,18 @@ const whitePaperData = [
 		image: "/assets/whitepaper/technical-arch.png",
 		tags: "blockchain, web3",
 	},
+	{
+		id: 3,
+		heading: "SecureDApp Techstack Whitepaper",
+		subHeading:
+			"Deep Dive into SecureDApp's Technology Stack and Implementation Strategy",
+		pdfUrl: "/assets/whitepaper/SecureDApp_Techstack_Whitepaper.pdf",
+		image: "/assets/whitepaper/technical-arch.png",
+		tags: "blockchain, web3, techstack",
+	},
 ];
 
-const allowedTags = ["all", "blockchain", "healthcare", "web3"];
+const allowedTags = ["all", "blockchain", "healthcare", "web3", "techstack"];
 
 function WhitePaper() {
 	const [selectedTag, setSelectedTag] = useState("all");
