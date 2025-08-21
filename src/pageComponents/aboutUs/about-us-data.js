@@ -63,11 +63,18 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/karan-sontakke",
   },
   {
-    name: "Athindra Kowjalgi",
-    designation: "Growth Associate",
-    image: "/assets/images/team/athindra.png",
-    twitter: "https://x.com/AthindraK21",
-    linkedin: "https://www.linkedin.com/in/athindrakowjalgi25",
+    name: "Agyepong frank",
+    designation: "AVP, Business Development, Ghana & Africa Region",
+    image: "/assets/images/team/frank-securedapp.png",
+    twitter: "https://twitter.com/frank_agyepong",
+    linkedin: "https://www.linkedin.com/in/frank-agyepong-0b120621a",
+  },
+  {
+    name: "Gokul Priyan",
+    designation: "Software Developer",
+    image: "/assets/images/team/gokul-securedapp.png",
+    twitter: "https://x.com/Gokkull15",
+    linkedin: "https://www.linkedin.com/in/gokkull-s",
   },
 ];
 
