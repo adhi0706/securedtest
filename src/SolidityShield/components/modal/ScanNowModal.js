@@ -19,25 +19,35 @@ import { getUserData } from "../../redux/auth/authSlice";
 
 const sourceTypes = ["Github", "Contract Address", "Upload File"];
 const chainTypes = [
-  "Ethereum Mainnet",
-  "Polygon Mainnet",
-  "Sepolia",
-  "Polygon Amoy",
-  "Arbitrum Mainnet",
-  "Avalanche C-Chain",
-  "Base Mainnet",
-  "Binance Smart Chain Mainnet",
-  "Optimism",
-  "OpBNB",
-  "Polygon zkEVM",
-  "Fantom",
-  "Cronos",
-  "Linea",
-  "Gnosis Mainnet",
-  "Celo",
-  "zkSync Era",
-  "Scroll",
-  "XDC Network",
+  "Ethereum Mainnet",       // 0
+  "Polygon Mainnet",        // 1
+  "Sepolia",                // 2
+  "Polygon Amoy",           // 3
+  "Arbitrum Mainnet",       // 4
+  "Avalanche C-Chain",      // 5
+  "Base Mainnet",           // 6
+  "Binance Smart Chain",    // 7
+  "Optimism",               // 8
+  "opBNB",                  // 9
+  "Polygon zkEVM",          // 10
+  "Fantom",                 // 11
+  "Cronos",                 // 12
+  "Linea",                  // 13
+  "Gnosis Mainnet",         // 14
+  "Celo",                   // 15
+  "zkSync Era",             // 16
+  "Scroll",                 // 17
+  "XDC Network",            // 18
+  "Manta Pacific",          // 19
+  "Sonic Labs",             // 20
+  "GChain",                 // 21
+  "ZetaChain",              // 22
+  "Neo X",                  // 23
+  "Astar",                  // 24
+  "Soneium",                // 25
+  "Katana",                 // 26
+  "Hemi",                   // 27
+  "MintChain"               // 28
 ];
 
 const ScanNowModalField = ({ label, children }) => {

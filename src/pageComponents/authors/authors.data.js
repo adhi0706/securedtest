@@ -1,7 +1,7 @@
 export const authorsData = [
   {
     to: "karan",
-    image: "/assets/images/authors/karan.png",
+    image: "/assets/images/authors/karan_1.jpeg",
     name: "Mr. Karan Sontakke",
     designation: "Assistant Manager Marketing, MBA in Sales and Marketing",
     twitter: "https://x.com/AIA_Ken",
@@ -53,7 +53,7 @@ export const authorsData = [
   }, 
   {
     to: "kunal",
-    image: "/assets/images/authors/kunal.png",
+    image: "/assets/images/authors/kunal_2.jpeg",
     name: "Mr. Kunal Chowdhury",
     designation: "Marketing Associate, Honours in Media Studies ",
     twitter: "https://x.com/KunalCh38207888",
