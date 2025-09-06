@@ -47,7 +47,8 @@ const chainTypes = [
   "Soneium",                // 25
   "Katana",                 // 26
   "Hemi",                   // 27
-  "MintChain"               // 28
+  "MintChain",               // 28
+  "CoreDao"
 ];
 
 const ScanNowModalField = ({ label, children }) => {

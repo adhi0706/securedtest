@@ -1028,7 +1028,8 @@ const fetchContractDetails = async (contractAddress, _chain) => {
       25: "https://soneium.blockscout.com/api", // Soneium
       26: "https://explorer.katanarpc.com/api", // Katana
       27: "https://explorer.hemi.xyz/api", // Hemi
-      28: "https://explorer.mintchain.io/api" // MintChain
+      28: "https://explorer.mintchain.io/api", // MintChain
+      29: "https://scan.coredao.org/api"
     };
 
 
@@ -1062,6 +1063,7 @@ const fetchContractDetails = async (contractAddress, _chain) => {
        26: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        27: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        28: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       29: "63ff9ae2141e4f2981f4fcc844b266e4",
      };
  
 
