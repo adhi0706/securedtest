@@ -1019,6 +1019,17 @@ const fetchContractDetails = async (contractAddress, _chain) => {
       16: "https://api.zksync.io/api", // ZkSync Era
       17: "https://api.scrollscan.com/api", // Scroll
       18: "https://api.xdcscan.com/api", // XDC Network
+      19: "https://pacific-info.manta.network/api", // Manta Pacific
+      20: "https://explorer.soniclabs.com/api", // Sonic Labs
+      21: "https://gscan.xyz/api", // GChain
+      22: "https://explorer.mainnet.zetachain.com/api", // ZetaChain
+      23: "https://xexplorer.neo.org/api", // Neo X
+      24: "https://astar.subscan.io/api", // Astar
+      25: "https://soneium.blockscout.com/api", // Soneium
+      26: "https://explorer.katanarpc.com/api", // Katana
+      27: "https://explorer.hemi.xyz/api", // Hemi
+      28: "https://explorer.mintchain.io/api", // MintChain
+      29: "https://scan.coredao.org/api"
     };
 
 
@@ -1042,6 +1053,17 @@ const fetchContractDetails = async (contractAddress, _chain) => {
        16: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        17: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
        18: "C8U4QX17IFZMP1Z94NNVV9P5QSTX9456BC",
+       19: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       20: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       21: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       22: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       23: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       24: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       25: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       26: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       27: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       28: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+       29: "63ff9ae2141e4f2981f4fcc844b266e4",
      };
  
 

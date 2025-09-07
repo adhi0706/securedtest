@@ -237,7 +237,8 @@ export default function BlogPost({ blog }) {
       // Find blogs that share the same key term
       const related = blogsData.filter((blog) => {
         // Skip the current blog and unpublished blogs
-        if (blog.url.replace(":", "") === url || blog.status !== 1) return false;
+        if (blog.url.replace(":", "") === url || blog.status !== 1)
+          return false;
 
         // Get the blog's category
         const blogCategory = getCategory(blog.tags);
@@ -308,9 +309,7 @@ export default function BlogPost({ blog }) {
   // Helper to clean up blog content for meta description
   function getMetaDescription(content) {
     if (!content) return "";
-    return content
-      .replace(/\[|\]|\*|\n|\//g, " ")
-      .slice(0, 150);
+    return content.replace(/\[|\]|\*|\n|\//g, " ").slice(0, 150);
   }
 
   return (
@@ -319,16 +318,25 @@ export default function BlogPost({ blog }) {
       {blog && (
         <MetaTags
           data={{
-            title: blog.heading,
-            desc: `Read an interesting blog from SecureDapp on "${getMetaDescription(blog.content)}..."`,
+            title: blog.meta_tags || blog.heading,
+            desc:
+              blog.meta_desc ||
+              `Read an interesting blog from SecureDapp on "${getMetaDescription(
+                blog.content
+              )}..."`,
             image:
-              blog.image && typeof blog.image === "string" && blog.image.trim() !== "" && (blog.image.startsWith("http") || blog.image.startsWith("/"))
-                ? (blog.image.startsWith("http")
-                    ? blog.image
-                    : `https://securedapp.io${blog.image}`)
+              blog.image &&
+              typeof blog.image === "string" &&
+              blog.image.trim() !== "" &&
+              (blog.image.startsWith("http") || blog.image.startsWith("/"))
+                ? blog.image.startsWith("http")
+                  ? blog.image
+                  : `https://securedapp.io${blog.image}`
                 : "https://securedapp-v2.vercel.app/assets/images/Home.png",
-            keywords: blog.tags,
+            keywords: blog.prim_keys || blog.tags,
             url: `https://securedapp.io/blog/${blog.url.replace(":", "")}`,
+            // Additional meta fields for enhanced SEO
+            relatedKeywords: blog.rela_keys,
           }}
         />
       )}
