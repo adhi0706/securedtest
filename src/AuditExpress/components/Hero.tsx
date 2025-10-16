@@ -276,13 +276,47 @@ const Hero = (props: Props) => {
   };
 
 
+  // const extractCompilerVersion = (sourceCode: string): string | null => {
+  //   const pragmaRegex = /pragma solidity\s+([^;]+);/;
+  //   const match = sourceCode.match(pragmaRegex);
+  //   if (match && match[1]) {
+  //     return match[1].replace("^", "").trim();
+  //   }
+  //   return null;
+  // };
+
   const extractCompilerVersion = (sourceCode: string): string | null => {
-    const pragmaRegex = /pragma solidity\s+([^;]+);/;
-    const match = sourceCode.match(pragmaRegex);
-    if (match && match[1]) {
-      return match[1].replace("^", "").trim();
+    const pragmaRegex = /pragma solidity\s+([^;]+);/g;
+    let match;
+    const versions: { major: number; minor: number; patch: number; original: string }[] = [];
+  
+    const parseVersion = (v: string) => {
+      const parts = v.split(".").map(Number);
+      return { major: parts[0] || 0, minor: parts[1] || 0, patch: parts[2] || 0 };
+    };
+  
+    const compareVersions = (a: any, b: any) => {
+      if (a.major !== b.major) return b.major - a.major;
+      if (a.minor !== b.minor) return b.minor - a.minor;
+      return b.patch - a.patch;
+    };
+  
+    while ((match = pragmaRegex.exec(sourceCode)) !== null) {
+      const pragma = match[1].trim();
+      
+      // Match explicit version: 0.8.9, 0.7.6 etc.
+      const explicitVersionMatch = pragma.match(/\b\d+\.\d+\.\d+\b/);
+      if (explicitVersionMatch) {
+        const parsed = parseVersion(explicitVersionMatch[0]);
+        versions.push({ ...parsed, original: explicitVersionMatch[0] });
+      }
     }
-    return null;
+  
+    if (versions.length === 0) return null;
+  
+    // Sort and return the highest explicit version
+    const highest = versions.sort(compareVersions)[0];
+    return highest.original;
   };
 
   const extractContractName = (sourceCode: string): string | null => {
@@ -463,6 +497,8 @@ const Hero = (props: Props) => {
       const startTime = performance.now();
 
       const response = await fetch("https://139-59-5-56.nip.io:3443/analyzeAE", {
+        // const response = await fetch("http://localhost:8000/analyzeAE", {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -575,9 +611,9 @@ const Hero = (props: Props) => {
           <option className="text-black" value="">
             Select Source
           </option>
-          <option className="text-black" value="contract_address">
+          {/* <option className="text-black" value="contract_address">
             Contract Address
-          </option>
+          </option> */}
           <option className="text-black" value="github">
             GitHub
           </option>

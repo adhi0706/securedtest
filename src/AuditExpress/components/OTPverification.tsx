@@ -6,6 +6,8 @@ import { FaCheckCircle, FaTimes } from "react-icons/fa";
 const sendOTP = async ({ email }) => {
   try {
     const response = await fetch("https://139-59-5-56.nip.io:3443/expressOTP", {
+    // const response = await fetch("http://localhost:8000/expressOTP", {
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -19,6 +21,8 @@ const sendOTP = async ({ email }) => {
     } else {
       throw new Error(data.message || "OTP sending failed");
     }
+    // return { success: true, message:  "OTP sent successfully!" };
+
   } catch (error) {
     console.error("Error sending OTP:", error);
     throw new Error(error.message || "Failed to send OTP");
