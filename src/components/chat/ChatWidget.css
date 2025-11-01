@@ -1,0 +1,91 @@
+/* ChatWidget custom styles to ensure readability on dark backgrounds */
+
+/* Force readable text inside message bubbles */
+.message-list .rce-mbox-text,
+.message-list .rce-mbox-text * {
+    color: #e9f1ff !important;
+    white-space: pre-line !important;
+}
+
+/* Make titles/labels readable */
+.message-list .rce-mbox-title {
+    color: #c7d7ff !important;
+}
+
+/* Soften timestamp color */
+.message-list .rce-mbox-time {
+    color: rgba(148, 187, 233, 0.65) !important;
+}
+
+/* Base bubble styling */
+.message-list .rce-mbox {
+    background: linear-gradient(150deg, rgba(7, 30, 70, 0.92) 0%, rgba(4, 20, 46, 0.9) 95%) !important;
+    border: 1px solid rgba(47, 112, 203, 0.28) !important;
+    max-width: calc(100% - 18px) !important;
+    margin: 10px 8px !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 40px rgba(2, 9, 26, 0.45) !important;
+    backdrop-filter: blur(6px);
+}
+
+/* User (right) bubble accent */
+.message-list .rce-mbox.rce-mbox-right {
+    background: linear-gradient(140deg, #2ce6c2 0%, #1f7bff 100%) !important;
+    border-color: rgba(22, 135, 222, 0.35) !important;
+    color: #041225 !important;
+    box-shadow: 0 16px 36px rgba(21, 152, 203, 0.35) !important;
+}
+
+.message-list .rce-mbox.rce-mbox-right .rce-mbox-text,
+.message-list .rce-mbox.rce-mbox-right .rce-mbox-text *,
+.message-list .rce-mbox.rce-mbox-right .rce-mbox-title,
+.message-list .rce-mbox.rce-mbox-right .rce-mbox-title * {
+    color: #0a162f !important;
+}
+
+/* Ensure pointers inherit gradient blending */
+.message-list .rce-mbox-right .rce-mbox-right-notch {
+    filter: brightness(1) !important;
+}
+
+.message-list .rce-mbox .rce-mbox-left-notch {
+    filter: brightness(0.9) !important;
+}
+
+/* Improve quick-replies spacing when content grows */
+.rce-quick-replies {
+    overflow-x: auto;
+}
+
+/* Add comfortable padding to the scroll area so the first bubble never sits under the header */
+.message-list {
+    padding-top: 8px !important;
+}
+
+.cipher-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cipher-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.rce-quick-replies::-webkit-scrollbar {
+    display: none;
+}
+
+.rce-quick-replies {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Small-screen typography adjustments */
+@media (max-width: 420px) {
+
+    .message-list .rce-mbox-text,
+    .message-list .rce-mbox-text * {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+    }
+}

@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  poweredByHeader: false,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -14,8 +15,9 @@ const nextConfig = {
     return config;
   },
 
-  output: "export", // Outputs a Single-Page Application (SPA).
-  distDir: "./build", // Changes the build output directory to `./dist`.
+  // output: "export", // Outputs a Single-Page Application (SPA).
+  // distDir: "./build", // Changes the build output directory to `./dist`.
+  // NOTE: Removed static export so that Next.js API Routes are enabled for the chatbot backend.
   images: {
     unoptimized: true,
   },

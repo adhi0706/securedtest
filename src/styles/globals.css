@@ -153,35 +153,38 @@ body {
 
 @keyframes grow {
   from {
-      transform: scale(0.9);
-      opacity: 0.8;
+    transform: scale(0.9);
+    opacity: 0.8;
   }
+
   to {
-      transform: scale(1);
-      opacity: 1;
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes shrink {
   from {
-      transform: scale(1.05);
-      opacity: 1;
+    transform: scale(1.05);
+    opacity: 1;
   }
+
   to {
-      transform: scale(1);
-      opacity: 1;
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 /* Animation for network type modal */
 @keyframes slideUp {
   from {
-      transform: translateY(100px);
-      opacity: 0;
+    transform: translateY(100px);
+    opacity: 0;
   }
+
   to {
-      transform: translateY(0);
-      opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -199,4 +202,3 @@ body {
   max-height: 300px;
   overflow-y: auto;
 }
-
