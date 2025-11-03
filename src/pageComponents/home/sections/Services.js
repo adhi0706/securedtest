@@ -96,6 +96,16 @@ const servicesData = [
   },
   {
     id: 10,
+    title: "SecureX DID",
+    name: "SecureX DID",
+    desc: "Decentralized identifier (DID) infrastructure that lets enterprises issue and manage verifiable credentials with Web3-grade security while keeping user data sovereign.",
+    alt: "",
+    to: "https://securexdid.com",
+    external: true,
+    image: "/assets/images/ServicePages/s5-hero.webp",
+  },
+  {
+    id: 11,
     title: "NFT Development",
     name: "NFT Development",
     desc: "Offering top-notch NFT development services has significantly impacted the blockchain world, with applications in digital art, gaming, and more.",
@@ -103,7 +113,7 @@ const servicesData = [
     to: "/nfts-development",
   },
   {
-    id: 11,
+    id: 12,
     title: "DeFi Development",
     name: "DeFi Development",
     desc: "DeFi is evolving rapidly compared to centralized finance systems, with new applications emerging frequently. We specialize in crafting innovative DeFi solutions tailored to your needs, whether offering or receiving financial services.",
@@ -112,7 +122,7 @@ const servicesData = [
     image: "/assets/images/ServicePages/s12-hero.png",
   },
   {
-    id: 12,
+    id: 13,
     title: "Levelup Academy",
     name: "LevelUp academy",
     desc: "SecureDApp's flagship initiative aims to foster blockchain talent and innovation across Indian universities and colleges.",
@@ -127,6 +137,17 @@ const Services = () => {
 
   const [selectedService, setService] = useState(0);
   let sliderRef = useRef(null);
+
+  const handleServiceNavigation = () => {
+    const { to, external } = servicesData[selectedService] || {};
+    if (!to) return;
+    if (external) {
+      typeof window !== "undefined" &&
+        window.open(to, "_blank", "noopener,noreferrer");
+    } else {
+      navigate.push(to);
+    }
+  };
 
   function moveLeft() {
     if (selectedService === 0) return;
@@ -226,6 +247,7 @@ const Services = () => {
           {servicesData.map((service, index) => {
             return (
               <div
+                key={service.id}
                 onClick={() => setService(index)}
                 className={`services-mobile-navbar-item ${
                   service.id === selectedService && "selected-mobile-navbar"
@@ -247,11 +269,7 @@ const Services = () => {
             {servicesData[selectedService].desc}
           </div>
           <div className="services-content-left-button">
-            <Button
-              onClick={() => navigate.push(servicesData[selectedService].to)}
-              text={"Get Started"}
-              filled={true}
-            />
+            <Button onClick={handleServiceNavigation} text={"Get Started"} filled={true} />
           </div>
         </div>
         <div className="services-content-right">
