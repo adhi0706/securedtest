@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { rateLimit } from "../../utils/RateLimit";
+import { rateLimit } from "../../utils/rateLimit";
 
 const REQUIRED_FIELDS = ["name", "email", "phone", "company"];
 
