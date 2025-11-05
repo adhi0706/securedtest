@@ -2,6 +2,8 @@ import { Provider } from "react-redux";
 import { mainStore } from "../redux/store";
 import "../styles/globals.css";
 import { ToastContainer } from "react-toastify";
+import "../components/chat/ChatWidget.css";
+import "react-chat-elements/dist/main.css";
 
 import "../components/common/ProductServiceHero.css";
 import "../components/common/BrandLogos.css";

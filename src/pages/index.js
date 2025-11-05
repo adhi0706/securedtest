@@ -9,6 +9,7 @@ import {
 } from "../redux/slices/main/homeSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import ChatWidget from "../components/chat/ChatWidget";
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export default function Index() {
   return (
     <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary">
       <Home />
+      <ChatWidget bottomOffset={100} rightOffset={16} mobileBottomOffset={160} />
     </div>
   );
 }

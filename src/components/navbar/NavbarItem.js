@@ -54,7 +54,12 @@ const NavbarItem = ({
               {items.map((item) => {
                 return (
                   item["to"] && (
-                    <Link className="nested-navbar-item" href={item["to"]}>
+                    <Link
+                      className="nested-navbar-item"
+                      href={item["to"]}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                    >
                       <p>{item["name"]}</p>
                     </Link>
                   )
@@ -76,6 +81,8 @@ const NavbarItem = ({
                             <Link
                               href={child.to}
                               className="nested-navbar-items-services-card-col-item"
+                              target={child.external ? "_blank" : undefined}
+                              rel={child.external ? "noopener noreferrer" : undefined}
                             >
                               <p>{child.name}</p>
                             </Link>
