@@ -585,6 +585,7 @@ export default function BlogPost({ blog }) {
 
 // 1. Define `getStaticPaths` to pre-render dynamic blog URLs
 export async function getStaticPaths() {
+  try {
   var data = await fetchBlogs();
   const paths = data.map((blog) => ({
     params: { url: blog.url.replace(":", "") },
@@ -594,10 +595,15 @@ export async function getStaticPaths() {
     paths, // Pre-rendered blog URLs
     fallback: false, // Enable fallback for other URLs
   };
+} catch (err) {
+  console.error("Error fetching blog list:", err);
+  return { paths: [], fallback: false }; // no blogs, but build won’t crash
+}
 }
 
 // 2. Define `getStaticProps` to fetch blog data for each page
 export async function getStaticProps({ params }) {
+  try {
   var data = await fetchBlogs();
   const blog = data.find(
     (blog) => blog.url.replace(":", "") === params.url.replace(":", "")
@@ -614,4 +620,9 @@ export async function getStaticProps({ params }) {
       blog,
     },
   };
+
+  } catch (err) { 
+    console.error("Error fetching blog data:", err); 
+    return { notFound: true }; 
+  }
 }
