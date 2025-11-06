@@ -3,6 +3,6 @@ build/
 # Local Netlify folder
 .netlify
 .next/
-.env.local
+# .env.local
 .env
 package-lock.json

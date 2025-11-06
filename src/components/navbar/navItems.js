@@ -9,6 +9,11 @@ export const navItems = [
       { name: "Secure Pad", to: "/secure-pad" },
       { name: "Audit Express", to: "/auditexpress/home" },
       { name: "SecureX-ID", to: "/web3-kyc" },
+      {
+        name: "SecureX DID",
+        to: "https://securexdid.com",
+        external: true,
+      },
     ],
     label: "Product",
   },

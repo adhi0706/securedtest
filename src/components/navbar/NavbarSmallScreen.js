@@ -147,14 +147,24 @@ const NavbarSmallScreen = ({
                               )}
                             </div>
                           ) : (
-                            nestedItem["to"] && (
+                            nestedItem["to"] &&
+                            (nestedItem.external ? (
+                              <a
+                                className="nested-sidebar-item"
+                                href={nestedItem["to"]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {nestedItem["name"]}
+                              </a>
+                            ) : (
                               <Link
                                 className="nested-sidebar-item"
                                 href={nestedItem["to"]}
                               >
                                 {nestedItem["name"]}
                               </Link>
-                            )
+                            ))
                           );
                         })}
                       </div>
