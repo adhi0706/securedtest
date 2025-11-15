@@ -36,6 +36,16 @@ const solutions = [
     image: "/assets/images/ProductPages/st/st-hero.webp",
   },
   {
+    title: "Secure CMS",
+    items: [
+      "Enterprise consent capture and preference orchestration",
+      "Unified policy engine for global privacy regulations",
+      "Audit-ready proof of opt-ins across every channel",
+    ],
+    to: "/secure-cms",
+    image: "/assets/images/ProductPages/ss/hero.webp",
+  },
+  {
     title: "SecurePad",
     items: [
       "A leading cost-free tokenization platform for a comprehensive suite of blockchain services",

@@ -5,6 +5,7 @@ export const navItems = [
       { name: "Solidity Shield", to: "/solidity-shield" },
       { name: "Secure Watch", to: "/secure-watch" },
       { name: "Secure Trace", to: "/secure-trace" },
+      { name: "Secure CMS (Consent)", to: "/secure-cms" },
       { name: "Secure Pad", to: "/secure-pad" },
       { name: "Audit Express", to: "/auditexpress/home" },
       { name: "SecureX-ID", to: "/web3-kyc" },
