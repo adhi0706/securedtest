@@ -246,7 +246,11 @@ const ChatWidget = ({
         company: company.trim(),
       };
 
-      const res = await fetch("/api/form-submit", {
+      const endpoint = API_BASE
+        ? `${API_BASE.replace(/\/$/, "")}/chatbot/form-submit`
+        : "/api/form-submit";
+
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
