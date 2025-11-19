@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# SecuredApp Frontend (Next.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the public SecuredApp marketing site and chatbot interface. It runs on **Next.js 14** with **React 18**, Tailwind, and Redux Toolkit. The chatbot widget calls the FastAPI backend at `http://72.60.102.190:2000` in production.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+- Node.js 18+
+- npm 9+
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install --legacy-peer-deps
+```
 
-### `npm test`
+The `--legacy-peer-deps` flag avoids peer conflicts between `react-chat-elements` and React 18.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Environment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create `.env.local` with the following keys:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```env
+NEXT_PUBLIC_API_BASE=http://72.60.102.190:2000
+SECUREBOT_SYSTEM_PROMPT="You are SecureDApp's assistant..."
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `NEXT_PUBLIC_API_BASE` controls where the chatbot posts messages and form data.
+- Update the prompt if marketing/CS teams tweak copy.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Scripts
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run dev    # Start local dev server at http://localhost:3000
+npm run build  # Production build
+npm start      # Serve the Next.js build (used in production)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> Note: `npm start` expects a serverful deployment (e.g., PM2, systemd, Docker). The deploy branch currently runs behind a custom Node host.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Chatbot Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Chat UI lives in `src/components/chat/ChatWidget.jsx`.
+- Form submissions call `${NEXT_PUBLIC_API_BASE}/chatbot/form-submit`.
+- Conversations hit `${NEXT_PUBLIC_API_BASE}/chat`.
+- User info persists via `localStorage` to keep follow-up messages seamless.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+When developing locally with the FastAPI backend running at `http://127.0.0.1:8000`, set:
 
-### Code Splitting
+```env
+NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Deployment Checklist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Build: `npm run build`
+2. Copy `.next/` bundle (or run `npm start` directly on the target server)
+3. Provide `.env.production`/`.env.local` with the correct API base URL
+4. Ensure the FastAPI backend `/chat` and `/chatbot/form-submit` endpoints are accessible from the hosting environment
 
-### Making a Progressive Web App
+Optional: use Docker/PM2 to keep the process alive.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Repository Layout Highlights
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `src/components/chat/` – chatbot widget, styles, guided flows
+- `src/store/` – Redux slices
+- `public/assets/` – static images and icons
+- `tailwind.config.js` / `postcss.config.js` – styling pipeline
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Support
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For deployment assistance or feature requests, contact the SecuredApp web team at [hello@securedapp.in](mailto:hello@securedapp.in).

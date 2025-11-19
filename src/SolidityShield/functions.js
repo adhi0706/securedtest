@@ -16,7 +16,8 @@ import { setCouponCode } from "./redux/dashboard/paymentSlice";
 import { pricingDetails } from "./pages/pricing/pricing.data";
 
 const logo = "/assets/images/securedapp_logo.svg";
-const apiUrl = "https://139-59-5-56.nip.io:3443";
+const apiUrl =
+  process.env.NEXT_PUBLIC_API_BASE ?? "https://139-59-5-56.nip.io:3443";
 
 export async function checkCoupon(code, disptach) {
   const response = await fetch(
@@ -721,19 +722,41 @@ export const verifyOTP = async ({ email, otp, dispatch }) => {
         return response.json();
       }
 
-      toast.error("Invlaid Network Response: verify otp");
+      toast.error("Invalid Network Response: verify otp");
       //typeof window !== 'undefined' && window.location.replace("/solidity-shield-scan/auth");
     })
     .then((data) => {
-      //console.log(data);
-      if (data.length == 0) {
-        toast("Wrong OTP");
+      if (!data) {
+        toast.error("No response from server");
         return;
       }
-      let userdata = data[0];
 
-      jwt = userdata.jwt;
-      localStorage.setItem("UserJwtToken", userdata.jwt);
+      let userdata = null;
+      let jwtToken = null;
+
+      if (Array.isArray(data)) {
+        if (!data.length) {
+          toast("Wrong OTP");
+          return;
+        }
+        userdata = data[0];
+        jwtToken = userdata?.jwt ?? null;
+      } else {
+        if (!data.success) {
+          toast.error(data.error || "Invalid or expired OTP");
+          return;
+        }
+        userdata = data.user;
+        jwtToken = data.jwt;
+      }
+
+      if (!userdata || !jwtToken) {
+        toast.error("Unable to login. Please try again!");
+        return;
+      }
+
+      jwt = jwtToken;
+      localStorage.setItem("UserJwtToken", jwtToken);
       localStorage.setItem("UserEmail", email);
 
       let plandetail = "Free Plan";
@@ -757,7 +780,7 @@ export const verifyOTP = async ({ email, otp, dispatch }) => {
           planExpiry: userdata.planexpiry,
           firstName: "First Name",
           lastName: "Last Name",
-          jwt: jwt,
+          jwt: jwtToken,
           companyName: "Company Name",
         })
       );
@@ -1029,43 +1052,41 @@ const fetchContractDetails = async (contractAddress, _chain) => {
       26: "https://explorer.katanarpc.com/api", // Katana
       27: "https://explorer.hemi.xyz/api", // Hemi
       28: "https://explorer.mintchain.io/api", // MintChain
-      29: "https://scan.coredao.org/api"
+      29: "https://scan.coredao.org/api",
     };
 
-
     const api_list = {
-       0: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       1: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       2: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       3: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       4: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       5: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       6: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       7: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       8: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       9: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       10: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       11: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       12: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       13: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       14: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       15: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       16: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       17: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       18: "C8U4QX17IFZMP1Z94NNVV9P5QSTX9456BC",
-       19: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       20: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       21: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       22: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       23: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       24: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       25: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       26: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       27: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       28: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
-       29: "63ff9ae2141e4f2981f4fcc844b266e4",
-     };
- 
+      0: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      1: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      2: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      3: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      4: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      5: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      6: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      7: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      8: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      9: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      10: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      11: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      12: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      13: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      14: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      15: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      16: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      17: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      18: "C8U4QX17IFZMP1Z94NNVV9P5QSTX9456BC",
+      19: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      20: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      21: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      22: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      23: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      24: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      25: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      26: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      27: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      28: "EAU935QMPKGR1Y59GDWE34DUPCN8X77GPE",
+      29: "63ff9ae2141e4f2981f4fcc844b266e4",
+    };
 
     const apiUrl = `${chain_list[_chain]}?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${api_list[_chain]}`;
 
