@@ -112,24 +112,36 @@ const RequestQuoteModal = () => {
       toast("Please accept our privacy policy to continue");
       return;
     }
-    fetch("https://139-59-5-56.nip.io:3443/contactMail", {
+
+    const subscribeUpdates = document.getElementById("request-quote-check-subscribe")?.checked || false;
+
+    fetch("https://crm-be.securedapp.io/api/public/project-inquiry", {
       method: "POST",
       body: JSON.stringify({
-        name: name,
-        mail: email,
-        number: mobile,
-        msg: service + "---" + description,
+        fullName: name,
+        mobile: mobile,
+        email: email,
+        serviceOffering: service,
+        message: description || "",
+        agreePrivacy: true,
+        subscribeUpdates: subscribeUpdates,
       }),
       headers: {
         "Content-type": "application/json",
       },
     })
       .then((res) => {
-        toast.success("Sumbitted. Will soon reach out to you!");
-        closeModal();
+        if (res.ok) {
+          toast.success("Submitted. Will soon reach out to you!");
+          closeModal();
+        } else {
+          return res.json().then(data => {
+            throw new Error(data.error || "Failed to submit inquiry");
+          });
+        }
       })
       .catch((err) => {
-        toast.error("Error in sending mail");
+        toast.error(err.message || "Error in sending inquiry");
       });
   };
 
@@ -245,7 +257,7 @@ const RequestQuoteModal = () => {
               </div>
             </div>
             <div className="request-quote-modal-checkbox-container">
-              <input type="checkbox" />
+              <input id="request-quote-check-subscribe" type="checkbox" />
               <div>Get cyber-security research reports .</div>
             </div>
           </div>
