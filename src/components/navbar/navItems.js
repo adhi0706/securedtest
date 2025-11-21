@@ -47,7 +47,10 @@ export const navItems = [
           { name: "DApp Development", to: "/dapp-development" },
           { name: "NFTs Development", to: "/nfts-development" },
           { name: "DeFi Development", to: "/defi-development" },
-          { name: "SOX Compliance", to: "/sox-compliance-sarbanes-oxley-compliance-audit" },
+          {
+            name: "SOX Compliance",
+            to: "/sox-compliance-sarbanes-oxley-compliance-audit",
+          },
           { name: "ITGC Compliance", to: "/itgc-audit-services" },
         ],
       },
@@ -61,12 +64,11 @@ export const navItems = [
   {
     to: "",
     items: [
-      { name: "Blogs", to: "/blog" },
+      { name: "Blogs", to: "https://securedapp.io/blog", external: true },
       { name: "About Us", to: "/about" },
       { name: "Our Authors", to: "/authors" },
       { name: "Media", to: "/media" },
-            {name: "White Papers", to: "/white-paper" },
-
+      { name: "White Papers", to: "/white-paper" },
     ],
     label: "Resources",
   },

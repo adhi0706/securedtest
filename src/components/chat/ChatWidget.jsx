@@ -4,10 +4,42 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MessageList } from "react-chat-elements";
 import { quickReplies, botReplies, guidedFlow } from "./chatFaq";
 
-const RAW_API_BASE = (process.env.NEXT_PUBLIC_API_BASE ?? "").trim();
-const API_BASE = RAW_API_BASE.endsWith("/")
-  ? RAW_API_BASE.slice(0, -1)
-  : RAW_API_BASE;
+const RAW_CHATBOT_API = (
+  process.env.NEXT_PUBLIC_CHATBOT_API ??
+  process.env.NEXT_PUBLIC_API_BASE ??
+  ""
+).trim();
+const CHATBOT_API_BASE = RAW_CHATBOT_API.endsWith("/")
+  ? RAW_CHATBOT_API.slice(0, -1)
+  : RAW_CHATBOT_API;
+
+const CRM_INQUIRY_URL = (
+  process.env.NEXT_PUBLIC_CRM_PUBLIC_INQUIRY_URL ?? ""
+).trim();
+
+const buildCrmPayload = ({ name, email, phone, company }) => ({
+  fullName: name,
+  email,
+  mobile: phone,
+  company,
+  serviceOffering: company || "Not specified",
+  message: "Lead captured via SecureBot chatbot form.",
+  agreePrivacy: true,
+  subscribeUpdates: false,
+});
+
+const submitCrmInquiry = async (lead) => {
+  if (!CRM_INQUIRY_URL) return;
+  const crmPayload = buildCrmPayload(lead);
+  const response = await fetch(CRM_INQUIRY_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(crmPayload),
+  });
+  if (!response.ok) {
+    throw new Error(`CRM submission failed: HTTP ${response.status}`);
+  }
+};
 
 const COMMON_EMAIL_DOMAINS = [
   "gmail.com",
@@ -246,8 +278,8 @@ const ChatWidget = ({
         company: company.trim(),
       };
 
-      const endpoint = API_BASE
-        ? `${API_BASE.replace(/\/$/, "")}/chatbot/form-submit`
+      const endpoint = CHATBOT_API_BASE
+        ? `${CHATBOT_API_BASE}/chatbot/form-submit`
         : "/api/form-submit";
 
       const res = await fetch(endpoint, {
@@ -259,6 +291,16 @@ const ChatWidget = ({
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.error || `Failed to submit: HTTP ${res.status}`);
+      }
+
+      try {
+        await submitCrmInquiry(payload);
+      } catch (crmError) {
+        console.error("CRM submission error", crmError);
+        throw new Error(
+          crmError?.message ||
+            "Details saved but CRM update failed. Please try again in a moment."
+        );
       }
 
       localStorage.setItem("chatUserInfo", JSON.stringify(payload));
@@ -406,7 +448,9 @@ const ChatWidget = ({
     try {
       setTyping(true);
       setGlobalError("");
-      const endpoint = API_BASE ? `${API_BASE}/chat` : "/api/chat";
+      const endpoint = CHATBOT_API_BASE
+        ? `${CHATBOT_API_BASE}/chat`
+        : "/api/chat";
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -536,6 +580,36 @@ const ChatWidget = ({
         setGuidedFlowStep(nextStepId); // Go to next step
       }
     }
+  };
+
+  const handleHealthCheck = async () => {
+    if (!CHATBOT_API_BASE) {
+      setHealthStatus("error");
+      setHealthMessage("Backend URL missing");
+      return;
+    }
+
+    setHealthStatus("checking");
+    setHealthMessage("Checking...");
+    try {
+      const endpoint = `${CHATBOT_API_BASE}/health`;
+      const res = await fetch(endpoint, { cache: "no-store" });
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const data = await res.json().catch(() => ({}));
+      setHealthStatus("ok");
+      setHealthMessage(
+        data?.status === "ok" ? "Backend online" : data?.status || "Healthy"
+      );
+    } catch (err) {
+      setHealthStatus("error");
+      setHealthMessage(err.message || "Backend unreachable");
+    }
+
+    setTimeout(() => {
+      setHealthStatus("idle");
+    }, 6000);
   };
 
   return (
