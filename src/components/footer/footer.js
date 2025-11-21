@@ -31,6 +31,10 @@ const navigationItems = [
         to: "/secure-watch",
       },
       {
+        name: "Secure CMS (Consent)",
+        to: "/secure-cms",
+      },
+      {
         name: "Audit Express",
         to: "/auditexpress/home",
       },
