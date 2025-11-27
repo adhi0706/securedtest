@@ -17,12 +17,29 @@ const CRM_INQUIRY_URL = (
   process.env.NEXT_PUBLIC_CRM_PUBLIC_INQUIRY_URL ?? ""
 ).trim();
 
+const SERVICE_OFFERINGS = [
+  "Dapp Development",
+  "Smart Contract Audit",
+  "Dapp Security Audit",
+  "Token Audit",
+  "Web3 KYC",
+  "Web3 Security",
+  "Blockchain Forensic",
+  "RWA Audit",
+  "Crypto Compliance & AMI",
+  "Decentralized Identify (DID)",
+  "NFTs Development",
+  "DeFi Development",
+  "LevelUp Academy",
+];
+const DEFAULT_SERVICE_OFFERING = SERVICE_OFFERINGS[0];
+
 const buildCrmPayload = ({ name, email, phone, company }) => ({
   fullName: name,
-  email,
+  accountCompany: company || "Not specified",
   mobile: phone,
-  company,
-  serviceOffering: company || "Not specified",
+  email,
+  serviceOffering: DEFAULT_SERVICE_OFFERING,
   message: "Lead captured via SecureBot chatbot form.",
   agreePrivacy: true,
   subscribeUpdates: false,
@@ -299,7 +316,7 @@ const ChatWidget = ({
         console.error("CRM submission error", crmError);
         throw new Error(
           crmError?.message ||
-            "Details saved but CRM update failed. Please try again in a moment."
+          "Details saved but CRM update failed. Please try again in a moment."
         );
       }
 
@@ -352,10 +369,10 @@ const ChatWidget = ({
     const safeInset =
       typeof window !== "undefined"
         ? Number(
-            getComputedStyle(document.documentElement)
-              .getPropertyValue("env(safe-area-inset-bottom)")
-              .replace("px", "")
-          ) || 0
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("env(safe-area-inset-bottom)")
+            .replace("px", "")
+        ) || 0
         : 0;
     const mobileBottom = (mobileBottomOffset ?? bottomOffset + 24) + safeInset;
     return {
@@ -717,8 +734,8 @@ const ChatWidget = ({
                   fieldOrder[formStep]?.key === "phone"
                     ? "tel"
                     : fieldOrder[formStep]?.key === "email"
-                    ? "email"
-                    : "text"
+                      ? "email"
+                      : "text"
                 }
                 style={{
                   padding: "13px 16px",
@@ -802,8 +819,8 @@ const ChatWidget = ({
                 {formStep < fieldOrder.length - 1
                   ? "Next"
                   : savingInfo
-                  ? "Saving..."
-                  : "Start Chat"}
+                    ? "Saving..."
+                    : "Start Chat"}
               </button>
             </div>
           </form>
@@ -892,49 +909,49 @@ const ChatWidget = ({
         >
           {guidedFlowStep && guidedFlow[guidedFlowStep]?.options
             ? guidedFlow[guidedFlowStep].options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleGuidedFlowReply(option)}
-                  style={{
-                    background: "rgba(59,130,246,0.18)",
-                    color: "#e2e8f0",
-                    border: "1px solid rgba(148,163,184,0.15)",
-                    borderRadius: 16,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    letterSpacing: 0.2,
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {option.label}
-                </button>
-              ))
+              <button
+                key={option.id}
+                onClick={() => handleGuidedFlowReply(option)}
+                style={{
+                  background: "rgba(59,130,246,0.18)",
+                  color: "#e2e8f0",
+                  border: "1px solid rgba(148,163,184,0.15)",
+                  borderRadius: 16,
+                  padding: "6px 12px",
+                  fontSize: 12,
+                  letterSpacing: 0.2,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                {option.label}
+              </button>
+            ))
             : quickReplies.map((q) => (
-                <button
-                  key={q.id}
-                  onClick={() => handleQuickReply(q.id)}
-                  disabled={showForm || !!guidedFlowStep}
-                  style={{
-                    background:
-                      showForm || !!guidedFlowStep
-                        ? "rgba(15,23,42,0.6)"
-                        : "rgba(59,130,246,0.18)",
-                    color: "#e2e8f0",
-                    border: "1px solid rgba(148,163,184,0.15)",
-                    borderRadius: 16,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    letterSpacing: 0.2,
-                    cursor:
-                      showForm || !!guidedFlowStep ? "not-allowed" : "pointer",
-                    opacity: showForm || !!guidedFlowStep ? 0.55 : 1,
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {q.label}
-                </button>
-              ))}
+              <button
+                key={q.id}
+                onClick={() => handleQuickReply(q.id)}
+                disabled={showForm || !!guidedFlowStep}
+                style={{
+                  background:
+                    showForm || !!guidedFlowStep
+                      ? "rgba(15,23,42,0.6)"
+                      : "rgba(59,130,246,0.18)",
+                  color: "#e2e8f0",
+                  border: "1px solid rgba(148,163,184,0.15)",
+                  borderRadius: 16,
+                  padding: "6px 12px",
+                  fontSize: 12,
+                  letterSpacing: 0.2,
+                  cursor:
+                    showForm || !!guidedFlowStep ? "not-allowed" : "pointer",
+                  opacity: showForm || !!guidedFlowStep ? 0.55 : 1,
+                  transition: "all 0.2s ease",
+                }}
+              >
+                {q.label}
+              </button>
+            ))}
         </div>
 
         {globalError && (
