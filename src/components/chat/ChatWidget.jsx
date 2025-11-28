@@ -34,6 +34,9 @@ const SERVICE_OFFERINGS = [
 ];
 const DEFAULT_SERVICE_OFFERING = SERVICE_OFFERINGS[0];
 
+const USER_INFO_STORAGE_KEY = "chatUserInfo";
+const SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
 const buildCrmPayload = ({ name, email, phone, company }) => ({
   fullName: name,
   accountCompany: company || "Not specified",
@@ -160,28 +163,43 @@ const ChatWidget = ({
     if (typeof window === "undefined") return;
     let stored = null;
     try {
-      stored = JSON.parse(localStorage.getItem("chatUserInfo") || "null");
+      stored = JSON.parse(localStorage.getItem(USER_INFO_STORAGE_KEY) || "null");
     } catch {
       // ignore
     }
 
-    if (stored) {
-      setUserInfo(stored);
-      setShowForm(false);
-      setFormStep(4);
-      setFormData((prev) => ({ ...prev, ...stored }));
-      const greetingText = `Thanks, ${stored.name}. What can ${ASSISTANT_NAME} handle for you next?`;
-      setMessages((prev) => {
-        if (prev.some((msg) => msg.text === greetingText)) return prev;
-        return prev.concat({
-          position: "left",
-          type: "text",
-          title: ASSISTANT_NAME,
-          text: greetingText,
-          date: new Date(),
+    const normalizeStoredPayload = (raw) => {
+      if (!raw) return null;
+      if (raw.payload) return { payload: raw.payload, savedAt: raw.savedAt }; // new format
+      return { payload: raw, savedAt: null }; // legacy format
+    };
+
+    const storedBundle = normalizeStoredPayload(stored);
+
+    if (storedBundle?.payload) {
+      const isExpired =
+        typeof storedBundle.savedAt === "number" &&
+        Date.now() - storedBundle.savedAt > SESSION_TTL_MS;
+      if (isExpired) {
+        localStorage.removeItem(USER_INFO_STORAGE_KEY);
+      } else {
+        setUserInfo(storedBundle.payload);
+        setShowForm(false);
+        setFormStep(4);
+        setFormData((prev) => ({ ...prev, ...storedBundle.payload }));
+        const greetingText = `Thanks, ${storedBundle.payload.name}. What can ${ASSISTANT_NAME} handle for you next?`;
+        setMessages((prev) => {
+          if (prev.some((msg) => msg.text === greetingText)) return prev;
+          return prev.concat({
+            position: "left",
+            type: "text",
+            title: ASSISTANT_NAME,
+            text: greetingText,
+            date: new Date(),
+          });
         });
-      });
-      return;
+        return;
+      }
     }
 
     const timer = setTimeout(() => {
@@ -320,7 +338,10 @@ const ChatWidget = ({
         );
       }
 
-      localStorage.setItem("chatUserInfo", JSON.stringify(payload));
+      localStorage.setItem(
+        USER_INFO_STORAGE_KEY,
+        JSON.stringify({ payload, savedAt: Date.now() })
+      );
       setUserInfo(payload);
       setShowForm(false);
       setFormStep(fieldOrder.length);
