@@ -267,7 +267,7 @@ const RequestQuoteModal = () => {
                 await sendMail({
                   name: fullName,
                   email: email,
-                  number: mobileNumber,
+                  mobile: mobileNumber,
                   service: selectedService,
                   description: message,
                 });
