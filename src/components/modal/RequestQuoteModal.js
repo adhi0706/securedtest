@@ -17,7 +17,7 @@ const services = [
   "Smart Contract Audit",
   "Dapp Security Audit",
   "Token Audit",
-  "Web3 KYC", 
+  "Web3 KYC",
   "Web3 security",
   "Blockchain Forensic",
   "RWA Audit",
@@ -269,7 +269,7 @@ const RequestQuoteModal = () => {
                 await sendMail({
                   name: fullName,
                   email: email,
-                  number: mobileNumber,
+                  mobile: mobileNumber,
                   service: selectedService,
                   description: message,
                 });
