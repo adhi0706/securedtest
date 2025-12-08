@@ -161,45 +161,12 @@ const ChatWidget = ({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    let stored = null;
+    
+    // Always clear previous session to ensure fresh start every visit
     try {
-      stored = JSON.parse(localStorage.getItem(USER_INFO_STORAGE_KEY) || "null");
+      localStorage.removeItem(USER_INFO_STORAGE_KEY);
     } catch {
-      // ignore
-    }
-
-    const normalizeStoredPayload = (raw) => {
-      if (!raw) return null;
-      if (raw.payload) return { payload: raw.payload, savedAt: raw.savedAt }; // new format
-      return { payload: raw, savedAt: null }; // legacy format
-    };
-
-    const storedBundle = normalizeStoredPayload(stored);
-
-    if (storedBundle?.payload) {
-      const isExpired =
-        typeof storedBundle.savedAt === "number" &&
-        Date.now() - storedBundle.savedAt > SESSION_TTL_MS;
-      if (isExpired) {
-        localStorage.removeItem(USER_INFO_STORAGE_KEY);
-      } else {
-        setUserInfo(storedBundle.payload);
-        setShowForm(false);
-        setFormStep(4);
-        setFormData((prev) => ({ ...prev, ...storedBundle.payload }));
-        const greetingText = `Thanks, ${storedBundle.payload.name}. What can ${ASSISTANT_NAME} handle for you next?`;
-        setMessages((prev) => {
-          if (prev.some((msg) => msg.text === greetingText)) return prev;
-          return prev.concat({
-            position: "left",
-            type: "text",
-            title: ASSISTANT_NAME,
-            text: greetingText,
-            date: new Date(),
-          });
-        });
-        return;
-      }
+      // ignore localStorage errors
     }
 
     const timer = setTimeout(() => {
