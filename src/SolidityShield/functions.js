@@ -506,34 +506,39 @@ export const downloadfReportPdf = (id, user) => {
 };
 
 export const getScanSummaryData = async ({ dispatch, email }) => {
-  var history = await getScanHistoryData({
+  const history = await getScanHistoryData({
     userEmail: email,
     dispatch,
   });
-  // console.log(history);
-  var latestScan = history.reduce((max, item) => {
+  if (!Array.isArray(history) || !history.length) {
+    return;
+  }
+
+  const latestScanSummary = history.reduce((max, item) => {
     return item.id > max.id ? item : max;
   }, history[0]);
 
-  if (latestScan) {
-    latestScan = await getReport({ id: latestScan.id, email });
-    // console.log(latestScan);
-    var summary = `Scanned ${latestScan.contracts} contracts, ${
-      latestScan.lines
-    } lines of code and found ${Object.values(latestScan.findings).reduce(
-      (accumulator, currentValue) => {
-        return accumulator + currentValue;
-      },
-      0
-    )} vulnerabilities`;
-    var data = latestScan.findings;
-    var score =
+  if (latestScanSummary) {
+    const latestScan = await getReport({ id: latestScanSummary.id, email });
+    if (!latestScan) {
+      return;
+    }
+
+    const summary = `Scanned ${latestScan.contracts} contracts, ${latestScan.lines
+      } lines of code and found ${Object.values(latestScan.findings || {}).reduce(
+        (accumulator, currentValue) => {
+          return accumulator + currentValue;
+        },
+        0
+      )} vulnerabilities`;
+    const data = latestScan.findings || {};
+    const score =
       5 -
       ((Number(data["high_issues"]) +
         Number(data["medium_issues"]) +
         Number(data["low_issues"])) /
         30) *
-        5;
+      5;
 
     dispatch(
       setScanSummary({
@@ -562,7 +567,7 @@ export const getScanSummaryData = async ({ dispatch, email }) => {
           },
         ],
         summary,
-        id: latestScan.id,
+        id: latestScanSummary.id,
       })
     );
   }
@@ -570,17 +575,27 @@ export const getScanSummaryData = async ({ dispatch, email }) => {
 };
 
 export const getIssuesChartData = async ({ dispatch, email }) => {
-  var history = await getScanHistoryData({
+  const history = await getScanHistoryData({
     userEmail: email,
     dispatch,
   });
-  // console.log(history);
-  let data = [];
-  for (let i = 0; i < history.length; i++) {
-    var scanReport = await getReport({ id: history[i].id, email });
-    data.push(scanReport.findings);
+  if (!Array.isArray(history) || !history.length) {
+    return;
   }
-  data = data.reduce((accumulator, currentObject) => {
+
+  const aggregated = [];
+  for (let i = 0; i < history.length; i++) {
+    const scanReport = await getReport({ id: history[i].id, email });
+    if (scanReport?.findings) {
+      aggregated.push(scanReport.findings);
+    }
+  }
+
+  if (!aggregated.length) {
+    return;
+  }
+
+  let data = aggregated.reduce((accumulator, currentObject) => {
     for (let key in currentObject) {
       if (!accumulator[key]) {
         accumulator[key] = 0;
@@ -591,59 +606,77 @@ export const getIssuesChartData = async ({ dispatch, email }) => {
   }, {});
   data = [
     { name: "", value: 0 },
-    { name: "High Issues", value: data.high_issues },
-    { name: "Medium Issues", value: data.medium_issues },
-    { name: "Low Issues", value: data.low_issues },
-    { name: "Optimization Issues", value: data.optimization_issues },
-    { name: "Informational Issues", value: data.informational_issues },
+    { name: "High Issues", value: data.high_issues || 0 },
+    { name: "Medium Issues", value: data.medium_issues || 0 },
+    { name: "Low Issues", value: data.low_issues || 0 },
+    { name: "Optimization Issues", value: data.optimization_issues || 0 },
+    { name: "Informational Issues", value: data.informational_issues || 0 },
     { name: "", value: 0 },
   ];
-  // console.log(data);
+
   dispatch(setIssuesData(data));
   return data;
 };
 
 export const getReport = async ({ id, email }) => {
+  const jwt = getJwt();
+  if (!jwt) {
+    return null;
+  }
+
   return await fetch(apiUrl + "/getReport", {
     method: "POST",
     body: JSON.stringify({
-      id: id,
+      id,
     }),
     headers: {
-      //Authorization: getJwt(),
       "Content-type": "application/json",
+      Authorization: jwt,
     },
   })
     .then(async (response) => {
-      if (!response.ok) {
-        toast("Invalid Network response ");
+      if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem("UserJwtToken");
       }
-      return await response.text();
+      if (!response.ok) {
+        throw new Error("Failed to fetch report");
+      }
+      return response.json();
     })
     .then((data) => {
-      var report = JSON.parse(data);
-      console.log(id);
-      // console.log(report);
-      report = report[0].reportdata;
-      report = JSON.parse(report);
+      if (!Array.isArray(data) || !data.length) {
+        return null;
+      }
 
-      var score =
+      const row = data[0];
+      if (!row?.reportdata) {
+        return null;
+      }
+
+      const report = JSON.parse(row.reportdata);
+      const score =
         5 -
-        ((Number(report.findings["high_issues"]) +
-          Number(report.findings["medium_issues"]) +
-          Number(report.findings["low_issues"])) /
+        ((Number(report.findings?.["high_issues"] || 0) +
+          Number(report.findings?.["medium_issues"] || 0) +
+          Number(report.findings?.["low_issues"] || 0)) /
           30) *
-          5;
+        5;
       report.score = (score * 2).toFixed(1) + "/10";
-
       return report;
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error("Error fetching report:", error);
+      toast.error("Unable to fetch report. Please log in again.");
+      return null;
     });
 };
 
 export const getScanHistoryData = async ({ userEmail, dispatch }) => {
+  const jwt = getJwt();
+  if (!jwt) {
+    return [];
+  }
+
   return fetch(apiUrl + "/getHistory", {
     method: "POST",
     body: JSON.stringify({
@@ -651,7 +684,7 @@ export const getScanHistoryData = async ({ userEmail, dispatch }) => {
     }),
     headers: {
       "Content-type": "application/json",
-      Authorization: getJwt(),
+      Authorization: jwt,
     },
   })
     .then((response) => {
@@ -661,13 +694,13 @@ export const getScanHistoryData = async ({ userEmail, dispatch }) => {
       toast.error("Invalid Network Response. Please try again!");
     })
     .then((data) => {
-      // console.log(data);
+      if (!data) return [];
       dispatch(setScanHistory(data.sort((a, b) => b.id - a.id)));
-      // toast("setScanHitsory");
       return data;
     })
     .catch((error) => {
       console.error("Error:", error);
+      return [];
     });
 };
 
@@ -797,25 +830,22 @@ export const verifyOTP = async ({ email, otp, dispatch }) => {
     });
 };
 
-export function getJwt() {
+export function getJwt(options = {}) {
+  if (typeof window === "undefined") return null;
   const jwt = localStorage.getItem("UserJwtToken");
   if (!jwt) {
-    toast("Please sign in with your email.");
-    typeof window !== "undefined" &&
-      window.location.replace("/solidity-shield-scan/auth");
-    return;
-  } else {
-    return `Bearer ${jwt}`;
+    if (options?.notify) {
+      toast("Please sign in with your email.");
+    }
+    return null;
   }
+  return `Bearer ${jwt}`;
 }
 
 export const getUser = async ({ dispatch, email }) => {
   const jwt = getJwt();
   if (!jwt) {
-    toast("Please sign in with your email.");
-    typeof window !== "undefined" &&
-      window.location.replace("/solidity-shield-scan/auth");
-    return;
+    return null;
   }
 
   return await fetch(apiUrl + "/getUser", {
@@ -825,7 +855,7 @@ export const getUser = async ({ dispatch, email }) => {
     }),
     headers: {
       "Content-type": "application/json",
-      Authorization: getJwt(),
+      Authorization: jwt,
     },
   })
     .then((response) => {
@@ -842,8 +872,10 @@ export const getUser = async ({ dispatch, email }) => {
       return;
     })
     .then(async (data) => {
-      //console.log(data);
-      if (data.length == 0) toast("Error Signing in. Try again.");
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        toast.error("Error Signing in. Try again.");
+        return null;
+      }
       let userdata = data[0];
 
       let plandetail = "Free Plan";
@@ -883,13 +915,10 @@ export const getUser = async ({ dispatch, email }) => {
         jwt: jwt,
         companyName: "Company Name",
       };
-      getScanHistoryData({ userEmail: email, dispatch });
     })
     .catch((error) => {
       console.error("Error:", error);
       toast.error("Unable to login. Please try again!");
-      typeof window !== "undefined" &&
-        window.location.replace("/solidity-shield-scan/auth");
     });
 };
 
@@ -949,7 +978,7 @@ export function generateTable(data) {
       Number(data.findings[finding_names[1]]) +
       Number(data.findings[finding_names[2]])) /
       30) *
-      5;
+    5;
 
   return {
     critical: data.findings[finding_names[0]],

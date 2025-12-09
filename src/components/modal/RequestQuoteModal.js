@@ -51,6 +51,8 @@ const RequestQuoteModal = () => {
     setFullName(value);
     if (value.length === 0) {
       setFullNameWarning("* Compulsory Field");
+    } else if (/[<>!@#$%^&*()_+={}\[\]|\\:;"?,.~`]/.test(value)) {
+      setFullNameWarning("Invalid Name");
     } else {
       setFullNameWarning("");
     }
@@ -104,7 +106,10 @@ const RequestQuoteModal = () => {
       name === "" ||
       email === "" ||
       service === "Choose a Service..." ||
-      mobile === ""
+      mobile === "" ||
+      fullNameWarning !== "" ||
+      emailWarning !== "" ||
+      mobileNumberWarning !== ""
     ) {
       toast.error("Please fill in the details");
       return;
