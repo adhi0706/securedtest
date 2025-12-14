@@ -4,10 +4,62 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MessageList } from "react-chat-elements";
 import { quickReplies, botReplies, guidedFlow } from "./chatFaq";
 
-const RAW_API_BASE = (process.env.NEXT_PUBLIC_API_BASE ?? "").trim();
-const API_BASE = RAW_API_BASE.endsWith("/")
-  ? RAW_API_BASE.slice(0, -1)
-  : RAW_API_BASE;
+const RAW_CHATBOT_API = (
+  process.env.NEXT_PUBLIC_CHATBOT_API ??
+  process.env.NEXT_PUBLIC_API_BASE ??
+  ""
+).trim();
+const CHATBOT_API_BASE = RAW_CHATBOT_API.endsWith("/")
+  ? RAW_CHATBOT_API.slice(0, -1)
+  : RAW_CHATBOT_API;
+
+const CRM_INQUIRY_URL = (
+  process.env.NEXT_PUBLIC_CRM_PUBLIC_INQUIRY_URL ?? ""
+).trim();
+
+const SERVICE_OFFERINGS = [
+  "Dapp Development",
+  "Smart Contract Audit",
+  "Dapp Security Audit",
+  "Token Audit",
+  "Web3 KYC",
+  "Web3 Security",
+  "Blockchain Forensic",
+  "RWA Audit",
+  "Crypto Compliance & AMI",
+  "Decentralized Identify (DID)",
+  "NFTs Development",
+  "DeFi Development",
+  "LevelUp Academy",
+];
+const DEFAULT_SERVICE_OFFERING = SERVICE_OFFERINGS[0];
+
+const USER_INFO_STORAGE_KEY = "chatUserInfo";
+const SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+const buildCrmPayload = ({ name, email, phone, company }) => ({
+  fullName: name,
+  accountCompany: company || "Not specified",
+  mobile: phone,
+  email,
+  serviceOffering: DEFAULT_SERVICE_OFFERING,
+  message: "Lead captured via SecureBot chatbot form.",
+  agreePrivacy: true,
+  subscribeUpdates: false,
+});
+
+const submitCrmInquiry = async (lead) => {
+  if (!CRM_INQUIRY_URL) return;
+  const crmPayload = buildCrmPayload(lead);
+  const response = await fetch(CRM_INQUIRY_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(crmPayload),
+  });
+  if (!response.ok) {
+    throw new Error(`CRM submission failed: HTTP ${response.status}`);
+  }
+};
 
 const COMMON_EMAIL_DOMAINS = [
   "gmail.com",
@@ -109,30 +161,12 @@ const ChatWidget = ({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    let stored = null;
+    
+    // Always clear previous session to ensure fresh start every visit
     try {
-      stored = JSON.parse(localStorage.getItem("chatUserInfo") || "null");
+      localStorage.removeItem(USER_INFO_STORAGE_KEY);
     } catch {
-      // ignore
-    }
-
-    if (stored) {
-      setUserInfo(stored);
-      setShowForm(false);
-      setFormStep(4);
-      setFormData((prev) => ({ ...prev, ...stored }));
-      const greetingText = `Thanks, ${stored.name}. What can ${ASSISTANT_NAME} handle for you next?`;
-      setMessages((prev) => {
-        if (prev.some((msg) => msg.text === greetingText)) return prev;
-        return prev.concat({
-          position: "left",
-          type: "text",
-          title: ASSISTANT_NAME,
-          text: greetingText,
-          date: new Date(),
-        });
-      });
-      return;
+      // ignore localStorage errors
     }
 
     const timer = setTimeout(() => {
@@ -246,8 +280,8 @@ const ChatWidget = ({
         company: company.trim(),
       };
 
-      const endpoint = API_BASE
-        ? `${API_BASE.replace(/\/$/, "")}/chatbot/form-submit`
+      const endpoint = CHATBOT_API_BASE
+        ? `${CHATBOT_API_BASE}/chatbot/form-submit`
         : "/api/form-submit";
 
       const res = await fetch(endpoint, {
@@ -261,7 +295,20 @@ const ChatWidget = ({
         throw new Error(data?.error || `Failed to submit: HTTP ${res.status}`);
       }
 
-      localStorage.setItem("chatUserInfo", JSON.stringify(payload));
+      try {
+        await submitCrmInquiry(payload);
+      } catch (crmError) {
+        console.error("CRM submission error", crmError);
+        throw new Error(
+          crmError?.message ||
+          "Details saved but CRM update failed. Please try again in a moment."
+        );
+      }
+
+      localStorage.setItem(
+        USER_INFO_STORAGE_KEY,
+        JSON.stringify({ payload, savedAt: Date.now() })
+      );
       setUserInfo(payload);
       setShowForm(false);
       setFormStep(fieldOrder.length);
@@ -310,10 +357,10 @@ const ChatWidget = ({
     const safeInset =
       typeof window !== "undefined"
         ? Number(
-            getComputedStyle(document.documentElement)
-              .getPropertyValue("env(safe-area-inset-bottom)")
-              .replace("px", "")
-          ) || 0
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("env(safe-area-inset-bottom)")
+            .replace("px", "")
+        ) || 0
         : 0;
     const mobileBottom = (mobileBottomOffset ?? bottomOffset + 24) + safeInset;
     return {
@@ -406,7 +453,9 @@ const ChatWidget = ({
     try {
       setTyping(true);
       setGlobalError("");
-      const endpoint = API_BASE ? `${API_BASE}/chat` : "/api/chat";
+      const endpoint = CHATBOT_API_BASE
+        ? `${CHATBOT_API_BASE}/chat`
+        : "/api/chat";
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -538,6 +587,36 @@ const ChatWidget = ({
     }
   };
 
+  const handleHealthCheck = async () => {
+    if (!CHATBOT_API_BASE) {
+      setHealthStatus("error");
+      setHealthMessage("Backend URL missing");
+      return;
+    }
+
+    setHealthStatus("checking");
+    setHealthMessage("Checking...");
+    try {
+      const endpoint = `${CHATBOT_API_BASE}/health`;
+      const res = await fetch(endpoint, { cache: "no-store" });
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const data = await res.json().catch(() => ({}));
+      setHealthStatus("ok");
+      setHealthMessage(
+        data?.status === "ok" ? "Backend online" : data?.status || "Healthy"
+      );
+    } catch (err) {
+      setHealthStatus("error");
+      setHealthMessage(err.message || "Backend unreachable");
+    }
+
+    setTimeout(() => {
+      setHealthStatus("idle");
+    }, 6000);
+  };
+
   return (
     <div style={containerStyles} aria-live="polite">
       <div style={panelStyles} role="dialog" aria-label="SecureDApp chat">
@@ -643,8 +722,8 @@ const ChatWidget = ({
                   fieldOrder[formStep]?.key === "phone"
                     ? "tel"
                     : fieldOrder[formStep]?.key === "email"
-                    ? "email"
-                    : "text"
+                      ? "email"
+                      : "text"
                 }
                 style={{
                   padding: "13px 16px",
@@ -728,8 +807,8 @@ const ChatWidget = ({
                 {formStep < fieldOrder.length - 1
                   ? "Next"
                   : savingInfo
-                  ? "Saving..."
-                  : "Start Chat"}
+                    ? "Saving..."
+                    : "Start Chat"}
               </button>
             </div>
           </form>
@@ -818,49 +897,49 @@ const ChatWidget = ({
         >
           {guidedFlowStep && guidedFlow[guidedFlowStep]?.options
             ? guidedFlow[guidedFlowStep].options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleGuidedFlowReply(option)}
-                  style={{
-                    background: "rgba(59,130,246,0.18)",
-                    color: "#e2e8f0",
-                    border: "1px solid rgba(148,163,184,0.15)",
-                    borderRadius: 16,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    letterSpacing: 0.2,
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {option.label}
-                </button>
-              ))
+              <button
+                key={option.id}
+                onClick={() => handleGuidedFlowReply(option)}
+                style={{
+                  background: "rgba(59,130,246,0.18)",
+                  color: "#e2e8f0",
+                  border: "1px solid rgba(148,163,184,0.15)",
+                  borderRadius: 16,
+                  padding: "6px 12px",
+                  fontSize: 12,
+                  letterSpacing: 0.2,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                {option.label}
+              </button>
+            ))
             : quickReplies.map((q) => (
-                <button
-                  key={q.id}
-                  onClick={() => handleQuickReply(q.id)}
-                  disabled={showForm || !!guidedFlowStep}
-                  style={{
-                    background:
-                      showForm || !!guidedFlowStep
-                        ? "rgba(15,23,42,0.6)"
-                        : "rgba(59,130,246,0.18)",
-                    color: "#e2e8f0",
-                    border: "1px solid rgba(148,163,184,0.15)",
-                    borderRadius: 16,
-                    padding: "6px 12px",
-                    fontSize: 12,
-                    letterSpacing: 0.2,
-                    cursor:
-                      showForm || !!guidedFlowStep ? "not-allowed" : "pointer",
-                    opacity: showForm || !!guidedFlowStep ? 0.55 : 1,
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {q.label}
-                </button>
-              ))}
+              <button
+                key={q.id}
+                onClick={() => handleQuickReply(q.id)}
+                disabled={showForm || !!guidedFlowStep}
+                style={{
+                  background:
+                    showForm || !!guidedFlowStep
+                      ? "rgba(15,23,42,0.6)"
+                      : "rgba(59,130,246,0.18)",
+                  color: "#e2e8f0",
+                  border: "1px solid rgba(148,163,184,0.15)",
+                  borderRadius: 16,
+                  padding: "6px 12px",
+                  fontSize: 12,
+                  letterSpacing: 0.2,
+                  cursor:
+                    showForm || !!guidedFlowStep ? "not-allowed" : "pointer",
+                  opacity: showForm || !!guidedFlowStep ? 0.55 : 1,
+                  transition: "all 0.2s ease",
+                }}
+              >
+                {q.label}
+              </button>
+            ))}
         </div>
 
         {globalError && (
