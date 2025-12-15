@@ -24,7 +24,7 @@ function PQCSuitePage() {
         data={{
           title: "PQC Suite: Quantum-Safe Security Products",
           desc:
-            "A comprehensive Post-Quantum Cryptography suite: APIs, SDKs, VPN, Chat, File Sharing, PKI, IoT, HSM, and HNDL protection.",
+            "A comprehensive Post-Quantum Cryptography suite: APIs, SDKs, VPN, Chat, File Sharing, PKI, IoT, and HSM.",
           keywords:
             "PQC, post-quantum cryptography, Kyber, Dilithium, Falcon, SPHINCS+, quantum-safe, VPN, KMS, HSM, PKI, SSL, CA, IoT",
           image: "/assets/images/ProductPages/ss/hero.webp",
@@ -44,7 +44,7 @@ function PQCSuitePage() {
         <ProductCard
           header={"What is the PQC Suite?"}
           description={
-            "The PQC Suite is a modular, end‑to‑end platform for adopting post‑quantum cryptography across your stack. It combines a managed API service, unified SDKs, and ready‑to‑use apps (File Sharing, Chat, VPN, Sign/PKI, IoT Device Manager, HSM/KMS) so teams can protect data in transit and at rest—today and against Harvest‑Now‑Decrypt‑Later attacks. Built on NIST‑track algorithms with hybrid modes, it enables phased migration, crypto‑agility, and enterprise controls without rewriting existing systems."
+            "The PQC Suite is a modular, end‑to‑end platform for adopting post‑quantum cryptography across your stack. It combines a managed API service, unified SDKs, and ready‑to‑use apps (File Sharing, Chat, VPN, Sign/PKI, IoT Device Manager, HSM/KMS) so teams can protect data in transit and at rest. Built on NIST‑track algorithms with hybrid modes, it enables phased migration, crypto‑agility, and enterprise controls without rewriting existing systems."
           }
           buttonText={"Talk to us"}
           image={"/assets/images/ProductPages/ss/1.webp"}
@@ -57,7 +57,7 @@ function PQCSuitePage() {
               "Drop-in APIs, unified SDKs, and infrastructure services to protect data in transit and at rest—today and against future quantum threats."
             }
           />
-          <FeatureCards featureData={features} />
+          <FeatureCards featureData={features} variant="key-capabilities" />
         </div>
         <ProductWhyCard
           header={"Why Teams Choose Our PQC Suite"}

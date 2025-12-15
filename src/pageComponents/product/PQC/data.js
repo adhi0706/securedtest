@@ -1,45 +1,141 @@
 export const features = [
   {
-    header: "Harvest-Now-Decrypt-Later Protection",
-    description:
-      "<strong>Scope:</strong> Wraps high-value archives and telemetry in hybrid Kyber + AES envelopes within onboarding hours.<br /><strong>Control:</strong> Policy-as-code steers rotation, revocation, and destruction while streaming tamper-aware evidence into SIEM tooling.<br /><strong>Assurance:</strong> Produces regulator-ready attestations aligned to GDPR, HIPAA, SOX, and classified retention mandates.<br /><strong>Velocity:</strong> Compresses crypto uplift programmes from quarters to tightly governed eight-week sprints.",
-    icon: "shield-lock",
-  },
-  {
     header: "PQC API Service",
-    description:
-      "<strong>Surface:</strong> Unified REST endpoints cover encrypt, sign, verify, KMS, and certificate issuance with versioned schemas.<br /><strong>Guardrails:</strong> Enforces tenant isolation, granular throttles, and key custody separation across every region.<br /><strong>Operations:</strong> 99.99% SLA backed by 24/7 SRE coverage, observability hooks, and contract-ready governance packs.<br /><strong>Evidence:</strong> Delivers immutable audit trails and service attestations consumable by risk and procurement teams.",
+    tag: "Gateway",
+    lede: "Run every PQC call through one governed gateway.",
+    points: [
+      {
+        label: "Policy Guardrails",
+        text: "REST tiers enforce policy checkpoints, credential segregation, and risk scoring on every request.",
+      },
+      {
+        label: "Live Observability",
+        text: "Stream cryptographic events into your SIEM with real-time audit feeds.",
+      },
+      {
+        label: "Outcome",
+        text: "Unify crypto governance while accelerating change approvals.",
+      },
+    ],
     icon: "settings-gear",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc api.png" },
+    ],
   },
   {
     header: "Unified SDKs",
-    description:
-      "<strong>Coverage:</strong> Idiomatic helpers for Python, JS/TS, Go, JVM, .NET, and C with shared generators and tests.<br /><strong>Safety:</strong> Secure defaults, lint rules, secret scanners, and rollback utilities keep releases disciplined.<br /><strong>Agility:</strong> Feature flags toggle Kyber, Dilithium, Falcon, and SPHINCS+ alongside classical suites during migrations.<br /><strong>Readiness:</strong> Starter kits and CI blueprints certify teams in days while preserving platform guardrails.",
+    tag: "Builders",
+    lede: "Equip teams with ergonomic PQC toolkits.",
+    points: [
+      {
+        label: "Accelerated Builds",
+        text: "Safe defaults, generators, and rollback templates ship with every release.",
+      },
+      {
+        label: "Language Coverage",
+        text: "Ship one toolkit across web, mobile, server, and device workloads.",
+      },
+      {
+        label: "Outcome",
+        text: "Deliver PQC upgrades without derailing product roadmaps.",
+      },
+    ],
     icon: "code",
-  },
-  {
-    header: "PQC File Sharing & Chat",
-    description:
-      "<strong>Identity:</strong> Passkey onboarding and device attestation certify participants before secure rooms open.<br /><strong>Retention:</strong> Watermarking, legal holds, and export controls align with board, M&A, and incident workflows.<br /><strong>Insight:</strong> Real-time dashboards surface participation trends, sensitive topics, and policy drift for risk leaders.<br /><strong>Continuity:</strong> Seamless mobile and desktop experiences keep executives engaged without sacrificing governance.",
-    icon: "users",
-  },
-  {
-    header: "PQC VPN",
-    description:
-      "<strong>Access:</strong> Continuously assesses device posture, identity, and context before issuing quantum-safe tunnels.<br /><strong>Performance:</strong> Optimised suites keep latency within three milliseconds of classical VPN experiences.<br /><strong>Telemetry:</strong> Streams enriched flow analytics into SIEM and NDR tooling to accelerate detection and investigation.<br /><strong>Continuity:</strong> High-availability gateways and policy failover ensure hybrid workforces stay connected during incidents.",
-    icon: "shield",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc sdk.png" },
+    ],
   },
   {
     header: "Digital Signature & PKI",
-    description:
-      "<strong>Workflow:</strong> Models delegated signing, quorum approvals, and timestamping within governed approval lanes.<br /><strong>Artifacts:</strong> Produces co-signed PQC + classical bundles with validation kits for partners and auditors.<br /><strong>Integration:</strong> REST and SDK connectors slot into CI/CD, ERP, and notarisation stacks without bespoke plumbing.<br /><strong>Assurance:</strong> Maintains lineage and attestation bundles that satisfy regulators and counterparties alike.",
+    tag: "Trust",
+    lede: "Coordinate regulated signing with PQC + classical bundles.",
+    points: [
+      {
+        label: "Unified Workflows",
+        text: "Delegated approvals and role policies govern every signature trail.",
+      },
+      {
+        label: "Lifecycle Control",
+        text: "API hooks orchestrate issuance, rotation, and revocation automatically.",
+      },
+      {
+        label: "Outcome",
+        text: "Produce chain-of-custody proof on demand for every signature.",
+      },
+    ],
     icon: "badge",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc sig.png" },
+    ],
+  },
+  {
+    header: "PQC VPN",
+    tag: "Access",
+    lede: "Keep remote access stable with PQC tunnels.",
+    points: [
+      {
+        label: "Adaptive Posture",
+        text: "Continuous posture checks keep Kyber handshakes fast and observable.",
+      },
+      {
+        label: "Hybrid Tunnels",
+        text: "Blend PQC with classical ciphers for compatibility at the edge.",
+      },
+      {
+        label: "Outcome",
+        text: "Give remote teams PQC protection without performance trade-offs.",
+      },
+    ],
+    icon: "shield",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc vpn.png" },
+    ],
+  },
+  {
+    header: "PQC File Sharing & Chat",
+    tag: "Collaboration",
+    lede: "Protect executive collaboration end-to-end.",
+    points: [
+      {
+        label: "Executive Controls",
+        text: "Attested rooms apply watermarks, retention rules, and link expiry automatically.",
+      },
+      {
+        label: "Session Insight",
+        text: "Live analytics surface who accessed sensitive workstreams and when.",
+      },
+      {
+        label: "Outcome",
+        text: "Keep leadership syncs on sensitive workstreams with confidence.",
+      },
+    ],
+    icon: "users",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc file.png" },
+    ],
   },
   {
     header: "IoT & HSM",
-    description:
-      "<strong>Enrollment:</strong> Bootstraps factories and field sites with Kyber-based provisioning—even when air-gapped.<br /><strong>Lifecycle:</strong> Automates firmware attestations, remote wipe, and credential refresh across millions of assets.<br /><strong>Custody:</strong> Anchors secrets inside PQC-aware HSM and KMS clusters with BYOK coverage across hybrid estates.<br /><strong>Visibility:</strong> Fleet analytics spotlight drift, anomalies, and maintenance priorities for operations teams.",
+    tag: "Devices",
+    lede: "Harden device credentials and secrets at fleet scale.",
+    points: [
+      {
+        label: "Fleet Provisioning",
+        text: "Kyber enrollment secures device identities from onboarding through rotation.",
+      },
+      {
+        label: "Orchestrated Secrets",
+        text: "PQC-aware HSM automation governs wraps, unwraps, and attestation.",
+      },
+      {
+        label: "Outcome",
+        text: "Maintain tamper evidence and health scoring across distributed fleets.",
+      },
+    ],
     icon: "chip-brain",
+    media: [
+      { src: "/assets/images/ProductPages/pqc/pqc Iot.png" },
+    ],
   },
 ];
 
@@ -93,7 +189,7 @@ export const whyChoose = [
   "NIST-track algorithms (Kyber, Dilithium, Falcon, SPHINCS+) implemented with security hardening and sensible defaults for real-world deployments.",
   "Hybrid KEM/TLS and classical compatibility to phase in PQC safely while preserving interoperability with existing clients and infrastructure.",
   "Enterprise-grade KMS/HSM integrations to protect key material, enable BYOK patterns, and enforce separation of duties across environments.",
-  "A clear, staged migration path for applications, VPNs, and PKI with guidance for HNDL protection and low-risk rollouts.",
+  "A clear, staged migration path for applications, VPNs, and PKI with guidance for low-risk rollouts.",
 ];
 
 export const suiteProducts = [
@@ -108,12 +204,6 @@ export const suiteProducts = [
     name: "PQC SDKs & Combined SDK",
     blurb:
       "Unified Sign/Encrypt/Decrypt with algorithm agility: Kyber, Dilithium, Falcon, SPHINCS+.",
-  },
-  {
-    id: "hndl",
-    name: "HNDL Protection",
-    blurb:
-      "Harvest-Now-Decrypt-Later defense with immediate PQC and hybrid cryptography.",
   },
   {
     id: "chat",
@@ -171,7 +261,7 @@ export const faqsData = [
     },
     {
       q: "How do we migrate safely?",
-      a: "Start with hybrid deployments via the API/SDK, enable HNDL protection, then phase-in full PQC.",
+      a: "Start with hybrid deployments via the API/SDK, strengthen archival protections, then phase-in full PQC.",
     },
     {
       q: "Is this open-source compatible?",
