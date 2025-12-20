@@ -12,5 +12,6 @@
     Permissions-Policy = "camera=(), geolocation=(), microphone=(), payment=(), usb=()"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-XSS-Protection = "0"
-    # Attempt to override Server header (Netlify might persist its own, but this is the correct attempt)
     Server = "Securewatch"
+    # Remove X-Powered-By header to prevent technology fingerprinting
+    X-Powered-By = ""
