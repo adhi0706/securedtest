@@ -128,35 +128,14 @@ export const payCrypto = async ({ planid, email, couponCode }) => {
       .replace(",", "");
     price = Number(price);
     try {
-      // First, insert the Web3 payment
-      const data = await fetch(apiUrl + "/payment-insert-web3", {
-        method: "POST",
-        body: JSON.stringify({
-          mail: email,
-          planid,
-          paymentid: transactionid,
-          couponCode,
-        }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: getJwt(),
-        },
-      });
 
-      const result = await data.json();
-
-      if (!result.status) {
-        toast.error("Error initiating the USDT payment!");
-        return;
-      }
-
-      // If Web3 insertion is successful, proceed with NowPayments
-      const nowPaymentsResponse = await fetch(
+       // Entry with NowPayments
+       const nowPaymentsResponse = await fetch(
         "https://api.nowpayments.io/v1/payment",
         {
           method: "POST",
           body: JSON.stringify({
-            price_amount: result.inrPlanCost,
+            price_amount: Number(price),
             price_currency: "inr",
             pay_currency: "USDTMATIC",
             pay_amount: price,
@@ -174,6 +153,31 @@ export const payCrypto = async ({ planid, email, couponCode }) => {
 
       const nowPaymentsData = await nowPaymentsResponse.json();
 
+
+      // insert the Web3 payment
+      const data = await fetch(apiUrl + "/payment-insert-web3", {
+        method: "POST",
+        body: JSON.stringify({
+          mail: email,
+          planid,
+          paymentid: transactionid,
+          txn_id: nowPaymentsData.payment_id,
+          couponCode,
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: getJwt(),
+        },
+      });
+
+      const result = await data.json();
+
+      if (!result.status) {
+        toast.error("Error initiating the USDT payment!");
+        return;
+      }
+
+     
       localStorage.setItem(
         "latestPayment",
         JSON.stringify({

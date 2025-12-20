@@ -46,6 +46,10 @@ const navigationItems = [
         name: "Secure Pad",
         to: "/secure-pad",
       },
+      {
+        name: "PQC Suite",
+        to: "/pqc",
+      },
     ],
   },
   {
