@@ -6,5 +6,5 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
   X-XSS-Protection: 0
-  Server: Securewatch
-  X-Powered-By: 
+  Server: Securewatch 
+*/

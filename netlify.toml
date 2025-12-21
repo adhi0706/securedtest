@@ -13,5 +13,3 @@
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-XSS-Protection = "0"
     Server = "Securewatch"
-    # Remove X-Powered-By header to prevent technology fingerprinting
-    X-Powered-By = ""
