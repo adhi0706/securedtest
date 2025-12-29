@@ -1,6 +1,3 @@
-# Netlify Headers Configuration
-# This file configures HTTP security headers for all routes
-
 /*
   X-Frame-Options: DENY
   Content-Security-Policy: frame-ancestors 'none';
@@ -9,3 +6,4 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
   X-XSS-Protection: 0
+  Server: Securewatch 
