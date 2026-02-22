@@ -1,17 +1,20 @@
 "use client";
 import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { usePathname } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const MetaTags = ({ data }) => {
-  // Use the provided data.url if available, otherwise fallback to path
-  const url =
-    data.url ||
-    (typeof window !== "undefined"
-      ? window.location.href
-      : "https://securedapp.io");
-  const path = usePathname();
+  const router = useRouter();
+  const [url, setUrl] = useState(data.url || "https://securedapp.io");
+
+  useEffect(() => {
+    if (!data.url && typeof window !== "undefined") {
+      setUrl(window.location.href);
+    }
+  }, [data.url, router.asPath]);
+
+  const path = router.asPath;
   var fullPath = "https://securedapp.io" + path;
 
   // Remove blogImage and metaImage logic, use default image only
@@ -27,7 +30,7 @@ const MetaTags = ({ data }) => {
 
   const metadata = [
     {
-      title: "Blockchain Security & Smart Contract Audits | SecureDApp.io",
+      title: "Real-Time Blockchain Threat Monitoring & Security | SecureDApp",
       desc: "SecureDApp offers blockchain security, smart contract audits, DApp development, and compliance services. Protect your digital assets today.",
       keywords:
         "blockchain security, smart contract audits, DApp development, compliance solutions, Layer 1 and Layer 2 chains, Ethereum security, Algorand security, Solana audits, Aptos blockchain, Hyperledger auditing, Binance Smart Chain security, DeFi protocol audits, NFT security, DAO audits, digital asset protection, non-custodial wallet security, custodial wallet protection, blockchain platform security, intellectual property protection, vulnerability detection blockchain",

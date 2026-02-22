@@ -50,7 +50,7 @@ export const authorsData = [
         to: "/defi-development",
       },
     ],
-  }, 
+  },
   {
     to: "kunal",
     image: "/assets/images/authors/kunal_1.png",
@@ -102,7 +102,7 @@ export const authorsData = [
         to: "/defi-development",
       },
     ],
-  }, 
+  },
   {
     to: "nikhil",
     image: "/assets/images/authors/nikhil.png",
@@ -355,7 +355,7 @@ export const authorsData = [
       },
       {
         name: "Decentralized Identity",
-        to: "/decentralized-identity-did",
+        to: "/self-sovereign-identity-enterprises",
       },
     ],
   },
@@ -511,7 +511,7 @@ export const authorsData = [
       },
       {
         name: "Decentralized Identity",
-        to: "/decentralized-identity-did",
+        to: "/self-sovereign-identity-enterprises",
       },
     ],
   },

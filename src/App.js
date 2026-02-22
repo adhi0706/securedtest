@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import {
   Routes,
   Route,
-  BrowserRouter as Router,        
+  BrowserRouter as Router,
 } from "next/router";
 import Home from "./pages/home/HomePage";
 import { useEffect } from "react";
@@ -97,8 +97,8 @@ function App() {
         <Route path="/" index element={<Home />} />
         <Route path="product" element={<Product />} />
         <Route path="solidity-shield" element={<SolidityShieldPage />} />
-        <Route path="secure-watch" element={<SecureWatchPage />} />
-        <Route path="secure-trace" element={<SecureTracePage />} />
+        <Route path="real-time-blockchain-threat-monitoring" element={<SecureWatchPage />} />
+        <Route path="blockchain-forensic-investigation-tool" element={<SecureTracePage />} />
         <Route path="secure-pad" element={<SecurePadPage />} />
         <Route path="service" element={<Service />} />
         <Route path="dapp-development" element={<DappDevelopment />} />
@@ -112,7 +112,7 @@ function App() {
         <Route path="itgc-audit-services" element={<ITGCService />} />
         <Route path="crypto-compliance-aml" element={<CryptoComplianceAml />} />
         <Route
-          path="decentralized-identity-did"
+          path="self-sovereign-identity-enterprises"
           element={<DecentralizedIdentity />}
         />
         <Route path="nfts-development" element={<NftsDvelopment />} />

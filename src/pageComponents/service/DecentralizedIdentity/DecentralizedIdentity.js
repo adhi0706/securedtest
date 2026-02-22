@@ -26,8 +26,7 @@ function DecentralizedIdentity() {
       {" "}
       <MetaTags
         data={{
-          title:
-            "Decentralized Identity (DID): Secure & Private Digital Identities",
+          title: "Self-Sovereign Identity Enterprises",
           desc: "SecureDApp's Decentralized Identity solutions ensure privacy, data security, and seamless identity verification. Protect your digital identity now.",
           keywords:
             "decentralized identity, DID solutions, digital identity, privacy-first identities, blockchain identity, identity verification, secure digital identity, identity management, verifiable credentials, decentralized technology",

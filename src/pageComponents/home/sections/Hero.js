@@ -16,12 +16,12 @@ const images = [
   {
     src: "/assets/images/ProductPages/sw/hero.webp",
     alt: "Secure Watch",
-    to: "/secure-watch",
+    to: "/real-time-blockchain-threat-monitoring",
   },
   {
     src: "/assets/images/ProductPages/st/st-hero.webp",
     alt: "Secure Trace",
-    to: "/secure-trace",
+    to: "/blockchain-forensic-investigation-tool",
   },
 ];
 

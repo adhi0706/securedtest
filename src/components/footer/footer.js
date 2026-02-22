@@ -28,7 +28,7 @@ const navigationItems = [
       },
       {
         name: "Secure Watch",
-        to: "/secure-watch",
+        to: "/real-time-blockchain-threat-monitoring",
       },
       {
         name: "Secure CMS (Consent)",
@@ -40,7 +40,7 @@ const navigationItems = [
       },
       {
         name: "Secure Trace",
-        to: "/secure-trace",
+        to: "/blockchain-forensic-investigation-tool",
       },
       {
         name: "Secure Pad",
@@ -103,7 +103,7 @@ const navigationItems = [
     items: [
       {
         name: "Blogs",
-        to: "/blog",
+        to: "https://blog.securedapp.io",
       },
       {
         name: "Audits",
