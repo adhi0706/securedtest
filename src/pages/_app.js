@@ -78,43 +78,44 @@ function MyApp({ Component, pageProps }) {
     router.asPath !== "/solidity-shield-scan/auth" &&
     router.asPath !== "/solidity-shield-scan/contact";
   const [isClient, setIsClient] = useState(false);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
-  // if (!isClient) return null; // or some loading state while determining the path
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
-    <>
-      <Provider store={mainStore}>
-        <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary">
+    <Provider store={mainStore}>
+      <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary">
+        {isClient && (
           <ToastContainer
             position="top-center"
             autoClose={2000}
             theme="dark"
             pauseOnHover
           />
-          {isSolidityShieldScan && <ScanNowModal />}
-          {isSolidityShieldScan && <PaymentModal />}
-          {isSolidityShieldScan && <RequestQuoteModal />}
-          {isSolidityShieldScan ? (
-            <MainLayout>
-              <MetaTags
-                data={{
-                  title: "Solidity Shield Scan",
-                  desc: "Get your smart contracts audited here by SecureDapps's Solidity Shield with AI scanning.",
-                }}
-              />
-              {isSolidityShieldScan && <Loader />}
-              <Component {...pageProps} />
-            </MainLayout>
-          ) : (
+        )}
+        {isClient && isSolidityShieldScan && (
+          <>
+            <ScanNowModal />
+            <PaymentModal />
+            <RequestQuoteModal />
+          </>
+        )}
+        {isSolidityShieldScan ? (
+          <MainLayout>
+            <MetaTags
+              data={{
+                title: "Solidity Shield Scan",
+                desc: "Get your smart contracts audited here by SecureDapps's Solidity Shield with AI scanning.",
+              }}
+            />
+            {isClient && <Loader />}
             <Component {...pageProps} />
-          )}
-        </div>
-      </Provider>
-    </>
+          </MainLayout>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </div>
+    </Provider>
   );
 }
 

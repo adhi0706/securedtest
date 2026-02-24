@@ -29,7 +29,7 @@ const Footer = () => {
 
         if (response.ok) {
           console.log(response);
-          
+
           toast.success("Successfully Subscribed!");
           setEmail("");
         } else {
@@ -114,7 +114,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="https://securedapp.io/secure-watch"
+                    href="/real-time-blockchain-threat-monitoring"
                     className="text-xs text-gray-300 dark:text-black hover:dark:text-green-500 hover:text-green-500"
                   >
                     Secure Watch
@@ -127,7 +127,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="https://securedapp.io/secure-trace"
+                    href="/blockchain-forensic-investigation-tool"
                     className="text-xs text-gray-300 dark:text-black hover:dark:text-green-500 hover:text-green-500"
                   >
                     Secure Trace
@@ -242,7 +242,7 @@ const Footer = () => {
               <ul className="space-y-1" id="poppins-regular">
                 <li>
                   <Link
-                    href="https://securedapp.io/blog"
+                    href="https://blog.securedapp.io"
                     className="text-xs text-gray-300 dark:text-black hover:dark:text-green-500 hover:text-green-500"
                   >
                     Blogs

@@ -25,7 +25,7 @@ function SecureTracePage() {
       {" "}
       <MetaTags
         data={{
-          title: "SecureTrace: AI-Powered Blockchain Forensics & Compliance",
+          title: "Blockchain Forensic Investigation Tool",
           desc: "SecureTrace simplifies blockchain investigations with AI-driven tools. Trace transactions, enhance security, and ensure compliance with comprehensive analysis.",
           keywords:
             "SecureTrace, blockchain forensics, AI-powered investigation, blockchain compliance, transaction tracing, forensic analysis, SecureDApp, blockchain security, AI in blockchain, digital asset recovery",

@@ -326,15 +326,15 @@ export default function BlogPost({ blog }) {
               )}..."`,
             image:
               blog.image &&
-              typeof blog.image === "string" &&
-              blog.image.trim() !== "" &&
-              (blog.image.startsWith("http") || blog.image.startsWith("/"))
+                typeof blog.image === "string" &&
+                blog.image.trim() !== "" &&
+                (blog.image.startsWith("http") || blog.image.startsWith("/"))
                 ? blog.image.startsWith("http")
                   ? blog.image
                   : `https://securedapp.io${blog.image}`
                 : "https://securedapp-v2.vercel.app/assets/images/Home.png",
             keywords: blog.prim_keys || blog.tags,
-            url: `https://securedapp.io/blog/${blog.url.replace(":", "")}`,
+            url: `https://blog.securedapp.io/${blog.url.replace(":", "")}`,
             // Additional meta fields for enhanced SEO
             relatedKeywords: blog.rela_keys,
           }}
@@ -382,7 +382,7 @@ export default function BlogPost({ blog }) {
               <div className="body-header">
                 <div className="body-header-tags">
                   {blogDetails.tags.split(",").map((tag) => {
-                    return <BlogTag tag={tag} onClick={() => {}} />;
+                    return <BlogTag tag={tag} onClick={() => { }} />;
                   })}
                 </div>
                 <div className="body-header-title">{blogDetails.title}</div>
@@ -426,7 +426,7 @@ export default function BlogPost({ blog }) {
                       href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                         blogDetails.title
                       )}&url=${encodeURIComponent(
-                        "https://securedapp.io/blog/" + url
+                        "https://blog.securedapp.io/" + url
                       )}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faTwitter} />
@@ -436,9 +436,9 @@ export default function BlogPost({ blog }) {
                       rel="noopener noreferrer"
                       href={`https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
                         blogDetails.title +
-                          " : " +
-                          "https://securedapp.io/blog/" +
-                          url
+                        " : " +
+                        "https://blog.securedapp.io/" +
+                        url
                       )}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faLinkedin} />
@@ -446,7 +446,7 @@ export default function BlogPost({ blog }) {
                     <Link
                       target="_blank"
                       href={`https://t.me/share/url?url=${encodeURIComponent(
-                        "https://securedapp.io/blog/" + url
+                        "https://blog.securedapp.io/" + url
                       )}&text=${encodeURIComponent(blogDetails.title)}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faTelegram} />
@@ -455,7 +455,7 @@ export default function BlogPost({ blog }) {
                       target="_blank"
                       onClick={() => {
                         navigator.clipboard.writeText(
-                          "https://securedapp.io/blog/" + url
+                          "https://blog.securedapp.io/" + url
                         );
                         toast("Link copied");
                       }}
@@ -586,43 +586,43 @@ export default function BlogPost({ blog }) {
 // 1. Define `getStaticPaths` to pre-render dynamic blog URLs
 export async function getStaticPaths() {
   try {
-  var data = await fetchBlogs();
-  const paths = data.map((blog) => ({
-    params: { url: blog.url.replace(":", "") },
-  }));
+    var data = await fetchBlogs();
+    const paths = data.map((blog) => ({
+      params: { url: blog.url.replace(":", "") },
+    }));
 
-  return {
-    paths, // Pre-rendered blog URLs
-    fallback: false, // Enable fallback for other URLs
-  };
-} catch (err) {
-  console.error("Error fetching blog list:", err);
-  return { paths: [], fallback: false }; // no blogs, but build won’t crash
-}
+    return {
+      paths, // Pre-rendered blog URLs
+      fallback: false, // Enable fallback for other URLs
+    };
+  } catch (err) {
+    console.error("Error fetching blog list:", err);
+    return { paths: [], fallback: false }; // no blogs, but build won’t crash
+  }
 }
 
 // 2. Define `getStaticProps` to fetch blog data for each page
 export async function getStaticProps({ params }) {
   try {
-  var data = await fetchBlogs();
-  const blog = data.find(
-    (blog) => blog.url.replace(":", "") === params.url.replace(":", "")
-  );
+    var data = await fetchBlogs();
+    const blog = data.find(
+      (blog) => blog.url.replace(":", "") === params.url.replace(":", "")
+    );
 
-  if (!blog) {
+    if (!blog) {
+      return {
+        notFound: true, // Return 404 if blog not found
+      };
+    }
+
     return {
-      notFound: true, // Return 404 if blog not found
+      props: {
+        blog,
+      },
     };
-  }
 
-  return {
-    props: {
-      blog,
-    },
-  };
-
-  } catch (err) { 
-    console.error("Error fetching blog data:", err); 
-    return { notFound: true }; 
+  } catch (err) {
+    console.error("Error fetching blog data:", err);
+    return { notFound: true };
   }
 }

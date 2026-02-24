@@ -30,8 +30,11 @@ const Navbar = () => {
     case "/solidity-shield":
       nextPath = "/solidity-shield-scan";
       break;
-    case "/secure-watch":
+    case "/real-time-blockchain-threat-monitoring":
       nextPath = "https://securewatch.securedapp.io/";
+      break;
+    case "/blockchain-forensic-investigation-tool":
+      nextPath = "https://securetrace.securedapp.io/";
       break;
     case "/secure-pad":
       nextPath = "https://securepad.xyz/";
@@ -63,7 +66,7 @@ const Navbar = () => {
   };
 
   const toggleTheme = () => {
-    if (  darkMode === true) {
+    if (darkMode === true) {
       setModeLight();
     } else {
       setModeDark();

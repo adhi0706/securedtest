@@ -35,18 +35,18 @@ function Web3KYC() {
       />
       <Navbar />
       <div className="service">
-      <ProductServiceHero
-  name={
-    <>
-      <span className="white-text">Secure</span>
-      <span className="green-x">X</span>
-      <span className="white-text">-ID: Decentralized KYC/AML for Web3</span>
-    </>
-  }
-  title="Your Gateway to Compliant and Secure Decentralized Finance"
-  image={"/assets/images/ServicePages/s5-hero.webp"}
-  service={true}
-/>
+        <ProductServiceHero
+          name={
+            <>
+              <span className="white-text">Secure</span>
+              <span className="green-x">X</span>
+              <span className="white-text">-ID: Decentralized KYC/AML for Web3</span>
+            </>
+          }
+          title="Your Gateway to Compliant and Secure Decentralized Finance"
+          image={"/assets/images/ServicePages/s5-hero.webp"}
+          service={true}
+        />
         <ProductCard
           header={"What is SecureX-ID ?"}
           description={

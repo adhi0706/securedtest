@@ -289,7 +289,7 @@ const BlogPost = () => {
               <div className="body-header">
                 <div className="body-header-tags">
                   {blogDetails.tags.split(",").map((tag) => {
-                    return <BlogTag tag={tag} onClick={() => {}} />;
+                    return <BlogTag tag={tag} onClick={() => { }} />;
                   })}
                 </div>
                 <h1 className="body-header-title">{blogDetails.title}</h1>
@@ -325,7 +325,7 @@ const BlogPost = () => {
                       href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                         blogDetails.title
                       )}&url=${encodeURIComponent(
-                        "https://securedapp.io/blog/" + url
+                        "https://blog.securedapp.io/" + url
                       )}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faTwitter} />
@@ -335,9 +335,9 @@ const BlogPost = () => {
                       rel="noopener noreferrer"
                       href={`https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
                         blogDetails.title +
-                          " : " +
-                          "https://securedapp.io/blog/" +
-                          url
+                        " : " +
+                        "https://blog.securedapp.io/" +
+                        url
                       )}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faLinkedin} />
@@ -345,7 +345,7 @@ const BlogPost = () => {
                     <Link
                       target="_blank"
                       href={`https://t.me/share/url?url=${encodeURIComponent(
-                        "https://securedapp.io/blog/" + url
+                        "https://blog.securedapp.io/" + url
                       )}&text=${encodeURIComponent(blogDetails.title)}`}
                     >
                       <FontAwesomeIcon size="xl" icon={faTelegram} />
@@ -354,7 +354,7 @@ const BlogPost = () => {
                       target="_blank"
                       onClick={() => {
                         navigator.clipboard.writeText(
-                          "https://securedapp.io/blog/" + url
+                          "https://blog.securedapp.io/" + url
                         );
                         toast("Link copied");
                       }}

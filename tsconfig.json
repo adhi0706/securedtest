@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -17,9 +21,12 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/types/**/*.d.ts",
     "src/AuditExpress/components/NavbarLargeScreen.jsx",
     "src/AuditExpress/components/Navbar.jsx",
-    "src/Auditexpress/ScanIdPage.tsx"
+    "src/AuditExpress/ScanIdPage.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

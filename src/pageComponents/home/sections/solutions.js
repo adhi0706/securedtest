@@ -22,7 +22,7 @@ const solutions = [
       "Machine learning for anomaly identification",
       "Customizable security measures",
     ],
-    to: "/secure-watch",
+    to: "/real-time-blockchain-threat-monitoring",
     image: "/assets/images/ProductPages/sw/hero.webp",
   },
   {
@@ -32,7 +32,7 @@ const solutions = [
       "Analyzes transaction data",
       "Supports regulatory compliance",
     ],
-    to: "/secure-trace",
+    to: "/blockchain-forensic-investigation-tool",
     image: "/assets/images/ProductPages/st/st-hero.webp",
   },
   {
@@ -61,9 +61,8 @@ const Solution = ({ title, items = [], to, image, isImageLeft = false }) => {
   const navigate = useRouter();
   return (
     <div
-      className={`solution-card lg:flex ${
-        isImageLeft ? "lg:flex-row-reverse" : "lg:flex-row"
-      } flex-col items-center`}
+      className={`solution-card lg:flex ${isImageLeft ? "lg:flex-row-reverse" : "lg:flex-row"
+        } flex-col items-center`}
     >
       <div className="solution-card-content">
         <div className="solution-card-title">{title}</div>
