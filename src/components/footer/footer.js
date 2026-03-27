@@ -298,7 +298,7 @@ const Footer = () => {
         </div>
         <div className="footer-legacy-right">
           <div>
-            © 2024, Vettedcode Technologies India Pvt. Ltd.. All rights reserved
+            © 2026, Vettedcode Technologies India Pvt. Ltd.. All rights reserved
           </div>
         </div>
       </div>

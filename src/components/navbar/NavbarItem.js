@@ -3,6 +3,8 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import MegaMenu from "./MegaMenu";
+import { useRef } from "react";
 
 const NavbarItem = ({
   to,
@@ -12,91 +14,47 @@ const NavbarItem = ({
   setDropDown,
   items = [],
 }) => {
+  const isVisible = dropDown === children;
+  
   const handleMouseEnter = () => setDropDown(children);
   const handleMouseLeave = () => setDropDown("");
 
   return (
     <div
-      className="navbar-item"
-      onMouseOver={handleMouseEnter}
-      onMouseOut={handleMouseLeave}
+      className="relative flex items-center h-full"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <Link href={to}>
-        <div className="navbar-item-primary">
+      <Link href={to} className="h-full flex items-center">
+        <div className="py-4 flex space-x-2 items-center cursor-pointer">
           <p
-            onClick={() =>
-              children === "Pricing" &&
-              typeof window !== "undefined" &&
-              window.open("/solidity-shield-scan/pricing")
-            }
+            onClick={() => {
+              if (
+                children === "Pricing" &&
+                typeof window !== "undefined"
+              ) {
+                window.open("/solidity-shield-scan/pricing");
+              }
+            }}
+            className={`transition-colors duration-200 ${isVisible ? "text-[#00d2ff]" : "text-primary"}`}
           >
             {children}
           </p>
           {items.length > 0 && (
             <FontAwesomeIcon
               icon={faChevronDown}
-              color={darkMode ? "white" : "primary"}
+              className={`transition-transform duration-300 ${isVisible ? "rotate-180 text-[#00d2ff]" : "text-white"}`}
               size="xs"
             />
           )}
         </div>
       </Link>
-      {items.length > 0 && dropDown === children && (
-        <div
-          className={`nested-navbar ${
-            children === "Services" && "left-1/2 transform -translate-x-1/2"
-          }`}
-        >
-          {/* <div className="nested-navbar-header">{children}</div> */}
-          {/* <hr className="border my-2 border-cardBorderColorLight dark:border-cardBorderColorDark"></hr> */}
-          {children !== "Services" ? (
-            <div className="nested-navbar-items">
-              {items.map((item) => {
-                return (
-                  item["to"] && (
-                    <Link
-                      className="nested-navbar-item"
-                      href={item["to"]}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                    >
-                      <p>{item["name"]}</p>
-                    </Link>
-                  )
-                );
-              })}
-            </div>
-          ) : (
-            <div className="nested-navbar-items-services">
-              {items.map((item) => {
-                return (
-                  <div className="nested-navbar-items-services-card-col">
-                    <div className="nested-navbar-items-services-card-col-header">
-                      {item.title}
-                    </div>
-                    <div className="nested-navbar-items-services-card-col-items">
-                      {item.children.map((child) => {
-                        return (
-                          child.to && (
-                            <Link
-                              href={child.to}
-                              className="nested-navbar-items-services-card-col-item"
-                              target={child.external ? "_blank" : undefined}
-                              rel={child.external ? "noopener noreferrer" : undefined}
-                            >
-                              <p>{child.name}</p>
-                            </Link>
-                          )
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      )}
+      
+      <MegaMenu 
+        items={items} 
+        label={children} 
+        isVisible={isVisible} 
+      />
     </div>
   );
 };
