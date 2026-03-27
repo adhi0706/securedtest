@@ -1,0 +1,111 @@
+.rtm-whatis-container {
+    padding: 100px 20px 40px 20px;
+    background-color: transparent;
+    font-family: inherit;
+}
+.rtm-whatis-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+.rtm-whatis-title {
+    font-size: 2.2rem;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.rtm-whatis-title .highlight {
+    color: #00d2ff;
+}
+.rtm-whatis-text p {
+    color: #a0a5b1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.rtm-whatis-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+.rtm-whatis-toggle {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px;
+}
+.rtm-toggle-btn {
+    background: transparent;
+    border: none;
+    color: #797d86;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.rtm-toggle-btn:hover {
+    color: #ffffff;
+}
+.rtm-toggle-btn.active-without {
+    background: rgba(255, 77, 79, 0.15);
+    color: #ff4d4f;
+    border: 1px solid rgba(255, 77, 79, 0.3);
+}
+.rtm-toggle-btn.active-with {
+    background: rgba(0, 210, 255, 0.15);
+    color: #00d2ff;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+}
+
+.rtm-whatis-result {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rtm-result-box {
+    width: 100%;
+    max-width: 750px;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: left;
+    background: #1e3255 !important;
+}
+.rtm-result-red {
+    border: 1px solid rgba(255, 77, 79, 0.3);
+    box-shadow: 0 0 30px rgba(255, 77, 79, 0.05);
+}
+.rtm-result-green {
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.05);
+}
+.rtm-result-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+.red-label { color: #ff4d4f; }
+.green-label { color: #00ff88; }
+.rtm-result-text {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+}
+.red-highlight { color: #ff4d4f; font-weight: 700; }
+.green-highlight { color: #00ff88; font-weight: 700; }
+
+.animation-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

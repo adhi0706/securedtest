@@ -1,0 +1,142 @@
+.rtm-mp-container {
+    padding: 100px 20px;
+    background-color: transparent;
+    font-family: inherit;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.rtm-mp-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.rtm-mp-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.rtm-mp-title {
+    font-size: 2.5rem;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.rtm-mp-title .highlight {
+    color: #00ff88;
+}
+.rtm-mp-subtitle {
+    font-size: 1.1rem;
+    color: #a0a5b1;
+}
+.rtm-mp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+.rtm-mp-card {
+    background: #1e3255 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.rtm-mp-card.rtm-mp-recommended,
+.rtm-mp-card:hover {
+    border-color: rgba(0, 210, 255, 0.5);
+    background: linear-gradient(180deg, rgba(0, 210, 255, 0.05) 0%, rgba(20, 24, 34, 0.8) 100%);
+    box-shadow: 0 10px 40px rgba(0, 210, 255, 0.1);
+    transform: translateY(-10px);
+}
+.rtm-mp-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00d2ff;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+.rtm-mp-card-top h3 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.rtm-mp-card-top p {
+    color: #a0a5b1;
+    font-size: 0.95rem;
+    min-height: 48px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+.rtm-mp-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+.rtm-mp-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    color: #cbcdd4;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+.rtm-mp-check {
+    color: #00d2ff;
+    font-weight: bold;
+}
+.rtm-mp-card-bottom {
+    margin-top: 30px;
+}
+.rtm-mp-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+.rtm-mp-btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+.rtm-mp-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.rtm-mp-card:hover .rtm-mp-btn-outline {
+    background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
+    border-color: transparent;
+    color: #ffffff;
+}
+.rtm-mp-card:hover .rtm-mp-btn-outline:hover {
+    box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+    transform: translateY(-2px);
+}
+.rtm-mp-btn-primary {
+    background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
+    border: none;
+    color: #ffffff;
+}
+.rtm-mp-btn-primary:hover {
+    box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+    transform: translateY(-2px);
+}
+.rtm-mp-footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #797d86;
+    font-size: 0.85rem;
+}

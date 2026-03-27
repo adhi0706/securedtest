@@ -47,7 +47,7 @@ const NavbarSmallScreen = ({
   };
 
   return (
-    <div className="navbar-small-screen">
+    <div className="bg-[#031B34] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] navbar-small-screen">
       <div className="flex items-center justify-between">
         <div className="absolute left-3 cursor-pointer" onClick={showSideBar}>
           <FontAwesomeIcon
@@ -57,22 +57,15 @@ const NavbarSmallScreen = ({
           />
         </div>
         <div className="mx-auto">
-          <Logo />
+          <Logo forceDark={true} />
         </div>
       </div>
       {isSideBarOpen && (
         <div className="sidebar-background">
-          <div className="sidebar">
+          <div className="bg-[#031B34] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] sidebar">
             <div className="sidebar-header">
-              <Logo isLeft={true} />
+              <Logo isLeft={true} forceDark={true} />
               <div className="flex space-x-3 items-center">
-                <button onClick={toggleTheme}>
-                  {darkMode ? (
-                    <i className="fa-regular fa-brightness"></i>
-                  ) : (
-                    <i className="fa-regular fa-moon"></i>
-                  )}
-                </button>
                 <FontAwesomeIcon
                   icon={faClose}
                   color={darkMode ? "white" : "black"}
@@ -174,14 +167,7 @@ const NavbarSmallScreen = ({
               })}
             </nav>
             <div className="w-full text-center py-3 px-2">
-              {nextPath ? (
-                <Button text={"Login"} onClick={handleNavigation} />
-              ) : (
-                <Button
-                  text="Request Quote"
-                  onClick={handleNavigation}
-                ></Button>
-              )}
+              <Button text="Login" onClick={handleNavigation} />
             </div>
           </div>
         </div>

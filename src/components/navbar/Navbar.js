@@ -113,7 +113,8 @@ const Navbar = () => {
   }, [dispatch]);
 
   return (
-    <div className="absolute z-10 top-0 left-0 right-0">
+    <div className="absolute z-[999] w-full top-0 left-0 right-0 pointer-events-none">
+      <div className="pointer-events-auto">
       {isRequestModalOpen && <RequestQuoteModal />}
       {isLargeScreen ? (
         <NavbarLargeScreen
@@ -130,6 +131,7 @@ const Navbar = () => {
           toggleTheme={toggleTheme}
         />
       )}
+      </div>
     </div>
   );
 };

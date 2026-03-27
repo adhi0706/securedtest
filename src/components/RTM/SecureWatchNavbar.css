@@ -1,0 +1,99 @@
+.swnav-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(4, 26, 58, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.swnav-scrolled {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+}
+.swnav-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.swnav-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.swnav-logo img {
+    height: 35px;
+    width: auto;
+}
+.swnav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: rgba(20, 24, 34, 0.6);
+    padding: 0 25px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 50px;
+}
+.swnav-link {
+    background: transparent;
+    border: none;
+    color: #a0a5b1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 5px 0;
+}
+.swnav-link:hover {
+    color: #ffffff;
+}
+.swnav-live-btn {
+    color: #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+.swnav-live-btn:hover {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+.live-dot-green {
+    width: 6px;
+    height: 6px;
+    background: #00ff88;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #00ff88;
+}
+
+.swnav-trial-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid #00ff88;
+    color: #ffffff;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.swnav-trial-btn:hover {
+    background: #00ff88;
+    color: #041a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+}
+
+@media (max-width: 900px) {
+    .swnav-links {
+        display: none;
+    }
+}

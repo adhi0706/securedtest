@@ -1,4 +1,6 @@
 "use client";
+import React, { useState } from 'react';
+import styles from './SecureWatchPage.module.css';
 
 import Footer from "../../../components/footer/footer";
 import Navbar from "../../../components/navbar/Navbar";
@@ -15,13 +17,43 @@ import ProductWhyCard from "../../../components/productService/ProductWhyCard";
 import HowItWorksCard from "../../../components/productService/HowItWorksCard";
 import { faqsData, threats, features } from "./data";
 import BookMeetCta from "../../../components/common/bookMeetCta";
+import RTMOverview from "../../../components/RTM/RTMOverview";
+import RTMThreats from "../../../components/RTM/RTMThreats";
+import RTMMonitoring from "../../../components/RTM/RTMMonitoring";
+import RTMHowItWorks from "../../../components/RTM/RTMHowItWorks";
+import RTMFeatures from "../../../components/RTM/RTMFeatures";
+import RTMUseCases from "../../../components/RTM/RTMUseCases";
+import RTMBenefits from "../../../components/RTM/RTMBenefits";
+import RTMPlans from "../../../components/RTM/RTMPlans";
+import RTMFAQ from "../../../components/RTM/RTMFAQ";
+import RTMCaseStudy from "../../../components/RTM/RTMCaseStudy";
+import RTMTechnology from "../../../components/RTM/RTMTechnology";
+import Technology from "../../../components/RTM/Technology";
+import ContinuousBenefits from "../../../components/RTM/ContinuousBenefits";
+import ClientsSay from "../../../components/RTM/ClientsSay";
+import MonitoringPlans from "../../../components/RTM/MonitoringPlans";
+import SecureWatchFAQ from "../../../components/RTM/SecureWatchFAQ";
+import SecureWatchCTA from "../../../components/RTM/SecureWatchCTA";
+import SecureWatchOverviewSection from "../../../components/RTM/SecureWatchOverviewSection";
+import WhatIsSection from "../../../components/RTM/WhatIsSection";
+import FeaturesGridSection from "../../../components/RTM/FeaturesGridSection";
+import HowItWorksSection from "../../../components/RTM/HowItWorksSection";
+import UseCasesSection from "../../../components/RTM/UseCasesSection";
+import SecureWatchHero from "../../../components/RTM/SecureWatchHero";
+import AuditsVsMonitoringSection from "../../../components/RTM/AuditsVsMonitoringSection";
+import EulerCaseStudySection from "../../../components/RTM/EulerCaseStudySection";
+import SecureWatchNavbar from "../../../components/RTM/SecureWatchNavbar";
+import RequestDemoModal from "../../../components/RTM/RequestDemoModal";
+
 
 function SecureWatchPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   if (typeof window !== "undefined") {
     typeof window !== "undefined" && window.scrollTo(0, 0);
   }
   return (
-    <div className="product-container">
+    <div className={`product-container ${styles.securewatchPageBg}`}>
       {" "}
       <MetaTags
         data={{
@@ -32,9 +64,11 @@ function SecureWatchPage() {
           image: "/assets/images/ProductPages/sw/hero.webp",
         }}
       />
+      
       <Navbar />
+      
       <div className="product">
-        <ProductServiceHero
+        {/* <ProductServiceHero
           name="SECURE WATCH"
           title="Blockchain Threat Detection"
           image={"/assets/images/ProductPages/sw/hero.webp"}
@@ -42,52 +76,41 @@ function SecureWatchPage() {
             typeof window !== "undefined" &&
             window.open("https://securewatch.securedapp.io")
           }
-        />
+        /> */}
+        <SecureWatchHero />
+        <SecureWatchOverviewSection />
+        <WhatIsSection />
+        <FeaturesGridSection />
+        <HowItWorksSection />
+        <UseCasesSection />
+        <AuditsVsMonitoringSection />
+        <EulerCaseStudySection />
+
+        {/* <RTMOverview />
+        <RTMThreats />
+        <RTMMonitoring />
+        <RTMHowItWorks />
+        <RTMFeatures />
+        <RTMUseCases />
+        <RTMBenefits />
+        <RTMPlans />
+        <RTMFAQ />
+        <RTMCaseStudy />
+        <RTMTechnology /> */}
+
+        <Technology />
+        <ContinuousBenefits />
+        <MonitoringPlans />
+        <ClientsSay />
         <ProductCard
-          header={"What is Secure Watch"}
+          header={<>What is <span className="text-[#00ff88]">Secure Watch</span></>}
           description={
             "SecureWatch is a cutting-edge post-deployment security monitoring and threat detection tool that leverages AI for real-time surveillance of your projects and smart contracts. It provides continuous protection by constantly monitoring on-chain transactions to identify security breaches, unauthorized access, and abnormal behavior. <br/><br/> Seamlessly integrating with your existing DevOps processes, it guarantees that security measures are consistently applied throughout development and operations.<br/><br/>Comply with needed regulations and have complete visibility and control of your Web3 environment, 24-7, safeguarding client assets and stopping illicit finance."
           }
           buttonText={"Scan now"}
           image={"/assets/images/ProductPages/sw/1.webp"}
         />
-        <div className="features-section">
-          <SectionTitle
-            name={"Threats"}
-            title={"What Threats SecureWatch Detects in a Smart Contract?"}
-            description={
-              "With its high-tech blockchain threat detection capabilities, Securewatch identifies a range of security breaches through its advanced monitoring system. Here’s how it keeps your smart contract secure."
-            }
-          />
-          <FeatureCards featureData={threats} />
-          {/* <div className="features-section-button">
-            <Button text={"Learn more"} filled={true} />
-          </div> */}
-        </div>
-        <div className="features-section">
-          <SectionTitle
-            name={"Features"}
-            title={"What are the Features of SecureWatch?"}
-            description={
-              "SecureWatch offers several advanced features to maintain real-time blockchain security and safeguard your digital assets throughout their lifecycle."
-            }
-          />
-          <FeatureCards featureData={features} />
-          {/* <div className="features-section-button">
-            <Button text={"Learn more"} filled={true} />
-          </div> */}
-        </div>
-        <ProductWhyCard
-          header={"Why Choose Secure Watch?"}
-          descriptions={[
-            "Choosing SecureWatch means opting for a solution that protects and enhances your smart contract's security over time.",
-            "What sets SecureWatch apart is its ability to customize security policies to fit your unique needs and risk profiles, providing a customized approach to security. Additionally, its analysis of historical data helps refine security measures based on past incidents, enabling continuous improvement and a stronger defense against future threats.",
-            "With Blockchain Threat Intelligence at its core, SecureWatch offers unmatched insights and threat detection capabilities, helping you stay ahead of emerging vulnerabilities and risks. By continuously tracking deviations from normal behavior, SecureWatch proactively identifies potential threats before they escalate.",
-          ]}
-          buttonText={"Get Started"}
-          image={"/assets/images/ProductPages/sw/2.webp"}
-          imageAlt={"Product 1 Why Image"}
-        />
+
         {/* <div>
           <SectionTitle
             name={"How it works"}
@@ -115,13 +138,15 @@ function SecureWatchPage() {
           </div>
           </div>
         </div> */}
-        <Testimonials reviews={reviews} />
+        {/* <Testimonials reviews={reviews} /> */}
         <div>
-          <FAQs faqsData={faqsData} />
+          {/* <FAQs faqsData={faqsData} /> */}
+          <SecureWatchFAQ />
         </div>
+        <SecureWatchCTA />
       </div>
       <Footer />
-      <BookMeetCta />
+      <RequestDemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
