@@ -11,5 +11,5 @@
 }
 
 .how-it-works-card-description {
-  @apply text-left text-sm font-light;
+  @apply text-left text-sm font-light text-secondary/70 dark:text-primary/70;
 }

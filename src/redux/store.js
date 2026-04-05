@@ -7,6 +7,7 @@ import issuesReducer from "../SolidityShield/redux/dashboard/issuesSlice";
 import historyReducer from "../SolidityShield/redux/dashboard/historySlice";
 import scanHistoryReducer from "../SolidityShield/redux/scanHistory/scanHistorySlice";
 import paymentReducer from "../SolidityShield/redux/dashboard/paymentSlice";
+import themeReducer from "./slices/themeSlice";
 
 export const mainStore = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const mainStore = configureStore({
     history: historyReducer,
     scanHistory: scanHistoryReducer,
     payment: paymentReducer,
+    theme: themeReducer,
   },
 });

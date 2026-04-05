@@ -16,5 +16,5 @@
 }
 
 .product-why-card-content-descriptions {
-  @apply lg:pr-12 flex flex-col space-y-2 lg:space-y-4 font-light;
+  @apply lg:pr-12 flex flex-col space-y-2 lg:space-y-4 font-light text-secondary/70 dark:text-primary/70;
 }

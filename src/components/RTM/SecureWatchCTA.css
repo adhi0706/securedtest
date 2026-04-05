@@ -2,7 +2,7 @@
     padding: 100px 20px;
     background-color: transparent;
     font-family: inherit;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(var(--secondary-rgb), 0.05);
 }
 .rtm-swcta-inner {
     max-width: 900px;
@@ -11,7 +11,7 @@
 }
 .rtm-swcta-title {
     font-size: 2.8rem;
-    color: #ffffff;
+    /* color: #ffffff; */
     font-weight: 700;
     margin-bottom: 25px;
     line-height: 1.3;
@@ -23,7 +23,7 @@
     margin-bottom: 40px;
 }
 .rtm-swcta-desc {
-    color: #a0a5b1;
+    color: var(--text-muted);
     font-size: 1.1rem;
     line-height: 1.5;
     margin: 5px 0;
@@ -50,20 +50,20 @@
 .rtm-swcta-btn-primary {
     background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
     border: none;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 .rtm-swcta-btn-primary:hover {
     box-shadow: 0 5px 25px rgba(0, 210, 255, 0.4);
     transform: translateY(-2px);
 }
 .rtm-swcta-btn-outline {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    background: rgba(var(--secondary-rgb), 0.03);
+    border: 1px solid rgba(var(--secondary-rgb), 0.1);
+    color: var(--foreground);
 }
 .rtm-swcta-btn-outline:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(var(--secondary-rgb), 0.08);
+    border-color: rgba(var(--secondary-rgb), 0.3);
 }
 .rtm-swcta-checkmarks {
     display: flex;
@@ -81,7 +81,7 @@
     font-weight: bold;
 }
 .rtm-swcta-check-text {
-    color: #797d86;
+    color: var(--text-muted);
     font-size: 0.95rem;
 }
 
@@ -89,4 +89,15 @@
     .rtm-swcta-buttons { flex-direction: column; }
     .rtm-swcta-btn { width: 100%; }
     .rtm-swcta-checkmarks { flex-direction: column; gap: 15px; align-items: center; }
+}
+@media (max-width: 768px) {
+    .rtm-swcta-container {
+        padding: 60px 15px !important;
+    }
+    .rtm-swcta-title {
+        font-size: 1.8rem !important;
+    }
+    .rtm-swcta-buttons {
+        flex-direction: column !important;
+    }
 }

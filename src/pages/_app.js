@@ -100,6 +100,7 @@ import { MainLayout } from "../SolidityShield/components/sidebar/Layout";
 import MetaTags from "../components/common/MetaTags";
 import Loader from "../SolidityShield/components/common/Loader";
 import { useEffect, useState } from "react";
+import { setTheme } from "../redux/slices/themeSlice";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -108,13 +109,26 @@ function MyApp({ Component, pageProps }) {
     router.asPath !== "/solidity-shield-scan/auth" &&
     router.asPath !== "/solidity-shield-scan/contact";
   const [isClient, setIsClient] = useState(false);
+  const isMainPage = router.pathname === "/";
+
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    
+    // Theme synchronization is now handled primarily by the Navbar component 
+    // using localStorage. This effect ensures the initial mount matches.
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    } else if (savedTheme === "light") {
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
+    }
+  }, [router.pathname]);
 
   return (
     <Provider store={mainStore}>
-      <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary">
+      <div className="bg-primary dark:bg-secondary text-secondary dark:text-primary min-h-screen relative">
         {isClient && (
           <ToastContainer
             position="top-center"

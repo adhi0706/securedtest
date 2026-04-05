@@ -3,14 +3,14 @@ import React from 'react';
 const CommonCard = ({ icon, title, description, children, pill, preTitle, className = "" }) => {
   return (
     <div className={`
-      bg-[#1e3255]
-      border border-[rgba(255,255,255,0.08)] 
+      bg-white dark:bg-[#1e3255]
+      border border-secondary/10 dark:border-[rgba(255,255,255,0.08)] 
       rounded-[14px]
       p-7 md:p-8
       transition-all duration-300 ease-in-out 
       hover:-translate-y-1
-      hover:border-cyan-400/50 
-      hover:shadow-[0_8px_30px_rgba(34,211,238,0.15)] 
+      hover:border-[#12D576] dark:hover:border-cyan-400/50 
+      hover:shadow-[0_8px_30px_rgba(18,213,118,0.15)] dark:hover:shadow-[0_8px_30px_rgba(34,211,238,0.15)] 
       cursor-pointer
       flex flex-col items-start
       w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]
@@ -31,13 +31,13 @@ const CommonCard = ({ icon, title, description, children, pill, preTitle, classN
       )}
       
       {title && (
-        <h3 className="text-lg md:text-[1.15rem] font-bold text-white leading-snug mb-3">
+        <h3 className="text-lg md:text-[1.15rem] font-bold text-secondary dark:text-white leading-snug mb-3">
           {title}
         </h3>
       )}
 
       {description && (
-        <p className="text-[0.95rem] text-[#A0AABA] leading-relaxed">
+        <p className="text-[0.95rem] text-secondary/70 dark:text-[#A0AABA] leading-relaxed">
           {description}
         </p>
       )}

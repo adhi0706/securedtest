@@ -12,7 +12,7 @@
 
 .rtm-plans-inner h2 {
   font-size: 2.2rem;
-  color: #fff;
+  /* color: #fff; */
   margin-bottom: 10px;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .rtm-plan-card h3 {
-  color: #fff;
+  /* color: #fff; */
   font-size: 1.8rem;
   margin-bottom: 5px;
 }
@@ -82,7 +82,7 @@
 }
 
 .rtm-plan-features li {
-  color: #fff;
+  /* color: #fff; */
   font-size: 0.95rem;
   margin-bottom: 15px;
   padding-left: 25px;
@@ -101,7 +101,7 @@
   display: block;
   text-align: center;
   background-color: transparent;
-  color: #fff;
+  /* color: #fff; */
   border: 1px solid #333642;
   padding: 12px;
   border-radius: 8px;

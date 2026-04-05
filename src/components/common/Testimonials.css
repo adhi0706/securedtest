@@ -18,7 +18,7 @@
 }
 
 .testimonial-card-text {
-  @apply font-light;
+  @apply font-light text-secondary/80 dark:text-primary/80;
 }
 
 .testimonial-card-content {
@@ -30,7 +30,7 @@
 }
 
 .testimonial-card-designation {
-  @apply font-light;
+  @apply font-light text-secondary/60 dark:text-primary/60;
 }
 
 .testimonial-card-quote {
