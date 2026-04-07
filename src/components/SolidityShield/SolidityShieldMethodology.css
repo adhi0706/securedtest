@@ -1,0 +1,100 @@
+.ss-methodology-container {
+  padding: 80px 20px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ss-methodology-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.ss-methodology-content {
+  flex: 1 1 500px;
+}
+
+.ss-methodology-content h2,
+.ss-methodology-why h2 {
+  font-size: 2.2rem;
+  /* color: #fff; */
+  margin-bottom: 25px;
+}
+
+.ss-methodology-content p {
+  color: #a0a5b1;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.ss-methodology-capabilities {
+  list-style: none;
+  padding: 0;
+}
+
+.ss-methodology-capabilities li {
+  margin-bottom: 20px;
+  color: #a0a5b1;
+  font-size: 1rem;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.ss-methodology-capabilities li::before {
+  content: '→';
+  color: #00ff88;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ss-methodology-capabilities strong {
+  /* color: #fff; */
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ss-methodology-why {
+  flex: 1 1 500px;
+}
+
+.ss-why-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ss-why-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 25px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.ss-why-card:hover {
+  transform: translateX(5px);
+  border-color: rgba(0, 255, 136, 0.3);
+}
+
+.ss-why-card h4 {
+  color: #00ff88;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.ss-why-card p {
+  color: #a0a5b1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .ss-methodology-inner {
+    flex-direction: column;
+  }
+}

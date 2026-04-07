@@ -9,22 +9,22 @@ const MegaMenu = ({ items, label, isVisible, onMouseEnter, onMouseLeave }) => {
 
   return (
     <div
-      className={`absolute left-0 top-full mt-2 transition-all duration-300 ease-in-out z-[100] w-max ${
+      className={`absolute left-1/2 top-full mt-2 transition-all duration-300 ease-in-out z-[100] w-max ${
         isVisible
-          ? "opacity-100 translate-y-0 visible"
-          : "opacity-0 -translate-y-2 invisible"
+          ? "opacity-100 translate-y-0 -translate-x-1/2 visible"
+          : "opacity-0 -translate-y-2 -translate-x-1/2 invisible"
       }`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <div 
-        className="bg-[#031B34] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] border border-white/10 rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)] flex gap-x-16"
+        className="bg-white dark:bg-[#031B34] bg-grid border border-black/5 dark:border-white/10 rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.05)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] flex gap-x-16"
       >
         {isServices ? (
           // grouped Layout (Services)
           items.map((section, idx) => (
             <div key={idx} className="flex flex-col gap-y-4">
-              <h4 className="text-white font-bold text-lg whitespace-nowrap">
+              <h4 className="text-secondary dark:text-white font-bold text-lg whitespace-nowrap">
                 {section.title}
               </h4>
               <div className="flex flex-col gap-y-2">
@@ -34,7 +34,7 @@ const MegaMenu = ({ items, label, isVisible, onMouseEnter, onMouseLeave }) => {
                     href={child.to || "#"}
                     target={child.external ? "_blank" : undefined}
                     rel={child.external ? "noopener noreferrer" : undefined}
-                    className="text-gray-300 hover:text-[#00d2ff] hover:bg-white/5 px-3 py-2 -mx-3 rounded transition-colors duration-200 text-[15px] whitespace-nowrap"
+                    className="text-gray-600 dark:text-gray-300 hover:text-accent dark:hover:text-[#00d2ff] hover:bg-black/5 dark:hover:bg-white/5 px-3 py-2 -mx-3 rounded transition-colors duration-200 text-[15px] whitespace-nowrap"
                   >
                     {child.name}
                   </Link>
@@ -64,7 +64,7 @@ const MegaMenu = ({ items, label, isVisible, onMouseEnter, onMouseLeave }) => {
                 href={item.to || "#"}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
-                className="text-gray-300 hover:text-[#00d2ff] hover:bg-white/5 px-4 py-2 -mx-4 rounded transition-colors duration-200 text-[15px] whitespace-nowrap"
+                className="text-gray-600 dark:text-gray-300 hover:text-accent dark:hover:text-[#00d2ff] hover:bg-black/5 dark:hover:bg-white/5 px-4 py-2 -mx-4 rounded transition-colors duration-200 text-[15px] whitespace-nowrap"
               >
                 {item.name}
               </Link>

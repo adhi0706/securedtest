@@ -29,7 +29,7 @@ const plansData = [
         btnLabel: "Start Free Trial",
         btnClass: "rtm-mp-btn-primary",
         btnLink: "https://securewatch.securedapp.io/signup",
-        isRecommended: true
+        isRecommended: false
     },
     {
         name: "Fortress",
@@ -60,7 +60,7 @@ const MonitoringPlans = () => {
                 <div className="rtm-mp-grid">
                     {plansData.map((plan, idx) => (
                         <div key={idx} className={`rtm-mp-card ${plan.isRecommended ? 'rtm-mp-recommended' : ''}`}>
-                            {plan.isRecommended && <div className="rtm-mp-badge">RECOMMENDED</div>}
+
                             <div className="rtm-mp-card-top">
                                 <h3>{plan.name}</h3>
                                 <p>{plan.desc}</p>

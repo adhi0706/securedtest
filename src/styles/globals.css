@@ -2,30 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-.App {
-  @apply font-nunitoSans text-secondary dark:text-primary overflow-hidden;
 
-  scroll-behavior: smooth;
-}
 
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #001938;
+  --secondary-rgb: 0, 25, 56;
+  --primary: #00ff88;
+  --primary-rgb: 0, 255, 136;
+  --highlight: #12D576;
+  --text-muted: #64748b;
+  --text-primary: #001938;
+  --text-primary-rgb: 0, 25, 56;
+  --text-secondary: #64748b;
+  --accent: #0056b3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark:root, 
+.dark body {
+  --background: #001938; 
+  --foreground: #ffffff;
+  --secondary-rgb: 255, 255, 255;
+  --primary: #00ff88;
+  --primary-rgb: 0, 255, 136;
+  --highlight: #00ff88;
+  --text-muted: #a0a5b1;
+  --text-primary: #ffffff;
+  --text-primary-rgb: 255, 255, 255;
+  --text-secondary: #a0a5b1;
+  --accent: #00d2ff;
 }
+
+
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.App {
+  @apply font-nunitoSans text-secondary dark:text-primary overflow-hidden min-h-screen;
+  background: inherit;
+  scroll-behavior: smooth;
+}
+
 
 @layer utilities {
   .text-balance {

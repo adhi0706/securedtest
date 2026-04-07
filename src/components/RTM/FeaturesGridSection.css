@@ -12,7 +12,7 @@
 }
 .fgs-title {
     font-size: 2.2rem;
-    color: #ffffff;
+    /* color: #ffffff; */
     font-weight: 700;
 }
 .fgs-title .highlight {
@@ -49,7 +49,7 @@
     flex: 1;
 }
 .fgs-card-title {
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -81,5 +81,14 @@
 @media (max-width: 600px) {
     .fgs-card {
         flex: 1 1 100%;
+    }
+}
+\n
+@media (max-width: 768px) {
+    .fgs-container {
+        padding: 60px 15px !important;
+    }
+    .fgs-title {
+        font-size: 1.8rem !important;
     }
 }

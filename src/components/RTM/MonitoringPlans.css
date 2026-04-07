@@ -1,8 +1,7 @@
-.rtm-mp-container {
+.rtm-plans-container {
     padding: 100px 20px;
-    background-color: transparent;
-    font-family: inherit;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    border-bottom: 1px solid rgba(var(--secondary-rgb), 0.05);
 }
 .rtm-mp-inner {
     max-width: 1200px;
@@ -14,37 +13,38 @@
 }
 .rtm-mp-title {
     font-size: 2.5rem;
-    color: #ffffff;
     font-weight: 700;
     margin-bottom: 15px;
 }
 .rtm-mp-title .highlight {
-    color: #00ff88;
+    color: var(--primary);
 }
 .rtm-mp-subtitle {
     font-size: 1.1rem;
-    color: #a0a5b1;
+    color: var(--text-muted);
 }
 .rtm-mp-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
-.rtm-mp-card {
-    background: #1e3255 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 40px;
+.rtm-plan-card {
+    background: var(--background) !important;
+    border: 1px solid rgba(var(--secondary-rgb), 0.1);
+    border-radius: 16px;
+    padding: 50px;
+    flex: 1;
+    min-width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     position: relative;
     transition: all 0.3s ease;
 }
-.rtm-mp-card.rtm-mp-recommended,
-.rtm-mp-card:hover {
-    border-color: rgba(0, 210, 255, 0.5);
-    background: linear-gradient(180deg, rgba(0, 210, 255, 0.05) 0%, rgba(20, 24, 34, 0.8) 100%);
-    box-shadow: 0 10px 40px rgba(0, 210, 255, 0.1);
+.rtm-plan-card.rtm-mp-recommended,
+.rtm-plan-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 10px 40px rgba(var(--primary-rgb), 0.15);
     transform: translateY(-10px);
 }
 .rtm-mp-badge {
@@ -61,7 +61,7 @@
     letter-spacing: 1px;
 }
 .rtm-mp-card-top h3 {
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 10px;
@@ -110,7 +110,7 @@
 .rtm-mp-btn-outline {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 .rtm-mp-btn-outline:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -119,7 +119,7 @@
 .rtm-mp-card:hover .rtm-mp-btn-outline {
     background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
     border-color: transparent;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 .rtm-mp-card:hover .rtm-mp-btn-outline:hover {
     box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
@@ -128,7 +128,7 @@
 .rtm-mp-btn-primary {
     background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
     border: none;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 .rtm-mp-btn-primary:hover {
     box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
@@ -139,4 +139,15 @@
     margin-top: 50px;
     color: #797d86;
     font-size: 0.85rem;
+}
+@media (max-width: 768px) {
+    .rtm-mp-container {
+        padding: 60px 15px !important;
+    }
+    .rtm-mp-title {
+        font-size: 1.8rem !important;
+    }
+    .rtm-mp-grid {
+        grid-template-columns: 1fr !important;
+    }
 }

@@ -12,12 +12,15 @@ import Link from "next/link";
 import Logo from "../common/Logo";
 import { navItems } from "./navItems";
 import Button from "../common/Button";
+import ThemeToggle from "../common/ThemeToggle";
 
 const NavbarSmallScreen = ({
   handleNavigation,
   nextPath,
   darkMode,
   toggleTheme,
+  buttonText = "Login",
+  isMainPage
 }) => {
   const [isSideBarOpen, setSideBarOpen] = useState(false);
   const [dropDown, setDropDown] = useState("");
@@ -47,9 +50,9 @@ const NavbarSmallScreen = ({
   };
 
   return (
-    <div className="bg-[#031B34] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] navbar-small-screen">
-      <div className="flex items-center justify-between">
-        <div className="absolute left-3 cursor-pointer" onClick={showSideBar}>
+    <div className="navbar-small-screen relative pb-2 pt-2">
+      <div className="flex items-center justify-between relative px-2 mb-2">
+        <div className="absolute left-3 cursor-pointer mt-1" onClick={showSideBar}>
           <FontAwesomeIcon
             icon={faBars}
             color={darkMode ? "white" : "black"}
@@ -57,14 +60,19 @@ const NavbarSmallScreen = ({
           />
         </div>
         <div className="mx-auto">
-          <Logo forceDark={true} />
+          <Logo />
         </div>
+        {isMainPage && (
+          <div className="absolute right-3 cursor-pointer">
+            <ThemeToggle toggleTheme={toggleTheme} darkMode={darkMode} />
+          </div>
+        )}
       </div>
       {isSideBarOpen && (
         <div className="sidebar-background">
-          <div className="bg-[#031B34] bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] sidebar">
+          <div className="sidebar">
             <div className="sidebar-header">
-              <Logo isLeft={true} forceDark={true} />
+              <Logo isLeft={true} />
               <div className="flex space-x-3 items-center">
                 <FontAwesomeIcon
                   icon={faClose}
@@ -167,7 +175,12 @@ const NavbarSmallScreen = ({
               })}
             </nav>
             <div className="w-full text-center py-3 px-2">
-              <Button text="Login" onClick={handleNavigation} />
+              <Button 
+                text={buttonText} 
+                onClick={handleNavigation} 
+                filled={buttonText === "Request Quote"}
+                className={buttonText === "Request Quote" ? "font-semibold px-4" : ""}
+              />
             </div>
           </div>
         </div>

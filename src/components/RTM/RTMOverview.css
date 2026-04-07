@@ -1,7 +1,7 @@
 .rtm-overview-container {
   padding: 80px 20px;
   background-color: transparent;
-  color: #ffffff;
+  /* color: #ffffff; */
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -65,7 +65,7 @@
 
 .rtm-btn-secondary {
   background-color: transparent;
-  color: #fff;
+  /* color: #fff; */
   padding: 12px 24px;
   border-radius: 8px;
   border: 1px solid #333642;
