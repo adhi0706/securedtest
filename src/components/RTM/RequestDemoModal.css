@@ -36,7 +36,7 @@
     margin-bottom: 30px;
 }
 .rdm-title {
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 10px;
@@ -56,7 +56,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    /* color: #ffffff; */
     padding: 14px 16px;
     border-radius: 8px;
     font-size: 0.95rem;
@@ -76,13 +76,13 @@
 }
 .rdm-form-group select option {
     background: #0f131a;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 .rdm-submit-btn {
     margin-top: 10px;
     background: linear-gradient(90deg, #00d2ff 0%, #0088ff 100%);
     border: none;
-    color: #ffffff;
+    /* color: #ffffff; */
     padding: 16px;
     border-radius: 8px;
     font-size: 1.05rem;

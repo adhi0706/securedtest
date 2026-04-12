@@ -6,13 +6,8 @@ import React, { useEffect, useState } from "react";
 
 const MetaTags = ({ data }) => {
   const router = useRouter();
-  const [url, setUrl] = useState(data.url || "https://securedapp.io");
-
-  useEffect(() => {
-    if (!data.url && typeof window !== "undefined") {
-      setUrl(window.location.href);
-    }
-  }, [data.url, router.asPath]);
+  const baseUrl = "https://securedapp.io";
+  const url = data.url || (baseUrl + (router.asPath === "/" ? "" : router.asPath));
 
   const path = router.asPath;
   var fullPath = "https://securedapp.io" + path;

@@ -37,7 +37,7 @@ function SecureCMSPage() {
           image={"/assets/images/ProductPages/ss/hero.webp"}
           onClick={() =>
             typeof window !== "undefined" &&
-            window.open("https://securedapp.io/contact")
+            window.open("https://cms.securedapp.io")
           }
         />
         <ProductCard

@@ -14,7 +14,7 @@
 }
 .rtm-ben-new-title {
     font-size: 2.5rem;
-    color: #ffffff;
+    /* color: #ffffff; */
     font-weight: 700;
     margin-bottom: 15px;
 }
@@ -60,7 +60,7 @@
     font-size: 1.8rem;
 }
 .rtm-ben-new-card-title {
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 1.3rem;
     margin-bottom: 20px;
     font-weight: 600;

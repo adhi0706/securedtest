@@ -13,5 +13,5 @@
 }
 
 .product-card-content-description {
-  @apply font-light text-left;
+  @apply font-light text-left text-secondary/70 dark:text-primary/70;
 }

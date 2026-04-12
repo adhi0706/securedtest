@@ -14,6 +14,7 @@ export const navItems = [
       { name: "Audit Express", to: "/auditexpress/home" },
       { name: "Secure Pad", to: "/secure-pad" },
       { name: "SecureX-ID", to: "/web3-kyc" },
+      { name: "Quantum Vault", to: "/quantum-vault" },
     ],
     label: "Product",
   },

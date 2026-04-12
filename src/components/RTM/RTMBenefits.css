@@ -26,7 +26,7 @@
 }
 
 .rtm-mockup-header {
-  color: #fff;
+  /* color: #fff; */
   font-weight: bold;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -45,7 +45,7 @@
 .rtm-mockup-body .l3 { width: 90%; background-color: #00d2ff; }
 
 .rtm-benefits-content h2 {
-  color: #fff;
+  /* color: #fff; */
   font-size: 2.2rem;
   margin-bottom: 30px;
 }

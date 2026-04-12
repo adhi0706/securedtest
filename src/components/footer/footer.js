@@ -50,6 +50,10 @@ const navigationItems = [
         name: "PQC Suite",
         to: "/pqc",
       },
+      {
+        name: "Quantum Vault",
+        to: "/quantum-vault",
+      },
     ],
   },
   {
