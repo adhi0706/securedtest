@@ -3,24 +3,27 @@ import ScanPage from "../../AuditExpress/ScanIdPage";
 
 // Fetch all the available scan IDs at build time
 export async function getStaticPaths() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE || "https://139-59-5-56.nip.io:3443";
   try {
     // Fetch all available IDs from your API
     const response = await axios.post(
-      "https://139-59-5-56.nip.io:3443/getscansAE"
+      `${apiUrl}/getscansAE`,
+      {},
+      { timeout: 5000 } // Add a 5-second timeout
     );
-    const ids = response.data.scans.map((item) => item.id); // Assume API response contains { ids: [1, 2, 3, ...] }
+    const ids = response.data.scans.map((item: any) => item.id);
 
     // Generate paths for each scan ID
     const paths = ids.map((id: number) => ({
-      params: { id: id.toString() }, // Pass each id as a string (required by Next.js dynamic routing)
+      params: { id: id.toString() },
     }));
 
     return {
       paths,
-      fallback: "blocking", // 'blocking' means the page will wait until the data is ready before serving it
+      fallback: "blocking",
     };
   } catch (error) {
-    console.error("Error fetching scan IDs:", error);
+    console.error("Error fetching scan IDs during build:", error);
     return {
       paths: [],
       fallback: "blocking",

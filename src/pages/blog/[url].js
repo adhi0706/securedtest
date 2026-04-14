@@ -593,7 +593,7 @@ export async function getStaticPaths() {
 
     return {
       paths, // Pre-rendered blog URLs
-      fallback: false, // Enable fallback for other URLs
+      fallback: "blocking", // Enable fallback for other URLs
     };
   } catch (err) {
     console.error("Error fetching blog list:", err);
