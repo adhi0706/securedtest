@@ -33,35 +33,28 @@ const PricingPlanCard = ({
   return (
     <div className="sss-pricing-plan-card-container">
       <div
-        style={{
-          border: auth.user.plan === id && "2px solid black",
-          borderRadius: "10px",
-        }}
-        className="sss-pricing-plan-card"
+        className={`sss-pricing-plan-card ${auth.user.plan === id ? 'border-2 border-tertiary' : 'border border-[#D2E6FF]'}`}
+        style={{ borderRadius: "20px" }}
       >
         <div className="sss-pricing-card-header">
-          <img layout="intrinsic" src={icon} alt="icon" />
-          <div className="sss-pricing-card-header-plan-type">{planType}</div>
+          <img src={icon} alt="icon" className="w-8 h-8" />
+          <div className="sss-pricing-card-header-plan-type font-medium text-gray-500">{planType}</div>
         </div>
-        <div className="sss-pricing-card-body">
-          <div className="sss-pricing-card-body-price">{price}</div>
-          <div className="">{"/month"}</div>
+        <div className="sss-pricing-card-body flex items-baseline gap-1">
+          <div className="sss-pricing-card-body-price text-3xl font-bold">{price}</div>
+          <div className="text-gray-400 text-sm">{"/month"}</div>
         </div>
-        <div className="sss-pricing-card-description">{description}</div>
-        <div onClick={onClick} className="sss-pricing-card-button-container">
-          <button className="sss-pricing-card-button">
-            <div className="">
-              {auth.user.plan === id && auth.user.plan > 0
-                ? "Renew Plan"
-                : auth.user.plan === 0 && auth.user.plan === id
-                ? "Free Plan"
-                : "Get Started"}
-            </div>
-            {auth.user.plan === 0 && auth.user.plan === id ? (
-              ""
-            ) : (
-              <i className="fa-solid fa-arrow-right"></i>
-            )}
+        <div className="sss-pricing-card-description text-gray-500 text-sm min-h-[60px]">{description}</div>
+        <div className="sss-pricing-card-button-container mt-4">
+          <button 
+            onClick={onClick}
+            className="w-full py-3 rounded-xl bg-[#12D576] text-black font-semibold hover:bg-[#0bc168] transition-colors"
+          >
+            {auth.user.plan === id && auth.user.plan > 0
+              ? "Renew Plan"
+              : auth.user.plan === 0 && auth.user.plan === id
+              ? "Free Plan"
+              : "Get Started"}
           </button>
         </div>
       </div>
@@ -130,7 +123,7 @@ const Pricing = () => {
   }, [user, dispatch, navigate]);
 
   return (
-    <div className="sss-pricing-container">
+    <div className="sss-pricing-container bg-white min-h-screen">
       <MetaTags
         data={{
           title: "Solidity Shield Scan: Secure Audits & Vulnerability Checks",
@@ -139,15 +132,7 @@ const Pricing = () => {
             "Solidity Shield Scan, smart contract audits, vulnerability checks, secure audits, Solidity security, blockchain security, contract vulnerability scan, smart contract security",
         }}
       />
-      <div
-        style={{
-          width: "125%",
-          transform: "scale(0.8)",
-          transformOrigin: "top left",
-          overflowX: "auto",
-        }}
-        className="sss-pricing-plans-scrollable"
-      >
+      <div className="sss-pricing-wrapper max-w-[1400px] mx-auto px-4 py-8 text-secondary">
         <div className="sss-pricing-plans">
           <div className="sss-pricing-plan-headers">
             <div className="sss-pricing-plan-headers-cards">
@@ -253,16 +238,15 @@ const Pricing = () => {
               })}
             </div>
           </div>
-        </div>
       </div>
-      <div style={{ marginTop: "-200px" }} className="sss-pricing-plan-footer">
-        <div className="sss-pricing-plan-footer-buttons">
-          <div className="text-center">Get a custom Plan</div>
+      <div className="sss-pricing-plan-footer mt-12 mb-20 text-center">
+        <div className="sss-pricing-plan-footer-content flex flex-col items-center gap-6">
+          <div className="text-2xl font-semibold text-secondary pt-12">Get a custom Plan</div>
           <div className="sas-pricing-plan-footer-button-container">
             <CustomButton
               text={"Contact Us"}
               className={
-                "border border-tertiary px-12 py-2 rounded-xl active:bg-tertiary"
+                "border border-[#12D576] text-[#12D576] px-16 py-3 rounded-2xl hover:bg-[#12D576] hover:text-white transition-all font-medium"
               }
               onClick={() => navigate.push("/solidity-shield-scan/contact")}
             />
@@ -271,7 +255,8 @@ const Pricing = () => {
       </div>
       <Footer />
     </div>
-  );
+  </div>
+);
 };
 
 export default Pricing;

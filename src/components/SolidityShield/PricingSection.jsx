@@ -38,7 +38,7 @@ const PricingSection = () => {
               <button 
                 onClick={() => {
                   if (card.name === 'Starter' || card.name === 'Professional') {
-                    window.location.href = 'https://securedapp.io/solidity-shield-scan/pricing';
+                    window.location.href = '/solidity-shield-scan/auth';
                   } else if (card.name === 'Enterprise') {
                     window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ21-NumjUBdRf0JzEARDvMYJ8kTpVE3AkdeVpX6fQ2-Xbm8sm5KICJfDsAuoF3F2-3Vd5lr50sp', '_blank');
                   }

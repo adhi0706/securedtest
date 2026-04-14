@@ -39,13 +39,13 @@ const Header = () => {
             </div>
           )}
           {!isMobile && auth.user.credits == 1 ? (
-            <div>
-              Start Free Trial – No card required, for first security scan.
+            <div className="text-secondary">
+              Start Free Trial – No card required, for first security scan.
             </div>
           ) : (
             !isMobile && (
-              <div>
-                "Solidity Shield to protect the heart of your Web3 project"
+              <div className="text-secondary">
+                <span className="text-tertiary font-semibold">Solidity Shield</span> to protect the heart of your Web3 project
               </div>
             )
           )}

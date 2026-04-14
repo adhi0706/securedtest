@@ -13,8 +13,8 @@ const Footer = ({ classname }) => {
       }}
       className="product-footer"
     >
-      <div style={{ padding: "12px" }}>
-        <p style={{ marginBottom: "2px" }}>Technology partner</p>
+      <div className="flex flex-col items-center" style={{ padding: "12px" }}>
+        <p className="text-secondary font-medium" style={{ marginBottom: "2px" }}>Technology partner</p>
         <img
           src="/assets/images/solidity-shield-scan/C3ihub.png"
           alt="C3ihub"
@@ -22,8 +22,8 @@ const Footer = ({ classname }) => {
           style={{ margin: "0 auto" }}
         />
       </div>
-      <div style={{ padding: "12px" }}>
-        <p style={{ marginBottom: "10px" }}>Sandbox</p>
+      <div className="flex flex-col items-center" style={{ padding: "12px" }}>
+        <p className="text-secondary font-medium" style={{ marginBottom: "10px" }}>Sandbox</p>
         <img
           src="/assets/images/solidity-shield-scan/IFSCA.png"
           alt="IFSCA"
@@ -31,8 +31,8 @@ const Footer = ({ classname }) => {
           style={{ margin: "0 auto" }}
         />
       </div>
-      <div style={{ padding: "12px" }}>
-        <p style={{ marginBottom: "10px" }}>Payments partner</p>
+      <div className="flex flex-col items-center" style={{ padding: "12px" }}>
+        <p className="text-secondary font-medium" style={{ marginBottom: "10px" }}>Payments partner</p>
         <img
           src="/assets/images/solidity-shield-scan/phonepe-icon.svg"
           alt="Phonpe"

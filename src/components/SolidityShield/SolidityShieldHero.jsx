@@ -22,7 +22,7 @@ const SolidityShieldHero = () => {
           </p>
 
           <div className="sw-hero-buttons">
-            <a href="/solidity-shield-scan" className="sw-btn-primary">{heroData.primaryCta}</a>
+            <a href="/solidity-shield-scan/auth" className="sw-btn-primary">{heroData.primaryCta}</a>
             <a href="https://www.youtube.com/watch?v=ubvywC8rYCA" target="_blank" rel="noopener noreferrer" className="sw-btn-outline">{heroData.secondaryCta}</a>
           </div>
         </div>

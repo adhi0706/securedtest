@@ -14,7 +14,7 @@ const CTASection = () => {
         </p>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-          <a href="https://securedapp.io/solidity-shield-scan/auth" target="_blank" rel="noopener noreferrer" className="px-8 py-3 rounded-lg bg-[#00ff88] text-[#031b34] font-bold hover:bg-[#00e078] shadow-[0_4px_14px_rgba(0,255,136,0.3)] transition-all inline-block">
+          <a href="/solidity-shield-scan/auth" className="px-8 py-3 rounded-lg bg-[#00ff88] text-[#031b34] font-bold hover:bg-[#00e078] shadow-[0_4px_14px_rgba(0,255,136,0.3)] transition-all inline-block">
             {ctaData.buttons[0].label}
           </a>
           
@@ -22,7 +22,7 @@ const CTASection = () => {
             {ctaData.buttons[1].label}
           </a>
 
-          <a href="https://securedapp.io/solidity-shield-scan/auth" target="_blank" rel="noopener noreferrer" className="text-[#00ff88] font-medium hover:underline underline-offset-4 decoration-[#00ff88]">
+          <a href="/solidity-shield-scan/auth" className="text-[#00ff88] font-medium hover:underline underline-offset-4 decoration-[#00ff88]">
             {ctaData.buttons[2].label}
           </a>
         </div>

@@ -86,7 +86,7 @@ export const Sidebar = () => {
             <CustomDivider classname={"w-full pt-5"} />
             <div className="sss-body">
               <div className="sss-body-header">
-                <div className="">MAIN MENUS</div>
+                <div className="text-[#52525B] font-medium">MAIN MENUS</div>
               </div>
               <div className="sss-body-navigation">
                 {sidebarItems.map((item, index) => {
@@ -115,7 +115,7 @@ export const Sidebar = () => {
                             }
                           />
                         </div>
-                        <div className="sss-sidebar-item-text">{item.name}</div>
+                        <div className="sss-sidebar-item-text text-secondary">{item.name}</div>
                       </div>
                     </div>
                   );
@@ -134,7 +134,7 @@ export const Sidebar = () => {
           </div>
           <div className="sss-sidebar-lower">
             <div className="sss-sidebar-credits-card">
-              <div className="">Remaining Credits</div>
+              <div className="text-[#52525B] font-medium">Remaining Credits</div>
               <div className="sss-sidebar-credits-container">
                 <div className="">
                   <ProgressBar
@@ -149,7 +149,7 @@ export const Sidebar = () => {
                     baseBgColor="#CDCDCD"
                   />
                 </div>
-                <div className="sss-sidebar-credits-text">
+                <div className="sss-sidebar-credits-text text-secondary">
                   {auth.user.remainingCredits}/{auth.user.credits}
                 </div>
               </div>
