@@ -30,7 +30,7 @@ const Sales = (props: Props) => {
             </button>
             <button onClick={() =>
               typeof window !== "undefined" &&
-              window.open("https://securewatch.securedapp.io/")
+              window.open("https://securewatch.securedapp.io/login")
             }
               className="lg:text-2xl bg-transparent dark:text-white text-black border-green-500 px-5 py-2 rounded-2xl hover:bg-green-600 border hover:border-black scale-100 hover:scale-105 transform transition"
               id="poppins-medium"

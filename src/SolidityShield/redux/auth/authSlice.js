@@ -14,10 +14,7 @@ const authSlice = createSlice({
   },
 });
 
-export const getUserData = createSelector(
-  (state) => state.auth,
-  (state) => state
-);
+export const getUserData = (state) => state.auth;
 
 export const { login } = authSlice.actions;
 

@@ -31,7 +31,7 @@ const Navbar = () => {
       nextPath = "/solidity-shield-scan";
       break;
     case "/real-time-blockchain-threat-monitoring":
-      nextPath = "https://securewatch.securedapp.io/";
+      nextPath = "https://securewatch.securedapp.io/login";
       break;
     case "/blockchain-forensic-investigation-tool":
       nextPath = "https://securetrace.securedapp.io/";

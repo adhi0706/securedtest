@@ -2,7 +2,7 @@
 import MetaTags from "../components/common/MetaTags";
 import { useDispatch } from "react-redux";
 import Home from "../pageComponents/home/HomePage";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import {
   getHomeSelector,
   setIsLargeScreen,
@@ -14,7 +14,8 @@ import ChatWidget from "../components/chat/ChatWidget";
 export default function Index() {
   const dispatch = useDispatch();
   const { isLargeScreen, isRequestModalOpen } = useSelector(getHomeSelector);
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = router.pathname;
 
   useEffect(() => {
     const isSolidityShieldScan = pathname.startsWith("/solidity-shield-scan");

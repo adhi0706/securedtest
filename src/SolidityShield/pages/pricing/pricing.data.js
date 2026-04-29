@@ -4,43 +4,43 @@ export const pricingDetails = [
     pricingCard: {},
     details: {
       numberOfScans: {
-        value: "No. of Scans",
+        value: 'No. of <span style="color: #12D576;">Scans</span>',
         info: "Track your scan credit and its usage and plan accordingly",
       },
       run: {
-        value: "Run",
+        value: '<span style="color: #12D576;">Run</span>',
         info: "Launch a full scan to ensure your smart contract's safety",
       },
       auditScore: {
-        value: "Audit Score",
+        value: '<span style="color: #12D576;">Audit</span> Score',
         info: "View your smart contract's overall security rating",
       },
       vulnerabilityCount: {
-        value: "Vulnerability Count",
+        value: '<span style="color: #12D576;">Vulnerability</span> Count',
         info: "Understand the specific security risks in your smart contract",
       },
       vulnerabilityDescriptions: {
-        value: "Vulnerability Descriptions",
+        value: '<span style="color: #12D576;">Vulnerability</span> Descriptions',
         info: "Understand the specific security risks in your smart contract",
       },
       auditReport: {
-        value: "Audit Report",
+        value: '<span style="color: #12D576;">Audit</span> Report',
         info: "Contains a comprehensive report of your smart contract audit",
       },
       reportPublic: {
-        value: "Report Publish",
+        value: '<span style="color: #12D576;">Report</span> Publish',
         info: "Share your audit report publicly to enhance transparency",
       },
       github: {
-        value: "Github",
+        value: '<span style="color: #12D576;">Github</span>',
         info: "Enhances transparency and builds trust by publishing your audit reports on SecureDApp's GitHub account as 3rd party auditor",
       },
       socialShares: {
-        value: "Social Shares (SecureDApp)",
+        value: '<span style="color: #12D576;">Social</span> Shares(SecureDApp)',
         info: "Spread awareness about your project's security commitment via SecureDApp's social handle",
       },
       dedicateBlog: {
-        value: "Dedicate Blog (SecureDApp)",
+        value: 'Dedicate <span style="color: #12D576;">Blog</span>(SecureDApp)',
         info: "Access in-depth blog posts about your project via the SecureDApps blog page",
       },
       emailSupport: {
@@ -48,7 +48,7 @@ export const pricingDetails = [
         info: "Email Support",
       },
       api: {
-        value: "API",
+        value: '<span style="color: #12D576;">API</span>',
         info: "Solidity shield API",
       },
       dedicatedSupport: {

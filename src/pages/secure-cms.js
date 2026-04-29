@@ -1,9 +1,12 @@
-import SecureCMSPage from "../pageComponents/product/SecureCMS/SecureCMSPage";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Index() {
-  return (
-    <div>
-      <SecureCMSPage />
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/consent-management-platform");
+  }, [router]);
+
+  return null;
 }

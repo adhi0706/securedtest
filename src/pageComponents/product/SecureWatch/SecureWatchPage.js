@@ -64,9 +64,9 @@ function SecureWatchPage() {
           image: "/assets/images/ProductPages/sw/hero.webp",
         }}
       />
-      
+
       <Navbar />
-      
+
       <div className="product">
         {/* <ProductServiceHero
           name="SECURE WATCH"
@@ -74,7 +74,7 @@ function SecureWatchPage() {
           image={"/assets/images/ProductPages/sw/hero.webp"}
           onClick={() =>
             typeof window !== "undefined" &&
-            window.open("https://securewatch.securedapp.io")
+            window.open("https://securewatch.securedapp.io/login")
           }
         /> */}
         <SecureWatchHero />

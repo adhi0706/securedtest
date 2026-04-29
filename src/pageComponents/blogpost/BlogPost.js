@@ -25,7 +25,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { blogsData as fullData } from "../blog/blog-data";
-import { usePathname } from "next/navigation";
 
 const renderContent = (blogData) => {
   const filteredBlog = blogData;

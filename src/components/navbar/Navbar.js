@@ -28,11 +28,11 @@ const Navbar = () => {
   const currentPath = navigate.asPath;
 
   switch (currentPath) {
-    case "/solidity-shield":
+    case "/smart-contract-audit":
       nextPath = "/solidity-shield-scan/auth";
       break;
     case "/real-time-blockchain-threat-monitoring":
-      nextPath = "https://securewatch.securedapp.io/";
+      nextPath = "https://securewatch.securedapp.io/login";
       break;
     case "/blockchain-forensic-investigation-tool":
       nextPath = "https://securetrace.securedapp.io/";
@@ -46,6 +46,9 @@ const Navbar = () => {
     case "/web3-kyc":
       nextPath = "/web3-kyc";
       break;
+    case "/consent-management-platform":
+      nextPath = "https://cms-app.securedapp.io/";
+      break;
     default:
       nextPath = null;
   }
@@ -53,9 +56,9 @@ const Navbar = () => {
   const handleNavigation = () => {
     if (nextPath) {
       if (nextPath.startsWith("http")) {
-        window.open(nextPath, "_blank");
+        typeof window !== "undefined" && window.open(nextPath, "_blank");
       } else {
-        navigate.push(nextPath);
+        typeof window !== "undefined" && window.open(nextPath, "_self");
       }
     } else {
       dispatch(setIsRequestModalOpen(true));
@@ -121,7 +124,9 @@ const Navbar = () => {
     };
   }, [dispatch]);
 
-  const buttonText = currentPath === "/" || currentPath?.includes("/quantum-vault") ? "Request Quote" : "Login";
+  const buttonText = 
+    currentPath?.includes("/consent-management-platform") ? "Try it now" : 
+    (currentPath === "/" || currentPath?.includes("/quantumvault.tech/enterprise-hsm-key-management") ? "Request Quote" : "Login");
 
   return (
     <div className="absolute z-[999] w-full top-0 left-0 right-0 pointer-events-none">

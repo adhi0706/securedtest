@@ -2,8 +2,8 @@ export const navItems = [
   {
     to: "",
     items: [
-      { name: "Solidity Shield", to: "/solidity-shield" },
-      { name: "Secure CMS (Consent)", to: "/secure-cms" },
+      { name: "Solidity Shield", to: "/smart-contract-audit" },
+      { name: "Secure CMS (Consent)", to: "/consent-management-platform" },
       { name: "Secure Trace", to: "/blockchain-forensic-investigation-tool" },
       { name: "PQC Suite", to: "/pqc" },
       {
@@ -14,7 +14,7 @@ export const navItems = [
       { name: "Audit Express", to: "/auditexpress/home" },
       { name: "Secure Pad", to: "/secure-pad" },
       { name: "SecureX-ID", to: "/web3-kyc" },
-      { name: "Quantum Vault", to: "/quantum-vault" },
+      { name: "Quantum Vault", to: "/quantumvault.tech/enterprise-hsm-key-management" },
     ],
     label: "Product",
   },

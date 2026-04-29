@@ -12,7 +12,7 @@ const solutions = [
       "Customizable security audits",
       "Enhanced developer workflow",
     ],
-    to: "/solidity-shield",
+    to: "/smart-contract-audit",
     image: "/assets/images/ProductPages/ss/hero.webp",
   },
   {
@@ -42,7 +42,7 @@ const solutions = [
       "Unified policy engine for global privacy regulations",
       "Audit-ready proof of opt-ins across every channel",
     ],
-    to: "/secure-cms",
+    to: "/consent-management-platform",
     image: "/assets/images/ProductPages/ss/hero.webp",
   },
   {

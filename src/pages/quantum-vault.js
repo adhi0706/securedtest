@@ -1,9 +1,12 @@
-import QuantumVaultPage from "../pageComponents/product/QuantumVault/QuantumVaultPage";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Index() {
-  return (
-    <div>
-      <QuantumVaultPage />
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/quantumvault.tech/enterprise-hsm-key-management");
+  }, [router]);
+
+  return null;
 }

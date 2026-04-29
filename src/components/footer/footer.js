@@ -24,7 +24,7 @@ const navigationItems = [
     items: [
       {
         name: "Solidity Shield Scan",
-        to: "/solidity-shield",
+        to: "/smart-contract-audit",
       },
       {
         name: "Secure Watch",
@@ -32,7 +32,7 @@ const navigationItems = [
       },
       {
         name: "Secure CMS (Consent)",
-        to: "/secure-cms",
+        to: "/consent-management-platform",
       },
       {
         name: "Audit Express",
@@ -52,7 +52,7 @@ const navigationItems = [
       },
       {
         name: "Quantum Vault",
-        to: "/quantum-vault",
+        to: "/quantumvault.tech/enterprise-hsm-key-management",
       },
     ],
   },

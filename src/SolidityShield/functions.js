@@ -41,16 +41,11 @@ export async function checkCoupon(code, disptach) {
 }
 
 export async function getBlogs() {
-  try {
-    const response = await fetch(apiUrl + "/getBlogList");
-    if (!response.ok) throw new Error("API responded with error");
-    let data = await response.json();
-    data = data.filter((item) => item.status === 1);
-    return data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    return []; // Return empty array to allow build to continue
-  }
+  const response = await fetch(apiUrl + "/getBlogList");
+  let data = await response.json();
+  data = data.filter((item) => item.status === 1);
+  // console.log(data);
+  return data;
 }
 
 export const getAudits = async () => {

@@ -7,7 +7,7 @@
 }
 
 .sss-sidebar-container {
-  @apply z-40 fixed md:relative h-screen w-2/3 sm:w-2/4 md:max-w-[20%] border-r border-[#E5EAEF] shadow-lg bg-white;
+  @apply z-40 fixed md:relative h-screen w-2/3 sm:w-2/4 md:max-w-[20%] border-r border-[#E5EAEF] shadow-lg bg-white text-secondary;
 }
 
 .sss-sidebar {

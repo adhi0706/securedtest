@@ -1,9 +1,12 @@
-import SolidityShieldPage from "../pageComponents/product/SolidityShield/SolidityShieldPage";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Index() {
-  return (
-    <div>
-      <SolidityShieldPage />
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/smart-contract-audit");
+  }, [router]);
+
+  return null;
 }
