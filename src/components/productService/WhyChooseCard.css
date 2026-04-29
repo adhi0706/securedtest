@@ -1,0 +1,17 @@
+.why-choose-card-icon {
+  @apply w-16 h-16 rounded-2xl flex justify-center items-center dark:text-secondary;
+}
+
+.why-choose-card {
+  @apply p-6 flex flex-col space-y-3 bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark hover:border-[#A4CDFF];
+}
+.why-choose-card-header {
+  @apply flex space-x-3 items-center;
+}
+.why-choose-card-header-title {
+  @apply font-bold text-2xl;
+}
+
+.why-choose-card-description {
+  @apply font-light;
+}

@@ -1,0 +1,138 @@
+.audit-card {
+  @apply h-full flex flex-col overflow-hidden bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark hover:border-[#A4CDFF];
+}
+
+.audits-page-card-container {
+  @apply border w-full rounded-lg border-cardBorderColorLight dark:border-cardBorderColorDark bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}
+
+.audits-page-card {
+  @apply py-3 px-3 flex flex-col gap-y-4 w-full;
+}
+
+.audits-page-card-headers {
+  @apply w-full bg-[#A4CDFF] dark:bg-[#FFFFFF0F] flex rounded;
+}
+
+.audits-page-card-header {
+  @apply py-1 px-2 text-xl;
+}
+
+.audits-page-card-body {
+  @apply w-full;
+}
+
+.audits-page-card-body-rows {
+}
+
+.audits-page-card-body-row {
+  @apply px-2 dark:text-[#FAFAFA] pt-3 pb-1 flex w-full font-light border-b border-cardBorderColorLight dark:border-cardBorderColorDark;
+}
+
+.audits-page-card-body-row-topic {
+  @apply min-w-[150px] sm:min-w-[250px] md:min-w-[350px];
+}
+
+.audits-page-card-body-row-value {
+  @apply flex-1 break-all whitespace-normal;
+}
+
+.audits-page-container {
+  @apply min-h-screen w-full;
+}
+
+.audits-page {
+  @apply bg-grid py-32 px-4 lg:px-36;
+}
+
+.audits-page-header {
+  @apply flex flex-col gap-y-2 items-center justify-center;
+}
+
+.audits-page-header-title {
+  @apply font-bold text-4xl;
+}
+
+.audits-page-body {
+  @apply flex flex-col gap-y-8;
+}
+
+.audits-page-body-search {
+  @apply pt-8;
+}
+
+.audits-page-body-search-input-box {
+  @apply py-3 px-4 lg:px-8 border w-full rounded-lg focus:border-[#A4CDFF] border-cardBorderColorLight dark:border-cardBorderColorDark bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}
+
+.audits-page-body-logo {
+  @apply flex gap-x-4 items-center justify-start;
+}
+
+.audits-page-body-logo-desc {
+  @apply h-full flex flex-col gap-y-4;
+}
+
+.audits-page-body-logo-desc-title {
+  @apply text-3xl;
+}
+
+.audits-page-body-logo-desc-timeline {
+  @apply text-[#858585];
+}
+
+.audits-page-body-cards {
+  @apply flex flex-col gap-y-6;
+}
+
+.audits-page-card-body-chart {
+  @apply flex flex-col md:flex-row items-center justify-center py-8;
+}
+
+.audits-page-card-body-chart-left {
+  @apply flex-1 flex items-center justify-center w-full;
+}
+
+.audits-page-body-progress-value-container {
+  @apply w-28 h-28 lg:h-36 lg:w-36 flex items-center justify-center shadow-xl rounded-full;
+}
+
+.audits-page-body-progress-value {
+  @apply font-semibold text-xl lg:text-3xl p-4;
+}
+
+.audits-page-card-body-chart-right {
+  @apply flex-1 w-full flex flex-col items-center justify-center gap-y-12;
+}
+
+.audits-page-body-figure-component-container {
+  @apply w-full md:w-[350px] border border-[#D2E6FF] rounded-lg;
+}
+
+.audits-page-body-figure-component {
+  @apply p-4;
+}
+
+.audits-page-body-figure-component-figure {
+  @apply font-semibold text-xl;
+}
+
+.audits-page-body-figure-component-text {
+  @apply text-sm text-[#969BA0];
+}
+
+.blog-pagination {
+  @apply w-full pt-10 flex flex-wrap justify-center items-center gap-x-5;
+}
+
+.blog-pagination-item {
+  @apply py-2 px-4 cursor-pointer;
+}
+
+.blog-pagination-number {
+  @apply h-8 w-8 flex justify-center items-center border rounded-md border-cardBorderColorLight dark:border-cardBorderColorDark bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}
+
+.blog-pagniation-arrow-container {
+  @apply h-8 w-8 flex justify-center items-center border rounded-full border-cardBorderColorLight dark:border-cardBorderColorDark bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}

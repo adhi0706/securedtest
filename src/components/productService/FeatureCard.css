@@ -1,0 +1,119 @@
+.feature-icon {
+  @apply w-12 h-12 text-xl flex justify-center items-center dark:text-primary;
+}
+
+.feature-icon--key {
+  @apply w-12 h-12;
+}
+
+.feature-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.feature-card {
+  @apply p-6 w-full md:!w-[300px] bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark hover:border-[#A4CDFF];
+}
+
+.feature-card--key {
+  @apply flex flex-col bg-cardBackgroundLight dark:bg-cardBackgroundDark border border-cardBorderColorLight/60 dark:border-cardBorderColorDark/60 rounded-3xl overflow-hidden shadow-lg shadow-black/10;
+  padding: 0;
+  flex: 1 1 360px;
+  min-width: 0;
+  width: 100%;
+}
+
+.feature-card-visual {
+  @apply relative w-full overflow-hidden bg-gradient-to-br from-cardBackgroundLight via-secondary/5 to-secondary/10 dark:from-[#0C1B36] dark:via-[#11274D] dark:to-[#121E38] p-6;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  min-height: 220px;
+}
+
+.feature-card-visual:before {
+  content: "";
+  @apply absolute inset-0 border border-[#1F3A66]/40 rounded-3xl pointer-events-none;
+}
+
+.feature-card-visual-pane {
+  @apply relative flex items-center justify-center rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm p-4;
+}
+
+.feature-card-visual-img {
+  @apply max-h-44 w-full object-contain drop-shadow-xl;
+  filter: brightness(1.05) contrast(1.05);
+}
+
+.feature-card-visual-pane--single {
+  @apply col-span-2 sm:col-span-1 max-w-[200px] mx-auto;
+}
+
+.feature-card-media {
+  @apply shrink-0 flex items-start justify-center;
+}
+
+.feature-card-tag {
+  @apply uppercase tracking-wide text-[11px] font-semibold text-[#6FA8FF] dark:text-[#9BC0FF] bg-[#6FA8FF1a] dark:bg-[#9BC0FF1a] px-2 py-1 rounded;
+}
+
+.feature-card-lede {
+  @apply text-base font-medium text-secondary dark:text-primary/90 leading-relaxed;
+}
+
+.feature-card-points {
+  @apply flex flex-col gap-3 mt-4 w-full;
+}
+
+.feature-card-point {
+  @apply flex items-start gap-3 text-sm text-secondary/80 dark:text-primary/80;
+}
+
+.feature-card-point-bullet {
+  @apply mt-1 w-2 h-2 rounded-full bg-gradient-to-br from-[#A4CDFF] to-[#5F8BFF];
+}
+
+.feature-card-point-label {
+  @apply text-sm font-semibold text-secondary dark:text-primary;
+}
+
+.feature-card-point-text {
+  @apply text-sm leading-6 text-secondary/80 dark:text-primary/80;
+}
+
+.feature-card--key .feature-card-content {
+  @apply flex-1 min-w-0 flex flex-col gap-4 px-6 pt-6 pb-6;
+}
+
+.feature-card--key .feature-card-content-header {
+  @apply text-xl font-semibold;
+}
+
+.feature-card--key .feature-card-content-description {
+  @apply text-sm leading-6;
+}
+
+.feature-card-home {
+  @apply p-6 w-full mb-[15px] bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark hover:border-[#A4CDFF];
+}
+
+.feature-card-content {
+  @apply pt-6 flex flex-col space-y-2 items-start;
+}
+.feature-card-content-header {
+  @apply text-lg font-bold;
+}
+
+.feature-card-content-description {
+  @apply font-light text-sm;
+}
+
+.features-section-cards {
+  @apply flex flex-wrap justify-center gap-x-10 gap-y-10;
+}
+
+.features-section-cards--key {
+  @apply flex flex-wrap gap-6 w-full;
+  max-width: none;
+}

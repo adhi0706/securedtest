@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
+
+  @keyframes float-simple {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-simple {
+    animation: float-simple 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-simple 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+}
+
+/* Custom Secure CMS Feature Cards Styling */
+.dark .custom-securecms-cards .feature-card {
+  background-color: #1e3255 !important;
+}
+
+/* Custom Secure CMS FAQ Styling to ensure visibility */
+.custom-securecms-faq .faq-item-question {
+  @apply text-secondary dark:text-white font-semibold !important;
+}
+
+.custom-securecms-faq .faq-item-answer {
+  @apply text-[#001938] dark:text-primary opacity-100 font-normal !important;
+}
+
+.dark .custom-securecms-faq .faq-navbar-item {
+  color: #a0aec0 !important;
+}
+
+.dark .custom-securecms-faq .faq-navbar-item-selected {
+  color: white !important;
+}
+
+/* Scoped font standardization for SecureCMS page */
+.product-container.font-outfit {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+.product-container.font-outfit :where(h1, h2, h3, h4, h5, h6, p, span, div, li, a, button) {
+  font-family: 'Outfit', sans-serif !important;
+}

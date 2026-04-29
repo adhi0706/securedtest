@@ -1,0 +1,8 @@
+node_modules
+build/
+# Local Netlify folder
+.netlify
+.next/
+# .env.local
+.env
+package-lock.json

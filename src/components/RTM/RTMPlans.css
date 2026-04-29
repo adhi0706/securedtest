@@ -1,0 +1,131 @@
+.rtm-plans-container {
+  padding: 80px 20px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rtm-plans-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rtm-plans-inner h2 {
+  font-size: 2.2rem;
+  /* color: #fff; */
+  margin-bottom: 10px;
+}
+
+.rtm-plans-sub {
+  color: #a0a5b1;
+  font-size: 1.1rem;
+  margin-bottom: 50px;
+}
+
+.rtm-plans-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.rtm-plan-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 40px 30px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  position: relative;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.rtm-plan-card.recommended {
+  border-color: #00d2ff;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+}
+
+.rtm-plan-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background-color: #00d2ff;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.rtm-plan-card h3 {
+  /* color: #fff; */
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.rtm-plan-target {
+  color: #a0a5b1;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 20px;
+}
+
+.rtm-plan-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+  flex-grow: 1;
+}
+
+.rtm-plan-features li {
+  /* color: #fff; */
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.rtm-plan-features li::before {
+  content: '✓';
+  color: #00d2ff;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.rtm-plan-btn {
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  /* color: #fff; */
+  border: 1px solid #333642;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.rtm-plan-card.recommended .rtm-plan-btn {
+  background-color: #00d2ff;
+  color: #000;
+  border-color: #00d2ff;
+}
+
+.rtm-plan-btn:hover {
+  background-color: #333642;
+}
+
+.rtm-plan-card.recommended .rtm-plan-btn:hover {
+  background-color: #00b0d9;
+}
+
+@media (max-width: 768px) {
+  .rtm-plan-card.recommended {
+    transform: scale(1);
+  }
+}

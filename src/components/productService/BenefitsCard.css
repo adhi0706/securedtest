@@ -1,0 +1,15 @@
+.benefits-card-icon {
+  @apply w-14 h-12 p-3 flex justify-center items-center bg-cardBackgroundLight dark:bg-cardBackgroundDark border rounded-lg border-cardBorderColorLight dark:border-cardBorderColorDark;
+}
+
+.benefits-card {
+  @apply p-4 flex flex-col space-y-2;
+}
+
+.benefits-card-header {
+  @apply font-bold text-lg;
+}
+
+.benefits-card-description {
+  @apply font-light text-sm;
+}

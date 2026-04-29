@@ -1,0 +1,15 @@
+.how-it-works-card {
+  @apply p-6 w-[300px] flex flex-col space-y-5 lg:justify-start justify-center items-start bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark hover:border-[#A4CDFF];
+}
+
+.how-it-works-card-image {
+  @apply w-12 lg:min-h-[32px];
+}
+
+.how-it-works-card-title {
+  @apply w-full text-lg font-bold text-left lg:min-h-[36px];
+}
+
+.how-it-works-card-description {
+  @apply text-left text-sm font-light text-secondary/70 dark:text-primary/70;
+}

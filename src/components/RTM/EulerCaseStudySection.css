@@ -1,0 +1,109 @@
+.ecs-container {
+    padding: 60px 20px 100px 20px;
+    background-color: transparent;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ecs-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.ecs-title {
+    font-size: 2.2rem;
+    /* color: #ffffff; */
+    font-weight: 700;
+}
+.ecs-title .highlight {
+    color: var(--primary);
+}
+.rtm-ecs-container {
+    padding: 100px 20px;
+    background: transparent;
+    border-bottom: 1px solid rgba(var(--secondary-rgb), 0.05);
+}
+.ecs-card {
+    /* background: #1e3255 !important; */
+    border: 1px solid rgba(var(--secondary-rgb), 0.08);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 850px;
+    width: 100%;
+}
+.ecs-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.ecs-icon-box {
+    width: 45px;
+    height: 45px;
+    background: rgba(var(--primary-rgb), 0.1);
+    border: 1px solid rgba(var(--primary-rgb), 0.3);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ecs-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.ecs-date {
+    /* color: #ffffff; */
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+}
+.ecs-loss {
+    /* color: #ffffff; */
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+.ecs-body {
+    margin-bottom: 35px;
+}
+.ecs-body p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+.ecs-body p:last-child {
+    margin-bottom: 0;
+}
+.ecs-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.ecs-pill {
+    background: rgba(var(--primary-rgb), 0.1);
+    /* color: #ffffff; */
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+@media (max-width: 650px) {
+    .ecs-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 900px) {
+    .rtm-ecs-container {
+        padding: 60px 15px !important;
+    }
+    .rtm-ecs-title {
+        font-size: 1.8rem !important;
+    }
+    .rtm-ecs-stat-val {
+        font-size: 2rem !important;
+    }
+}

@@ -1,0 +1,7 @@
+.securewatchPageBg {
+    /* background-color: #031B34 !important; */
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+

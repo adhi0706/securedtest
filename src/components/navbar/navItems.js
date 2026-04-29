@@ -1,0 +1,81 @@
+export const navItems = [
+  {
+    to: "",
+    items: [
+      { name: "Solidity Shield", to: "/smart-contract-audit" },
+      { name: "Secure CMS (Consent)", to: "/consent-management-platform" },
+      { name: "Secure Trace", to: "/blockchain-forensic-investigation-tool" },
+      { name: "PQC Suite", to: "/pqc" },
+      {
+        name: "SecureX DID",
+        to: "/self-sovereign-identity-enterprises",
+      },
+      { name: "Secure Watch", to: "/real-time-blockchain-threat-monitoring" },
+      { name: "Audit Express", to: "/auditexpress/home" },
+      { name: "Secure Pad", to: "/secure-pad" },
+      { name: "SecureX-ID", to: "/web3-kyc" },
+      { name: "Quantum Vault", to: "/quantumvault.tech/enterprise-hsm-key-management" },
+    ],
+    label: "Product",
+  },
+  {
+    to: "",
+    items: [
+      {
+        title: "Audit",
+        children: [
+          { name: "Smart Contract Audit", to: "/smart-contract-audit" },
+          { name: "Dapp Security Audit", to: "/dapp-security-audit" },
+          { name: "Token Audit", to: "/token-audit" },
+          { name: "RWA Audit", to: "/rwa-audit" },
+        ],
+      },
+      {
+        title: "Security",
+        children: [
+          { name: "Web3 Security", to: "/web3-security" },
+          { name: "Blockchain Forensic", to: "/blockchain-forensic" },
+        ],
+      },
+      {
+        title: "Regulatory Solutions",
+        children: [
+          { name: "Crypto Compliance & AML", to: "/crypto-compliance-aml" },
+          {
+            name: "Decentralized Identity (DID)",
+            to: "/self-sovereign-identity-enterprises",
+          },
+          { name: "DApp Development", to: "/dapp-development" },
+          { name: "NFTs Development", to: "/nfts-development" },
+          { name: "DeFi Development", to: "/defi-development" },
+          {
+            name: "SOX Compliance",
+            to: "/sox-compliance-sarbanes-oxley-compliance-audit",
+          },
+          { name: "ITGC Compliance", to: "/itgc-audit-services" },
+        ],
+      },
+      {
+        title: "Training & Education",
+        children: [{ name: "LevelUp Academy", to: "/levelup-academy" }],
+      },
+    ],
+    label: "Services",
+  },
+  {
+    to: "",
+    items: [
+      { name: "Blogs", to: "https://blog.securedapp.io", external: true },
+      { name: "Our Authors", to: "/authors" },
+      { name: "White Papers", to: "/white-paper" },
+      { name: "About Us", to: "/about" },
+      { name: "Media", to: "/media" },
+    ],
+    label: "Resources",
+  },
+  {
+    to: "",
+    items: [],
+    label: "Pricing",
+  },
+];

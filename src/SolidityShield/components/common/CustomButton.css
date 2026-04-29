@@ -1,0 +1,6 @@
+.sss-custom-button-container {
+  @apply w-full flex items-center justify-center;
+}
+
+.sss-custom-button {
+}

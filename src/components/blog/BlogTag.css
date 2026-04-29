@@ -1,0 +1,7 @@
+.blog-tag {
+  @apply text-xs font-light cursor-pointer px-2 border-2 rounded-2xl border-cardBorderColorLight dark:border-cardBorderColorDark bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}
+
+.selected-tag {
+  @apply border-[#A4CDFF];
+}

@@ -1,0 +1,94 @@
+.sss-billing-screen-container {
+  @apply h-full py-4 px-2 lg:px-8 font-poppins;
+}
+
+.sss-billing-screen {
+}
+
+.sss-billing-header {
+  @apply flex flex-col lg:flex-row items-center justify-center gap-y-6 lg:gap-x-6 lg:gap-y-0;
+}
+
+.sss-billing-current-container {
+  @apply p-6;
+}
+
+.sss-billing-current-header {
+  @apply flex flex-col gap-y-1 font-light;
+}
+
+.sss-billing-current-header-tittle {
+  @apply text-xl;
+}
+
+.sss-billing-current-header-desc {
+  @apply text-sm text-[#898989];
+}
+
+.sss-billing-current-body {
+  @apply py-4 flex justify-between items-center;
+}
+
+.sss-billing-current-body-rate {
+  @apply flex items-end gap-x-2;
+}
+
+.sss-billing-current-body-price {
+  @apply font-semibold text-3xl;
+}
+
+.sss-billing-current-body-per {
+  @apply text-[#898989];
+}
+
+.sss-billing-current-body-users {
+  @apply text-[#898989] font-light;
+}
+
+.sss-billing-current-button-container {
+  @apply w-full flex lg:flex-row-reverse justify-center lg:justify-start items-center;
+}
+
+.sss-billing-current-buttons {
+  @apply w-full xl:w-3/5 gap-y-2 sm:gap-x-3 sm:gap-y-0 flex flex-col sm:flex-row justify-end items-center;
+}
+
+.sss-billing-payment-container {
+  @apply p-6;
+}
+
+.sss-billing-payment-header {
+  @apply flex flex-col gap-y-1 font-light;
+}
+
+.sss-billing-payment-method-container {
+  @apply my-4 h-full w-full border rounded-xl;
+}
+
+.sss-billing-payment-method {
+  @apply p-4 w-full flex flex-col md:flex-row md:justify-between items-center gap-y-8 md:gap-y-0;
+}
+
+.sss-billing-payment-method-left {
+  @apply flex flex-col md:flex-row justify-center items-center md:items-start gap-y-4 md:gap-x-2 md:gap-y-0;
+}
+
+.sss-billing-payment-method-image {
+  @apply border rounded-lg;
+}
+
+.sss-billing-payment-method-left-details {
+  @apply flex flex-col gap-y-1 font-light text-sm text-[#78828A];
+}
+
+.sss-billing-payment-method-detail-mail {
+  @apply flex gap-x-1 items-center;
+}
+
+.sss-billing-body {
+  @apply pt-8;
+}
+
+.sss-billing-footer {
+  @apply pb-8;
+}

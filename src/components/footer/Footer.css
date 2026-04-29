@@ -1,0 +1,56 @@
+.footer {
+  @apply lg:px-32 pt-24 lg:pt-48 pb-12 flex flex-col space-y-16 justify-center lg:items-stretch;
+}
+
+.footer-newsletter {
+  @apply px-6 flex flex-col lg:flex-row space-y-6 lg:space-y-0;
+}
+.footer-newsletter-left {
+  @apply flex-1 flex flex-col space-y-2 items-center lg:justify-center lg:items-start;
+}
+
+.footer-newsletter-right {
+  @apply flex-1 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0 justify-center items-center;
+}
+.email-input-box {
+  @apply py-2 px-4 border w-full lg:w-2/3 rounded-xl border-[#A4CDFF] bg-cardBackgroundLight dark:bg-cardBackgroundDark;
+}
+
+.footer-about {
+  @apply flex flex-col-reverse lg:flex-row justify-center items-center lg:items-stretch;
+}
+.footer-about-left {
+  @apply flex-1 flex flex-col justify-between;
+}
+.footer-logo {
+  @apply hidden lg:inline-block w-5/12;
+}
+
+.footer-socials {
+  @apply flex space-x-5;
+}
+
+.footer-socials div:hover {
+  color: #12d576;
+}
+
+.footer-about-right {
+  @apply pb-10 lg:pb-0 w-full flex-1 lg:flex grid grid-cols-2 lg:flex-row justify-center lg:space-x-10 whitespace-nowrap;
+}
+.footer-navigation-item {
+  @apply flex-1 pl-4 pb-4 lg:pb-0;
+}
+.footer-navigation-item-title {
+  @apply font-bold text-lg pb-1 lg:pb-5;
+}
+
+.footer-navigation-item-items {
+  @apply font-light text-sm flex flex-col space-y-1 lg:space-y-2;
+}
+
+.footer-legacy {
+  @apply opacity-70 flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between items-center;
+}
+.footer-legacy-left {
+  @apply flex items-center space-x-4;
+}

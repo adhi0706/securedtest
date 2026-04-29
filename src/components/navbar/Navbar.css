@@ -1,0 +1,67 @@
+.navbar-small-screen {
+  @apply py-3 px-2 z-40 font-nunitoSans shadow-md rounded-b-xl text-secondary dark:text-white bg-white dark:bg-[#031B34] border-b border-black/5 dark:border-white/10;
+}
+
+.sidebar-background {
+  @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-start items-center z-[100];
+}
+
+.sidebar {
+  @apply w-5/6 sm:w-2/4 md:w-1/4 h-full border-r border-black/5 dark:border-white/10 shadow-2xl bg-white dark:bg-[#031B34] text-secondary dark:text-white;
+}
+
+.sidebar-header {
+  @apply flex px-6 pt-6 pb-4 items-center justify-between border-b border-black/5 dark:border-white/10;
+}
+
+.sidebar-items {
+  @apply flex flex-col space-y-0 py-4;
+}
+
+.sidebar-item {
+  @apply flex justify-between items-center cursor-pointer px-6 py-3 transition-colors duration-200;
+}
+
+.sidebar-item-label {
+  @apply text-lg font-bold;
+}
+
+.sidebar-item:hover, .sidebar-item:active {
+  @apply bg-black/5 dark:bg-white/5 text-accent dark:text-[#00d2ff];
+}
+
+.nested-sidebar-items {
+  @apply flex flex-col space-y-0 bg-black/5 dark:bg-black/20 border-y border-black/5 dark:border-white/5 py-2;
+}
+
+.nested-sidebar-item {
+  @apply cursor-pointer pl-10 py-2 transition-colors duration-200 text-gray-600 dark:text-gray-300;
+}
+
+.nested-sidebar-item:hover {
+  @apply bg-black/5 dark:bg-white/5 text-accent dark:text-[#00d2ff];
+}
+
+.services-nested-sidebar-item {
+  @apply cursor-pointer flex flex-col;
+}
+
+.services-nested-sidebar-item-header {
+  @apply pl-10 py-2 w-full flex items-center justify-between pr-6 transition-colors duration-200 text-gray-700 dark:text-gray-200 font-semibold;
+}
+
+.services-nested-sidebar-item-header:hover {
+  @apply bg-black/5 dark:bg-white/5 text-accent dark:text-[#00d2ff];
+}
+
+.services-nested-sidebar-body-items {
+  @apply pl-14 py-2 flex flex-col gap-y-1 bg-black/5 dark:bg-black/10;
+}
+
+.services-nested-sidebar-body-item {
+  @apply text-[15px] font-light py-1.5 transition-colors duration-200 text-gray-500 dark:text-gray-400;
+}
+
+.services-nested-sidebar-body-item:hover {
+  @apply text-accent dark:text-[#00d2ff];
+}

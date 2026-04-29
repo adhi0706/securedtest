@@ -1,0 +1,17 @@
+.product-card {
+  @apply pt-8 lg:pt-24 lg:px-24 flex flex-col-reverse lg:flex-row justify-between items-center space-y-4 lg:space-y-0 lg:space-x-10;
+}
+.product-card-image {
+  @apply flex-1 pl-4;
+}
+
+.product-card-content {
+  @apply flex-1 px-4 pb-12 lg:pb-0 flex flex-col items-start lg:items-start justify-center space-y-6;
+}
+.product-card-content-header {
+  @apply text-3xl lg:text-4xl font-bold;
+}
+
+.product-card-content-description {
+  @apply font-light text-left text-secondary/70 dark:text-primary/70;
+}

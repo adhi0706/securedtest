@@ -1,0 +1,7 @@
+.auth-logos-container {
+  @apply w-full border border-[#D0D5DD] rounded-lg flex items-center justify-center;
+}
+
+.auth-logos {
+  @apply py-3;
+}

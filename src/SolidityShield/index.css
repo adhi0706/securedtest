@@ -1,0 +1,7 @@
+.sss-product {
+  @apply w-full min-h-screen md:flex;
+}
+
+.sss-product-with-header {
+  @apply w-full bg-[#FAFAFA] h-screen overflow-y-scroll;
+}

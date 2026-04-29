@@ -1,0 +1,79 @@
+.sss-billing-table-status-component-container {
+  @apply w-[100px] text-center border rounded-lg;
+}
+
+.sss-billing-table-status-component-container-yellow {
+  @apply border-[#F6D11A] text-[#F6D11A];
+  background-color: rgba(246, 209, 26, 0.1);
+}
+
+.sss-billing-table-status-component-container-red {
+  @apply border-[#ED544E] text-[#ED544E];
+  background-color: rgba(237, 84, 78, 0.1);
+}
+
+.sss-billing-table-status-component-container-green {
+  @apply border-[#3CB961] text-[#3CB961];
+  background-color: rgba(60, 185, 97, 0.1);
+}
+
+.sss-billing-table-status-component {
+  @apply w-full py-1 px-3;
+}
+
+.sss-billing-table-container {
+  @apply px-8;
+}
+
+.sss-billing-table-header {
+  @apply w-full py-6 flex justify-between items-center;
+}
+
+.sss-billing-table-header-title {
+  @apply text-xl;
+}
+
+.sss-billing-table-body {
+  @apply font-light;
+}
+
+.sss-billing-table-body-header {
+  @apply min-w-full flex items-end;
+}
+
+.sss-billing-table-header-item {
+  @apply border-y py-3 px-3;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.sss-billing-table-invoice-container {
+  @apply min-w-[250px];
+}
+
+.sss-billing-table-supplier-container {
+  @apply min-w-[250px] md:w-full;
+}
+
+.sss-billing-table-price-container {
+  @apply min-w-[200px];
+}
+
+.sss-billing-table-date-container {
+  @apply min-w-[200px];
+}
+
+.sss-billing-table-status-container {
+  @apply min-w-[200px];
+}
+
+.sss-billing-table-body-items {
+  @apply flex flex-col gap-y-3;
+}
+
+.sss-billing-table-row {
+  @apply w-full flex items-end text-left;
+}
+
+.sss-billing-table-item {
+  @apply border-b py-3 px-3;
+}

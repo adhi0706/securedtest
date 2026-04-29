@@ -1,0 +1,53 @@
+.testimonials {
+  @apply px-8 lg:px-0;
+}
+
+.testimonial-cards {
+  @apply lg:px-0;
+}
+
+.slick-track {
+  @apply flex items-end !important;
+}
+
+.testimonial-card {
+  @apply h-[400px] mx-4 px-8 py-10 flex flex-col rounded-2xl opacity-[76%] items-center justify-between bg-cardBackgroundLight dark:bg-cardBackgroundDark border border-cardBorderColorLight dark:border-cardBorderColorDark;
+}
+.selected-card {
+  @apply h-[500px] pt-12 border-[#A4CDFF] opacity-100;
+}
+
+.testimonial-card-text {
+  @apply font-light text-secondary/80 dark:text-primary/80;
+}
+
+.testimonial-card-content {
+  @apply w-full pt-8 flex justify-between;
+}
+
+.testimonial-card-reviwer {
+  @apply font-semibold;
+}
+
+.testimonial-card-designation {
+  @apply font-light text-secondary/60 dark:text-primary/60;
+}
+
+.testimonial-card-quote {
+  @apply font-playFairDisplay text-[150px] text-[#A4CDFF] self-end;
+  line-height: 0;
+}
+
+.testimonial-arrows {
+  @apply w-full pt-10 flex justify-center space-x-4;
+}
+.testimonial-arrow {
+  @apply flex items-center justify-center w-8 h-8 rounded-full bg-[#A4CDFF] dark:bg-[#FFFFFF0F];
+}
+.testimonial-arrow-first {
+  @apply bg-[#3E395114];
+}
+
+.testimonial-arrow-last {
+  @apply bg-[#3E395114];
+}

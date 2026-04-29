@@ -1,0 +1,292 @@
+import { useState } from "react";
+import Link from "next/link";
+import Button from "../common/Button";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  getHomeSelector,
+  setIsRequestModalOpen,
+} from "../../redux/slices/main/homeSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IoClose } from "react-icons/io5";
+
+const services = [
+  "Dapp Development",
+  "Smart Contract Audit",
+  "Dapp Security Audit",
+  "Token Audit",
+  "Web3 KYC",
+  "Web3 security",
+  "Blockchain Forensic",
+  "RWA Audit",
+  "Crypto Compliance & AMl",
+  "Decentralized Identity (DID)",
+  "NFTs Development",
+  "DeFi Development",
+  "LevelUp Academy",
+];
+
+const RequestQuoteModal = () => {
+  const dispatch = useDispatch();
+  const { isRequestModalOpen } = useSelector(getHomeSelector);
+
+  const [fullName, setFullName] = useState("");
+  const [fullNameWarning, setFullNameWarning] = useState("");
+
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumberWarning, setMobileNumberWarning] = useState("");
+
+  const [selectedService, setSelectedService] = useState("Choose a Service...");
+  const [dropDown, setDropDown] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [emailWarning, setEmailWarning] = useState("");
+
+  const [message, setMessage] = useState("");
+
+  const onFullNameChange = (e) => {
+    const value = e.target.value;
+    setFullName(value);
+    if (value.length === 0) {
+      setFullNameWarning("* Compulsory Field");
+    } else if (/[<>!@#$%^&*()_+={}\[\]|\\:;"?,.~`]/.test(value)) {
+      setFullNameWarning("Invalid Name");
+    } else {
+      setFullNameWarning("");
+    }
+  };
+
+  const onMobileNumberChange = (e) => {
+    const value = e.target.value;
+    setMobileNumber(value);
+    if (value.length === 0) {
+      setMobileNumberWarning("* Compulsory Field");
+    } else if (!/^\d{10}$/.test(value)) {
+      setMobileNumberWarning("Invalid Mobile Number");
+    } else {
+      setMobileNumberWarning("");
+    }
+  };
+
+  const handleSelectedService = (e) => {
+    setSelectedService(e.target.value);
+  };
+
+  const toggleDropDown = () => {
+    setDropDown(!dropDown);
+  };
+
+  const onEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (value.length === 0) {
+      setEmailWarning("* Compulsory Field");
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+      setEmailWarning("Invalid Email");
+    } else {
+      setEmailWarning("");
+    }
+  };
+
+  const onMessageChange = (e) => {
+    const value = e.target.value;
+    setMessage(value);
+  };
+
+  const closeModal = () => {
+    dispatch(setIsRequestModalOpen(false));
+  };
+
+  if (!isRequestModalOpen) return null;
+
+  const sendMail = async ({ name, email, mobile, description, service }) => {
+    if (
+      name === "" ||
+      email === "" ||
+      service === "Choose a Service..." ||
+      mobile === "" ||
+      fullNameWarning !== "" ||
+      emailWarning !== "" ||
+      mobileNumberWarning !== ""
+    ) {
+      toast.error("Please fill in the details");
+      return;
+    } else if (
+      document.getElementById("request-quote-check-privacy").checked === false
+    ) {
+      toast("Please accept our privacy policy to continue");
+      return;
+    }
+
+    const subscribeUpdates = document.getElementById("request-quote-check-subscribe")?.checked || false;
+
+    fetch("https://crm-be.securedapp.io/api/public/project-inquiry", {
+      method: "POST",
+      body: JSON.stringify({
+        fullName: name,
+        mobile: mobile,
+        email: email,
+        serviceOffering: service,
+        message: description || "",
+        agreePrivacy: true,
+        subscribeUpdates: subscribeUpdates,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Submitted. Will soon reach out to you!");
+          closeModal();
+        } else {
+          return res.json().then(data => {
+            throw new Error(data.error || "Failed to submit inquiry");
+          });
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message || "Error in sending inquiry");
+      });
+  };
+
+  return (
+    isRequestModalOpen && (
+      <div className="request-quote-modal-container">
+        <div className="request-quote-modal">
+          <div className="request-quote-modal-close-container">
+            <IoClose
+              onClick={closeModal}
+              className="fa-solid fa-xmark fa-xl request-modal-close-button"
+            />
+          </div>
+          <div className="requeset-quote-modal-header">
+            Tell us about your Projects
+          </div>
+          <div className="request-quote-modal-body">
+            <div className="request-quote-modal-input-container">
+              <input
+                value={fullName}
+                onChange={onFullNameChange}
+                className="request-quote-modal-input-box"
+                placeholder="Full Name"
+                type="text"
+              />
+              <div className="requeste-quote-modal-input-warning">
+                {fullNameWarning}
+              </div>
+            </div>
+            <div className="request-quote-modal-input-container">
+              <input
+                value={mobileNumber}
+                onChange={onMobileNumberChange}
+                className="request-quote-modal-input-box"
+                placeholder="Mobile Number"
+                type="text"
+              />
+              <div className="requeste-quote-modal-input-warning">
+                {mobileNumberWarning}
+              </div>
+            </div>
+            <div className="request-quote-modal-dropdown-container">
+              {/* <select
+                value={selectedService}
+                onChange={handleSelectedService}
+                className="request-quote-modal-dropdown">
+                <option value={""}>Choose a Service...</option>
+                <option value={"Smart Contract Audit"}>
+                  Smart Contract Audit
+                </option>
+                <option value={"Smart Contract Development"}>
+                  Smart Contract Development
+                </option>
+                <option value={"DAPP Development"}>DAPP Development</option>
+                <option value={"Tokenomics Consultation"}>
+                  Tokenomics Consultation
+                </option>
+              </select> */}
+              <div
+                onClick={toggleDropDown}
+                className="request-quote-modal-dropdown"
+              >
+                <div>{selectedService}</div>
+                {dropDown && (
+                  <div className="request-quote-modal-dropdown-options">
+                    {services.map((service) => {
+                      return (
+                        <div
+                          onClick={() => setSelectedService(service)}
+                          className="request-quote-modal-dropdown-option-container"
+                        >
+                          <div className="request-quote-modal-dropdown-option">
+                            {service}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="request-quote-modal-input-container">
+              <input
+                value={email}
+                onChange={onEmailChange}
+                className="request-quote-modal-input-box"
+                placeholder="Email"
+                type="email"
+              />
+              <div className="requeste-quote-modal-input-warning">
+                {emailWarning}
+              </div>
+            </div>
+            <div className="request-quote-modal-textarea-container">
+              <textarea
+                onChange={onMessageChange}
+                className="request-quote-modal-textarea"
+              ></textarea>
+            </div>
+            <div className="request-quote-modal-checkbox-container">
+              <input id="request-quote-check-privacy" type="checkbox" />
+              <div>
+                I agree with the{" "}
+                <Link
+                  className="text-[#A4CDFF] font-bold"
+                  target="_blank"
+                  href="https://securedapp.gitbook.io/securedapp-launchpad/privacy-policy-securedapp"
+                  rel="noreferrer"
+                >
+                  Privacy Policy
+                </Link>{" "}
+                and information being used to contact me
+              </div>
+            </div>
+            <div className="request-quote-modal-checkbox-container">
+              <input id="request-quote-check-subscribe" type="checkbox" />
+              <div>Get cyber-security research reports .</div>
+            </div>
+          </div>
+          <div className="request-quote-modal-button-container">
+            <Button
+              onClick={async () => {
+                await sendMail({
+                  name: fullName,
+                  email: email,
+                  mobile: mobileNumber,
+                  service: selectedService,
+                  description: message,
+                });
+              }}
+              className="w-1/4"
+              text={"Submit"}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  );
+};
+
+export default RequestQuoteModal;

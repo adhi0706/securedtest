@@ -1,0 +1,84 @@
+.scan-now-modal-field-container {
+}
+
+.scan-now-modal-field {
+  @apply flex flex-col gap-y-2;
+}
+
+.scan-now-modal-field-label {
+  @apply text-sm font-semibold;
+}
+
+.scan-now-modal-field-children {
+  @apply w-full;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.scan-now-modal-container {
+  @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-50;
+  z-index: 100;
+}
+
+.scan-now-modal {
+  @apply px-4 py-6 m-2 lg:m-0 bg-primary dark:bg-secondary rounded-lg shadow-xl w-full lg:w-5/12 flex flex-col items-center gap-y-8 border border-[#A4CDFF];
+}
+
+.scan-now-modal-header {
+  @apply w-full flex justify-between items-center;
+}
+
+.scan-now-modal-header-title {
+  @apply w-full font-bold text-xl;
+}
+
+.scan-now-modal-close-container {
+  @apply w-full flex justify-end items-center;
+}
+
+.scan-now-modal-close-button {
+  @apply cursor-pointer;
+}
+
+.scan-now-modal-body {
+  @apply w-full flex flex-col gap-y-5;
+}
+
+.scan-now-modal-body-dropdown {
+  @apply relative cursor-pointer py-3 px-4 rounded-lg border w-full;
+}
+
+.scan-now-modal-body-dropdown-content {
+  @apply flex gap-x-4 justify-between items-center;
+}
+
+.scan-now-modal-body-dropdown-options {
+  @apply shadow-md w-full z-50 absolute bg-white left-0 border rounded-lg;
+}
+
+.scan-now-modal-body-dropdown-option-container:hover {
+  @apply border rounded-lg;
+}
+
+.scan-now-modal-body-dropdown-option {
+  @apply py-1 lg:py-2 px-4;
+}
+
+.scan-now-modal-body-items {
+  @apply flex flex-col gap-y-5;
+}
+
+.scan-now-modal-input-text-field-container {
+  @apply w-full;
+}
+
+.scan-now-modal-input-text-field {
+  @apply py-3 px-4 rounded-lg border w-full;
+}
+
+.scan-now-modal-fotter {
+  @apply w-full flex justify-between items-center;
+}
+
+.scan-now-modal-footer-button {
+  @apply w-[120px];
+}

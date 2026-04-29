@@ -1,0 +1,75 @@
+.rtm-benefits-container {
+  padding: 80px 20px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rtm-benefits-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.rtm-benefits-image, .rtm-benefits-content {
+  flex: 1 1 400px;
+}
+
+.rtm-benefits-mockup {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.rtm-mockup-header {
+  /* color: #fff; */
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.rtm-mockup-body .line {
+  height: 10px;
+  border-radius: 5px;
+  background-color: #1f2128;
+  margin-bottom: 15px;
+}
+
+.rtm-mockup-body .l1 { width: 80%; }
+.rtm-mockup-body .l2 { width: 60%; }
+.rtm-mockup-body .l3 { width: 90%; background-color: #00d2ff; }
+
+.rtm-benefits-content h2 {
+  /* color: #fff; */
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+.rtm-benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.rtm-benefits-list li {
+  color: #a0a5b1;
+  font-size: 1.05rem;
+  padding-left: 30px;
+  margin-bottom: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.rtm-benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d2ff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

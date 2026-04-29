@@ -1,0 +1,98 @@
+.rtm-csay-container {
+    padding: 100px 20px;
+    background-color: transparent;
+    font-family: inherit;
+    border-bottom: 1px solid rgba(var(--secondary-rgb), 0.05);
+}
+.rtm-csay-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.rtm-csay-title {
+    font-size: 2.2rem;
+    /* color: #ffffff; */
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+}
+.rtm-csay-title .highlight {
+    color: #00d2ff;
+}
+.rtm-csay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+.rtm-csay-card {
+    background: var(--background) !important;
+    border: 1px solid rgba(var(--secondary-rgb), 0.08);
+    border-radius: 12px;
+    padding: 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+.rtm-csay-card:hover { border-color: rgba(0, 210, 255, 0.3); }
+.rtm-csay-quote-icon {
+    color: #00d2ff;
+    font-size: 3rem;
+    font-family: serif;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    opacity: 0.3;
+    line-height: 1;
+}
+.rtm-csay-quote {
+    /* color: #ffffff; */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+.rtm-csay-author { margin-top: auto; }
+.rtm-csay-name {
+    /* color: #ffffff; */
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.rtm-csay-title-sub {
+    color: #a0a5b1;
+    font-size: 0.85rem;
+}
+.rtm-csay-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.rtm-csay-tag {
+    background: transparent;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    color: #00d2ff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+.rtm-csay-tag:hover {
+    background: rgba(0, 210, 255, 0.1);
+}
+
+@media (max-width: 900px) {
+    .rtm-csay-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .rtm-clients-container {
+        padding: 60px 15px !important;
+    }
+    .rtm-clients-title {
+        font-size: 1.8rem !important;
+    }
+}

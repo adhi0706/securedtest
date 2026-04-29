@@ -1,0 +1,55 @@
+.audit-certificate-container {
+  @apply h-full py-4 px-2 lg:px-8 font-poppins;
+}
+
+.audit-certificate-screen {
+  @apply min-h-screen;
+}
+
+.audit-certificate-header {
+  @apply font-semibold text-4xl;
+}
+
+.audit-certificate-body {
+  @apply pt-12;
+}
+
+.audit-certificate-table-container {
+  @apply min-w-full;
+}
+
+.audit-certificate-table-scrollable {
+  @apply overflow-x-auto;
+}
+
+.audit-certificate-body-table {
+  @apply min-w-full;
+}
+
+.audit-certificate-body-table-header {
+  @apply min-w-full flex items-center text-center;
+}
+
+.audit-certificate-table-header-certificate {
+  @apply min-w-[250px];
+}
+
+.audit-certificate-table-header-company {
+  @apply min-w-[250px] md:w-full;
+}
+
+.audit-certificate-table-header-date {
+  @apply min-w-[250px];
+}
+
+.audit-certificate-table-header-email {
+  @apply min-w-[250px];
+}
+
+.audit-certificate-body-request {
+  @apply flex flex-col gap-y-4 items-start justify-start;
+}
+
+.audit-certificate-body-request-button {
+  
+}

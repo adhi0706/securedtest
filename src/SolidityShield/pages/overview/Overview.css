@@ -1,0 +1,22 @@
+.sss-overview-screen-container {
+  @apply h-full py-4 px-2 lg:px-8 font-poppins;
+}
+
+.sss-overview-screen {
+  @apply min-h-screen;
+}
+
+.sss-overview-header {
+  @apply font-semibold text-4xl;
+}
+
+.sss-overview-body {
+}
+
+.sss-overview-top-cards {
+  @apply h-full pt-4 flex flex-col w-full gap-y-6 items-center justify-center;
+}
+
+.sss-overview-first-time {
+  @apply pt-24 xl:pt-44 flex text-center flex-col items-center justify-center;
+}

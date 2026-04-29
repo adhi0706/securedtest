@@ -1,0 +1,126 @@
+h2 {
+  @apply font-bold text-3xl;
+}
+
+.blog-post {
+  @apply pt-32;
+}
+
+.blog-post-header {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #1c81ff 0deg,
+    #114d99 360deg
+  );
+
+  @apply flex-shrink-0 w-full flex items-center justify-center;
+}
+
+.blog-post-header-left,
+.blog-post-header-right {
+  @apply py-16 flex-1 w-full flex flex-col gap-y-8 justify-center items-center;
+}
+
+.blog-post-header-title {
+  @apply flex items-start;
+}
+
+.blog-post-header-title-text {
+  @apply font-bold text-2xl lg:text-4xl;
+
+  background: linear-gradient(
+    180deg,
+    #fff 35.42%,
+    #fff 44.67%,
+    rgba(234, 218, 255, 0) 103.92%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blog-post-content {
+  @apply w-full px-4 lg:px-20 lg:space-x-8 py-12 flex flex-col lg:flex-row lg:items-start;
+}
+
+.blog-post-summary,
+.blog-post-index {
+  @apply lg:w-[20%];
+}
+
+.blog-post-body {
+  @apply py-12 lg:py-0 lg:w-[60%];
+}
+
+.body-header {
+  @apply flex flex-col gap-y-4;
+}
+
+.body-header-tags {
+  @apply flex flex-wrap gap-y-2 gap-x-5 items-center justify-start;
+}
+
+.body-header-title {
+  @apply text-3xl lg:text-4xl font-bold;
+}
+
+.publisher {
+  @apply flex flex-col gap-y-4;
+}
+.publisher-details {
+  @apply flex flex-col lg:flex-row gap-y-8 lg:gap-y-0 lg:justify-between lg:items-center;
+}
+.publisher-profile {
+  @apply font-light text-sm flex justify-start items-center gap-x-4;
+}
+.publisher-image {
+  @apply w-16 h-16 rounded-full bg-[#EBE9EF];
+}
+
+.publisher-socials {
+  @apply flex gap-x-4 lg:justify-center items-center;
+}
+
+.publisher-socials i:hover {
+  color: #12d576;
+}
+
+.related-blogs {
+  @apply px-4 lg:px-24 pt-12;
+}
+
+.related-blogs-title {
+  @apply text-3xl lg:text-4xl font-bold;
+}
+
+.related-blog-cards {
+  @apply pt-12 grid grid-cols-1 lg:grid-cols-3 gap-6;
+}
+
+.no-related-posts {
+  @apply pt-16 text-2xl flex justify-center items-center;
+}
+
+.index-summary-card {
+  @apply bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark;
+}
+
+.card-details {
+  @apply p-3;
+}
+
+.card-title {
+  @apply text-2xl font-bold;
+}
+
+.card-content {
+  @apply pt-6 flex flex-col gap-y-2 font-light;
+}
+
+.card-read-more {
+  @apply cursor-pointer font-light text-sm pt-6 flex justify-end items-center;
+}
+
+.author-box {
+  @apply bg-cardBackgroundLight dark:bg-cardBackgroundDark border-2 rounded-xl border-cardBorderColorLight dark:border-cardBorderColorDark;
+}

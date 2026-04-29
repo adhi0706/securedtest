@@ -1,0 +1,103 @@
+.rtm-monitoring-container {
+  padding: 80px 20px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rtm-monitoring-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.rtm-monitoring-content {
+  flex: 1 1 500px;
+}
+
+.rtm-monitoring-content h2,
+.rtm-monitoring-why h2 {
+  font-size: 2.2rem;
+  /* color: #fff; */
+  margin-bottom: 25px;
+}
+
+.rtm-monitoring-content p {
+  color: #a0a5b1;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.rtm-inline-link {
+  color: #00d2ff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.rtm-monitoring-capabilities {
+  list-style: none;
+  padding: 0;
+}
+
+.rtm-monitoring-capabilities li {
+  margin-bottom: 15px;
+  color: #a0a5b1;
+  font-size: 1rem;
+  padding-left: 20px;
+  position: relative;
+}
+
+.rtm-monitoring-capabilities li::before {
+  content: '➔';
+  color: #00d2ff;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.rtm-monitoring-capabilities strong {
+  /* color: #fff; */
+}
+
+.rtm-monitoring-why {
+  flex: 1 1 500px;
+}
+
+.rtm-why-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rtm-why-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 25px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.rtm-why-card:hover {
+  transform: translateX(5px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rtm-why-card h4 {
+  color: #00d2ff;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.rtm-why-card p {
+  color: #a0a5b1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .rtm-monitoring-inner {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,51 @@
+export const billingDummyData = [
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Failed",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Pending",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Success",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Pending",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Failed",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Pending",
+  },
+  {
+    invoice: "#INVC0000001",
+    supplier: "ABC Company",
+    price: "$150,50",
+    date: "14/02/2024",
+    status: "Success",
+  },
+];

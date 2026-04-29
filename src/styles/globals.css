@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #001938;
+  --secondary-rgb: 0, 25, 56;
+  --primary: #00ff88;
+  --primary-rgb: 0, 255, 136;
+  --highlight: #12D576;
+  --text-muted: #64748b;
+  --text-primary: #001938;
+  --text-primary-rgb: 0, 25, 56;
+  --text-secondary: #64748b;
+  --accent: #0056b3;
+}
+
+.dark:root, 
+.dark body {
+  --background: #001938; 
+  --foreground: #ffffff;
+  --secondary-rgb: 255, 255, 255;
+  --primary: #00ff88;
+  --primary-rgb: 0, 255, 136;
+  --highlight: #00ff88;
+  --text-muted: #a0a5b1;
+  --text-primary: #ffffff;
+  --text-primary-rgb: 255, 255, 255;
+  --text-secondary: #a0a5b1;
+  --accent: #00d2ff;
+}
+
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App {
+  @apply font-nunitoSans text-secondary dark:text-primary overflow-hidden min-h-screen;
+  background: inherit;
+  scroll-behavior: smooth;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+#poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+#poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+#poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+#poppins {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+#poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+#poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+/* Modal Animation */
+.modal-grow {
+  animation: grow 0.4s ease-in-out;
+}
+
+.modal-shrink {
+  animation: shrink 0.4s ease-in-out;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animation for network type modal */
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Blockchain items hover effect */
+.blockchain-item {
+  transition: all 0.3s ease-in-out;
+}
+
+.blockchain-item:hover {
+  transform: scale(1.1);
+}
+
+/* Scrollable blockchain list */
+.blockchain-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
